@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
 
-const useInfiniteScroll = (pageInfo: any, itemClass: string) => {
+type TPageInfo = {
+  pageNumber: number,
+  itemPerPage: number,
+  totalItems: number
+}
+
+const useInfiniteScroll = (pageInfo: TPageInfo, itemClass: string) => {
   const [currPage, setCurrPage] = useState(0)
   const totalPage = Math.ceil(pageInfo.totalItems / pageInfo.itemPerPage)
 
   const handleScroll = () => {
-    const lastTestimonial = document.querySelector(
+    const lastElement = document.querySelector(
       `.${itemClass}:last-child`
     ) as HTMLElement
 
-    if (lastTestimonial) {
-      const lastTestimonialOffset = lastTestimonial.offsetTop + lastTestimonial.clientHeight
+    if (lastElement) {
+      const lastElementOffset = lastElement.offsetTop + lastElement.clientHeight
       const pageOffset = window.pageYOffset + window.innerHeight
 
-      if (pageOffset > lastTestimonialOffset && currPage < totalPage - 1)
+      if (pageOffset > lastElementOffset && currPage < totalPage - 1)
         setCurrPage(currPage + 1)
     }
   }
@@ -23,7 +29,7 @@ const useInfiniteScroll = (pageInfo: any, itemClass: string) => {
     return () => window.removeEventListener("scroll", handleScroll)
   })
 
-  return { currPage }
+  return { currPage, setCurrPage }
 }
 
 export default useInfiniteScroll
