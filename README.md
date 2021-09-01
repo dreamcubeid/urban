@@ -1,5 +1,5 @@
-# template-urban
-Sirclo Store 2.0 template Urban
+# Template Urban
+Sirclo Store 2.0 Template Urban
 
 ### How to run template on your local environment
 1. Create your own [staging SIRCLO Store 2.0](https://store.sirclo.com.dmmy.me/create-online-shop-2.0)
