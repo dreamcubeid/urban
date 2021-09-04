@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import {
   Logo,
   useCart,
-  Widget,
   useI18n
 } from "@sirclo/nexus";
 import ProfileMenu from "./ProfileMenu";
@@ -76,10 +75,6 @@ const classesPlaceholderCollapsibleNav = {
   placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_header__navMobile}`
 }
 
-const classesPlaceholderWidget = {
-  placeholderTitle: `${styles.placeholderItem} ${styles.placeholderItem_header__widget}`
-}
-
 const Header: FC<any> = ({ lng }) => {
   const i18n: any = useI18n();
   const { data: dataCart } = useCart();
@@ -90,9 +85,6 @@ const Header: FC<any> = ({ lng }) => {
   // const [openLanguage, setOpenLanguage] = useState<boolean>(false);
   // const [openCurrency, setOpenCurrency] = useState<boolean>(false);
   const [showPopupCheckOrder, setShowOrderCheck] = useState<boolean>(false);
-  const [showAnnounce, setShowAnnounce] = useState<boolean>(true);
-  const [countWidgetAnnouncement, setCountWidgetAnnouncement] = useState(null);
-
   useEffect(() => {
     setOpenMenu(false);
   }, [router.query]);
@@ -101,22 +93,6 @@ const Header: FC<any> = ({ lng }) => {
 
   return (
     <>
-      {(countWidgetAnnouncement === null || countWidgetAnnouncement > 0) &&
-        <div className={styles.announce} style={{ display: showAnnounce ? 'flex' : 'none' }}>
-          <span className={styles.announce__close}>
-            <X
-              className={styles.announce__close__icon}
-              onClick={() => setShowAnnounce(false)}
-            />
-          </span>
-          <Widget
-            getItemCount={(itemCount: number) => setCountWidgetAnnouncement(itemCount)}
-            pos="header-announcements"
-            widgetClassName={styles.announce__items}
-            loadingComponent={<Placeholder classes={classesPlaceholderWidget} withTitle />}
-          />
-        </div>
-      }
       <header className={styles.header}>
         <nav className={`
         navbar 
@@ -155,12 +131,12 @@ const Header: FC<any> = ({ lng }) => {
             />
           </div>
         </nav>
-        {showPopupCheckOrder && 
+        {showPopupCheckOrder &&
           <CheckPaymentOrder
             classes={classesCheckPaymentOrder}
             icon={{
               loading: <Loader color="text-light" />,
-              close: <X/>
+              close: <X />
             }}
             handleClose={() => setShowOrderCheck(!showPopupCheckOrder)}
             onErrorMsg={(msg) => toast.error(msg)}

@@ -8,6 +8,7 @@ import SEO from "../SEO";
 import { X as XIcon } from "react-feather";
 import PageNotFound from "components/PageNotFound";
 import styles from "public/scss/components/Newsletter.module.scss";
+import Annoucnements from "../Widget/Announcements";
 
 type LayoutPropType = {
   lngDict: any;
@@ -100,6 +101,9 @@ const Layout: React.FC<LayoutPropType> = ({
       {withHeader &&
         <Header lng={lng} />
       }
+
+      <Annoucnements i18n={i18n} />
+
       <main className={layoutClassName}>
         {withAllowed ?
           props.children :

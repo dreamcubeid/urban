@@ -20,11 +20,11 @@ const Announcements: FC<iProps> = ({
 
   return (
     <>
-      {router.pathname === '/[lng]' && 
-        <div className={styles.headerAnnouncements}>
+      {router.pathname === '/[lng]' &&
+        <div className={styles.announcements}>
           <Widget
             pos="header-announcements"
-            widgetClassName={styles.headerAnnouncements_item}
+            widgetClassName={styles.announcements_item}
             thumborSetting={{
               width: 512,
               format: "webp",
