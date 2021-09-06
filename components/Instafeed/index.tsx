@@ -1,7 +1,7 @@
 /* library package */
-import { FC, useState } from 'react'
-import dynamic from 'next/dynamic'
+import { FC } from 'react'
 import { InstagramFeed } from '@sirclo/nexus'
+import Carousel from '@brainhubeu/react-carousel'
 
 /* library template */
 import useWindowSize from 'lib/useWindowSize'
@@ -9,16 +9,6 @@ import useWindowSize from 'lib/useWindowSize'
 /* component */
 import styles from 'public/scss/components/InstaFeed.module.scss'
 import Placeholder from 'components/Placeholder'
-
-const InstagramQuickView = dynamic(() => import('@sirclo/nexus').then((mod) => mod.InstagramQuickView))
-
-const classesInstagramQuickView = {
-  quickViewBackgroundClassName: styles.instagramFeed_quickviewBackground,
-  quickViewContentClassName: styles.instagramFeed_quickviewInner,
-  closeButtonClassName: `${styles.btn} ${styles.instagramFeed_quickviewButton}`,
-  quickViewAnchorClassName: styles.instagramFeed_quickviewLink,
-  quickViewMediaClassName: styles.instagramFeed_quickviewImage
-}
 
 const classesInstagramFeed = {
   containerClassName: styles.instagramFeed,
@@ -43,41 +33,41 @@ type InstafeedType = {
 const Instafeed: FC<InstafeedType> = ({
   i18n,
   brand,
-  title,
-  withQuickview = false,
+  title = brand?.socmedSetting?.socmedLink?.instagram?.replace("https://www.instagram.com/", ""),
   withFollowButton = false,
-  followButtonText = i18n.t("instagram.label")
+  followButtonText = i18n.t("instagram.cta")
 }) => {
   const size: any = useWindowSize()
 
-  const [instagramQuickView, setInstagramQuickView] = useState<boolean>(false)
-  const [instagramMedia, setInstagramMedia] = useState<any>({})
-
-  const handleFollowButton = () => {
-    window.open(brand?.socmedSetting?.socmedLink?.instagram);
-  }
+  const handleFollowButton = () => window.open(brand?.socmedSetting?.socmedLink?.instagram);
 
   return (
     <>
-
       {title &&
-        <h2 className={styles.instagramFeed_title}>
-          {title}
-        </h2>
+        <div className={styles.instagramFeed_titleContainer}>
+          <h2 className={styles.instagramFeed_title}>
+            @{title}
+          </h2>
+          {withFollowButton &&
+            <span
+              className={styles.instagramFeed_followUs}
+              onClick={handleFollowButton}
+            >
+              {followButtonText}
+            </span>
+          }
+        </div>
       }
-
       <InstagramFeed
         postLimit={6}
         classes={classesInstagramFeed}
-        showQuickView={setInstagramQuickView}
-        getQuickViewMedia={setInstagramMedia}
-        withQuickview={withQuickview}
+        Carousel={size.width <= 765 && Carousel}
         loadingComponent={
           <div className={styles.instagramFeed_placeholderWrapper}>
             <Placeholder
               classes={classesPlaceholderInstafeed}
               withList
-              listMany={6}
+              listMany={size.width < 765 ? 1 : 6}
             />
           </div>
         }
@@ -87,28 +77,6 @@ const Instafeed: FC<InstafeedType> = ({
           quality: 85,
         }}
       />
-
-      {withFollowButton &&
-        <div className={styles.instagramFeed_button}>
-          <button type="button" onClick={handleFollowButton}>
-            {followButtonText}
-          </button>
-        </div>
-      }
-
-      {(instagramQuickView && instagramMedia) &&
-        <InstagramQuickView
-          classes={classesInstagramQuickView}
-          showQuickView={setInstagramQuickView}
-          media={instagramMedia}
-          thumborSetting={{
-            width: size.width < 575 ? 350 : 500,
-            format: 'webp',
-            quality: 85
-          }}
-        />
-
-      }
     </>
   )
 }

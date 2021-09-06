@@ -69,7 +69,7 @@ const Home: FC<any> = ({
           tagname='new-arrivals'
           withTitle={{
             type: 'left',
-            title: i18n.t('home.featuredProducts'),
+            title: i18n.t('home.arrivalsProducts'),
             withSeeAll: true
           }}
         />
@@ -90,11 +90,11 @@ const Home: FC<any> = ({
 
       {brand?.socmedSetting?.instagramToken &&
         <section>
+          {console.log(brand)}
           <LazyLoadComponent>
             <Instafeed
               i18n={i18n}
               brand={brand}
-              title={i18n.t("home.ourGallery")}
               withFollowButton
             />
           </LazyLoadComponent>
