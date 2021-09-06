@@ -13,6 +13,9 @@ import {
   ChevronDown,
 } from "react-feather";
 
+/* locale */
+import locales from 'locales'
+
 const classesPaymentConfirmation = {
   paymentConfirmationDivClassName: styles.paymentNotif_form,
   paymentInfoUploadClassName: styles.paymentNotif_info,
@@ -95,11 +98,9 @@ const PaymentConfirmationPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
 
-  const brand = await useBrand(req);
+  const lngDict = locales(params.lng) || {}
+  const brand = await useBrand(req)
 
   return {
     props: {

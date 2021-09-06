@@ -13,6 +13,9 @@ import {
 } from "react-feather";
 import styles from "public/scss/pages/ResetPassword.module.scss";
 
+/* locale */
+import locales from 'locales'
+
 const classesSetNewPassword = {
   containerClassName: styles.resetPassword_innerForm,
   inputContainerClassName: styles.sirclo_form_row,
@@ -69,10 +72,8 @@ const ResetPasswordPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
 
+  const lngDict = locales(params.lng) || {}
   const brand = await useBrand(req);
 
   return {

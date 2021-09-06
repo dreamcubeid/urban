@@ -14,6 +14,9 @@ import styles from "public/scss/pages/Contact.module.scss";
 
 const Placeholder = dynamic(() => import("components/Placeholder"));
 
+/* locale */
+import locales from 'locales'
+
 const classesContact = {
   containerClassName: `${styles.contact_container} d-flex flex-column align-items-start justify-content-start`,
   mapClassName: styles.contact_map,
@@ -94,9 +97,7 @@ const ContactPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locales(params.lng) || {}
 
   const brand = await useBrand(req);
 

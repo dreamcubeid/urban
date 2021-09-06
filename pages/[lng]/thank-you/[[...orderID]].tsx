@@ -8,6 +8,9 @@ import { toast } from "react-toastify";
 import { Check } from "react-feather";
 import styles from "public/scss/pages/ThankYou.module.scss";
 
+/* locale */
+import locales from 'locales'
+
 const classesThankYouPage = {
   thankYouClassName: styles.thankyou_inner,
   hankYouOrderID: styles.thankyou_label,
@@ -48,10 +51,8 @@ const ThankYouPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
 
+  const lngDict = locales(params.lng) || {}
   const brand = await useBrand(req);
 
   return {

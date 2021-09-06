@@ -18,6 +18,10 @@ import Loader from "components/Loader/Loader";
 import LoaderPages from 'components/Loader/LoaderPages';
 import styles from "public/scss/pages/Login.module.scss";
 
+/* locale */
+import locales from 'locales'
+
+
 const loginClasses = {
   containerClassName: `${styles.login_item} ${styles.login_item__form} order-3`,
   inputContainerClassName: styles.sirclo_form_row,
@@ -94,12 +98,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   params
 }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
-
+  const lngDict = locales(params.lng) || {}
   const brand = await useBrand(req);
-
   const cookies = parseCookies(req);
   const hasGoogleAuth = await useGoogleAuth(req);
   const hasFacebookAuth = await useFacebookAuth(req);

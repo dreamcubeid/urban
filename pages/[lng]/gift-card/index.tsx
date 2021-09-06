@@ -5,6 +5,9 @@ import { useBrand } from "lib/useBrand";
 import Layout from "components/Layout/Layout";
 import styles from "public/scss/pages/GiftCard.module.scss";
 
+/* locale */
+import locales from 'locales'
+
 const classesGiftCard = {
   containerClassName: `${styles.giftcard_item} ${styles.giftcard_item__form}`,
   inputContainerClassName: styles.sirclo_form_row,
@@ -54,10 +57,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   params,
   req
 }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  )
 
+  const lngDict = locales(params.lng) || {}
   const brand = await useBrand(req);
 
   return {

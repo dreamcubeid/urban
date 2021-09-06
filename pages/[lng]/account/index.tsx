@@ -26,6 +26,10 @@ import stylesPopupCheckPaymentOrder from "public/scss/components/CheckPaymentOrd
 
 const ACTIVE_CURRENCY = "IDR";
 
+/* locale */
+import locales from 'locales'
+
+
 const classesAccount = {
   containerClassName: styles.account,
   tabClassName: styles.account_tab,
@@ -219,10 +223,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   params
 }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
-
+  const lngDict = locales(params.lng) || {}
   const brand = await useBrand(req);
 
   if (res) {

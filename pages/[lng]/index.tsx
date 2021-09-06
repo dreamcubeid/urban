@@ -4,9 +4,13 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { useI18n } from '@sirclo/nexus'
 
+
 /* library template */
 import { parseCookies } from 'lib/parseCookies'
 import { useBrand, handleGetBanner } from 'lib/client'
+
+/* locale */
+import locales from 'locales'
 
 /* component */
 import Layout from 'components/Layout/Layout'
@@ -42,8 +46,8 @@ const Home: FC<any> = ({
         <ProductsComponent
           i18n={i18n}
           lng={lng}
-          type='grid'
-          tagname='featured'
+          type="grid"
+          tagname="featured"
           withTitle={{
             type: 'left',
             title: i18n.t('home.featuredProducts'),
@@ -62,11 +66,11 @@ const Home: FC<any> = ({
         <ProductsComponent
           i18n={i18n}
           lng={lng}
-          type='grid'
+          type="grid"
           tagname='new-arrivals'
           withTitle={{
             type: 'left',
-            title: i18n.t('home.featuredProducts'),
+            title: i18n.t('home.arrivalsProducts'),
             withSeeAll: true
           }}
         />
@@ -97,7 +101,6 @@ const Home: FC<any> = ({
           </LazyLoadComponent>
         </section>
       }
-
     </Layout>
   )
 }
@@ -120,17 +123,14 @@ export const getServerSideProps: GetServerSideProps = async ({
     res.end()
   }
 
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
-
+  const lngDict = locales(params.lng) || {}
   const brand = await useBrand(req)
   const dataBanners = await handleGetBanner(req);
 
   return {
     props: {
       lng: params.lng,
-      lngDict,
+      lngDict: lngDict,
       dataBanners,
       brand: brand || ''
     }

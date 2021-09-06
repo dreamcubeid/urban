@@ -10,6 +10,9 @@ import {
 } from "react-feather";
 import styles from "public/scss/pages/PaymentStatus.module.scss";
 
+/* locale */
+import locales from 'locales'
+
 type TypePaymentStatus = {
   title?: string,
   contentDesc?: string
@@ -117,10 +120,7 @@ const PaymentStatus: FC<any> = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
-
+  const lngDict = locales(params.lng) || {}
   const brand = await useBrand(req);
   const [orderID, status] = params?.orderID as string[];
 
@@ -132,7 +132,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
       orderID: orderID || "",
       status: status || "",
     }
-  };
+  }
 }
 
 export default PaymentStatus;

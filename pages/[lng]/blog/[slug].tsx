@@ -16,6 +16,10 @@ const Placeholder = dynamic(() => import("components/Placeholder"));
 const Popup = dynamic(() => import("components/Popup/Popup"));
 const SocialShare = dynamic(() => import("components/SocialShare"));
 
+/* locale */
+import locales from 'locales'
+
+
 const classesBlogSingle = {
   blogContainerClassName: styles.blog_detail,
   headerClassName: styles.blog_detailHeader,
@@ -72,79 +76,79 @@ const BlogSlug: FC<any> = ({
       lngDict={lngDict}
       brand={brand}
     >
-    <div className="container">
-      <div className="row">
-        <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+      <div className="container">
+        <div className="row">
+          <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
             <BlogSingle
-                classes={classesBlogSingle}
-                ID={slug.toString()}
-                timeIcon={
-                  <div className={`${styles.blog_detailIcon} ${styles.blog_detailIcon__time}`}></div>
-                }
-                authorIcon={
-                  <div className={`${styles.blog_detailIcon} ${styles.blog_detailIcon__author}`}></div>
-                }
-                loadingComponent={
-                  <div className="row">
-                    <div className="col-2">
-                      <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    </div>
-                    <div className="col-3">
-                      <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    </div>
-                    <div className="col-12 py-4">
-                      <Placeholder classes={classesPlaceholderBlogs} withImage />
-                      <Placeholder classes={classesPlaceholderBlogs} withImage />
-                      <Placeholder classes={classesPlaceholderBlogs} withImage />
-                      <Placeholder classes={classesPlaceholderBlogs} withImage />
-                      <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    </div>
+              classes={classesBlogSingle}
+              ID={slug.toString()}
+              timeIcon={
+                <div className={`${styles.blog_detailIcon} ${styles.blog_detailIcon__time}`}></div>
+              }
+              authorIcon={
+                <div className={`${styles.blog_detailIcon} ${styles.blog_detailIcon__author}`}></div>
+              }
+              loadingComponent={
+                <div className="row">
+                  <div className="col-2">
+                    <Placeholder classes={classesPlaceholderBlogs} withImage />
                   </div>
-                }
-              />
+                  <div className="col-3">
+                    <Placeholder classes={classesPlaceholderBlogs} withImage />
+                  </div>
+                  <div className="col-12 py-4">
+                    <Placeholder classes={classesPlaceholderBlogs} withImage />
+                    <Placeholder classes={classesPlaceholderBlogs} withImage />
+                    <Placeholder classes={classesPlaceholderBlogs} withImage />
+                    <Placeholder classes={classesPlaceholderBlogs} withImage />
+                    <Placeholder classes={classesPlaceholderBlogs} withImage />
+                  </div>
+                </div>
+              }
+            />
 
-              <div className={`${styles.lookbook_nav} ${styles.blog_detailNavigation} d-flex flex-row align-items-center justify-content-between`}>
-                <button onClick={() => router.back()}>
-                  {i18n.t("global.back")}
-                </button>
-                <button onClick={() => toggleShare()} className={styles.blog_detailShare}>
-                  {i18n.t("product.share")}
-                </button>
-              </div>
+            <div className={`${styles.lookbook_nav} ${styles.blog_detailNavigation} d-flex flex-row align-items-center justify-content-between`}>
+              <button onClick={() => router.back()}>
+                {i18n.t("global.back")}
+              </button>
+              <button onClick={() => toggleShare()} className={styles.blog_detailShare}>
+                {i18n.t("product.share")}
+              </button>
+            </div>
 
-              {(totalCategories > 0 || totalCategories === null) &&
+            {(totalCategories > 0 || totalCategories === null) &&
+              <>
+                <h2 className={styles.blog_titleSide}>
+                  {i18n.t("blog.categories")}
+                </h2>
+                <BlogCategories
+                  classes={classesBlogCategories}
+                  getCategoriesCount={(categoriesCount) => setTotalCategories(categoriesCount)}
+                />
+              </>
+            }
+
+            <h2 className={styles.blog_titleSide}>
+              {i18n.t("blog.recentPost")}
+            </h2>
+
+            <BlogRecent
+              classes={classesBlogRecent}
+              limit={5}
+              linkPrefix="blog"
+              thumborSetting={{
+                width: 100,
+                format: "webp",
+                quality: 85
+              }}
+              loadingComponent={
                 <>
-                  <h2 className={styles.blog_titleSide}>
-                    {i18n.t("blog.categories")}
-                  </h2>
-                  <BlogCategories
-                    classes={classesBlogCategories}
-                    getCategoriesCount={(categoriesCount) => setTotalCategories(categoriesCount)}
-                  />
+                  <Placeholder classes={classesPlaceholderBlogs} withImage />
+                  <Placeholder classes={classesPlaceholderBlogs} withImage />
+                  <Placeholder classes={classesPlaceholderBlogs} withImage />
                 </>
               }
-
-              <h2 className={styles.blog_titleSide}>
-                {i18n.t("blog.recentPost")}
-              </h2>
-              
-              <BlogRecent
-                classes={classesBlogRecent}
-                limit={5}
-                linkPrefix="blog"
-                thumborSetting={{
-                  width: 100,
-                  format: "webp",
-                  quality: 85
-                }}
-                loadingComponent={
-                  <>
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  </>
-                }
-              />
+            />
 
           </div>
         </div>
@@ -170,9 +174,7 @@ const BlogSlug: FC<any> = ({
 
 export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
   const { slug } = params;
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locales(params.lng) || {}
 
   const brand = await useBrand(req);
 

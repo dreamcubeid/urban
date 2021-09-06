@@ -5,6 +5,9 @@ import Layout from "components/Layout/Layout";
 import { useBrand } from "lib/useBrand";
 import styles from "public/scss/pages/Tautan.module.scss";
 
+/* locale */
+import locales from 'locales'
+
 const classesLinks = {
   containerClassName: styles.tautan,
   logoImage: styles.tautan_logo,
@@ -43,10 +46,8 @@ const TautanPage: FC<any> = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
 
+  const lngDict = locales(params.lng) || {}
   const brand = await useBrand(req);
 
   return {

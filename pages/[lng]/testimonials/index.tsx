@@ -18,6 +18,9 @@ import styles from "public/scss/pages/Testimonials.module.scss";
 
 const Popup = dynamic(() => import("components/Popup/Popup"));
 
+/* locale */
+import locales from 'locales'
+
 const classesTestimonials = {
   containerClassName: `${styles.testimonials_container}`,
   cardClassName: `${styles.testimonials_card}`,
@@ -171,10 +174,8 @@ const TestimonialsPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
 
+  const lngDict = locales(params.lng) || {}
   const brand = await useBrand(req);
 
   return {

@@ -10,6 +10,10 @@ import { useBrand } from "lib/useBrand";
 import { toast } from "react-toastify";
 import styles from "public/scss/pages/Login.module.scss";
 
+/* locale */
+import locales from 'locales'
+
+
 const classesResetPassword = {
   containerClassName: `${styles.login_item} ${styles.login_item__form}`,
   inputContainerClassName: styles.sirclo_form_row,
@@ -61,12 +65,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   params
 }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
-
+  const lngDict = locales(params.lng) || {}
   const brand = await useBrand(req);
-
   const cookies = parseCookies(req);
   redirectIfAuthenticated(res, cookies, 'account');
 

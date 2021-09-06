@@ -11,6 +11,9 @@ import Placeholder from "components/Placeholder";
 import { useBrand } from "lib/useBrand";
 import styles from "public/scss/pages/Article.module.scss";
 
+/* locale */
+import locales from 'locales'
+
 const classesPlaceholderArticle = {
 	placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_article}`,
 }
@@ -67,9 +70,7 @@ const ArticleDetail: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-	const { default: lngDict = {} } = await import(
-		`locales/${params.lng}.json`
-	);
+	const lngDict = locales(params.lng) || {}
 
 	const brand = await useBrand(req);
 

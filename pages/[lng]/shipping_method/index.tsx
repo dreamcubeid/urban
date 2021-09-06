@@ -29,6 +29,9 @@ import {
 import { toast } from "react-toastify";
 import styles from "public/scss/pages/ShippingMethod.module.scss";
 
+/* locale */
+import locales from 'locales'
+
 const Popup = dynamic(() => import("components/Popup/Popup"));
 const Placeholder = dynamic(() => import("components/Placeholder"));
 const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
@@ -437,11 +440,9 @@ const ShippingMethodPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
 
-  const brand = await useBrand(req);
+  const lngDict = locales(params.lng) || {}
+  const brand = await useBrand(req)
 
   return {
     props: {

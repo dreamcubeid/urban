@@ -21,6 +21,9 @@ import styles from "public/scss/pages/Products.module.scss";
 
 const Popup = dynamic(() => import("components/Popup/Popup"));
 
+/* locale */
+import locales from 'locales'
+
 const classesProducts = {
   productContainerClassName: `col-6 col-md-3 products_list ${styles.product}`,
   stickerContainerClassName: styles.product_sticker,
@@ -334,8 +337,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   params,
 }) => {
-  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`);
-
+  const lngDict = locales(params.lng) || {}
   const brand = await useBrand(req);
 
   return {
