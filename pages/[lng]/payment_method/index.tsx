@@ -22,6 +22,9 @@ import styles from "public/scss/pages/PaymentMethod.module.scss";
 
 const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
 const Placeholder = dynamic(() => import("components/Placeholder"));
+/* locales */
+import locale from "locales";
+
 
 const classesCustomerDetail = {
   customerDetailBoxClass: styles.customer,
@@ -258,9 +261,7 @@ const PaymentMethods: FC<any> = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locale(params.lng);
 
   const brand = await useBrand(req);
 

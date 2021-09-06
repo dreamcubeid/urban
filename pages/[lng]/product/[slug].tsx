@@ -41,6 +41,9 @@ const EmptyComponent = dynamic(
 const Popup = dynamic(() => import("components/Popup/Popup"));
 const PopupCart = dynamic(() => import("components/Popup/PopupCart"));
 const SocialShare = dynamic(() => import("components/SocialShare"));
+/* locales */
+import locale from "locales";
+
 
 const classesProductDetail = {
   productDetailParentDivClassName: styles.productdetail,
@@ -71,7 +74,7 @@ const classesProductDetail = {
   variantLabelClassName: styles.variantLabel,
   variantOptionsClassName: styles.variantOption,
   qtyBoxClassName: styles.productdetail_content_innerQty,
-  propertyFooterContainerClassname:  styles.productdetail_propertyFooterContainer,
+  propertyFooterContainerClassname: styles.productdetail_propertyFooterContainer,
   addToCartBtnClassName: `btn text-uppercase my-3 ${styles.btn_secondary} ${styles.btn_long} ${styles.btn_full_width}`,
   buyNowBtnClassName: `btn  text-uppercase ${styles.btn_long} ${styles.btn_primary} ${styles.btn_full_width}`,
   notifyMeClassName: styles.productdetail_notifyMe,
@@ -539,7 +542,7 @@ export async function getServerSideProps({ req, params }) {
   const data = await getProductDetail(GRAPHQL_URI(req), slug);
   const brand = await useBrand(req);
 
-  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`);
+  const lngDict = locale(params.lng)
 
   const urlSite = `https://${req.headers.host}/${params.lng}/product/${slug}`;
 

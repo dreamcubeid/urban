@@ -4,6 +4,8 @@ import { GiftCard, useI18n } from "@sirclo/nexus";
 import { useBrand } from "lib/useBrand";
 import Layout from "components/Layout/Layout";
 import styles from "public/scss/pages/GiftCard.module.scss";
+/* locales */
+import locale from "locales";
 
 const classesGiftCard = {
   containerClassName: `${styles.giftcard_item} ${styles.giftcard_item__form}`,
@@ -54,9 +56,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   params,
   req
 }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  )
+  const lngDict = locale(params.lng)
 
   const brand = await useBrand(req);
 

@@ -20,6 +20,9 @@ import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { useBrand } from "lib/useBrand";
 import styles from "public/scss/pages/Home.module.scss";
 
+/* locales */
+import locale from "locales";
+
 const classesBanner = {
   imageContainerClassName: styles.bannerCarousel_header,
   linkClassName: styles.bannerCarousel_link,
@@ -300,10 +303,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     res.end();
   }
 
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
-
+  const lngDict = locale(params.lng)
   const brand = await useBrand(req);
   const dataBanners = await getBanner(GRAPHQL_URI(req));
 

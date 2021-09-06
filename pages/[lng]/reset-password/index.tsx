@@ -12,6 +12,8 @@ import {
   CheckCircle
 } from "react-feather";
 import styles from "public/scss/pages/ResetPassword.module.scss";
+/* locales */
+import locale from "locales";
 
 const classesSetNewPassword = {
   containerClassName: styles.resetPassword_innerForm,
@@ -69,9 +71,7 @@ const ResetPasswordPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locale(params.lng);
 
   const brand = await useBrand(req);
 

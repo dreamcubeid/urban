@@ -32,6 +32,9 @@ import styles from "public/scss/pages/ShippingMethod.module.scss";
 const Popup = dynamic(() => import("components/Popup/Popup"));
 const Placeholder = dynamic(() => import("components/Placeholder"));
 const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
+/* locales */
+import locale from "locales";
+
 
 const classesCustomerDetail = {
   customerDetailBoxClass: styles.customer,
@@ -437,9 +440,7 @@ const ShippingMethodPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locale(params.lng);
 
   const brand = await useBrand(req);
 
