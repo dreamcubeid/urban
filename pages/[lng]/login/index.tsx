@@ -17,6 +17,8 @@ import Layout from "components/Layout/Layout";
 import Loader from "components/Loader/Loader";
 import LoaderPages from 'components/Loader/LoaderPages';
 import styles from "public/scss/pages/Login.module.scss";
+/* locales */
+import locale from "locales";
 
 const loginClasses = {
   containerClassName: `${styles.login_item} ${styles.login_item__form} order-3`,
@@ -94,9 +96,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   params
 }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locale(params.lng);
 
   const brand = await useBrand(req);
 

@@ -8,6 +8,9 @@ import { useI18n } from '@sirclo/nexus'
 import { parseCookies } from 'lib/parseCookies'
 import { useBrand, handleGetBanner } from 'lib/client'
 
+/* locale */
+import locale from "locales";
+
 /* component */
 import Layout from 'components/Layout/Layout'
 import Banner from 'components/Banner'
@@ -120,11 +123,8 @@ export const getServerSideProps: GetServerSideProps = async ({
     res.end()
   }
 
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
-
-  const brand = await useBrand(req)
+  const lngDict = locale(params.lng)
+  const brand = await useBrand(req);
   const dataBanners = await handleGetBanner(req);
 
   return {

@@ -17,6 +17,8 @@ import styles from "public/scss/pages/Blog.module.scss";
 
 const EmptyComponent = dynamic(() => import("components/EmptyComponent/EmptyComponent"));
 const Placeholder = dynamic(() => import("components/Placeholder"));
+/* locales */
+import locale from "locales";
 
 const classesBlogs = {
   blogsContainerClassName: styles.blog,
@@ -156,10 +158,7 @@ const Blog: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
-
+  const lngDict = locale(params.lng)
   const brand = await useBrand(req);
   const headerImage = await getBlogHeaderImage(GRAPHQL_URI(req));
 

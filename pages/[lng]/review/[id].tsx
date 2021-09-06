@@ -12,6 +12,8 @@ import { useBrand } from "lib/useBrand";
 import { toast } from "react-toastify";
 import { ChevronDown, ChevronUp } from "react-feather";
 import styles from "public/scss/pages/Review.module.scss";
+/* locales */
+import locale from "locales";
 
 const classesOrderReview = {
   titleContainerClassName: styles.orderReview_titleContainer,
@@ -122,9 +124,7 @@ const ReviewPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locale(params.lng);
 
   const brand = await useBrand(req);
 
