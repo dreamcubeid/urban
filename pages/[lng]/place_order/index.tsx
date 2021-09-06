@@ -33,6 +33,8 @@ import {
 } from "react-feather";
 import { toast } from "react-toastify";
 import styles from "public/scss/pages/Placeorder.module.scss";
+/* locales */
+import locale from "locales";
 
 const Popup = dynamic(() => import("components/Popup/Popup"));
 const Placeholder = dynamic(() => import("components/Placeholder"));
@@ -419,9 +421,7 @@ const PlaceOrderPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locale(params.lng);
 
   const brand = await useBrand(req);
 

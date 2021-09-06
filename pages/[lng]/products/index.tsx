@@ -18,6 +18,8 @@ import Placeholder from "components/Placeholder";
 import { useBrand } from "lib/useBrand";
 import { Sliders, ArrowUp } from "react-feather";
 import styles from "public/scss/pages/Products.module.scss";
+/* locales */
+import locale from "locales";
 
 const Popup = dynamic(() => import("components/Popup/Popup"));
 
@@ -334,7 +336,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   params,
 }) => {
-  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`);
+  const lngDict = locale(params.lng)
 
   const brand = await useBrand(req);
 

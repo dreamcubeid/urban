@@ -36,6 +36,10 @@ const Popup = dynamic(() => import('components/Popup/Popup'))
 import styles from 'public/scss/pages/Cart.module.scss'
 import stylesOrderSummary from 'public/scss/components/OrderSummaryV2.module.scss'
 
+/* locales */
+import locale from "locales";
+
+
 const classesCartDetails = {
   className: styles.cart,
   cartHeaderClassName: "d-none",
@@ -325,9 +329,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   params
 }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  )
+  const lngDict = locale(params.lng)
 
   if (process.env.IS_PROD !== "false") {
     const cookies = parseCookies(req)

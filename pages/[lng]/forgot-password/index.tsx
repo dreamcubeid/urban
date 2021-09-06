@@ -9,6 +9,8 @@ import redirectIfAuthenticated from "lib/redirectIfAuthenticated";
 import { useBrand } from "lib/useBrand";
 import { toast } from "react-toastify";
 import styles from "public/scss/pages/Login.module.scss";
+/* locales */
+import locale from "locales";
 
 const classesResetPassword = {
   containerClassName: `${styles.login_item} ${styles.login_item__form}`,
@@ -61,9 +63,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   params
 }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locale(params.lng);
 
   const brand = await useBrand(req);
 

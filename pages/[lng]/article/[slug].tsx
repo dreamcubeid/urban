@@ -10,6 +10,8 @@ import SEO from "components/SEO";
 import Placeholder from "components/Placeholder";
 import { useBrand } from "lib/useBrand";
 import styles from "public/scss/pages/Article.module.scss";
+/* locales */
+import locale from "locales";
 
 const classesPlaceholderArticle = {
 	placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_article}`,
@@ -67,10 +69,7 @@ const ArticleDetail: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-	const { default: lngDict = {} } = await import(
-		`locales/${params.lng}.json`
-	);
-
+	const lngDict = locale(params.lng)
 	const brand = await useBrand(req);
 
 	return {
