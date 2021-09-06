@@ -1,0 +1,36 @@
+.productSort
+{
+  &_sort
+  {
+    list-style: none;
+    width: 100%;
+    padding: 16px 0 0 32px;
+  }
+  
+  &_sortOptions
+  {
+    @extend .grid;
+    @include grid-(1);
+    @include gap-y-(15px);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &_sortOptionButton
+  {
+    @include typographyBuilder(400, 16, 21);
+    background: transparent;
+    border: none;
+    
+    &:hover
+    {
+      color: $color_blue;
+    }
+  }
+  
+  &_sortActive
+  {
+    color: $color_blue;
+  }
+}

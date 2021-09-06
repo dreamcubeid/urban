@@ -2,7 +2,7 @@
 import {
   FC,
   useState,
-  useEffect
+  // useEffect
 } from 'react'
 import Router from 'next/router'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic'
 import { Products } from '@sirclo/nexus'
 
 /* library template */
-import useInfiniteScroll from 'lib/useInfiniteScroll'
+// import useInfiniteScroll from 'lib/useInfiniteScroll'
 import useQuery from 'lib/useQuery'
 // import useRemoveParams from 'lib/useRemoveParams'
 
@@ -100,10 +100,9 @@ const ProductsComponent: FC<iProps> = ({
   const categories: string = useQuery('categories')
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const [showSort, setShowSort] = useState<boolean>(false);
-  const [filterProduct, setFilterProduct] = useState({})
-  const [totalUpsell, setTotalUpsell] = useState(null)
-  const [sort, setSort] = useState(null)
-  const itemPerPage = 6
+  // const [filterProduct, setFilterProduct] = useState({})
+  // const [sort, setSort] = useState(null)
+  const itemPerPage = 4
   const containerClasses = {
     "flexNoWrap": styles.productsComponent_flexNoWrap,
     "grid": `
@@ -124,10 +123,10 @@ const ProductsComponent: FC<iProps> = ({
   }
   const [pageInfo, setPageInfo] = useState({
     pageNumber: 0,
-    itemPerPage: 8,
+    itemPerPage: 4,
     totalItems: null,
   })
-  const { currPage, setCurrPage } = useInfiniteScroll(pageInfo, "products_container")
+  // const { currPage, setCurrPage } = useInfiniteScroll(pageInfo, "products_container")
   const handleShowFilter = () => setShowFilter(!showFilter)
   const handleShowSort = () => setShowSort(!showSort)
   // const handleFilter = (selectedFilter: any) => {
@@ -161,8 +160,8 @@ const ProductsComponent: FC<iProps> = ({
       propsProduct = {
         ...baseProductsProps,
         collectionSlug: categories,
-        sort: sort,
-        filter: filterProduct,
+        // sort: sort,
+        // filter: filterProduct,
         withSeparatedVariant: true,
         loadingComponent:
           [0, 1, 2, 3].map((_, i) => (
@@ -202,13 +201,11 @@ const ProductsComponent: FC<iProps> = ({
     }
   }
 
-  useEffect(() => {
-    setCurrPage(0);
-  }, [filterProduct, categories]);
+  // useEffect(() => {
+  //   setCurrPage(0);
+  // }, [filterProduct, categories]);
 
   if (pageInfo.totalItems === 0 && !withEmptyComponent) return <></>
-  if ((crossSell && props.SKUs === null) || pageInfo.itemPerPage === 10) return <></>
-  if (upSell && totalUpsell === 0) return <></>
 
   return (
     <>
@@ -246,13 +243,13 @@ const ProductsComponent: FC<iProps> = ({
                   as={`/${lng}/products${tagname ? `?tagname=${tagname}` : ""}`}
                 >
                   <span className={`${styles.productsComponent_seeAll}`}>
-                    {i18n.t("product.seaAll")}
+                    {i18n.t("product.seeAll")}
                   </span>
                 </Link>
               }
             </div>
           }
-          {withInfiniteScroll &&
+          {/* {withInfiniteScroll &&
             <div
               className={`
                 ${containerClasses[type]} ${withFilterSort && 'mt-0 pt-0'}
@@ -268,7 +265,7 @@ const ProductsComponent: FC<iProps> = ({
               ))
               }
             </div>
-          }
+          } */}
           {!withInfiniteScroll &&
             <>
               <div className={`${containerClasses[type]}`}>

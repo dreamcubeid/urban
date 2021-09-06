@@ -18,7 +18,6 @@ const MainAdvertisement: FC = () => {
         widgetClassName={styles.MainAdvertisement_item}
         loadingComponent={<Placeholder classes={placeholder} withImage />}
         thumborSetting={{
-          width: 512,
           format: "webp",
           quality: 85,
         }}

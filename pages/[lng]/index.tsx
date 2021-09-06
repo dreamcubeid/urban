@@ -42,7 +42,7 @@ const Home: FC<any> = ({
         <ProductsComponent
           i18n={i18n}
           lng={lng}
-          type='flexNoWrap'
+          type='grid'
           tagname='featured'
           withTitle={{
             type: 'left',
@@ -62,7 +62,7 @@ const Home: FC<any> = ({
         <ProductsComponent
           i18n={i18n}
           lng={lng}
-          type='flexNoWrap'
+          type='grid'
           tagname='new-arrivals'
           withTitle={{
             type: 'left',

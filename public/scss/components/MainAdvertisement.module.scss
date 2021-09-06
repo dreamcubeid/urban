@@ -1,4 +1,29 @@
-.mainAdvertisement
+@import "../utils/_variables.scss";
+@import "../utils/_grid.scss";
+
+.MainAdvertisement
 {
+    
+
+    &_container
+    {
+        @extend .grid;
+        @include grid-(2);
+        @include gap-x-(24px);
+        width: 100%;
+    }
+
+    &_item img
+    {
+        width: 100%;
+        height: auto;
+        object-fit: content;
+    }
+
+    @media (max-width: #{$breakpoint_min_sm}) 
+    {
+        @include grid-(1);
+        @include gap-y-(24px);
+    }
   
 }

@@ -4,6 +4,7 @@ import { ThankYou, useI18n } from "@sirclo/nexus";
 import SEO from "components/SEO";
 import Layout from "components/Layout/Layout";
 import { useBrand } from "lib/useBrand";
+import { toast } from "react-toastify";
 import { Check } from "react-feather";
 import styles from "public/scss/pages/ThankYou.module.scss";
 
@@ -37,6 +38,7 @@ const ThankYouPage: FC<any> = ({
               thankYouImageURL={<Check className={styles.thankyou_inner__icon} />}
               classes={classesThankYouPage}
               withDelay
+              onSuccessMsg={(msg) => toast.success(msg)}
             />
           </div>
         </div>

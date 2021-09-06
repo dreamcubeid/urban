@@ -1,42 +1,38 @@
 /* library package */
-import { FC, ReactNode } from 'react'
+import {
+  FC,
+  useState
+} from 'react'
 import { useRouter } from 'next/router'
 import { Widget } from '@sirclo/nexus'
-
 /* component */
 import styles from 'public/scss/components/Announcements.module.scss'
 
-type iProps = {
-  i18n?: any,
-  children?: ReactNode
-}
-
-const Announcements: FC<iProps> = ({
-  i18n,
-  children
-}) => {
+const Announcements: FC<any> = () => {
 
   const router = useRouter();
+  const [showAnnounce, setShowAnnounce] = useState<boolean>(true);
+  const [countWidgetAnnouncement, setCountWidgetAnnouncement] = useState(null);
 
   return (
     <>
-      {router.pathname === '/[lng]' && 
-        <div className={styles.headerAnnouncements}>
+      {(router.pathname === '/[lng]' && showAnnounce) &&
+        (countWidgetAnnouncement === null || countWidgetAnnouncement > 0) &&
+        <div className={styles.announcements}>
           <Widget
             pos="header-announcements"
-            widgetClassName={styles.headerAnnouncements_item}
+            getItemCount={(itemCount: number) => setCountWidgetAnnouncement(itemCount)}
+            widgetClassName={styles.announcements_item}
             thumborSetting={{
               width: 512,
               format: "webp",
               quality: 85,
             }}
-            loadingComponent={
-              <div className={styles.headerAnnouncements_item}>
-                <p>{i18n.t("global.loading")}</p>
-              </div>
-            }
           />
-          {children}
+          <span
+            onClick={() => setShowAnnounce(false)}
+            className={styles.announcements_closeIcon}
+          />
         </div>
       }
     </>
