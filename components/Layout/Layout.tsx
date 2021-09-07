@@ -114,7 +114,7 @@ const Layout: FC<LayoutPropType> = ({
       </main>
       <Announcements />
       <ToastContainer />
-      =      <div className={styles.newsletter_overlay}>
+     <div className={styles.newsletter_overlay}>
         <Newsletter
           classes={classesNewsletterPopup}
           closeButton={<XIcon color="black" size="18" />}

@@ -32,8 +32,7 @@ const BannerComponent: FC<any> = ({ dataBanners }) => {
     <Banner
       Carousel={Carousel}
       autoPlay={isReady ? 5000 : null}
-      data={dataBanners}
-      dots
+      data={dataBanners?.data}
       infinite
       classes={classesBanner}
       thumborSetting={{

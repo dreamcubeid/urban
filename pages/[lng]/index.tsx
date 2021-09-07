@@ -84,13 +84,15 @@ const Home: FC<any> = ({
       <section>
         <ProductCategoryComponent
           i18n={i18n}
-          displayMode='reels'
+          displayMode='normal'
+          withTitle
+          lng={lng}
+          withSeeAll
         />
       </section>
 
       {brand?.socmedSetting?.instagramToken &&
         <section>
-          {console.log(brand)}
           <LazyLoadComponent>
             <Instafeed
               i18n={i18n}

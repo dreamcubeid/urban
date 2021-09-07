@@ -3,7 +3,8 @@ const locale = {
     "arrivalsProducts": "Produk Terbaru",
     "close": "Tutup",
     "featuredProducts": "Produk Unggulan",
-    "loading": "Mohon Menunggu"
+    "loading": "Mohon Menunggu",
+    "productCategory": "Kategori produk"
   }
 }
 

@@ -3,7 +3,8 @@ const locale = {
     "arrivalsProducts": "New Arrival Products",
     "close": "Close",
     "featuredProducts": "Featured Products",
-    "loading": "Please Wait"
+    "loading": "Please Wait",
+    "productCategory": "Category products"
   }
 }
 
