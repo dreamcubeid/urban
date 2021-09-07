@@ -113,6 +113,19 @@
 
   @media (max-width: #{$breakpoint_min_sm}) 
   {
+    &_container
+    {
+      margin: 64px 18px 87px;
+    }
 
+    &_item
+    {
+      width: 100%;
+    }
+
+    &_media
+    {
+      display: none;
+    }
   }
 }
