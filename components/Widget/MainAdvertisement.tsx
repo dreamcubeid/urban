@@ -6,16 +6,16 @@ import Placeholder from '../Placeholder'
 import styles from 'public/scss/components/MainAdvertisement.module.scss'
 
 const placeholder = {
-  placeholderImage: styles.MainAdvertisement_placeholder,
+  placeholderImage: styles.mainAdvertisement_placeholder,
 }
 
 const MainAdvertisement: FC = () => {
   return (
-    <div className={styles.MainAdvertisement}>
+    <div className={styles.mainAdvertisement}>
       <Widget
         pos="main-content-1"
-        containerClassName={styles.MainAdvertisement_container}
-        widgetClassName={styles.MainAdvertisement_item}
+        containerClassName={styles.mainAdvertisement_container}
+        widgetClassName={styles.mainAdvertisement_item}
         loadingComponent={<Placeholder classes={placeholder} withImage />}
         thumborSetting={{
           format: "webp",

@@ -8,8 +8,7 @@ import {
   ListPaymentMethod,
   PrivateRoute,
   useI18n,
-  useShippingMethod,
-  formatPrice
+  useShippingMethod
 } from "@sirclo/nexus";
 import SEO from "components/SEO";
 import Layout from "components/Layout/Layout";
@@ -212,7 +211,7 @@ const PaymentMethods: FC<any> = ({
                               {data?.shippingMethod?.shippingProvider}&nbsp;{data?.shippingMethod?.shippingService}
                             </h3>
                             <h3 className={styles.payment_shippingCost}>
-                              {formatPrice(data?.shippingMethod?.shippingCost)}
+                              {data?.shippingMethod?.shippingCost}
                             </h3>
                           </div>
                         </>

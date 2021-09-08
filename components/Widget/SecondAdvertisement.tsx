@@ -11,11 +11,11 @@ const placeholder = {
 
 const SecondAdvertisement: FC = () => {
   return (
-    <div className={styles.secondAdvertisement}>
+    <div className={styles.SecondAdvertisement}>
       <Widget
-        pos="main-content-2"
-        containerClassName={styles.secondAdvertisement_container}
-        widgetClassName={styles.secondAdvertisement_item}
+        pos="main-content-1"
+        containerClassName={styles.SecondAdvertisement_container}
+        widgetClassName={styles.SecondAdvertisement_item}
         loadingComponent={<Placeholder classes={placeholder} withImage />}
         thumborSetting={{
           width: 512,

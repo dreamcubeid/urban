@@ -3,14 +3,11 @@ import { FC } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { useI18n } from '@sirclo/nexus'
-
 /* library template */
 import { parseCookies } from 'lib/parseCookies'
 import { useBrand, handleGetBanner } from 'lib/client'
-
 /* locale */
 import locale from "locales";
-
 /* component */
 import Layout from 'components/Layout/Layout'
 import Banner from 'components/Banner'
@@ -19,7 +16,6 @@ import SecondAdvertisement from 'components/Widget/SecondAdvertisement'
 import ProductsComponent from 'components/Products/ProductsComponent'
 import ProductCategoryComponent from 'components/ProductCategoryComponent/ProductCategoryComponent'
 import Instafeed from 'components/Instafeed'
-import TestimonialSlider from 'components/Testimonial/TestimonialSlider'
 
 const Home: FC<any> = ({
   lng,
@@ -36,7 +32,6 @@ const Home: FC<any> = ({
       lng={lng}
       brand={brand}
       logoHeader
-      withBack={false}
     >
       <Banner dataBanners={dataBanners} />
 
@@ -88,10 +83,6 @@ const Home: FC<any> = ({
           lng={lng}
           withSeeAll
         />
-      </section>
-
-      <section>
-        <TestimonialSlider i18n={i18n} />
       </section>
 
       {brand?.socmedSetting?.instagramToken &&
