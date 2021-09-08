@@ -19,6 +19,7 @@ import SecondAdvertisement from 'components/Widget/SecondAdvertisement'
 import ProductsComponent from 'components/Products/ProductsComponent'
 import ProductCategoryComponent from 'components/ProductCategoryComponent/ProductCategoryComponent'
 import Instafeed from 'components/Instafeed'
+import TestimonialSlider from 'components/Testimonial/TestimonialSlider'
 
 const Home: FC<any> = ({
   lng,
@@ -37,9 +38,7 @@ const Home: FC<any> = ({
       logoHeader
       withBack={false}
     >
-      <section>
-        <Banner dataBanners={dataBanners} />
-      </section>
+      <Banner dataBanners={dataBanners} />
 
       <LazyLoadComponent>
         <ProductsComponent
@@ -89,6 +88,10 @@ const Home: FC<any> = ({
           lng={lng}
           withSeeAll
         />
+      </section>
+
+      <section>
+        <TestimonialSlider i18n={i18n} />
       </section>
 
       {brand?.socmedSetting?.instagramToken &&

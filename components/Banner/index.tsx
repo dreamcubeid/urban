@@ -36,9 +36,9 @@ const BannerComponent: FC<any> = ({ dataBanners }) => {
       infinite
       classes={classesBanner}
       thumborSetting={{
-        width: 600,
+        width: 1048,
         format: 'webp',
-        quality: 85
+        quality: 95
       }}
       loadingComponent={
         <Placeholder classes={placeholder} withImage />
