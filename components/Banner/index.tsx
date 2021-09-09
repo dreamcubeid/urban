@@ -31,21 +31,29 @@ const BannerComponent: FC<any> = ({ dataBanners }) => {
   }, [isReady])
 
   return (
-    <Banner
-      Carousel={Carousel}
-      autoPlay={isReady ? 5000 : null}
-      data={dataBanners?.data}
-      infinite
-      classes={classesBanner}
-      thumborSetting={{
-        width: size.width < 575 ? 1400 : 600,
-        format: 'webp',
-        quality: 95
-      }}
-      loadingComponent={
-        <Placeholder classes={placeholder} withImage />
-      }
-    />
+    <div className={styleBanner.container}>
+      <Banner
+        Carousel={Carousel}
+        autoPlay={isReady ? 5000 : null}
+        data={dataBanners?.data}
+        infinite
+        classes={classesBanner}
+        thumborSetting={{
+          width: size.width < 575 ? 1048 : 600,
+          format: 'webp',
+          quality: 95
+        }}
+        loadingComponent={
+          <Placeholder classes={placeholder} withImage />
+        }
+      />
+      <a href="#featuredProduct">
+        <div className={styleBanner.seeMore}>
+          <div className={styleBanner.chevronDownCircle}></div>
+          <p>Lihat Selengkapnya</p>
+        </div>
+      </a>
+    </div>
   )
 }
 export default BannerComponent

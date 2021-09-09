@@ -52,6 +52,15 @@ $icon_sizes: (8, 10, 11, 12, 14, 16, 20, 24, 28, 32, 36, 40, 42, 48, 60);
         background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 18L15 12L9 6' stroke='%231C1E21' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
     }
 
+    &_arrowLeft
+    {
+        background-image: url("data:image/svg+xml,%3Csvg width='13' height='12' viewBox='0 0 13 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.371 5.25L7.394 1.227L6.3335 0.166504L0.500001 6L6.3335 11.8335L7.394 10.773L3.371 6.75H12.5V5.25H3.371Z' fill='%23222222'/%3E%3C/svg%3E%0A");    
+    }
+    
+    &_arrowRight
+    {
+        background-image: url("data:image/svg+xml,%3Csvg width='13' height='12' viewBox='0 0 13 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.629 5.25L5.606 1.227L6.6665 0.166504L12.5 6L6.6665 11.8335L5.606 10.773L9.629 6.75H0.5V5.25H9.629Z' fill='%23222222'/%3E%3C/svg%3E%0A");    }
+
     &_chevronDown
     {
         background-image: url("data:image/svg+xml,%3Csvg width='13' height='8' viewBox='0 0 13 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6.5 6L12 1' stroke='%2365676B' stroke-width='2'/%3E%3C/svg%3E%0A");

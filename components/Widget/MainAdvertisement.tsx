@@ -1,6 +1,8 @@
 /* library package */
 import { FC } from 'react'
 import { Widget } from '@sirclo/nexus'
+/* component library */
+import useWindowSize from 'lib/useWindowSize'
 /* component */
 import Placeholder from '../Placeholder'
 import styles from 'public/scss/components/MainAdvertisement.module.scss'
@@ -10,6 +12,8 @@ const placeholder = {
 }
 
 const MainAdvertisement: FC = () => {
+  const size = useWindowSize()
+
   return (
     <div className={styles.mainAdvertisement}>
       <Widget
@@ -18,8 +22,9 @@ const MainAdvertisement: FC = () => {
         widgetClassName={styles.mainAdvertisement_item}
         loadingComponent={<Placeholder classes={placeholder} withImage />}
         thumborSetting={{
+          width: size.width < 575 ? 800 : 400,
           format: "webp",
-          quality: 85,
+          quality: 95,
         }}
       />
     </div>
