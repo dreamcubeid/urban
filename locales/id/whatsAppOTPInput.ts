@@ -26,6 +26,13 @@ const locale = {
     "whatsappNumber": "Nomor Whatsapp",
     "willSendOTP": "Kami Akan mengirimkan kode verifikasi melalui nomor WhatsApp",
     "wrongOTP": "Kode OTP salah"
+  },
+  "whatsAppOTPInputRegis": {
+    "continue": "Daftar",
+    "disclaimer": "Dengan klik 'Daftar' berarti anda setuju menerima pemberitahuan melalui Whatsapp dan mengetahui",
+    "loginWithAnotherMethod": "Daftar menggunakan metode lain",
+    "chooseAnyAccountToLogin": "Anda memiliki beberapa akun yang terdaftar, silakan pilih salah satu untuk daftar",
+    "inputWhatsApp": "Masukan nomor Whatsapp Anda untuk daftar ke toko kami"
   }
 }
 

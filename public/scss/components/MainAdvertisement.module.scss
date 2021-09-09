@@ -1,9 +1,10 @@
 @import "../utils/_variables.scss";
 @import "../utils/_grid.scss";
+@import "../utils/_variables.scss";
 
-.MainAdvertisement
+.mainAdvertisement
 {
-    
+    margin: 0 42px;
 
     &_container
     {
@@ -13,17 +14,34 @@
         width: 100%;
     }
 
-    &_item img
+    &_item
     {
-        width: 100%;
-        height: auto;
-        object-fit: content;
+        &:hover
+        {
+            opacity: .5;
+            cursor: pointer;
+        }
+
+        img
+        {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &_placeholder
+    {
+        height: 300px;
     }
 
     @media (max-width: #{$breakpoint_min_sm}) 
     {
-        @include grid-(1);
-        @include gap-y-(24px);
+        margin: 0 16px;
+
+        &_container
+        {
+            @include grid-(1);
+            @include gap-y-(24px);
+        }
     }
-  
 }

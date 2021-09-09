@@ -1,9 +1,9 @@
 /* library package */
 import { FC } from 'react'
 import { ProductCategory } from '@sirclo/nexus'
+import Link from 'next/link';
 /* library template */
 import useWindowSize from 'lib/useWindowSize'
-
 /* component */
 import Placeholder from 'components/Placeholder'
 import styles from 'public/scss/components/ProductCategory.module.scss'
@@ -26,15 +26,20 @@ const classesPlaceholderCategory = {
 
 type ProductCategoryComponentPropType = {
   i18n: any
+  lng: string
   displayMode?: 'normal'
-  | 'reels'
   | 'list'
+  withTitle?: boolean
+  withSeeAll?: boolean
   getSelectedSlug?: () => void
 }
 
 const ProductCategoryComponent: FC<ProductCategoryComponentPropType> = ({
   i18n,
   displayMode = 'normal',
+  withTitle,
+  withSeeAll,
+  lng,
   getSelectedSlug
 }) => {
 
@@ -42,12 +47,7 @@ const ProductCategoryComponent: FC<ProductCategoryComponentPropType> = ({
   let classes: object
 
   switch (displayMode) {
-    case 'reels':
-      classes = {
-        ...classesProductCategory,
-        parentCategoryClassName: styles.productCategory__reels
-      }
-      break
+
     case 'list':
       classes = {
         ...classesProductCategory,
@@ -61,35 +61,50 @@ const ProductCategoryComponent: FC<ProductCategoryComponentPropType> = ({
   }
 
   return (
-    <ProductCategory
-      withOpenedSubCategory={false}
-      classes={classes}
-      showImages={displayMode !== 'list'}
-      imageFallback={
-        <div className={styles.productCategory_media}></div>
+    <div className={styles.productCategory_container}>
+      {withTitle &&
+        <h2>
+          {i18n.t("home.productCategory")}
+        </h2>
       }
-      dropdownIcon={displayMode === 'list' && <div className="icon-chevronDown"></div>}
-      thumborSetting={{
-        width: size.width < 767 ? 76 : 192,
-        format: "webp",
-        quality: 85,
-      }}
-      getSelectedSlug={getSelectedSlug}
-      loadingComponent={
-        <div className={`${styles.productCategory_loading} ${displayMode}`}>
-          <Placeholder
-            classes={classesPlaceholderCategory}
-            withList
-            listMany={8}
-          />
-        </div>
+      <ProductCategory
+        showCategoryNumber
+        itemPerPage={5}
+        classes={classes}
+        showImages={displayMode !== 'list'}
+        imageFallback={
+          <div className={styles.productCategory_media}></div>
+        }
+        dropdownIcon={displayMode === 'list' && <div className="icon-chevronDown"></div>}
+        thumborSetting={{
+          width: size.width < 767 ? 0 : 795,
+          format: "webp",
+          quality: 95,
+        }}
+        getSelectedSlug={getSelectedSlug}
+        loadingComponent={
+          <div className={`${styles.productCategory_loading} ${displayMode}`}>
+            <Placeholder
+              classes={classesPlaceholderCategory}
+              withList
+              listMany={8}
+            />
+          </div>
+        }
+        errorComponent={
+          <div className={styles.productCategory_loading}>
+            <p>{i18n.t("global.error")}</p>
+          </div>
+        }
+      />
+      {withSeeAll &&
+        <Link href="/[lng]/categories" as={`/${lng}/categories`}>
+          <div className={styles.productCategory_seeAll}>
+            <p>{i18n.t("product.seeAll")}</p>
+          </div>
+        </Link>
       }
-      errorComponent={
-        <div className={styles.productCategory_loading}>
-          <p>{i18n.t("global.error")}</p>
-        </div>
-      }
-    />
+    </div>
   )
 }
 

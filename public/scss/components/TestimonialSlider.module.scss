@@ -1,0 +1,91 @@
+@import '../utils/_variables.scss';
+@import './Icons.module.scss';
+
+.container
+{
+  width: 100%;
+  position: relative;
+}
+
+.main
+{
+  @include typography_builder(400, 25, 40);
+}
+
+.content
+{
+  width: 700px;
+  @include truncate(4);
+
+  &::before
+  {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 24px;
+    margin-bottom: 17px;
+    background-image: url("data:image/svg+xml,%3Csvg width='32' height='25' viewBox='0 0 32 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.52025 22.3117C1.71775 20.3972 0.75 18.2499 0.75 14.7692C0.75 8.64419 5.04975 3.15444 11.3025 0.440186L12.8653 2.85169C7.029 6.00869 5.888 10.1054 5.433 12.6884C6.37275 12.2019 7.603 12.0322 8.80875 12.1442C11.9658 12.4364 14.4543 15.0282 14.4543 18.2499C14.4543 19.8744 13.8089 21.4323 12.6603 22.581C11.5116 23.7296 9.9537 24.3749 8.32925 24.3749C6.4515 24.3749 4.656 23.5174 3.52025 22.3117ZM21.0203 22.3117C19.2178 20.3972 18.25 18.2499 18.25 14.7692C18.25 8.64419 22.5498 3.15444 28.8025 0.440186L30.3653 2.85169C24.529 6.00869 23.388 10.1054 22.933 12.6884C23.8728 12.2019 25.103 12.0322 26.3088 12.1442C29.4658 12.4364 31.9543 15.0282 31.9543 18.2499C31.9543 19.8744 31.3089 21.4323 30.1603 22.581C29.0116 23.7296 27.4537 24.3749 25.8293 24.3749C23.9515 24.3749 22.156 23.5174 21.0203 22.3117Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+  }
+}
+
+.user
+{
+  @include typography_builder(700, 16, 24);
+  text-transform: capitalize;
+  margin-top: 12px;
+}
+
+.arrowLeft
+{
+  @extend .minimalicon;
+  @extend .minimalicon_12_width;
+  @extend .minimalicon_arrowLeft;
+  @include position(absolute, auto, auto, auto, 154px);
+  cursor: pointer;
+}
+
+.arrowRight
+{
+  @extend .minimalicon;
+  @extend .minimalicon_12_width;
+  @extend .minimalicon_arrowRight;
+  @include position(absolute, auto, 154px, auto, auto);
+  cursor: pointer;
+}
+
+.placeholderTitle
+{
+  width: 100%;
+  height: 20px;
+  margin-bottom: 1rem;
+}
+.placeholderList
+{
+  width: 150px;
+  height: 20px;
+  margin-bottom: 1rem;
+  
+  &:last-child
+  {
+    width: 200px;
+  }
+}
+
+@media (max-width: #{$breakpoint_min_sm}) 
+{
+  .content
+  {
+    width: 100vw;
+    margin: 0;
+  }
+
+  .arrowLeft
+  {
+    @include position(absolute, auto, auto, -47px, -12px);
+  }
+  
+  .arrowRight
+  {
+    @include position(absolute, auto, auto, -47px, 32px);
+  }
+}
