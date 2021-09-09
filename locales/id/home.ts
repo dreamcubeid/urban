@@ -5,7 +5,8 @@ const locale = {
     "featuredProducts": "Produk Unggulan",
     "loading": "Mohon Menunggu",
     "productCategory": "Kategori produk",
-    "later": "Nanti saja"
+    "later": "Nanti saja",
+    "showMore": "Lihat Selengkapnya",
   }
 }
 

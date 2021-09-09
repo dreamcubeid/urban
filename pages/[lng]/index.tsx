@@ -34,7 +34,12 @@ const Home: FC<any> = ({
       brand={brand}
       logoHeader
     >
-      <Banner dataBanners={dataBanners} />
+      <div className="container-fluid p-0">
+        <Banner
+          i18n={i18n}
+          dataBanners={dataBanners}
+        />
+      </div>
 
       <LazyLoadComponent>
         <ProductsComponent
