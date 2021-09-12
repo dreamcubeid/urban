@@ -1,36 +1,153 @@
-import { FC } from "react";
-import dynamic from "next/dynamic";
+/* Library Package */
+import { FC } from 'react'
+import { toast } from 'react-toastify'
+import dynamic from 'next/dynamic'
 import {
+  useI18n,
   isCopyrightAllowed,
   Widget,
-  SocialMediaIcons
+  NewsletterForm
 } from "@sirclo/nexus";
-import useWindowSize from "lib/useWindowSize";
-import styles from "public/scss/components/Footer.module.scss";
 
-const Placeholder = dynamic(() => import("components/Placeholder"));
+import { FaArrowRight } from 'react-icons/fa'
 
-const socialMediaIcons = {
-  facebook: <img src="/images/facebook.svg" alt="facebook" />,
-  twitter: <img src="/images/twitter.svg" alt="twitter" />,
-  instagram: <img src="/images/instagram.svg" alt="instagram" />,
-  youtube: <img src="/images/youtube.svg" alt="youtube" />,
-  tiktok: <img src="/images/tiktok.svg" alt="tiktok" />
-};
+/* Library Template */
+import useWindowSize from 'lib/useWindowSize'
 
-const classesMediaSocial = {
-  socialMediaIconContainer: styles.socialIcon,
-  socialMediaIcon: styles.socialIcon_item,
-}
+/* Component */
+import FooterWidget from './FooterWidget'
+
+/* Styles */
+import styles from 'public/scss/components/Footer.module.scss'
+
+const Placeholder = dynamic(() => import('components/Placeholder'))
 
 const classesPlaceholderWidget = {
   placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_widgetFooterMenu}`,
 }
 
-const Footer: FC<any> = ({ brand }) => {
-  const size: any = useWindowSize();
-  const allowedCopyright = isCopyrightAllowed();
+const classesNewsletter = {
+  containerClassName: styles.footerNewsletter,
+  labelClassName: styles.footerNewsletter_label,
+  inputClassName: styles.footerNewsletter_input,
+  buttonClassName: styles.footerNewsletter_button
+}
 
+const Footer: FC<any> = ({ 
+  brand 
+}) => {
+
+  const i18n: any = useI18n()
+  const size: any = useWindowSize()
+  const allowedCopyright = isCopyrightAllowed()
+
+  return (
+    <div className={`${styles.footer}`}>
+
+      <div className="container-fluid">
+        <div className={`${styles.footer_top} row`}>
+          <div className="col-12 col-md-3">
+            <div className={styles.footerItem}>
+              <FooterWidget collapsible={false}>
+                <Widget
+                  pos="footer-1"
+                  widgetClassName={`${styles.footerItem_content}`}
+                  loadingComponent={
+                    <p className={styles.footer_loading}>
+                      {i18n.t("global.loading")}
+                    </p>
+                  }
+                  thumborSetting={{
+                    width: size.width < 992 ? 270 : 480,
+                    format: "webp",
+                    quality: 85
+                  }}
+                />
+              </FooterWidget>
+            </div>
+          </div>
+          <div className="col-12 col-md-3">
+            <div className={styles.footerItem}>
+              <FooterWidget>
+                <Widget
+                  pos="footer-2"
+                  widgetClassName={styles.footerItem_content}
+                  loadingComponent={
+                    <p className={styles.footer_loading}>
+                      {i18n.t("global.loading")}
+                    </p>
+                  }
+                  thumborSetting={{
+                    width: size.width < 992 ? 270 : 480,
+                    format: "webp",
+                    quality: 85
+                  }}
+                />
+              </FooterWidget>
+            </div>
+          </div>
+          <div className="col-12 col-md-3">
+            <div className={styles.footerItem}>
+              <FooterWidget>
+                <Widget
+                  pos="footer-3"
+                  widgetClassName={styles.footerItem_content}
+                  loadingComponent={
+                    <p className={styles.footer_loading}>
+                      {i18n.t("global.loading")}
+                    </p>
+                  }
+                  thumborSetting={{
+                    width: size.width < 992 ? 270 : 480,
+                    format: "webp",
+                    quality: 85
+                  }}
+                />
+              </FooterWidget>
+            </div>
+          </div>
+          <div className="col-12 col-md-3">
+            <div className={styles.footerItem}>
+              <FooterWidget title={i18n.t("newsletter.title")} collapsible={false}>
+                <NewsletterForm
+                  classes={classesNewsletter}
+                  onComplete={() => toast.success(i18n.t("newsletter.submitSuccess"))}
+                  onError={() => toast.error(i18n.t("newsletter.submitError"))}
+                  buttonComponent={
+                    <FaArrowRight />
+                  }
+                />
+              </FooterWidget>
+            </div>
+          </div>
+        </div>
+        <div className={`${styles.footer_bottom} row`}>
+          <div className="col-12">
+            <div className={styles.footer_copyright}>
+              {allowedCopyright ?
+                <>
+                  {brand?.settings?.websiteTitle || ""}
+                  {(brand?.settings?.websiteTitle && allowedCopyright) && ` - `}
+                  POWERED BY&nbsp;<a href="https://store.sirclo.com" target="_blank">SIRCLO</a>
+                </>
+                : 
+                <Widget 
+                  pos="copyright-and-policy" 
+                  thumborSetting={{
+                    width: 1,
+                    format: 'webp',
+                    quality: 5,
+                  }}
+                />
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
+  /*
   return (
     <>
       <div className={styles.widgetFooter}>
@@ -88,7 +205,8 @@ const Footer: FC<any> = ({ brand }) => {
         </div>
       </footer>
     </>
-  );
+  )
+  */
 }
 
-export default Footer;
+export default Footer

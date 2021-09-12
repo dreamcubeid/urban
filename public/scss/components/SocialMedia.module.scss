@@ -1,0 +1,27 @@
+@import '../utils/variables';
+
+.container
+{
+    @include debug();
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.icon
+{
+    @include debug();
+    @include transition();
+    @include flex(row, center, center);
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.title
+{
+    @include debug();
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
