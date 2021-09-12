@@ -13,6 +13,9 @@ import { toast } from "react-toastify";
 import styles from "public/scss/pages/Contact.module.scss";
 
 const Placeholder = dynamic(() => import("components/Placeholder"));
+/* locales */
+import locale from "locales";
+
 
 const classesContact = {
   containerClassName: `${styles.contact_container} d-flex flex-column align-items-start justify-content-start`,
@@ -94,9 +97,7 @@ const ContactPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locale(params.lng);
 
   const brand = await useBrand(req);
 

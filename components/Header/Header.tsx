@@ -155,16 +155,15 @@ const Header: FC<any> = ({ lng }) => {
             />
           </div>
         </nav>
-        {showPopupCheckOrder && 
+        {showPopupCheckOrder &&
           <CheckPaymentOrder
             classes={classesCheckPaymentOrder}
             icon={{
               loading: <Loader color="text-light" />,
-              close: <X/>
+              close: <X />
             }}
             handleClose={() => setShowOrderCheck(!showPopupCheckOrder)}
             onErrorMsg={(msg) => toast.error(msg)}
-            onSuccessMsg={(msg) => toast.success(msg)}
           />
         }
 

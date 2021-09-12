@@ -12,6 +12,9 @@ import {
   ChevronUp,
   ChevronDown,
 } from "react-feather";
+/* locales */
+import locale from "locales";
+
 
 const classesPaymentConfirmation = {
   paymentConfirmationDivClassName: styles.paymentNotif_form,
@@ -72,8 +75,8 @@ const PaymentConfirmationPage: FC<any> = ({
                 orderIDProps={orderID}
                 classes={classesPaymentConfirmation}
                 orderDetailIcon={{
-                  close: <ChevronUp/>,
-                  open: <ChevronDown />
+                  chevronUp: <ChevronUp />,
+                  chevronDown: <ChevronDown />,
                 }}
                 onErrorMsg={(msg) => toast.error(msg)}
                 onSuccessMsg={(msg) => toast.success(msg)}
@@ -95,9 +98,7 @@ const PaymentConfirmationPage: FC<any> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locale(params.lng);
 
   const brand = await useBrand(req);
 

@@ -12,6 +12,8 @@ import Layout from "components/Layout/Layout"
 import Placeholder from "components/Placeholder";
 
 import styles from "public/scss/pages/Lookbook.module.scss";
+/* locales */
+import locale from "locales";
 
 const classesLookbookSingle = {
   containerClassName: `${styles.lookbook} ${styles.lookbook__detail}`,
@@ -91,9 +93,7 @@ const LookbookSinglePage: FC<any> = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const lngDict = locale(params.lng);
 
   const brand = await useBrand(req);
 
