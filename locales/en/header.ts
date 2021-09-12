@@ -13,7 +13,8 @@ const locale = {
     "register": "Register",
     "searchPlaceholder": "Search anything",
     "searchProduct": "Search Products",
-    "shop": "Shop"
+    "shop": "Shop",
+    "socialMedia": "Social Media"
   }
 }
 

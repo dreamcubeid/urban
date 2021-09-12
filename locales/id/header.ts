@@ -13,7 +13,8 @@ const locale = {
     "register": "Daftar",
     "searchPlaceholder": "Cari apa saja",
     "searchProduct": "Pencarian Produk",
-    "shop": "Toko"
+    "shop": "Toko",
+    "socialMedia": "Sosial Media"
   }
 }
 

@@ -1,13 +1,20 @@
 /* Library Template */
 import { FC } from 'react'
 import { useI18n, SocialMediaIcons } from '@sirclo/nexus'
+import { IoLogoTiktok } from 'react-icons/io5'
+import { 
+  FaFacebookF, 
+  FaInstagram, 
+  FaTwitter,
+  FaYoutube
+} from 'react-icons/fa'
 
 /* Styles */
 import styles from 'public/scss/components/SocialMedia.module.scss'
 
 const classesSocialMediaIcons = {
-  socialMediaIconContainer: 'a',
-  socialMediaIcon: 'b'
+  socialMediaIconContainer: styles.icons,
+  socialMediaIcon: styles.icon
 }
 
 const SocialMedia: FC<any> = () => {
@@ -19,7 +26,7 @@ const SocialMedia: FC<any> = () => {
       <div className={styles.container}>
         
         <p className={styles.title}>
-          {i18n.t("")}
+          {i18n.t("header.socialMedia")}
         </p>
 
         <SocialMediaIcons 
@@ -27,11 +34,11 @@ const SocialMedia: FC<any> = () => {
 
           socialMediaIcons={
             {
-              facebook: <span>FB</span>,
-              twitter: <span>TW</span>,
-              instagram: <span>IG</span>,
-              youtube: <span>YT</span>,
-              tiktok: <span>TT</span>
+              facebook: <FaFacebookF />,
+              twitter: <FaTwitter />,
+              instagram: <FaInstagram />,
+              youtube: <FaYoutube />,
+              tiktok: <IoLogoTiktok />
             }
           }
         />
