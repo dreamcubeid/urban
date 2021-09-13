@@ -1,26 +1,30 @@
 /* Library Package */
-import { FC, useEffect } from 'react'
+import { 
+  FC, 
+  useEffect,
+  useState
+} from 'react'
 import { withBrand } from '@sirclo/nexus'
 import { ToastContainer } from 'react-toastify'
-
-/* Library Template */
 
 /* Component */
 import Header from 'components/Header/Header'
 import Footer from 'components/Footer/Footer'
 import PageNotFound from 'components/PageNotFound'
 import SEOHead from 'components/SEO'
-import PopupNewsletter from 'components/PopupNewsletter'
+
+/* Styles */
+import styles from 'public/scss/components/Layout.module.scss'
 
 type LayoutPropType = {
-  lngDict: any;
-  i18n: any;
-  lng: string;
-  layoutClassName?: string;
-  withHeader?: boolean;
-  withFooter?: boolean;
-  withAllowed?: boolean | undefined;
-  [otherProp: string]: any;
+  lngDict: any
+  i18n: any
+  lng: string
+  layoutClassName?: string
+  withHeader?: boolean
+  withFooter?: boolean
+  withAllowed?: boolean | undefined
+  [otherProp: string]: any
 };
 
 const Layout: FC<LayoutPropType> = ({
@@ -61,6 +65,16 @@ const Layout: FC<LayoutPropType> = ({
 
   const masterLayoutClassName = `${layoutClassNameMaster}`
 
+  const [mobileMenuToggled, setMobileMenuToggled] = useState<boolean>(false)
+
+  useEffect(() => {
+    if(mobileMenuToggled) {
+      document.querySelector('body').classList.add(styles.body__noOverflow)
+    } else {
+      document.querySelector('body').classList.remove(styles.body__noOverflow)
+    }
+  }, [mobileMenuToggled])
+
   return (
     <>
       <SEOHead {...SEOprops}>
@@ -80,7 +94,7 @@ const Layout: FC<LayoutPropType> = ({
       <section className={masterLayoutClassName}>
 
         {withHeader &&
-          <Header lng={lng} />
+          <Header lng={lng} mobileState={mobileMenuToggled} setMobileState={setMobileMenuToggled} />
         }
 
         <main className={layoutClassName}>
@@ -98,8 +112,6 @@ const Layout: FC<LayoutPropType> = ({
       </section>
 
       <ToastContainer />
-
-      <PopupNewsletter brand={brand} i18n={i18n} />
 
     </>
   )

@@ -11,6 +11,7 @@ const locale = {
     "menu": "Menu",
     "myAccount": "My Account",
     "register": "Register",
+    "search": "Search",
     "searchPlaceholder": "Search anything",
     "searchProduct": "Search Products",
     "shop": "Shop",

@@ -1,420 +1,490 @@
-@import "../base/colors.scss";
-@import "../components/Placeholder.module.scss";
-@import "../components//Form.module.scss";
-@import "../components/Search.module.scss";
+@import '../utils/variables';
 
-.announce {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  height: 32px;
-  background-color: $color_blue;
-
-  &__items {
-    padding: 0;
-    font-weight: 600;
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-align: center;
-    color: $color_white;
-    
-    &:empty {
-      display: none;
-    }
-  }
-
-  &__close {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: $color_white;
-
-    @media screen and (max-width: 576px) {
-      right: 0;
-    }
-
-    &:hover{
-      cursor: pointer;
-    }
-
-    &__icon
-    {
-      @media screen and (max-width: 576px) {
-        width: 20px;
-      }
-    }
-  }
-}
-
-.header
+.container
 {
-  height: 64px;
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04);
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-}
-
-.nav
-{
-  &_lastino
-  {
-    border: none;
+    @include transition();
+    @include flex(column, stretch, flex-start);
+    @include fixedWidth(300px);
+    @include fixedHeight(100vh);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1048;
+    margin: 0;
+    padding: 100px 60px 60px;
     background-color: $color_white;
-    justify-content: center;
-    height: 56px;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
 
-  &__icon,
-  &__icon-mobile
-  {
-    color: $color_black;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 
-    &:hover
+    & ~ main,
+    & ~ footer
     {
-      cursor: pointer;
+        @include transition();
+        @include fixedWidth(calc(100vw - 300px));
+        margin-left: 300px;
     }
-  }
 }
 
-.navbar
+.item
 {
-  &_menu
-  {
-    flex: 1;
-
-    &__icon
-    {
-      cursor: pointer;
-    }
-  }
-
-  &_logo
-  {
-    flex: 1;
-    text-align: center;
-    
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    @include flex(row, center, flex-start);
     position: relative;
-    height: 50px;
-    
-    a
-    {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+    margin: 0;
+    padding: 0;
+}
 
-      height: 100%;
+.shortcuts
+{
+    @include flex(row, center, flex-start, true);
+    position: relative;
+    margin: 0 -8px;
+    padding: 0;
+
+    & + div
+    {
+        margin-top: 60px;
     }
 
-    &__image
+    &_item
     {
-      display: block;
-      position: relative;
-      margin: 0 auto;
-      min-height: 100%;
-      max-height: 100%;
-      height: 100%;
-
-      @media screen and (max-width: 575px) {
-        min-height: 25px;
-        max-height: 25px;
-        height: 25px;
-      }
-
-      &__placeholder
-      {
-        width: 105px;
-        height: 35px;
-        background-color: #D3D3D3;
-      }
+        @include flex(row, center, center);
+        @include fixedSize(32px);
+        position: relative;
+        margin: 0 8px;
+        padding: 0;
+        cursor: pointer;
     }
-  }
 
-  &_profile_menu
-  {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    .search_icon
+    &_label
     {
-      position: relative;
+        @include flex(row, center, flex-start);
+        @include typographyBuilder(500, 16, 24);
+        position: relative;
+        margin: 0;
+        padding: 0;
 
-      .search
-      {
+        @media (min-width: #{$breakpoint_min_md})
+        {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    &_badge
+    {
+        @include typographyBuilder(500, 12, 12);
         position: absolute;
+        top: 0;
+        right: -2px;
+    }
+}
+
+.brand
+{
+    & ~ div[class*="shortcuts"]
+    {
+        margin-top: 60px;
+    }
+
+    a[data-identity="logo"]
+    {
+        @include flex(row, center, flex-start);
+        position: relative;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        max-width: 100%;
+    }
+
+    &_image
+    {
+        display: block;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+    }
+}
+
+.navigation
+{
+    @include flex(column, flex-start, flex-start);
+    position: relative;
+    flex-grow: 1;
+
+    ul,
+    ol
+    {
+        @include fixedWidth(100%);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    &_parent
+    {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    &_item
+    {
+        @include flex(column, flex-start, flex-start);
+        position: relative;
+        margin: 0;
+        padding: 0;
+
+        ul,
+        ol
+        {
+            padding-left: 32px;
+        }
+    }
+
+    &_value
+    {
+        @include transition();
+        @include flex(row, center, flex-start);
+        @include fixedWidth(calc(100% - 32px));
+        @include typographyBuilder(500, 16, 24);
+        min-height: 44px;
+        position: relative;
+        margin: 0;
+        padding: 0;
+
+        color: $color_black;
+        text-decoration: none;
+
+        &:hover,
+        &:focus,
+        &:active
+        {
+            color: $color_black;
+            text-decoration: none;
+        }
+
+        &:hover
+        {
+            text-decoration: underline;
+        }
+
+        &Container
+        {
+            @include flex(row, center, flex-start);
+            @include fixedWidth(100%);
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    &_dropdownIcon
+    {
+        @include transition();
+        @include flex(row, center, center);
+        @include fixedSize(32px);
+        cursor: pointer;
+    }
+}
+
+.mobile
+{
+    &_menu
+    {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+@media (max-width: #{$breakpoint_max_lg})
+{
+    .container
+    {
+        @include flex(row, stretch, flex-start, true);
+        @include fixedWidth(100%);
+        @include fixedHeight(70px);
+        position: fixed;
+        top: 0;
+        left: 0;
         right: 0;
-        top: -33px;
-        display: flex;
-        align-items: center;
-        width: 300px;
-        height: 85px;
-        background: $color_gray;
-        padding: 1rem .5rem;
-        z-index: 11;
+        bottom: auto;
+        padding: 70px 18px 0;
+    
+        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: hidden;
 
-        input[type="text"]
+        & ~ main,
+        & ~ footer
         {
-          padding: .5em;
-          width: 100%;
-          border: none;
-          background: transparent;
-
-          &::placeholder{
-            color: rgba(0, 0, 0, .3);
-          }
-
-          &:focus
-          {
-            outline: 0;
-          }
+            @include fixedWidth(100vw);
+            margin-left: 0;
         }
 
-        &_form
+        &::after
         {
-          position: relative;
-          width: 100%;
-
-          .btn_search
-          {
+            content: "";
+            display: block;
             position: absolute;
-            top: 0;
+            top: 69px;
+            left: 0;
             right: 0;
-
-            .icon_search{
-              color: $color_black;
-              font-size: 1.2em;
-            }
-
-            &:focus,
-            &:active{
-              outline: 0;
-              border: none;
-              box-shadow: none;
-            }
-          }
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.02);
         }
-      }
+
+        &__open
+        {
+            @include fixedHeight(50vh);
+            overflow: auto;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
     }
 
-    &__cart
+    .item
     {
-      position: relative;
+        @include fixedWidth(100%);
+
+        & + div
+        {
+            margin-top: 30px;
+        }
     }
-  }
 
-  &__mobile
-  {
-    @media screen and (max-width: 576px) {
-      margin: 0 1rem;
-    }
-  }
-}
-
-.badge_cart
-{
-  position: absolute;
-  font-family: "roboto-black";
-  font-size: 10px;
-  color: $color_white;
-  background: $color_blue;
-  width: 23px;
-  height: 23px;
-  line-height: 2.3;
-  text-align: center;
-  border-radius: 50%;
-  top: -10px;
-  right: -10px;
-  cursor: pointer;
-
-  @media screen and (max-width: 576px) {
-    font-size: 9px;
-    width: 20px;
-    height: 20px;
-    line-height: 2.3;
-  }
-}
-
-.navbar_mobile
-{
-  height: 56px;
-  width: 100%;
-  background: $color_white;
-  z-index: 2;
-
-  &__container
-  {
-    display: flex;
-    justify-content: space-between;
-    height: 56px;
-  }
-
-  &__icon
-  {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    padding: 20px 0;
-
-    &__right
+    .shortcuts
     {
-      justify-content: flex-end;
-    }
-
-    .mobile_menu_icon
-    {
-      position: relative;
-    }
-  }
-
-  &__logo
-  {
-    flex: 1;
-    text-align: center;
-    margin: auto 0;
-  }
-}
-
-.menu
-{
-  margin: 0;
-  padding: 0;
-
-  &_item
-  {
-    list-style: none;
-    padding: 1rem 0;
-    text-transform: capitalize;
-    border-bottom: 1px solid $color_gray_low;
-
-    &:first-child
-    {
-      border-top: 1px solid $color_gray_low;
-    }
-
-    span
-    {
-      display: block;
-      text-transform: uppercase;
-      padding: 0 1.5rem;
-
-      &:hover
-      {
-        font-family: "roboto-medium";
-      }
-
-      @media screen and (max-width: 576px) {
-        padding: 0 1rem;
-      }
-    }
-
-    li
-    {
-      border: none;
-
-      &:first-child
-      {
+        @include flex(column, stretch, flex-start);
+        @include fixedWidth(100%);
         border: none;
-      }
+
+        & + div
+        {
+            margin-top: 0;
+        }
+
+        &_item
+        {
+            @include fixedWidth(100%);
+            @include fixedHeight(44px);
+            @include flex(row, center, flex-start);
+            cursor: pointer;
+
+            svg
+            {
+                @include fixedSize(20px);
+                margin: 0 18px 0 0;
+            }
+
+            &__cart
+            {
+                display: none;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+            }
+            
+            & + div
+            {
+                border-bottom: solid 1px $color_elements;
+            }
+
+            &:hover
+            {
+                span[class*="label"]
+                {
+                    text-decoration: underline;
+                }
+            }
+        }
     }
-  }
 
-  &_itemSelector
-  {
-    padding: 1rem 1.5rem;
-
-    button
+    .navigation
     {
-      padding: 0;
-      background: transparent;
-      border: none;
+        &::before,
+        &::after
+        {
+            content: "";
+            @include flex(row, center, flex-start);
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        &::before
+        {
+            @include fixedWidth(100%);
+            @include fixedHeight(24px);
+        }
+
+        &::after
+        {
+            @include fixedWidth(12px);
+            @include fixedHeight(2px);
+            @include position(absolute, 12px, auto, auto, 0);
+            background-color: $color_black;
+        }
+
+        & + div
+        {
+            margin-top: 30px;
+        }
+
+        &_item
+        {
+            @include flex(column, flex-start, flex-start);
+
+            &:not(:last-child),
+            &:not(:last-of-type)
+            {
+                &:not(:only-of-type),
+                &:not(:only-child)
+                {
+                    border-bottom: solid 1px $color_elements;
+                }
+            }
+        }
+
+        &_value
+        {
+            @include fixedWidth(calc(100% - 32px));
+
+            &Container
+            {
+                min-width: 100%;
+            }
+        }
     }
-  }
 
-  &_itemSelected
-  {
-    color: $color_blue;
-
-    & > a
+    .mobile
     {
-      color: $color_blue !important;
-      font-family: "roboto-medium";
+        &_cart
+        {
+            @include flex(row, center, center);
+            @include fixedHeight(70px);
+            @include fixedWidth(48px);
+            position: relative;
+            margin: 0;
+            padding: 0;
+
+            svg
+            {
+                @include fixedSize(24px);
+            }
+
+            span
+            {
+                @include flex(row, center, center);
+                @include typographyBuilder(500, 12, 12);
+                @include absolute(calc(50% - 14px), calc(50% - 22px));
+                transform: translate3d(-50%, -50%, 0);
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        &_toggle
+        {
+            @include transition();
+            @include flex(row, center, center);
+            @include fixedSize(48px);
+            position: relative;
+            margin: 0;
+            padding: 0;
+
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+
+            svg
+            {
+                @include fixedSize(24px);
+            }
+
+            & > span
+            {
+                @include transition();
+                @include flex(row, center, center);
+                @include fixedSize(100%);
+                @include absolute(0, 0, 0, 0);
+                margin: 0;
+                padding: 0;
+
+                &:first-child,
+                &:first-of-type
+                {
+                    opacity: 1;
+                }
+
+                &:last-child,
+                &:last-of-type
+                {
+                    opacity: 0;
+                }
+            }
+
+            &__active
+            {
+                & > span
+                {
+                    &:first-child,
+                    &:first-of-type
+                    {
+                        opacity: 0;
+                    }
+
+                    &:last-child,
+                    &:last-of-type
+                    {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        &_menu
+        {
+            @include flex(row, center, flex-end);
+            @include fixedHeight(70px);
+            @include fixedWidth(calc(100% - 100px));
+            @include position(fixed, 0, 0, auto, auto);
+            margin: 0;
+            padding: 0;
+            background-color: $color_white;
+            z-index: 2;
+
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
     }
-  }
 
-  &_itemTitle
-  {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &_itemTitleLabel
-  {
-    padding: 0 !important;
-  }
-
-  a
-  {
-    text-decoration: none;
-    color: $color_black;
-  }
-
-  &_sub
-  {
-    margin-top: 1rem;
-    padding-left: 1rem;
-
-    @media screen and (max-width: 576px) {
-      padding-left: .5rem;
-    }
-
-    li
+    .brand
     {
-      &:last-child
-      {
-        padding-bottom: 0;
-      }
+        @include fixedHeight(70px);
+        @include fixedWidth(100px);
+        @include position(fixed, 0, auto, auto, 0);
+        padding: 0 0 0 18px;
+        background-color: $color_white;
+        z-index: 2;
+
+        & + div
+        {
+            margin-top: 0;
+        }
+
+        & ~ div[class*="shortcuts"]
+        {
+            margin-top: 18px;
+        }
     }
-  }
-}
-
-.sidemenu
-{
-  &_logo
-  {
-    height: 25px;
-  }
-}
-
-.icon_down
-{
-  float: right;
-  cursor: pointer;
-
-  &__svg
-  {
-    height: 1em;
-  }
 }

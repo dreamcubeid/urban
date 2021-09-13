@@ -1,0 +1,9 @@
+@import '../utils/variables';
+
+.body
+{
+    &__noOverflow
+    {
+        overflow: hidden;
+    }
+}

@@ -4,8 +4,8 @@
 {
   display: block;
   position: relative;
-  margin: 0;
-  padding: 0;
+  margin: 0 0 0 300px;
+  padding: 0 calc(42px - 15px);
   background-color: $color_black;
   color: $color_white;
 
@@ -13,6 +13,16 @@
   &_bottom
   {
     padding: 40px 0 0;
+  }
+
+  &_loading
+  {
+    @include flex(row, flex-start, flex-start);
+    @include typographyBuilder(400, 12, 16);
+    color: $color_white;
+    position: relative;
+    margin: 0;
+    padding: 0;
   }
 
   &_copyright
@@ -164,7 +174,7 @@
     &_input
     {
       flex-grow: 1;
-      padding: 0 16px;
+      padding: 0 0 0 16px;
     }
 
     &_button

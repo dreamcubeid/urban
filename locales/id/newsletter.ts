@@ -3,7 +3,8 @@ const locale = {
     "inputEmailPlaceholder": "Masukan email Anda",
     "submitError": "Gagal berlangganan",
     "submitSuccess": "Success berlangganan",
-    "subscribe": "Berlangganan"
+    "subscribe": "Berlangganan",
+    "title": "Berlangganan Buletin"
   }
 }
 

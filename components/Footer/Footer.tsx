@@ -1,7 +1,6 @@
 /* Library Package */
 import { FC } from 'react'
 import { toast } from 'react-toastify'
-import dynamic from 'next/dynamic'
 import {
   useI18n,
   isCopyrightAllowed,
@@ -20,12 +19,6 @@ import FooterWidget from './FooterWidget'
 /* Styles */
 import styles from 'public/scss/components/Footer.module.scss'
 
-const Placeholder = dynamic(() => import('components/Placeholder'))
-
-const classesPlaceholderWidget = {
-  placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_widgetFooterMenu}`,
-}
-
 const classesNewsletter = {
   containerClassName: styles.footerNewsletter,
   labelClassName: styles.footerNewsletter_label,
@@ -42,7 +35,7 @@ const Footer: FC<any> = ({
   const allowedCopyright = isCopyrightAllowed()
 
   return (
-    <div className={`${styles.footer}`}>
+    <footer className={`${styles.footer}`}>
 
       <div className="container-fluid">
         <div className={`${styles.footer_top} row`}>
@@ -144,7 +137,7 @@ const Footer: FC<any> = ({
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   )
 
   /*

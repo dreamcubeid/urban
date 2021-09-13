@@ -48,6 +48,12 @@
             visibility: hidden;
             pointer-events: none;
         }
+
+        [class*="footerWidget_header"]
+        {
+            border-bottom: none !important;
+            display: none;
+        }
     }
 
     &_header
