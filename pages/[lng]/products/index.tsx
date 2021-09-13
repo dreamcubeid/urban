@@ -117,7 +117,6 @@ const ProductsPage: FC<any> = ({
       window.removeEventListener("scroll", handleScroll);
     };
   });
-  { consol.log("ini products") }
 
   const handleScroll = () => {
     const lastTestimonial = document.querySelector(
@@ -148,6 +147,7 @@ const ProductsPage: FC<any> = ({
   return (
     <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
       <SEO title={i18n.t("product.products")} />
+      {console.log("ini products")}
       <div className={styles.category}>
         <div className="container">
           <div className="row">
