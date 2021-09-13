@@ -9,7 +9,7 @@ type SEOProps = {
   image?: string
   url?: string
   hideFromSearchEngine?: boolean
-  childre?: ReactNode
+  children?: ReactNode
 }
 
 const SEOHead: FC<SEOProps> = ({
@@ -101,11 +101,6 @@ const SEOHead: FC<SEOProps> = ({
 
     <link rel="dns-prefetch" href="https://storage.googleapis.com" />
     <link rel="dns-prefetch" href="https://thumbor.sirclocdn.com" />
-
-    {/*
-    <link rel="dns-prefetch" href="https://graph.instagram.com" />
-    <link rel="dns-prefetch" href="http://static.getbutton.io" />
-    */}
     
     {children}
 
