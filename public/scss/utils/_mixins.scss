@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /**
  * Transition
  * 
@@ -42,13 +44,13 @@
 @mixin fontSize($size, $base: 16)
 {
     font-size: ($size + 0px); // fallback for old browsers
-    font-size: ($size / $base) * 1rem;
+    font-size: math.div($size, $base) * 1rem;
 }
 
 @mixin lineHeight($size, $base: 16)
 {
     line-height: $size + 0px; // fallback for old browsers
-    line-height: ($size / $base) * 1rem;
+    line-height: math.div($size, $base) * 1rem;
 }
 
 /**
@@ -427,3 +429,30 @@
         -moz-appearance: textfield;
     }
  }
+
+/**
+ * Typography Builder
+ * 
+ * Usage
+ * @include typography_builder(400, 16, 16);
+ */
+
+@mixin typography_builder($font_weight: 400, $font_size: 16, $line_height: 0)
+{
+    @include fontPrimary($font_weight);
+    @include fontSize($font_size);
+
+    @if $line_height == 0 
+    {
+        @include lineHeight(math.div(($font_size * 150), 100));
+    }
+    @else
+    {
+        @include lineHeight($line_height);
+    }
+}
+
+@mixin typographyBuilder($font_weight: 400, $font_size: 16, $line_height: 0)
+{
+    @include typography_builder($font_weight, $font_size, $line_height);
+}
