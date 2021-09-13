@@ -117,6 +117,7 @@ const ProductsPage: FC<any> = ({
       window.removeEventListener("scroll", handleScroll);
     };
   });
+  { consol.log("ini products") }
 
   const handleScroll = () => {
     const lastTestimonial = document.querySelector(
