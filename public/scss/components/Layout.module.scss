@@ -4,6 +4,9 @@
 {
     &__noOverflow
     {
-        overflow: hidden;
+        @media (max-width: #{$breakpoint_max_lg})
+        {
+            overflow: hidden;
+        }
     }
 }
