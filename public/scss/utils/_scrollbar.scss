@@ -1,5 +1,9 @@
 .scrollbar
 {
+  $scrollbar_color: #F7F7F7;
+  $scrollbar_color_hover: #EEE;
+  $scrollbar_color_white: #FFF;
+
   &_main
   {
     &::-webkit-scrollbar 
@@ -22,13 +26,13 @@
     /* Handle */
     &::-webkit-scrollbar-thumb 
     {
-      background: $color_gray; 
+      background: $scrollbar_color; 
       border-radius: 4px;
       cursor: pointer; 
     
       &:hover 
       {
-        background: $color_blue;
+        background: $scrollbar_color_hover;
       }
     }
 
@@ -53,7 +57,7 @@
     /* Handle */
     &::-moz-scrollbar-thumb 
     {
-      background: $color_gray; 
+      background: $scrollbar_color; 
       border-radius: 4px;
       cursor: pointer; 
     }
@@ -61,7 +65,7 @@
     /* Handle on hover */
     &::-moz-scrollbar-thumb:hover
     {
-      background: $color_blue; 
+      background: $scrollbar_color_hover; 
     }
   }
 
@@ -69,12 +73,12 @@
   {
     &::-webkit-scrollbar-track
     {
-      background: $color_white;
+      background: $scrollbar_color_white;
     }
 
     &::-moz-scrollbar-track 
     {
-      background: $color_white;
+      background: $scrollbar_color_white;
     }
   }
   &_none

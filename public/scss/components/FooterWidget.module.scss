@@ -1,0 +1,141 @@
+@import '../utils/variables';
+
+.footerWidget
+{
+    @include transition();
+    position: relative;
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+
+    &__collapsible
+    {
+        position: relative;
+    }
+
+    &__collapsed
+    {
+        @media screen and (max-width: #{$breakpoint_max_md})
+        {
+            [class*="footerWidget_body"]
+            {
+                max-height: 72px;
+                margin-top: -72px;
+                overflow: hidden;
+    
+                h1, h2, h3, h4, h5, h6
+                {
+                    @include transition();
+    
+                    &:first-child,
+                    &:first-of-type,
+                    &:only-child,
+                    &:only-of-type
+                    {
+                        margin-top: 0;
+                    }
+                }
+            } 
+        }
+    }
+
+    &__static
+    {
+        [class*="footerWidget_toggle"]
+        {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        [class*="footerWidget_header"]
+        {
+            border-bottom: none !important;
+            display: none;
+        }
+    }
+
+    &_header
+    {
+        @include flex(row, center, flex-end, false);
+        position: relative;
+        min-height: 72px;
+
+        border-bottom: solid 1px $color_line_black;
+    }
+
+    &_title
+    {
+        @include flex(row, center, flex-start);
+        @include typographyBuilder(700, 16, 24);
+        position: relative;
+        margin: 0;
+        padding: 0;
+        color: $color_white;
+        flex-grow: 1;
+    }
+
+    &_body
+    {
+        @include transition();
+        position: relative;
+        
+        @media screen and (max-width: #{$breakpoint_max_md})
+        {
+            pointer-events: none;
+        }
+    }
+    
+    &_toggle
+    {
+        @include transition();
+        @include flex(row, center, flex-end);
+        @include fixedSize(48px);
+        position: relative;
+        margin: 0;
+        padding: 0;
+        color: $color_white;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover,
+        &:focus,
+        &:active
+        {
+            outline: none;
+            color: $color_white;
+            text-decoration: none;
+        }
+
+        &:hover
+        {
+            color: $color_text_secondary;
+        }
+    }
+}
+
+@media screen and (min-width: #{$breakpoint_min_md})
+{
+    .footerWidget
+    {
+        &_toggle
+        {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        &_header
+        {
+            min-height: 0;
+            border-bottom: none;
+        }
+
+        &_title
+        {
+            margin-bottom: 16px;
+        }
+    }
+}
