@@ -3,14 +3,11 @@ import { FC } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { useI18n } from '@sirclo/nexus'
-
 /* library template */
 import { parseCookies } from 'lib/parseCookies'
 import { useBrand, handleGetBanner } from 'lib/client'
-
 /* locale */
 import locale from "locales";
-
 /* component */
 import Layout from 'components/Layout/Layout'
 import Banner from 'components/Banner'
@@ -19,6 +16,7 @@ import SecondAdvertisement from 'components/Widget/SecondAdvertisement'
 import ProductsComponent from 'components/Products/ProductsComponent'
 import ProductCategoryComponent from 'components/ProductCategoryComponent/ProductCategoryComponent'
 import Instafeed from 'components/Instafeed'
+import TestimonialSlider from 'components/Testimonial/TestimonialSlider'
 
 const Home: FC<any> = ({
   lng,
@@ -35,11 +33,13 @@ const Home: FC<any> = ({
       lng={lng}
       brand={brand}
       logoHeader
-      withBack={false}
     >
-      <section>
-        <Banner i18n={i18n} dataBanners={dataBanners} />
-      </section>
+      <div className="container-fluid p-0">
+        <Banner
+          i18n={i18n}
+          dataBanners={dataBanners}
+        />
+      </div>
 
       <LazyLoadComponent>
         <ProductsComponent
@@ -55,27 +55,29 @@ const Home: FC<any> = ({
         />
       </LazyLoadComponent>
 
-      <section className='my-2'>
+      <section className="container">
         <LazyLoadComponent>
           <MainAdvertisement />
         </LazyLoadComponent>
       </section>
 
-      <LazyLoadComponent>
-        <ProductsComponent
-          i18n={i18n}
-          lng={lng}
-          type='grid'
-          tagname='new-arrivals'
-          withTitle={{
-            type: 'left',
-            title: i18n.t('home.arrivalsProducts'),
-            withSeeAll: true
-          }}
-        />
-      </LazyLoadComponent>
+      <div id="featuredProduct">
+        <LazyLoadComponent>
+          <ProductsComponent
+            i18n={i18n}
+            lng={lng}
+            type='grid'
+            tagname='new-arrivals'
+            withTitle={{
+              type: 'left',
+              title: i18n.t('home.arrivalsProducts'),
+              withSeeAll: true
+            }}
+          />
+        </LazyLoadComponent>
+      </div>
 
-      <section className='my-2'>
+      <section className="container">
         <LazyLoadComponent>
           <SecondAdvertisement />
         </LazyLoadComponent>
@@ -84,13 +86,19 @@ const Home: FC<any> = ({
       <section>
         <ProductCategoryComponent
           i18n={i18n}
-          displayMode='reels'
+          displayMode='normal'
+          withTitle
+          lng={lng}
+          withSeeAll
         />
       </section>
 
+      <section className="container">
+        <TestimonialSlider />
+      </section>
+
       {brand?.socmedSetting?.instagramToken &&
-        <section>
-          {console.log(brand)}
+        <section className="container">
           <LazyLoadComponent>
             <Instafeed
               i18n={i18n}

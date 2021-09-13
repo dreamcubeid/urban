@@ -26,6 +26,13 @@ const locale = {
     "whatsappNumber": "Whatsapp Number",
     "willSendOTP": "We will send a verification code via WhatsApp number",
     "wrongOTP": "Incorrect OTP code"
+  },
+  "whatsAppOTPInputRegis": {
+    "continue": "Sign Up",
+    "disclaimer": "By clicking 'Sign Up' means you agree to receive notifications via Whatsapp and know",
+    "loginWithAnotherMethod": "Sign Up using another method",
+    "chooseAnyAccountToLogin": "You have multiple accounts registered, please select one to sign up",
+    "inputWhatsApp": "Enter your Whatsapp number to sign up our store"
   }
 }
 
