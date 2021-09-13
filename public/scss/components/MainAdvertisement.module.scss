@@ -4,14 +4,14 @@
 
 .mainAdvertisement
 {
-    margin: 0 42px;
+    margin: 0 16px;
 
     &_container
     {
         @extend .grid;
         @include grid-(2);
         @include gap-x-(24px);
-        width: 100%;
+        width: 100% !important;
     }
 
     &_item
@@ -24,7 +24,7 @@
 
         img
         {
-            width: 100%;
+            width: 100% !important;
             height: auto;
         }
     }

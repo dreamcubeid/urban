@@ -117,12 +117,8 @@ const Layout: FC<LayoutPropType> = ({
         }
 
       </section>
-
       <ToastContainer />
       <Newsletter i18n={i18n} />
-      {withFooter &&
-        <Footer brand={brand} />
-      }
     </>
   )
 }

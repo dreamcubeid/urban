@@ -83,7 +83,7 @@ const Home: FC<any> = ({
         </LazyLoadComponent>
       </section>
 
-      <section>
+      <section className="container">
         <ProductCategoryComponent
           i18n={i18n}
           displayMode='normal'
@@ -134,7 +134,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   const lngDict = locale(params.lng)
   const brand = await useBrand(req);
   const dataBanners = await handleGetBanner(req);
-  console.log("🚀 ~ file: index.tsx ~ line 129 ~ dataBanners", dataBanners)
 
   return {
     props: {
