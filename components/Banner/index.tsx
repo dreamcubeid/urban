@@ -8,7 +8,8 @@ import { Banner } from '@sirclo/nexus'
 import Carousel from '@brainhubeu/react-carousel'
 /* component library */
 import useWindowSize from 'lib/useWindowSize'
-/* component */
+import { useBannerSize } from 'lib/utils/useBannerSize'
+
 import Placeholder from 'components/Placeholder'
 import styleBanner from 'public/scss/components/Banner.module.scss'
 
@@ -39,7 +40,7 @@ const BannerComponent: FC<any> = ({ i18n, dataBanners }) => {
         infinite
         classes={classesBanner}
         thumborSetting={{
-          width: size.width < 575 ? 1048 : 600,
+          width: useBannerSize(size.width),
           format: 'webp',
           quality: 95
         }}
