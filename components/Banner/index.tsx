@@ -8,7 +8,7 @@ import { Banner } from '@sirclo/nexus'
 import Carousel from '@brainhubeu/react-carousel'
 /* component library */
 import useWindowSize from 'lib/useWindowSize'
-import { useBannerSize } from 'lib/utils/useBannerSize'
+import { useBannerSize } from 'lib/useBannerSize'
 
 import Placeholder from 'components/Placeholder'
 import styleBanner from 'public/scss/components/Banner.module.scss'
