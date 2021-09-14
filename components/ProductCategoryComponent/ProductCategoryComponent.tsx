@@ -72,9 +72,6 @@ const ProductCategoryComponent: FC<ProductCategoryComponentPropType> = ({
         itemPerPage={5}
         classes={classes}
         showImages={displayMode !== 'list'}
-        imageFallback={
-          <div className={styles.productCategory_media}></div>
-        }
         dropdownIcon={displayMode === 'list' && <div className="icon-chevronDown"></div>}
         thumborSetting={{
           width: size.width < 767 ? 0 : 795,
@@ -95,6 +92,9 @@ const ProductCategoryComponent: FC<ProductCategoryComponentPropType> = ({
           <div className={styles.productCategory_loading}>
             <p>{i18n.t("global.error")}</p>
           </div>
+        }
+        imageFallback={
+          <img className={styles.productCategory_media} src="/images/image-category-placeholder.webp" />
         }
       />
       {withSeeAll &&
