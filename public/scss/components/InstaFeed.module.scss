@@ -111,5 +111,21 @@
   @media (max-width: #{$breakpoint_min_sm}) 
   {
     @include grid-(1);
+
+    &_titleContainer
+    {
+      @include flex(column, flex-start, center);
+    }
+
+    &_title
+    {
+      margin-bottom: 5px;
+    }
+
+    &_placeholder
+    {
+      @include fixedWidth(100%);
+      height: 220px;
+    }
   }
 }

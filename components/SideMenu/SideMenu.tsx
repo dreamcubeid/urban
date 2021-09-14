@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { X } from 'react-feather';
+import { RiCloseLine } from 'react-icons/ri'
 import styles from "public/scss/components/SideMenu.module.scss";
 
 type SideMenuPropsType = {
@@ -36,7 +36,7 @@ const SideMenu: FC<SideMenuPropsType> = ({
             <h6>{title}</h6>
           }
           {withClose &&
-            <X onClick={toogleSide} size={30} />
+            <RiCloseLine onClick={toogleSide} />
           }
         </div>
         {children}

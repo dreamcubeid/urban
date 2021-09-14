@@ -48,6 +48,15 @@
   {
     @include position(absolute, 0, auto, auto, 30%);
     width: 70%;
+    
+    &:empty
+    {
+      z-index: 2;
+      visibility: hidden;
+      width: 70%;
+      height: 265px;
+      background-image: url('../../images/image-category-placeholder.webp');
+    }
   }
 
   &_seeAll
@@ -105,7 +114,8 @@
     &:first-child,
     &:hover
     {
-      [class*="_image"]
+      [class*="_image"],
+      [class*="_media"]
       {
         visibility: visible;
       }
