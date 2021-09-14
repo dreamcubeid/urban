@@ -1,0 +1,12 @@
+@import '../utils/variables';
+
+.body
+{
+    &__noOverflow
+    {
+        @media (max-width: #{$breakpoint_max_lg})
+        {
+            overflow: hidden;
+        }
+    }
+}

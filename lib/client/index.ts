@@ -16,7 +16,7 @@ export const useWhatsAppOTPSetting = async (req: IncomingMessage) => {
   return await getWhatsAppOTPSetting(GRAPHQL_URI(req))
 }
 
-export const useSingleSignOn = async (req: IncomingMessage) => {
+export const useAuthMethod = async (req: IncomingMessage) => {
   const hasGoogleAuth = await getGoogleAuth(GRAPHQL_URI(req));
   const hasFacebookAuth = await getFacebookAuth(GRAPHQL_URI(req));
   const hasOtp = await useWhatsAppOTPSetting(req)

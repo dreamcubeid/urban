@@ -211,7 +211,7 @@ const ProductsComponent: FC<iProps> = ({
     <>
       <section
         className={
-          `my-2 
+          `container my-2 
           ${withFilterSort && pageInfo.totalItems !== 0 ? 'pb-4' : ""}
           ${isLastSection && pageInfo.totalItems !== 0 ? styles.productsComponent_lastSection : ""}
           ${sectionClasses[type] || ""}

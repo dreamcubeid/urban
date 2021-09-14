@@ -17,7 +17,7 @@ const SecondAdvertisement: FC = () => {
   return (
     <div className={styles.SecondAdvertisement}>
       <Widget
-        pos="main-content-1"
+        pos="main-content-2"
         containerClassName={styles.SecondAdvertisement_container}
         widgetClassName={styles.SecondAdvertisement_item}
         loadingComponent={<Placeholder classes={placeholder} withImage />}

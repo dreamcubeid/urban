@@ -3,7 +3,8 @@ const locale = {
     "inputEmailPlaceholder": "Input your email",
     "submitError": "Failed subscribe",
     "submitSuccess": "Success subscribe",
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "title": "Newsletter"
   }
 }
 

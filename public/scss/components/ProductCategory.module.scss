@@ -7,11 +7,11 @@
   position: relative;
   padding: 0;
   margin-top: 29px;
-  color: $color_text_primary;
+  color: $color_text;
 
   &_container
   {
-    margin: 64px 42px 87px;
+    margin: 64px 16px 80px;
   }
   
   h2
@@ -29,7 +29,13 @@
   {
     @include typography_builder(500, 20, 24);
     width: 100%;
+    color: $color_text;
 
+    &:hover
+    {
+      outline-color: $color_text;
+    }
+    
     span
     {
       display: inline-block;

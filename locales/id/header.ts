@@ -11,9 +11,11 @@ const locale = {
     "menu": "Menu",
     "myAccount": "Akun Saya",
     "register": "Daftar",
+    "search": "Pencarian",
     "searchPlaceholder": "Cari apa saja",
     "searchProduct": "Pencarian Produk",
-    "shop": "Toko"
+    "shop": "Toko",
+    "socialMedia": "Sosial Media"
   }
 }
 

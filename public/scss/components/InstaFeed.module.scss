@@ -8,11 +8,13 @@
 
   @extend .grid;
   @include grid-(6);
+  margin: 0 16px;
+
 
   &_titleContainer
   {
     @include flex(row, center, space-between);
-    margin-bottom: 24px
+    margin: 0 16px 24px;
   }
 
   &_title

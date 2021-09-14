@@ -1,97 +1,240 @@
-@import "../base/colors.scss";
-@import "../components/Placeholder.module.scss";
+@import '../utils/variables';
 
-.widgetFooter
+.footer
 {
-  background: $color_blue_light;
-  padding: 35px 0;
+  display: block;
+  position: relative;
+  margin: 58px 0 0 300px;
+  padding: 0 calc(42px - 15px);
+  background-color: $color_black;
+  color: $color_white;
 
-  h1,h2,h3,h4,h5,h6
+  &_top,
+  &_bottom
   {
-    font-size: 11px;
-    font-family: 'roboto-black';
-    margin-bottom: 13px;
+    padding: 40px 0 0;
   }
 
-  ul
+  &_loading
   {
-    padding: 0;
+    @include flex(row, flex-start, flex-start);
+    @include typographyBuilder(400, 12, 16);
+    color: $color_white;
+    position: relative;
     margin: 0;
+    padding: 0;
+  }
 
-    li
+  &_copyright
+  {
+    @include flex(row, center, flex-start);
+    @include typographyBuilder(400, 12, 16);
+    position: relative;
+    margin: 0;
+    padding: 12px 0;
+    color: $color_white;
+  }
+
+  &Item
+  {
+    @include typographyBuilder(400, 12, 16);
+    color: $color_white;
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    &_content
     {
-      list-style: none;
-      margin-bottom: 11px;
-      
+      display: block;
+      position: relative;
+      margin: 0;
+      padding: 0;
+
+      h1, h2, h3, h4, h5, h6
+      {
+        @include flex(row, center, flex-start);
+        @include typographyBuilder(700, 16, 24);
+        position: relative;
+        margin: 0;
+        padding: 0;
+        color: $color_white;
+
+        &:first-of-type,
+        &:first-child,
+        &:only-child,
+        &:only-of-type
+        {
+          margin-bottom: 16px;
+        }
+      }
+
+      figure,
+      img,
+      video,
+      iframe,
+      object
+      {
+        max-width: 100%;
+      }
+
+      img
+      {
+        display: block;
+        position: relative;
+        margin: 0 0 12px;
+        padding: 0;
+        max-width: 100%;
+        border: none;
+      }
+
+      ul,
+      ol
+      {
+        margin: 0 0 8px;
+        padding: 0;
+
+        li
+        {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+
+          & + li
+          {
+            margin-top: 8px;
+          }
+        }
+      }
+
       a
       {
+        @include transition();
+        @include flex(row, center, flex-start);
+        position: relative;
+        margin: 0;
+        padding: 0;
+        color: $color_white;
         text-decoration: none;
+        text-align: left;
+
+        &:hover,
+        &:focus,
+        &:active
+        {
+          color: $color_white;
+          text-decoration: none;
+        }
+
+        &:hover
+        {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &Newsletter
+  {
+    @include transition();
+    @include flex(row, center, flex-start, false);
+    @include fixedHeight(60px);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: solid 1px $color_text_secondary;
+    border-radius: 2px;
+
+    &_label
+    {
+      display: none;
+    }
+
+    &_input,
+    &_button
+    {
+      @include transition();
+      @include fixedHeight(100%);
+      @include placeholderColor($color_text_secondary);
+      position: relative;
+      margin: 0;
+      color: $color_white;
+      background-color: transparent;
+      box-shadow: 0 0 0 transparent;
+      border: none;
+
+      &:hover,
+      &:focus,
+      &:active
+      {
+        outline: none;
+        box-shadow: 0 0 0 transparent;
+      }
+    }
+
+    &_input
+    {
+      flex-grow: 1;
+      padding: 0 0 0 16px;
+    }
+
+    &_button
+    {
+      padding: 0 20px;
+      color: $color_placeholder;
+
+      &:hover
+      {
+        color: $color_white;
       }
     }
   }
 }
 
-.socialIcon
+@media screen and (max-width: #{$breakpoint_max_md})
 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &_item
+  .footer
   {
-    margin: 0 15px;
-
-    & > img
+    &Item
     {
-      height: 17px;
-    }
-  }
-}
+      padding: 0 3px;
 
-.footer
-{
-  background: $color_blue;
+      &_content
+      {
+        pointer-events: none;
 
-  &_line
-  {
-    border-top: 1px solid $color_divider;
-  }
+        *
+        {
+          pointer-events: auto;
+        }
 
-  &_bottom
-  {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    padding: .5rem 0;
-    color: $color_white;
-
-    & > a
-    {
-      color: $color_white;
+        h1, h2, h3, h4, h5, h6
+        {
+          &:first-of-type,
+          &:first-child,
+          &:only-child,
+          &:only-of-type
+          {
+            min-height: 72px;
+            margin-top: -72px;
+            max-width: calc(100% - 48px);
+          }
+        }
+      }
     }
 
-    & img, video, iframe
+    &_copyright
     {
-      display: none !important;
-    }
+      padding: 12px 3px;
 
-    div, h1, h2, h3, h4, h5, h6, p
-    {
-      text-align: center !important;
-      font-size: 13px !important;
-      margin-bottom: 0 !important;
-    }
-  }
-
-  &_bottomWidget
-  {
-    text-align: center;
-    font-size: 11px;
-
-    div, h1, h2, h3, h4, h5, h6, p
-    {
-      text-align: center;
-      font-size: 11px;
+      &::before
+      {
+        content: "";
+        display: block;
+        @include absolute(0, auto, auto, 0);
+        @include fixedHeight(1px);
+        @include fixedWidth(32px);
+        background-color: $color_white;
+      }
     }
   }
 }

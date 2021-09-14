@@ -83,7 +83,7 @@ const Home: FC<any> = ({
         </LazyLoadComponent>
       </section>
 
-      <section>
+      <section className="container">
         <ProductCategoryComponent
           i18n={i18n}
           displayMode='normal'

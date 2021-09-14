@@ -1,0 +1,115 @@
+@import '../utils/variables';
+
+.headerAnnouncement
+{
+  @include transition();
+  @include flex(row, center, flex-end);
+  @include typographyBuilder(400, 12, 16);
+  @include fixedHeight(40px);
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1049;
+  margin: 0;
+  padding: 0;
+  border-radius: 50px;
+  overflow: hidden;
+  background-color: $color_black;
+  color: $color_white;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  &__active
+  {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  &_content
+  {
+    @include flex(row, center, flex-end);
+    @include typographyBuilder(400, 12, 16);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    color: $color_white;
+
+    h1, h2, h3, h4, h5, h6, p, blockquote
+    {
+      @include flex(row, center, flex-end);
+      @include typographyBuilder(400, 12, 16);
+      margin: 0;
+      padding: 0;
+      color: $color_white;
+    }
+
+    img, video, iframe, table, figure
+    {
+      display: none;
+    }
+  }
+
+  &_loading
+  {
+    @include flex(row, center, center);
+    @include typographyBuilder(400, 12, 16);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: $color_white;
+  }
+
+  &_icon
+  {
+    @include flex(row, center, center);
+    @include fixedSize(24px);
+    position: relative;
+    margin: 0 12px 0 8px;
+    padding: 0;
+    border-radius: 100%;
+    background-color: rgba($color_white, 0.23);
+    border: none;
+    color: $color_white;
+
+    svg
+    {
+      max-width: 100%;
+    }
+  }
+
+  &_close
+  {
+    @include transition();
+    @include flex(row, center, center);
+    @include fixedSize(36px);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    color: $color_white;
+
+    &:hover
+    {
+      opacity: 0.6;
+    }
+  }
+}
+
+@media (max-width: #{$breakpoint_max_lg})
+{
+  .headerAnnouncement
+  {
+    top: calc(70px + 24px);
+    right: 18px;
+
+    &__down
+    {
+      top: calc(50vh + 24px);
+    }
+  }
+}

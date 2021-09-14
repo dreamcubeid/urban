@@ -4,28 +4,30 @@
 
 .SecondAdvertisement
 {
-    margin: 0 42px;
+    margin: 0 16px;
 
     &_container
     {
         @extend .grid;
         @include grid-(1);
         @include gap-y-(24px);
-        width: 100%;
+        width: 100% !important;
     }
 
     &_item
     {
+        width: 100% !important;
+        
         &:hover
         {
             opacity: .5;
             cursor: pointer;
         }
 
-        img
+        img, iframe
         {
-            width: 100%;
-            height: auto;
+            width: 100% !important;
+            height: 355px;
         }
     }
 
