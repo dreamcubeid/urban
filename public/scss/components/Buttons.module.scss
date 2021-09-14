@@ -1,0 +1,175 @@
+@import "../utils/mixins";
+@import "../utils/_variables.scss";
+
+.btn 
+{
+  $this: &;
+
+  @include buttonVariant($color_white, $color_blue, $color_blue);
+  @include transition();
+  @include typography_builder(800, 14, 18);
+  @include truncate(1);
+  @include flex(row, center, center);
+  text-decoration: none;
+  text-align: center;
+
+  width: fit-content;
+  margin: 0;
+  padding: 15px 20px;
+  cursor: pointer;
+
+  & > svg
+  {
+    margin-right: 5px;
+  }
+
+  &:disabled
+  {
+    @include buttonVariant($color_grey, $color_white, $color_grey);
+
+    &:hover
+    {
+      cursor: default;
+      border-color: $color_grey !important;
+      color: $color_grey !important;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle 
+  {
+    text-decoration: none;
+    outline: 0;
+
+    & > svg
+    {
+      color: $color_blue !important;
+    }
+  }
+
+  &_long
+  {
+    @extend .btn;
+    width: 100%;
+  }
+
+  &_light
+  {
+    @extend .btn;
+    @include buttonVariant($color_blue, $color_light_blue, $color_light_blue);
+  }
+
+  &_red
+  {
+    @extend .btn;
+    @include buttonVariant($color_white, $color_red, $color_red);
+  }
+
+  &_green
+  {
+    @extend .btn;
+    @include buttonVariant($color_white, $color_green, $color_green);
+  }
+
+  &_grey
+  {
+    @extend .btn;
+    @include buttonVariant($color_black, $color_grey, $color_grey);
+  }
+
+  &_longLight
+  {
+    @extend 
+      .btn_long,
+      .btn_light;
+  }
+
+  &_longGrey
+  {
+    @extend 
+      .btn_long,
+      .btn_grey;
+  }
+
+  &_withGoogleButton
+  {
+    width: 100%;
+    height: 48px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $color_grey !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+   
+    span
+    {
+      @include typography_builder(400, 14, 18);
+      color: $color_black !important;
+      text-transform: uppercase;
+    }
+
+    &:hover
+    {
+      border: 1px solid $color_blue !important;
+    }
+
+    & + label
+    {
+      display: flex; 
+      justify-content: center;
+      position: relative;
+      margin: 30px 0;
+      
+      span
+      {
+        background-color: $color_white;
+        padding: 0 12px;
+        z-index: 2;
+
+        @include typography_builder(800, 14, 18);
+        color: $color_light_black;
+        text-transform: capitalize;
+      }
+
+      &::before
+      {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        width: 100%;
+        height: 1px;
+        background: $color_grey;
+      }
+    }
+  }
+}
+
+@media (max-width: #{$breakpoint_min_sm}) 
+{
+  .btn 
+  {
+    padding: 10px 30px;
+
+    &_sm 
+    {
+      &__block 
+      {
+        width: 100%;
+        @include flex(row, center, center);
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        word-break: keep-all;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+}

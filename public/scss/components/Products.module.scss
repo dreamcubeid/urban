@@ -1,0 +1,180 @@
+.products
+{
+  &_productContainer
+  {
+    position: relative;
+    height: fit-content;
+    cursor: pointer;
+  }
+  
+  &_label
+  {
+    @include typography_builder(500, 10, 16);
+    @include absolute(0, 0, auto, auto);
+    z-index: 2;
+    padding: 5px 7px;
+    text-align: center;
+  }
+  
+  &_outOfStockLabel
+  {
+    background: $color_text;
+    color:  $color_white;
+  }
+
+  &_saleLabel
+  {
+    background: $color_red;
+    color:  $color_white;
+  }
+
+  &_comingSoonLabel
+  {
+    background: $color_text;
+    color:  $color_white;
+  }
+
+  &_openOrderLabel
+  {
+    background: $color_text;
+    color:  $color_white;
+  }
+
+  &_preOrderLabel
+  {
+    background: $color_text;
+    color:  $color_white;
+  }
+  
+  &_newLabel
+  {
+    background: $color_text;
+    color:  $color_white;
+  }
+
+  &_productImage
+  {
+    width: 100%;
+    min-height: 120px;
+  }
+
+  
+  &_productImageContainer
+  {
+    display: flex;
+    height: fit-content;
+    position: relative;
+
+    &:hover
+    {
+      &::before
+      {
+        @include position(absolute, 0, 0, 0, 0);
+        content: "";
+        pointer-events: none;
+        background: rgba(0, 0, 0, 0.05);
+        height: 100%;
+        width: 100%;
+      }
+      
+      &::after
+      {
+        @include position(absolute, 50%, 50%);
+        content: "";
+        transform: translate(50%,-50%);
+        pointer-events: none;
+        width: 40px;
+        height: 40px;
+        background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.5' y='0.5' width='39' height='39' rx='1.5' fill='white' fill-opacity='0.5'/%3E%3Cpath d='M19.9998 11.6667C24.6023 11.6667 28.3332 15.3975 28.3332 20C28.3332 24.6025 24.6023 28.3334 19.9998 28.3334C15.3973 28.3334 11.6665 24.6025 11.6665 20C11.6665 15.3975 15.3973 11.6667 19.9998 11.6667ZM19.9998 13.3334C18.2317 13.3334 16.536 14.0357 15.2858 15.286C14.0355 16.5362 13.3332 18.2319 13.3332 20C13.3332 21.7681 14.0355 23.4638 15.2858 24.7141C16.536 25.9643 18.2317 26.6667 19.9998 26.6667C21.7679 26.6667 23.4636 25.9643 24.7139 24.7141C25.9641 23.4638 26.6665 21.7681 26.6665 20C26.6665 18.2319 25.9641 16.5362 24.7139 15.286C23.4636 14.0357 21.7679 13.3334 19.9998 13.3334ZM19.9998 15.8334C20.877 15.8337 21.7317 16.1108 22.4421 16.6253C23.1525 17.1398 23.6825 17.8653 23.9565 18.6986C24.2304 19.5319 24.2344 20.4304 23.9679 21.266C23.7014 22.1017 23.178 22.832 22.4721 23.3528C21.7663 23.8736 20.9142 24.1583 20.037 24.1665C19.1599 24.1747 18.3026 23.9058 17.5872 23.3983C16.8718 22.8907 16.3349 22.1703 16.0528 21.3397C15.7708 20.5091 15.7581 19.6107 16.0165 18.7725C16.2114 19.2081 16.5501 19.5635 16.9757 19.7793C17.4014 19.9951 17.8882 20.0581 18.3548 19.9579C18.8214 19.8577 19.2394 19.6002 19.5388 19.2286C19.8383 18.8571 20.001 18.3939 19.9998 17.9167C19.9999 17.5154 19.8842 17.1226 19.6664 16.7856C19.4487 16.4485 19.1382 16.1815 18.7723 16.0167C19.1607 15.8975 19.5723 15.8334 19.9998 15.8334Z' fill='%23222222'/%3E%3Crect x='0.5' y='0.5' width='39' height='39' rx='1.5' stroke='%23E5E7EF'/%3E%3C/svg%3E%0A");
+        background-repeat: no-repeat;
+        background-color: transparent;
+      }
+    }
+  }
+
+  &_productLabelContainer
+  {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 12px 0 0;
+    max-width: 250px;
+  }
+
+  &_productTitle
+  {
+    @include truncate(2);
+    @include typography_builder(500, 16, 24);
+    text-transform: capitalize;
+    margin-bottom: 4px;
+  }
+  
+  &_productPrice
+  {
+    @include typography_builder(400, 12, 16);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+  
+  &_salePrice
+  {
+    @include typography_builder(400, 12, 16);
+    color: $color_light_black;
+    text-decoration: line-through;
+  }
+  
+  &_price
+  {
+    @include typography_builder(700, 14, 18);
+    color: $color_red;
+  }
+
+  &_placeholder
+  {
+    width: 100%;
+    height: 200px;
+  }
+
+  &_placeholderFlexNoWrap
+  {
+    width: 180px;
+    height: 200px;
+  }
+  
+  &_placeholderList
+  {
+    width: 100%;
+    height: 30px;
+    margin: 8px 0;
+
+    &:last-child
+    {
+      width: 70%;
+    }
+  }
+
+  &_emptyContainer
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 35vh;
+  }
+
+  @media (max-width: #{$breakpoint_min_sm}) 
+  {
+    &_placeholderFlexNoWrap
+    {
+      width: calc(2/6 * 100vw);  
+    }
+
+    &_price,
+    &_productPrice,
+    &_label
+    {
+      @include typography_builder(400, 12, 18);
+    }
+  }
+}
+

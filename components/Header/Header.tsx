@@ -36,7 +36,7 @@ const PrivateComponent = dynamic(() => import("@sirclo/nexus").then((mod) => mod
 const classesPlaceholderLogo = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_header__logo}`
 }
-  
+
 const classesPlaceholderCollapsibleNav = {
   placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_header__navMobile}`
 }
@@ -102,16 +102,16 @@ const Header: FC<THeader> = ({
               {dataCart?.totalItem}
             </span>
           </div>
-          <button 
-            type="button" 
-            className={`${styles.mobile_toggle} ${mobileState ? styles.mobile_toggle__active : ''}`} 
+          <button
+            type="button"
+            className={`${styles.mobile_toggle} ${mobileState ? styles.mobile_toggle__active : ''}`}
             onClick={handleMobileToggle}>
-              <span>
-                <RiMenu3Fill />
-              </span>
-              <span>
-                <RiCloseFill />
-              </span>
+            <span>
+              <RiMenu3Fill />
+            </span>
+            <span>
+              <RiCloseFill />
+            </span>
           </button>
         </div>
 
@@ -126,7 +126,7 @@ const Header: FC<THeader> = ({
             </span>
           </div>
 
-          <PrivateComponent 
+          <PrivateComponent
             Auth={
               <Link href="/[lng]/account" as={`/${lng}/account`}>
                 <div className={styles.shortcuts_item}>

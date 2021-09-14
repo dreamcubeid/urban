@@ -1,6 +1,6 @@
 const locale = {
   "instagram": {
-    "cta": "ikuti kami di instagram"
+    "cta": "ikuti Instagram kami"
   }
 }
 

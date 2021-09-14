@@ -13,3 +13,4 @@ npm-debug.log*
 now.json
 package-lock.json
 .vscode/settings.json
+.history

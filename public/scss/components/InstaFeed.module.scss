@@ -1,0 +1,115 @@
+@import '../utils/variables';
+@import '../components/Placeholder.module.scss';
+
+.instagramFeed
+{
+
+  $this: &;
+
+  @extend .grid;
+  @include grid-(6);
+  margin: 0 16px;
+
+
+  &_titleContainer
+  {
+    @include flex(row, center, space-between);
+    margin: 0 16px 24px;
+  }
+
+  &_title
+  {
+    @include flex(row, center, flex-start);
+    @include typographyBuilder(500, 20, 24);
+    position: relative;
+    margin: 0;
+    background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &_followUs
+  {
+    @include typography_builder(500, 16, 24);
+    @include flex(row, center, center);
+    cursor: pointer;
+
+    &:hover
+    {
+      opacity: 0.6;
+    }
+
+    &:after
+    {
+      display: block;
+      content: "";
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.129 5.25L5.106 1.227L6.1665 0.166504L12 6L6.1665 11.8335L5.106 10.773L9.129 6.75H0V5.25H9.129Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+      background-repeat: no-repeat;
+      width: 12px;
+      height: 12px;
+      margin-left: 11px; 
+    }
+  }
+
+  &_item
+  {
+    width: 100%;
+    background-color: $color_grey;
+    position: relative;
+    margin: 1px;
+    padding: 0;
+  }
+
+  &_image
+  {
+    width: 100%;
+    object-fit: contain;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+
+    &:hover
+    {
+      opacity: .5;
+    }
+  }
+
+  &_link
+  {
+    @include fixedSize(100%);
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 100% 0 0;
+    overflow: hidden;
+
+    #{$this}_image
+    {
+      @include absolute(0, 0, 0, 0);
+    }
+  }
+
+  &_placeholder
+  {
+    @extend .placeholder;
+    @include fixedWidth(calc((100% / 6) - 2px));
+    height: 120px;
+    margin: 1px;
+    padding: 0;
+
+    &Wrapper
+    {
+      @include flex(row, flex-start, flex-start, true);
+      @include fixedWidth(100%);
+      position: relative;
+      padding: 16px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: #{$breakpoint_min_sm}) 
+  {
+    @include grid-(1);
+  }
+}

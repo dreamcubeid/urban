@@ -1,9 +1,10 @@
 /* Library Package */
-import { 
-  FC, 
+import {
+  FC,
   useEffect,
   useState
 } from 'react'
+
 import { withBrand } from '@sirclo/nexus'
 import { ToastContainer } from 'react-toastify'
 
@@ -12,9 +13,15 @@ import Header from 'components/Header/Header'
 import Footer from 'components/Footer/Footer'
 import PageNotFound from 'components/PageNotFound'
 import SEOHead from 'components/SEO'
+import Newsletter from '../Newsletters';
 
 /* Styles */
 import styles from 'public/scss/components/Layout.module.scss'
+/* library package */
+
+/* component */
+// import Header from "components/Header/Header";
+
 
 type LayoutPropType = {
   lngDict: any
@@ -68,7 +75,7 @@ const Layout: FC<LayoutPropType> = ({
   const [mobileMenuToggled, setMobileMenuToggled] = useState<boolean>(false)
 
   useEffect(() => {
-    if(mobileMenuToggled) {
+    if (mobileMenuToggled) {
       document.querySelector('body').classList.add(styles.body__noOverflow)
     } else {
       document.querySelector('body').classList.remove(styles.body__noOverflow)
@@ -99,9 +106,9 @@ const Layout: FC<LayoutPropType> = ({
 
         <main className={layoutClassName}>
           {withAllowed ?
-              props.children 
+            props.children
             :
-              <PageNotFound i18n={i18n} />
+            <PageNotFound i18n={i18n} />
           }
         </main>
 
@@ -110,9 +117,8 @@ const Layout: FC<LayoutPropType> = ({
         }
 
       </section>
-
       <ToastContainer />
-
+      <Newsletter i18n={i18n} />
     </>
   )
 }

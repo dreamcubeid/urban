@@ -4,12 +4,11 @@ import { ThankYou, useI18n } from "@sirclo/nexus";
 import SEO from "components/SEO";
 import Layout from "components/Layout/Layout";
 import { useBrand } from "lib/useBrand";
+import { toast } from "react-toastify";
 import { Check } from "react-feather";
 import styles from "public/scss/pages/ThankYou.module.scss";
-import { toast } from "react-toastify";
 /* locales */
 import locale from "locales";
-
 
 const classesThankYouPage = {
   thankYouClassName: styles.thankyou_inner,

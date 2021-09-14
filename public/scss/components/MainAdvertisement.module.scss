@@ -1,0 +1,47 @@
+@import "../utils/_variables.scss";
+@import "../utils/_grid.scss";
+@import "../utils/_variables.scss";
+
+.mainAdvertisement
+{
+    margin: 0 16px;
+
+    &_container
+    {
+        @extend .grid;
+        @include grid-(2);
+        @include gap-x-(24px);
+        width: 100% !important;
+    }
+
+    &_item
+    {
+        &:hover
+        {
+            opacity: .5;
+            cursor: pointer;
+        }
+
+        img
+        {
+            width: 100% !important;
+            height: auto;
+        }
+    }
+
+    &_placeholder
+    {
+        height: 300px;
+    }
+
+    @media (max-width: #{$breakpoint_min_sm}) 
+    {
+        margin: 0 16px;
+
+        &_container
+        {
+            @include grid-(1);
+            @include gap-y-(24px);
+        }
+    }
+}

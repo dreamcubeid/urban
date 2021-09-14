@@ -1,0 +1,49 @@
+@import "../utils/_grid.scss";
+@import "../utils/_variables.scss";
+
+
+.SecondAdvertisement
+{
+    margin: 0 16px;
+
+    &_container
+    {
+        @extend .grid;
+        @include grid-(1);
+        @include gap-y-(24px);
+        width: 100% !important;
+    }
+
+    &_item
+    {
+        width: 100% !important;
+        
+        &:hover
+        {
+            opacity: .5;
+            cursor: pointer;
+        }
+
+        img, iframe
+        {
+            width: 100% !important;
+            height: 355px;
+        }
+    }
+
+    &_placeholder
+    {
+        height: 300px;
+    }
+
+    @media (max-width: #{$breakpoint_min_sm}) 
+    {
+        margin: 0 16px;
+
+        &_container
+        {
+            @include grid-(1);
+            @include gap-y-(24px);
+        }
+    }
+}
