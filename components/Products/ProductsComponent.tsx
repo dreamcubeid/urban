@@ -101,7 +101,7 @@ const ProductsComponent: FC<iProps> = ({
   const categories: string = useQuery('categories')
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const [showSort, setShowSort] = useState<boolean>(true);
-  const [filterProduct, setFilterProduct] = useState({})
+  // const [filterProduct, setFilterProduct] = useState({})
   const [sort, setSort] = useState(null)
   const itemPerPage = 4
   const [pageInfo, setPageInfo] = useState({
@@ -132,16 +132,16 @@ const ProductsComponent: FC<iProps> = ({
   const { currPage, setCurrPage } = useInfiniteScroll(pageInfo, "products_container")
   const handleShowFilter = () => setShowFilter(!showFilter)
   const handleShowSort = () => setShowSort(!showSort)
-  const handleFilter = (selectedFilter: any) => {
-    setFilterProduct(selectedFilter)
-    setShowFilter(false)
-  }
+  // const handleFilter = (selectedFilter: any) => {
+  //   setFilterProduct(selectedFilter)
+  //   setShowFilter(false)
+  // }
   const handleSort = (selectedSort: any) => {
     setSort(selectedSort)
     setShowSort(false)
   }
 
-  const getSelectedCategory = () => setShowFilter(!showFilter)
+  // const getSelectedCategory = () => setShowFilter(!showFilter)
 
   let propsProduct: any
   const baseProductsProps = {
@@ -165,7 +165,7 @@ const ProductsComponent: FC<iProps> = ({
         itemPerPage: 12,
         collectionSlug: categories,
         sort: sort,
-        filter: filterProduct,
+        // filter: filterProduct,
         withSeparatedVariant: true,
         loadingComponent:
           [0, 1, 2, 3].map((_, i) => (
@@ -207,7 +207,11 @@ const ProductsComponent: FC<iProps> = ({
 
   useEffect(() => {
     setCurrPage(0);
-  }, [filterProduct, categories, tagname]);
+  }, [categories, tagname])
+
+  // useEffect(() => {
+  //   setCurrPage(0);
+  // }, [filterProduct, categories, tagname])
 
   if (pageInfo.totalItems === 0 && !withEmptyComponent) return <></>
 
