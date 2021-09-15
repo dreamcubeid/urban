@@ -93,9 +93,6 @@ const ProductCategoryComponent: FC<ProductCategoryComponentPropType> = ({
             <p>{i18n.t("global.error")}</p>
           </div>
         }
-        imageFallback={
-          <img className={styles.productCategory_media} src="/images/image-category-placeholder.webp" />
-        }
       />
       {withSeeAll &&
         <Link href="/[lng]/categories" as={`/${lng}/categories`}>

@@ -5,8 +5,10 @@
 
 .productsComponent
 {
+  position: relative;
   margin-bottom: 20px;
   width: 100%;
+  padding-top: 42px;
 
   &_lastSection
   {
@@ -103,15 +105,41 @@
 
   &_action
   {
+    @include position(absolute, 0px, 16px);
     @extend .grid;
     @include grid-(2);
-    @include gap-(12px);
-    padding: 16px 16px 16px 16px;
+    @include gap-x-(25px);
   }
 
   &_actionItem
   {
-    @extend .btn_longLight;
+    @include flex(row, center, flex-start);
+    @extend .btn_transparent;
+    @include typographyBuilder(400, 16, 24);
+    padding: 0;
+
+    &:first-child
+    {
+      &::before
+      {
+        @include fixedSize(9px);
+        content: "";
+        margin-right: 10px;
+        background-repeat: no-repeat;
+        background-image: url("data:image/svg+xml,%3Csvg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.5 0V1H9L6.5 4.75V9H3.5V4.75L1 1H0.5V0H9.5ZM2.202 1L4.5 4.447V8H5.5V4.447L7.798 1H2.202Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+      }
+    }
+    &:last-child
+    {
+      &::before
+      {
+        @include fixedSize(11px);
+        content: "";
+        margin-right: 10px;
+        background-repeat: no-repeat;
+        background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.83333 7.5H7.16667V6.33333H4.83333V7.5ZM0.75 0.5V1.66667H11.25V0.5H0.75ZM2.5 4.58333H9.5V3.41667H2.5V4.58333Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+      }
+    }
   }
 
   &_seeAllProducts

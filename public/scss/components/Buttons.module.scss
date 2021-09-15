@@ -56,6 +56,13 @@
     width: 100%;
   }
 
+  &_transparent
+  {
+    @extend .btn;
+    width: 100%;
+    @include buttonVariant($color_black, transparent, transparent);
+  }
+
   &_light
   {
     @extend .btn;
