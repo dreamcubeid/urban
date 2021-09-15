@@ -103,7 +103,6 @@ const ProductsComponent: FC<iProps> = ({
   const [showSort, setShowSort] = useState<boolean>(true);
   // const [filterProduct, setFilterProduct] = useState({})
   const [sort, setSort] = useState(null)
-  const itemPerPage = 4
   const [pageInfo, setPageInfo] = useState({
     pageNumber: 0,
     itemPerPage: 4,
@@ -146,7 +145,7 @@ const ProductsComponent: FC<iProps> = ({
   let propsProduct: any
   const baseProductsProps = {
     tagName: tagname || null,
-    itemPerPage: itemPerPage,
+    itemPerPage: 4,
     classes: classesProducts,
     getPageInfo: (pageInfo: any) => setPageInfo(pageInfo),
     fullPath: `product/{id}`,
@@ -279,7 +278,7 @@ const ProductsComponent: FC<iProps> = ({
                 <Products {...propsProduct} />
               </div>
 
-              {(withSeeAllBtn && (pageInfo.totalItems > itemPerPage)) &&
+              {(withSeeAllBtn && (pageInfo.totalItems > 4)) &&
                 <div className={` ${styles.productsComponent_seeAllProducts}`}>
                   <button
                     className={`${styles.productsComponent_actionItem}`}
