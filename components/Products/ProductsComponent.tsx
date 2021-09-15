@@ -278,7 +278,7 @@ const ProductsComponent: FC<iProps> = ({
                 <Products {...propsProduct} />
               </div>
 
-              {(withSeeAllBtn && (pageInfo.totalItems > itemPerPage)) &&
+              {(withSeeAllBtn && (pageInfo.totalItems > 4)) &&
                 <div className={` ${styles.productsComponent_seeAllProducts}`}>
                   <button
                     className={`${styles.productsComponent_actionItem}`}
