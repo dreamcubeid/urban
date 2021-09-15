@@ -1,53 +1,82 @@
 /* library package */
 import { FC } from 'react'
 import { ProductFilter } from '@sirclo/nexus'
+
 /* component */
-import styles from 'public/scss/components/ProductFilter.module.scss'
+import ProductCategoryComponent from 'components/ProductCategoryComponent/ProductCategoryComponent'
+import Placeholder from 'components/Placeholder'
+
+import stylesProductFilter from 'public/scss/components/ProductFilter.module.scss'
 
 const classes = {
-  filtersClassName: styles.productFilter,
-  filterClassName: styles.productFilter_filter,
-  filterNameClassName: styles.productFilter_name,
-  filterVariantClassName: styles.productFilter_filterVariant,
-  filterOptionClassName: styles.productFilter_option,
-  filterColorLabelClassName: styles.productFilter_optionLabel,
-  filterLabelClassName: styles.productFilter_optionLabel,
-  filterCheckboxClassName: styles.productFilter_optionCheckbox,
-  filterColorInputClassName: styles.productFilter_filterColorInput,
+  filtersClassName: stylesProductFilter.filters,
+  filterClassName: stylesProductFilter.filter,
+  filterNameClassName: stylesProductFilter.name,
+  filterVariantClassName: stylesProductFilter.filterVariant,
+  filterOptionClassName: stylesProductFilter.option,
+  filterColorLabelClassName: stylesProductFilter.optionLabel,
+  filterLabelClassName: stylesProductFilter.optionLabel,
+  filterCheckboxClassName: stylesProductFilter.optionCheckbox,
+  filterColorInputClassName: stylesProductFilter.filterColorInput,
+  filterColorPreviewClassName: stylesProductFilter.filterColorPreview,
 
   /* input  price*/
-  filterPriceInputClassName: styles.productFilter_filterPriceInput,
-  filterPriceLabelClassName: styles.productFilter_filterPriceLabel,
-  filterOptionPriceClassName: styles.productFilter_filterOptionPrice,
-  filterInputClassName: styles.productFilter_filterInput,
-  filterPriceClassName: styles.productFilter_filterPrice,
+  filterPriceInputClassName: stylesProductFilter.filterPriceInput,
+  filterPriceLabelClassName: stylesProductFilter.filterPriceLabel,
+  filterOptionPriceClassName: stylesProductFilter.filterOptionPrice,
+  filterInputClassName: stylesProductFilter.filterInput,
+  filterPriceClassName: stylesProductFilter.filterPrice,
 
   /*slider price*/
-  filterSliderClassName: styles.productFilter_filterSlider,
-  filterSliderRailClassName: styles.productFilter_filterSliderRail,
-  filterActiveClassName: styles.productFilter_filterActive,
-  filterColorActiveClassName: styles.productFilter_filterActive,
-  filterTagActiveClassName: styles.productFilter_filterActive,
-  filterSliderHandleClassName: styles.productFilter_filterSliderHandle,
-  filterSliderTrackClassName: styles.productFilter_filterSliderTrack,
+  filterSliderClassName: stylesProductFilter.filterSlider,
+  filterSliderRailClassName: stylesProductFilter.filterSliderRail,
+  filterActiveClassName: stylesProductFilter.filterActive,
+  filterColorActiveClassName: stylesProductFilter.filterActive,
+  filterTagActiveClassName: stylesProductFilter.filterActive,
+  filterSliderHandleClassName: stylesProductFilter.filterSliderHandle,
+  filterSliderTrackClassName: stylesProductFilter.filterSliderTrack,
+}
+
+const placeholder = {
+  placeholderImage: stylesProductFilter.placeholder,
+  placeholderList: stylesProductFilter.placeholderList,
 }
 
 const ProductFilterComponent: FC<any> = ({
   i18n,
+  lng,
   handleFilter,
-  withApply
+  getSelectedCategory
 }) => {
   return (
-    <ProductFilter
-      sortType="dropdown"
-      classes={classes}
-      withPriceMinimumSlider
-      withPriceValueLabel
-      withPriceInput
-      withApply={withApply}
-      handleFilter={handleFilter}
-      errorComponent={<p>{i18n.t("global.error")}</p>}
-    />
+    <div className={stylesProductFilter.container}>
+      <ProductCategoryComponent
+        lng={lng}
+        i18n={i18n}
+        displayMode="list"
+        getSelectedSlug={getSelectedCategory}
+        withTitle
+      />
+      <ProductFilter
+        sortType="dropdown"
+        classes={classes}
+        withPriceMinimumSlider
+        withPriceValueLabel
+        withPriceInput
+        withTooltip
+        handleFilter={handleFilter}
+        loadingComponent={
+          <div className={stylesProductFilter.filters} >
+            {
+              [0, 1, 2, 3].map((_, i) => (
+                <Placeholder key={i} classes={placeholder} withList />
+              ))
+            }
+          </div>
+        }
+        errorComponent={<p>{i18n.t("global.error")}</p>}
+      />
+    </div>
   )
 }
 
