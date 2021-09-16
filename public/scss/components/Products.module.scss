@@ -148,7 +148,7 @@
     height: 30px;
     margin: 8px 0;
 
-    &:last-child
+    &:nth-child(even)
     {
       width: 70%;
     }

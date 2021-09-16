@@ -38,7 +38,8 @@ const classesPlaceholderLogo = {
 }
 
 const classesPlaceholderCollapsibleNav = {
-  placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_header__navMobile}`
+  placeholderImage: styles.placeholder,
+  placeholderList: styles.placeholderList,
 }
 
 const classesCollapsibleNav = {
@@ -162,13 +163,9 @@ const Header: FC<THeader> = ({
             dropdownOpenIcon={<RiSubtractFill />}
             classes={classesCollapsibleNav}
             loadingComponent={
-              <>
-                <Placeholder
-                  classes={classesPlaceholderCollapsibleNav}
-                  withList={true}
-                  listMany={4}
-                />
-              </>
+              [0, 1, 2].map((_, i) => (
+                <Placeholder key={i} classes={classesPlaceholderCollapsibleNav} withList />
+              ))
             }
           />
         </div>
