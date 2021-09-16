@@ -1,9 +1,5 @@
 /* library package */
-import {
-  FC,
-  useState,
-  useEffect
-} from 'react'
+import { FC } from 'react'
 import Router from 'next/router'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
@@ -12,10 +8,8 @@ import {
   ProductSort
 } from '@sirclo/nexus'
 
-/* library template */
-import useInfiniteScroll from 'lib/useInfiniteScroll'
-import useQuery from 'lib/useQuery'
-import useWindowSize from 'lib/useWindowSize'
+/* library component */
+import useProducts from './hooks/useProducts'
 
 /* component */
 import SideMenu from 'components/SideMenu/SideMenu'
@@ -102,31 +96,20 @@ const ProductsComponent: FC<iProps> = ({
   ...props
 }) => {
 
-  const size = useWindowSize();
-  const categories: string = useQuery('categories')
-  const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [showSort, setShowSort] = useState<boolean>(false);
-  const [filterProduct, setFilterProduct] = useState({})
-  const [pageInfo, setPageInfo] = useState({
-    pageNumber: 0,
-    itemPerPage: 4,
-    totalItems: null,
-  })
-  const { currPage, setCurrPage } = useInfiniteScroll(pageInfo, "products_container")
-  const handleFilter = (selectedFilter: any) => setFilterProduct(selectedFilter)
-
-  const resetFilter = () => Router.replace(`/${lng}/products`)
-
-
-  const handleShowFilter = () => {
-    setShowFilter(!showFilter)
-    setShowSort(false)
-  }
-
-  const handleShowSort = () => {
-    setShowSort(!showSort)
-    setShowFilter(false)
-  }
+  const {
+    size,
+    setPageInfo,
+    pageInfo,
+    categories,
+    filterProduct,
+    handleShowFilter,
+    handleShowSort,
+    resetFilter,
+    showFilter,
+    handleFilter,
+    showSort,
+    currPage
+  } = useProducts({ lng, tagname })
 
   const containerClasses = {
     "grid": `
@@ -188,9 +171,6 @@ const ProductsComponent: FC<iProps> = ({
       }
     }
   }
-  useEffect(() => {
-    setCurrPage(0);
-  }, [filterProduct, categories, tagname])
 
   if (pageInfo.totalItems === 0 && !withEmptyComponent) return <></>
 
