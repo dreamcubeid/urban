@@ -35,6 +35,11 @@
     position: relative;
     margin: 0;
     padding: 0;
+
+    &:last-child
+    {
+        margin-top: 140px;
+    }
 }
 
 .shortcuts

@@ -65,7 +65,10 @@ const locale = {
     "weight": "Berat",
     "whatsapp": "Whatsapp",
     "writeReview": "Tulis Ulasan",
-    "yourReview": "Ulasan Anda"
+    "yourReview": "Ulasan Anda",
+    "show": "Menampilan",
+    "result": "Hasil",
+    "reset": "Bersihkan",
   }
 }
 

@@ -4,7 +4,7 @@
 
 .SecondAdvertisement
 {
-    margin: 0 16px;
+    margin: 0 0;
 
     &_container
     {
@@ -38,7 +38,7 @@
 
     @media (max-width: #{$breakpoint_min_sm}) 
     {
-        margin: 0 16px;
+        margin: 0 0;
 
         &_container
         {

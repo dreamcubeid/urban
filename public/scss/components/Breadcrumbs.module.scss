@@ -1,50 +1,80 @@
-@import "../base/colors.scss";
+@import "../utils/variables";
 
-.breadcrumbs
+.breadcrumb
 {
-  padding-bottom: 1rem;
-  white-space: nowrap;
-  overflow-x: auto;
+  
+  border-radius: 0;
+  background-color: transparent;
+  margin: 0 auto;
+  padding: 42px 0 0;
 
-  &_class 
+  &_item
   {
-    position: relative;
-    font-family: "roboto-medium";
-    font-size: 11px;
-    letter-spacing: 0.75px;
-    color: $color_gray_semi_dark;
-    margin-right: 2rem;
-    cursor: pointer;
-
-    &:last-child
+    @include typographyBuilder(400, 10, 16);
+    text-transform: capitalize;
+    color: $color_black;
+    display: flex;
+    
+    & + &::before
     {
-      margin-right: 0;
+      color: $color_black;
     }
 
-    &_number
+    a,
+    span
     {
-      position: absolute;
-      left: 0;
-      width: 19px;
-      height: 19px;
-      line-height: 19px;
-      text-align: center;
-      color: white;
-      background: $color_gray_semi_dark;
-      border-radius: 50%;
+      @include transition();
+      display: block;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      color: inherit;
+      text-decoration: none;
     }
 
-    &_label
+    a
     {
-      margin-left: 2rem;
+      &:hover,
+      &:focus
+      {
+        color: $color_black;
+        text-decoration: none;
+        outline: none;
+      }
+    }
+
+    &:last-child,
+    &:last-of-type
+    {
+      a,
+      span
+      {
+        color: $color_placeholder;
+        text-decoration: none;
+      }
     }
   }
 
-  &_activeClass {
-    color: $color_blue;
-  }
+  &_container
+  {
+    @include flex(row, center, flex-start);
+    margin: 0;
+    padding: 0;
 
-  &_activeNumber {
-    background: $color_blue;
+      
+    h2
+    {
+      @include typographyBuilder(700, 32, 48);
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (max-width: $breakpoint_max_lg)
+{
+  .breadcrumb
+  {
+    margin: 70px 0 0;
+    padding: 24px 0 0;
   }
 }

@@ -15,8 +15,7 @@ import {
 /* library template */
 import useInfiniteScroll from 'lib/useInfiniteScroll'
 import useQuery from 'lib/useQuery'
-import useRemoveParams from 'lib/useRemoveParams'
-
+import useWindowSize from 'lib/useWindowSize'
 
 /* component */
 import SideMenu from 'components/SideMenu/SideMenu'
@@ -103,6 +102,7 @@ const ProductsComponent: FC<iProps> = ({
   ...props
 }) => {
 
+  const size = useWindowSize();
   const categories: string = useQuery('categories')
   const [showFilter, setShowFilter] = useState<boolean>(false);
   const [showSort, setShowSort] = useState<boolean>(false);
@@ -115,19 +115,15 @@ const ProductsComponent: FC<iProps> = ({
   const { currPage, setCurrPage } = useInfiniteScroll(pageInfo, "products_container")
   const handleFilter = (selectedFilter: any) => setFilterProduct(selectedFilter)
 
-  const resetFilter = (type: string) => {
-    let resetSearchParam = useRemoveParams(type)
-    Router.replace(`/${lng}/products?${resetSearchParam}`)
-  }
+  const resetFilter = () => Router.replace(`/${lng}/products`)
+
 
   const handleShowFilter = () => {
-    if (showFilter) resetFilter("filter")
     setShowFilter(!showFilter)
     setShowSort(false)
   }
 
   const handleShowSort = () => {
-    if (showSort) resetFilter("sort")
     setShowSort(!showSort)
     setShowFilter(false)
   }
@@ -213,14 +209,26 @@ const ProductsComponent: FC<iProps> = ({
           ${props.item === "tree" && "position-relative"}
         `}>
           {withFilterSort &&
-            <div className={styles.productsComponent_action}>
-              <button className={styles.productsComponent_actionItem} onClick={handleShowFilter}>
-                {i18n.t("product.filter")}
-              </button>
-              <button className={`${styles.productsComponent_actionItem}`} onClick={handleShowSort}>
-                {i18n.t("product.sort")}
-              </button>
-            </div>
+            <>
+              <div className={styles.productsComponent_action}>
+                <button className={styles.productsComponent_actionItem} onClick={handleShowFilter}>
+                  {i18n.t("product.filter")}
+                </button>
+                <button className={`${styles.productsComponent_actionItem}`} onClick={handleShowSort}>
+                  {i18n.t("product.sort")}
+                </button>
+              </div>
+              <div className={styles.productsComponent_showResetContainer}>
+                <p className={styles.productsComponent_show}>
+                  {i18n.t("product.show")}
+                  {" "}{pageInfo.totalItems}{" "}
+                  {i18n.t("product.result")}
+                </p>
+                <button className={`${styles.productsComponent_reset}`} onClick={resetFilter}>
+                  {i18n.t("product.reset")}
+                </button>
+              </div>
+            </>
           }
           {withTitle &&
             <div className={`${styles.productsComponent_titleContainer} ${withTitle.type}`}>
@@ -280,7 +288,7 @@ const ProductsComponent: FC<iProps> = ({
               title={i18n.t("product.filter")}
               openSide={showFilter}
               toogleSide={handleShowFilter}
-              positionSide="left"
+              positionSide={size.width < 765 ? 'left' : 'right'}
             >
               <ProductFilterComponent
                 lng={lng}
@@ -297,7 +305,7 @@ const ProductsComponent: FC<iProps> = ({
               title={i18n.t("product.sort")}
               openSide={showSort}
               toogleSide={handleShowSort}
-              positionSide="left"
+              positionSide={size.width < 765 ? 'left' : 'right'}
             >
               <ProductSort
                 classes={classesProductSort}
