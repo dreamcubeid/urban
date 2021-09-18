@@ -16,6 +16,7 @@ const classesNewsletter = {
 }
 
 const Newsletters: FC<any> = ({ i18n }) => {
+
   return (
     <div className={styles.newsletter_popupContainer}>
       <Newsletter

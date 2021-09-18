@@ -8,6 +8,10 @@ import { useBrand } from 'lib/useBrand'
 /* component */
 import Layout from 'components/Layout/Layout'
 import ProductsComponent from 'components/Products/ProductsComponent'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+
+/* styles */
+import styleProducts from 'public/scss/pages/Products.module.scss'
 
 /* locales */
 import locales from 'locales'
@@ -17,7 +21,8 @@ const ProductsPage: FC<any> = ({
   lngDict,
   brand
 }) => {
-  const i18n: any = useI18n();
+  const i18n: any = useI18n()
+  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("product.products")]
 
   return (
     <Layout
@@ -29,6 +34,10 @@ const ProductsPage: FC<any> = ({
       withBack={false}
       titleSeo={i18n.t("product.title")}
     >
+      <section className={styleProducts.products_breadcumb}>
+        <Breadcrumb title={i18n.t("product.all")} links={linksBreadcrumb} lng={lng} />
+      </section>
+
       <LazyLoadComponent>
         <ProductsComponent
           i18n={i18n}

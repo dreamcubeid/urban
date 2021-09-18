@@ -35,3 +35,15 @@
   color: $color_black;
 
 }
+
+.placeholderList
+{
+  width: 100%;
+  height: 30px;
+  margin: 8px 0;
+
+  &:nth-child(even)
+  {
+    width: 70%;
+  }
+}

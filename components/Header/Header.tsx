@@ -1,14 +1,8 @@
 /* Library Package */
-import { FC } from 'react'
-import {
-  Logo,
-  useI18n,
-  useCart
-} from '@sirclo/nexus'
+import { FC, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
-
 import {
   RiShoppingBag2Line,
   RiUser3Line,
@@ -18,6 +12,11 @@ import {
   RiSubtractFill,
   RiCloseFill
 } from 'react-icons/ri'
+import {
+  Logo,
+  useI18n,
+  useCart
+} from '@sirclo/nexus'
 
 /* Library Template */
 import useWindowSize from 'lib/useWindowSize'
@@ -26,9 +25,11 @@ import useWindowSize from 'lib/useWindowSize'
 import Announcement from './Announcement'
 import SocialMedia from './SocialMedia'
 import Placeholder from 'components/Placeholder'
+import Search from './Search'
 
 /* Styles */
 import styles from 'public/scss/components/Header.module.scss'
+import styleSearch from 'public/scss/components/Search.module.scss'
 
 const CollapsibleNav = dynamic(() => import("@sirclo/nexus").then((mod) => mod.CollapsibleNav))
 const PrivateComponent = dynamic(() => import("@sirclo/nexus").then((mod) => mod.PrivateComponent))
@@ -38,7 +39,8 @@ const classesPlaceholderLogo = {
 }
 
 const classesPlaceholderCollapsibleNav = {
-  placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_header__navMobile}`
+  placeholderImage: styles.placeholder,
+  placeholderList: styles.placeholderList,
 }
 
 const classesCollapsibleNav = {
@@ -66,10 +68,25 @@ const Header: FC<THeader> = ({
 
   const i18n: any = useI18n()
   const size: any = useWindowSize()
+  const [showSearch, setShowSearch] = useState(false)
   const { data: dataCart } = useCart()
 
-  const handleMobileToggle = () => {
-    setMobileState(!mobileState)
+  const handleMobileToggle = () => setMobileState(!mobileState)
+  const handleOnSearch = () => {
+    setShowSearch(!showSearch)
+    setMobileState(false)
+  }
+  const searchClasses = {
+    searchContainer: styleSearch.searchContainer,
+    searchInputContainer: styleSearch.searchInputContainer,
+    searchInput: styleSearch.searchInput,
+    searchClear: styleSearch.searchClear,
+    searchButton: styleSearch.searchButton,
+    searchForm: styleSearch.searchForm,
+    title: styleSearch.title,
+    iconClose: styleSearch.iconClose,
+    animateShow: styleSearch.animateShow,
+    animateHide: styleSearch.animateHide,
   }
 
   return (
@@ -148,7 +165,7 @@ const Header: FC<THeader> = ({
               </Link>
             }
           />
-          <div className={styles.shortcuts_item}>
+          <div className={styles.shortcuts_item} onClick={handleOnSearch}>
             <RiSearchLine />
             <span className={styles.shortcuts_label}>
               {i18n.t("header.search")}
@@ -162,13 +179,9 @@ const Header: FC<THeader> = ({
             dropdownOpenIcon={<RiSubtractFill />}
             classes={classesCollapsibleNav}
             loadingComponent={
-              <>
-                <Placeholder
-                  classes={classesPlaceholderCollapsibleNav}
-                  withList={true}
-                  listMany={4}
-                />
-              </>
+              [0, 1, 2].map((_, i) => (
+                <Placeholder key={i} classes={classesPlaceholderCollapsibleNav} withList />
+              ))
             }
           />
         </div>
@@ -178,7 +191,12 @@ const Header: FC<THeader> = ({
         </div>
 
       </div>
-
+      <Search
+        lng={lng}
+        classes={searchClasses}
+        showSearch={showSearch}
+        handleOnSearch={handleOnSearch}
+      />
     </>
   )
 }

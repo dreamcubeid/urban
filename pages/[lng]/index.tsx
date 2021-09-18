@@ -41,19 +41,21 @@ const Home: FC<any> = ({
         />
       </div>
 
-      <LazyLoadComponent>
-        <ProductsComponent
-          i18n={i18n}
-          lng={lng}
-          type='grid'
-          tagname='featured'
-          withTitle={{
-            type: 'left',
-            title: i18n.t('home.featuredProducts'),
-            withSeeAll: true
-          }}
-        />
-      </LazyLoadComponent>
+      <div id="featuredProduct">
+        <LazyLoadComponent>
+          <ProductsComponent
+            i18n={i18n}
+            lng={lng}
+            type='grid'
+            tagname='featured'
+            withTitle={{
+              type: 'left',
+              title: i18n.t('home.featuredProducts'),
+              withSeeAll: true
+            }}
+          />
+        </LazyLoadComponent>
+      </div>
 
       <section className="container">
         <LazyLoadComponent>
@@ -61,21 +63,19 @@ const Home: FC<any> = ({
         </LazyLoadComponent>
       </section>
 
-      <div id="featuredProduct">
-        <LazyLoadComponent>
-          <ProductsComponent
-            i18n={i18n}
-            lng={lng}
-            type='grid'
-            tagname='new-arrivals'
-            withTitle={{
-              type: 'left',
-              title: i18n.t('home.arrivalsProducts'),
-              withSeeAll: true
-            }}
-          />
-        </LazyLoadComponent>
-      </div>
+      <LazyLoadComponent>
+        <ProductsComponent
+          i18n={i18n}
+          lng={lng}
+          type='grid'
+          tagname='new-arrivals'
+          withTitle={{
+            type: 'left',
+            title: i18n.t('home.arrivalsProducts'),
+            withSeeAll: true
+          }}
+        />
+      </LazyLoadComponent>
 
       <section className="container">
         <LazyLoadComponent>

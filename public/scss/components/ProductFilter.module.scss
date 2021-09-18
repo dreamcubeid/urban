@@ -1,4 +1,206 @@
-.productFilter
+@import '../utils/_variables.scss';
+
+
+.container
+{
+  @extend .scrollbar_main;
+  @include flex(column, center, flex-start);
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.filters
+{
+  width: calc(100% - 36px);
+
+  & > div:last-child
+  {
+    border-bottom: none;
+    padding-bottom: 64px;
+  }
+}
+
+.filter
 {
 
+  & > div
+  {
+    padding: 26px 0 22px 0;
+    border-top: 1px solid $color_elements_line_darker;
+    
+    &:last-child
+    {
+      border-bottom: none;
+    }
+  }
+}
+
+.filterColorInput
+{
+  appearance: none;
+}
+
+.filterVariant
+{
+  padding: 27px 30px 32px 30px;
+  border-bottom: 1px dashed $color_grey;
+}
+
+.name
+{
+  @include typographyBuilder(700, 18, 24);
+  margin-bottom: 6px;
+}
+
+.filterInput
+{
+  appearance: none;
+}
+
+.option
+{
+  @extend .grid;
+  @include grid-(1);
+  @include gap-y-(16px);
+}
+
+.filterColorPreview
+{
+  @include fixedSize(12px);
+  display: block;
+  border-radius: 100%;
+  margin-right: 12px;
+}
+
+.optionLabel
+{
+  @include flex(row, center, flex-start);
+  @include typographyBuilder(400, 16, 24);
+  position: relative;
+  cursor: pointer;
+
+  &::after
+  {
+    @include fixedSize(15px);
+    @include position(absolute, auto, 8px);
+    content: "";
+    border-radius: 100%;
+    border: 2px solid $color_black;
+  }
+
+  &:hover
+  {
+    &::after
+    {
+      @include transition();
+      @include fixedSize(15px);
+      @include position(absolute, auto, 8px);
+      content: "";
+      border: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 15.5C3.85775 15.5 0.5 12.1423 0.5 8C0.5 3.85775 3.85775 0.5 8 0.5C12.1423 0.5 15.5 3.85775 15.5 8C15.5 12.1423 12.1423 15.5 8 15.5ZM7.25225 11L12.5548 5.69675L11.4943 4.63625L7.25225 8.879L5.1305 6.75725L4.07 7.81775L7.25225 11Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+    }
+  }
+}
+
+.filterActive
+{
+  & [class*="_optionLabel"]
+  {
+    &::after
+    {
+      @include fixedSize(15px);
+      @include position(absolute, auto, 8px);
+      content: "";
+      border: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 15.5C3.85775 15.5 0.5 12.1423 0.5 8C0.5 3.85775 3.85775 0.5 8 0.5C12.1423 0.5 15.5 3.85775 15.5 8C15.5 12.1423 12.1423 15.5 8 15.5ZM7.25225 11L12.5548 5.69675L11.4943 4.63625L7.25225 8.879L5.1305 6.75725L4.07 7.81775L7.25225 11Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+    }
+  }
+}
+
+.filterPrice
+{
+  padding: 0 18px 33px; 
+}
+
+/*slider price*/
+.filterSlider
+{
+  position: relative;
+  width: 100%;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+
+.filterSliderRail
+{
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  border-radius: 7px;
+  background-color: $color_grey;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.filterSliderHandle
+{
+  cursor: pointer;
+  position: absolute;
+  z-index: 2;
+  margin-top: -6px;
+  margin-left: -5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+  background-color: $color_white;
+  border: 2px solid $color_black;
+}
+
+.filterSliderTrack
+{
+  position: absolute;
+  height: 5px;
+  background-color: $color_black;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.filterPriceLabel
+{
+  @extend .grid;
+  @include grid-(2);
+  @include gap-x-(40px);
+}
+
+.filterPriceInput
+{
+  border: 1.5px solid $color_elements_line_darker;
+  border-radius: 3px;
+  width: 100%;
+  padding: 9px 0 9px 10px;
+  outline: none;
+  
+  &:focus
+  {
+    border: 1.5px solid $color_black;
+  }
+}
+
+.placeholder
+{
+  width: 100%;
+  height: 200px;
+}
+
+.placeholderList
+{
+  width: 100%;
+  height: 30px;
+  margin: 8px 0;
+
+  &:nth-child(even)
+  {
+    width: 70%;
+  }
 }

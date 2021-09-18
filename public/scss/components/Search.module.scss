@@ -1,48 +1,106 @@
-@import "./Button.module.scss";
+@import '../utils/_variables.scss';
+@import './Form.module.scss';
 
-.search
+.searchContainer
+{ 
+  @include position(fixed, 0, 0, auto, 300px);
+  @include fixedHeight(164px);
+  @include transition();
+  background-color: $color_white;
+  padding: 24px 42px;
+  border-radius: 2px;
+  margin-top: 0 !important;
+  z-index: 1050;
+  transform: translateY(-100%);
+}
+
+.animateShow
 {
-  &_form {
-    display: flex;
-  }
+  transform: translateY(0);
+}
 
-  &_inputContainer
+.animateHide
+{
+  transform: translateY(-100%);
+}
+
+.title
+{
+  @include ExtraLargeReguler;
+  margin-bottom: 16px;
+}
+
+.iconClose
+{
+  @include position(absolute, auto, 56px, auto, auto);
+  cursor: pointer;
+}
+
+.searchInputContainer
+{
+  @include flex(row, center, flex-start);
+  width: 100%;
+  height: 60px;
+}
+
+.searchInput
+{
+  @include flex(row, center, flex-start);
+  position: relative;
+  width: calc(100% - 76px);
+  margin-right: 16px;
+
+  input
   {
-    position: relative;
+    @extend .form_control;
+    @extend .form_input;
+    padding: 0 22px;
+    margin-bottom: 0;
     width: 100%;
-  }
-
-  &_inputText
-  {
     height: 60px;
-    padding-right: 1.5rem;
-    border-radius: 0.25rem 0 0 0.25rem;
+  }
+}
+
+.searchClear
+{
+  @include position(absolute, auto, 25px);
+  cursor: pointer;
+}
+.searchButton
+{
+  @include fixedHeight(100%);
+  @include buttonVariant($color_white, $color_black, $color_black);
+  @include fixedSize(60px);
+  border-radius: 2px;
+}
+
+@media (max-width: #{$breakpoint_min_sm}) 
+{ 
+  .searchContainer
+  { 
+    @include position(fixed, 0, 0, auto, 0);
   }
 
-  &_buttonClear
+  .searchContainer
   {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(-50%, -50%);
-    background: $color_gray_low;
-    border-radius: 38px;
-    padding: .25rem;
-    line-height: .5;
-    cursor: pointer;
+    padding: 24px 18px;
   }
 
-  &_buttonSearch {
-    @extend 
-      .btn,
-      .btn_primary;
+  .iconClose
+  {
+    @include position(absolute, 30px, 25px, auto, auto);
+    cursor: pointer;
 
-    border-radius: 0 0.25rem 0.25rem 0;
-    font-size: 14px;
-    padding: 1rem;
-
-    &:disabled{
-      background-color: $color_gray_semi_dark !important;
+    svg 
+    {
+      width: 16px;
     }
+  }
+  
+  .searchInput
+  {
+    @include flex(row, center, flex-start);
+    position: relative;
+    width: calc(100% - 76px);
   }
 }
