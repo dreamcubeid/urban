@@ -6,9 +6,7 @@
   @include flex(row, center, flex-end);
   @include typographyBuilder(400, 12, 16);
   @include fixedHeight(40px);
-  position: fixed;
-  top: 24px;
-  right: 24px;
+  @include position(fixed, -300px, 24px);
   z-index: 1049;
   margin: 0;
   padding: 0;
@@ -20,6 +18,8 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+
+  animation: animateDown 2s ease forwards;
 
   &__active
   {
@@ -104,12 +104,28 @@
 {
   .headerAnnouncement
   {
-    top: calc(70px + 24px);
+    top: -300px;
     right: 18px;
+    animation: animateDownMobile 2s ease forwards;
 
     &__down
     {
-      top: calc(50vh + 24px);
+      top: 24px;
     }
   }
+}
+
+
+@keyframes animateDown
+{
+  0%{opacity: 0}
+  70%{ transform: translateY(344px); opacity: .5}
+  100%{ transform: translateY(324px); opacity: 1}
+}
+
+@keyframes animateDownMobile
+{
+  0%{opacity: 0}
+  70%{ transform: translateY(414px); opacity: .5}
+  100%{ transform: translateY(394px); opacity: 1}
 }

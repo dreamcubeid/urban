@@ -1,9 +1,5 @@
 /* library package */
-import {
-  FC,
-  useState,
-  useEffect
-} from 'react'
+import { FC } from 'react'
 import Router from 'next/router'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
@@ -12,25 +8,28 @@ import {
   ProductSort
 } from '@sirclo/nexus'
 
-/* library template */
-import useInfiniteScroll from 'lib/useInfiniteScroll'
-import useQuery from 'lib/useQuery'
-// import useRemoveParams from 'lib/useRemoveParams'
+/* library component */
+import useProducts from './hooks/useProducts'
 
 /* component */
-// import Popup from 'components/Popup/Popup'
 import SideMenu from 'components/SideMenu/SideMenu'
 import Placeholder from 'components/Placeholder'
-// import ProductFilterComponent from 'components/ProductFilter'
-const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComponent'))
-// const ProductCategoryComponent = dynamic(() => import('components/ProductCategoryComponent/ProductCategoryComponent'))
+import ProductFilterComponent from 'components/ProductFilter'
 
+const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComponent'))
+
+/* styles */
 import styles from 'public/scss/components/ProductsComponent.module.scss'
 import stylesSort from 'public/scss/components/ProductSort.module.scss'
 
 const placeholder = {
   placeholderImage: styles.products_placeholder,
   placeholderList: styles.products_placeholderList,
+}
+
+const placeholderSort = {
+  placeholderImage: stylesSort.placeholder,
+  placeholderList: stylesSort.placeholderList,
 }
 
 const classesProducts = {
@@ -70,8 +69,7 @@ type iProps = {
   tagname?: 'featured'
   | 'preorder'
   | 'new-arrivals'
-  type: 'flexNoWrap'
-  | 'grid'
+  type: 'grid'
   | 'column',
   withFilterSort?: boolean
   slug?: string
@@ -98,19 +96,22 @@ const ProductsComponent: FC<iProps> = ({
   ...props
 }) => {
 
-  const categories: string = useQuery('categories')
-  const [showFilter, setShowFilter] = useState<boolean>(false);
-  const [showSort, setShowSort] = useState<boolean>(true);
-  // const [filterProduct, setFilterProduct] = useState({})
-  const [sort, setSort] = useState(null)
-  const [pageInfo, setPageInfo] = useState({
-    pageNumber: 0,
-    itemPerPage: 4,
-    totalItems: null,
-  })
+  const {
+    size,
+    setPageInfo,
+    pageInfo,
+    categories,
+    filterProduct,
+    handleShowFilter,
+    handleShowSort,
+    resetFilter,
+    showFilter,
+    handleFilter,
+    showSort,
+    currPage
+  } = useProducts({ lng, tagname })
 
   const containerClasses = {
-    "flexNoWrap": styles.productsComponent_flexNoWrap,
     "grid": `
       ${styles.productsComponent_grid}
       ${props.item === "tree"
@@ -127,20 +128,6 @@ const ProductsComponent: FC<iProps> = ({
       }
     `,
   }
-
-  const { currPage, setCurrPage } = useInfiniteScroll(pageInfo, "products_container")
-  const handleShowFilter = () => setShowFilter(!showFilter)
-  const handleShowSort = () => setShowSort(!showSort)
-  // const handleFilter = (selectedFilter: any) => {
-  //   setFilterProduct(selectedFilter)
-  //   setShowFilter(false)
-  // }
-  const handleSort = (selectedSort: any) => {
-    setSort(selectedSort)
-    setShowSort(false)
-  }
-
-  // const getSelectedCategory = () => setShowFilter(!showFilter)
 
   let propsProduct: any
   const baseProductsProps = {
@@ -163,11 +150,10 @@ const ProductsComponent: FC<iProps> = ({
         ...baseProductsProps,
         itemPerPage: 12,
         collectionSlug: categories,
-        sort: sort,
-        // filter: filterProduct,
+        filter: filterProduct,
         withSeparatedVariant: true,
         loadingComponent:
-          [0, 1, 2, 3].map((_, i) => (
+          [0, 1, 2, 3, 4, 5, 6].map((_, i) => (
             <div key={i}>
               <Placeholder classes={placeholder} withImage withList />
             </div>
@@ -177,40 +163,14 @@ const ProductsComponent: FC<iProps> = ({
       propsProduct = {
         ...baseProductsProps,
         loadingComponent:
-          [0, 1, 2, 3].map((_, i) => (
+          [0, 1, 2, 3, 4, 5, 6].map((_, i) => (
             <div key={i}>
               <Placeholder classes={placeholder} withImage withList />
             </div>
           ))
       }
     }
-
-  } else if (type === "flexNoWrap") {
-    propsProduct = {
-      ...baseProductsProps,
-      loadingComponent:
-        [0, 1, 2, 3].map((_, i) => (
-          <div key={i} className="ml-2">
-            <Placeholder
-              classes={{
-                placeholderImage: styles.products_placeholderFlexNoWrap,
-                placeholderList: styles.products_placeholderList,
-              }}
-              withImage
-              withList
-            />
-          </div>
-        ))
-    }
   }
-
-  useEffect(() => {
-    setCurrPage(0);
-  }, [categories, tagname])
-
-  // useEffect(() => {
-  //   setCurrPage(0);
-  // }, [filterProduct, categories, tagname])
 
   if (pageInfo.totalItems === 0 && !withEmptyComponent) return <></>
 
@@ -225,19 +185,30 @@ const ProductsComponent: FC<iProps> = ({
         `}
       >
         <div className={`
-          ${styles.productsComponent} ${type === "flexNoWrap" && "p-0"}
           ${pageInfo.totalItems === 0 && "mb-0"}
           ${props.item === "tree" && "position-relative"}
         `}>
           {withFilterSort &&
-            <div className={styles.productsComponent_action}>
-              <button className={styles.productsComponent_actionItem} onClick={handleShowFilter}>
-                {i18n.t("product.filter")}
-              </button>
-              <button className={`${styles.productsComponent_actionItem}`} onClick={handleShowSort}>
-                {i18n.t("product.sort")}
-              </button>
-            </div>
+            <>
+              <div className={styles.productsComponent_action}>
+                <button className={styles.productsComponent_actionItem} onClick={handleShowFilter}>
+                  {i18n.t("product.filter")}
+                </button>
+                <button className={`${styles.productsComponent_actionItem}`} onClick={handleShowSort}>
+                  {i18n.t("product.sort")}
+                </button>
+              </div>
+              <div className={styles.productsComponent_showResetContainer}>
+                <p className={styles.productsComponent_show}>
+                  {i18n.t("product.show")}
+                  {" "}{pageInfo.totalItems}{" "}
+                  {i18n.t("product.result")}
+                </p>
+                <button className={`${styles.productsComponent_reset}`} onClick={resetFilter}>
+                  {i18n.t("product.reset")}
+                </button>
+              </div>
+            </>
           }
           {withTitle &&
             <div className={`${styles.productsComponent_titleContainer} ${withTitle.type}`}>
@@ -290,32 +261,23 @@ const ProductsComponent: FC<iProps> = ({
               }
             </>
           }
-          {/* <Popup
-            title={i18n.t("product.filter")}
-            withCloseButton
-            visibleState={showFilter}
-            setVisibleState={setShowFilter}
-            withButtonLeft={{
-              title: i18n.t("product.reset"),
-              onClick: () => {
-                let resetSearchParam = useRemoveParams("filter")
-                setShowFilter(false)
-                Router.replace(`/${lng}/products?${resetSearchParam}`)
-              }
-            }}
-          >
-            <ProductCategoryComponent
-              i18n={i18n}
-              displayMode="list"
-              getSelectedSlug={getSelectedCategory}
-            />
-            <ProductFilterComponent
-              i18n={i18n}
-              handleFilter={handleFilter}
-              withApply
-            />
-          </Popup>
-          */}
+          {showFilter &&
+            <SideMenu
+              withClose
+              withTitle
+              title={i18n.t("product.filter")}
+              openSide={showFilter}
+              toogleSide={handleShowFilter}
+              positionSide={size.width < 765 ? 'left' : 'right'}
+            >
+              <ProductFilterComponent
+                lng={lng}
+                i18n={i18n}
+                handleFilter={handleFilter}
+                withApply
+              />
+            </SideMenu>
+          }
           {showSort &&
             <SideMenu
               withClose
@@ -323,17 +285,16 @@ const ProductsComponent: FC<iProps> = ({
               title={i18n.t("product.sort")}
               openSide={showSort}
               toogleSide={handleShowSort}
-              positionSide="left"
+              positionSide={size.width < 765 ? 'left' : 'right'}
             >
               <ProductSort
                 classes={classesProductSort}
                 errorComponent={<p>{i18n.t("global.error")}</p>}
-                handleSort={handleSort}
                 loadingComponent={
                   <div className={stylesSort.sort} >
                     {
                       [0, 1, 2, 3].map((_, i) => (
-                        <Placeholder key={i} classes={placeholder} withList />
+                        <Placeholder key={i} classes={placeholderSort} withList />
                       ))
                     }
                   </div>
@@ -341,13 +302,13 @@ const ProductsComponent: FC<iProps> = ({
               />
             </SideMenu>
           }
-
         </div >
       </section >
       {pageInfo.totalItems === 0 && withEmptyComponent &&
         <EmptyComponent
-          logo={<img src="/icon/empty_product.svg" alt="empty_product" />}
+          logo={<div className={styles.products_iconEmpty} />}
           classes={{ emptyContainer: styles.products_emptyContainer }}
+          desc={i18n.t("product.isEmpty")}
         />
       }
     </>

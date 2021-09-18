@@ -67,18 +67,19 @@
     width: 100%;
     height: 50px;
     padding: 0 12px;
-    border-radius: 6px;
+    border-radius: 2px;
     background-color: $color_white;
-    border: 1px solid $color_grey;
-
+    border: 1px solid $color_elements_placeholder;
+    
     @include fontPrimary();
     @include fontSize(14);
     @include lineHeight(18);
-
+    
     &:focus
     {
       outline: 0;
       box-shadow: none;
+      border: 1px solid $color_black;
     }
 
     &::placeholder

@@ -17,11 +17,6 @@ import Newsletter from '../Newsletters';
 
 /* Styles */
 import styles from 'public/scss/components/Layout.module.scss'
-/* library package */
-
-/* component */
-// import Header from "components/Header/Header";
-
 
 type LayoutPropType = {
   lngDict: any

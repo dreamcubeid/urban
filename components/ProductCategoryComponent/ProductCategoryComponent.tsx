@@ -9,7 +9,7 @@ import Placeholder from 'components/Placeholder'
 import styles from 'public/scss/components/ProductCategory.module.scss'
 
 const classesProductCategory = {
-  parentCategoryClassName: styles.productCategory,
+  parentCategoryClassName: styles.productCategory_section,
   categoryItemClassName: styles.productCategory_item,
   categoryValueContainerClassName: styles.productCategory_valueContainer,
   categoryValueClassName: styles.productCategory_link,
@@ -51,9 +51,9 @@ const ProductCategoryComponent: FC<ProductCategoryComponentPropType> = ({
     case 'list':
       classes = {
         ...classesProductCategory,
-        parentCategoryClassName: styles.productCategory__list,
-        imgContainerClassName: "d-none",
-        dropdownIconClassName: styles.productCategory_dropdownIcon,
+        parentCategoryClassName: styles.productCategory_sectionList,
+        categoryItemClassName: styles.productCategory_itemList,
+        categoryNameClassName: styles.productCategory_nameList,
       }
       break
     default:
@@ -61,10 +61,18 @@ const ProductCategoryComponent: FC<ProductCategoryComponentPropType> = ({
   }
 
   return (
-    <div className={styles.productCategory_container}>
+    <div className={
+      displayMode === "normal"
+        ? styles.productCategory_container
+        : styles.productCategory_containerList
+    }>
       {withTitle &&
         <h2>
-          {i18n.t("home.productCategory")}
+          {
+            displayMode === "normal"
+              ? i18n.t("home.productCategory")
+              : i18n.t("categories.categories")
+          }
         </h2>
       }
       <ProductCategory
