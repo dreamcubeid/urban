@@ -8,13 +8,14 @@
 {
   &_popupContainer
   {
-    @include position(fixed, auto, 42px, 42px);
-    @include transition;
+    @include position(fixed, auto, 42px, -600px);
+    @include transition();
     border-radius: 2px;
     z-index: 30;
     width: fit-content;
     height: fit-content;
     max-height: 336px;
+    animation: animateUp 2s ease forwards;
   }
   
   &_popupInner
@@ -73,13 +74,22 @@
     border: none;
     outline: none;
   }
-
+  
   @media (max-width: #{$breakpoint_min_sm})
   {
     &_popupContainer 
     {
-      @include position(fixed, auto, 17px, 42px, 18px);
+      @include position(fixed, auto, 17px, -600px, 18px);
       width: calc(100% - 35px);
+      animation: animateUp 2s ease forwards;
     }
   }
 }
+
+@keyframes animateUp 
+{
+  0%{opacity: 0}
+  70%{ transform: translateY(-662px); opacity: .5}
+  100%{ transform: translateY(-642px); opacity: 1}
+}
+

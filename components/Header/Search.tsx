@@ -1,16 +1,17 @@
 import {
   FC,
-  useState,
-  useEffect,
-  useRef
 } from "react";
 import { useI18n } from "@sirclo/nexus";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import {
-  Search as IconSearch,
-  X as IconX
-} from 'react-feather';
+  RiCloseFill,
+  RiCloseCircleFill,
+  RiSearchLine,
+} from 'react-icons/ri'
 
 export type SearchPropsType = {
+  lng: string
   classes?: {
     searchContainer?: string
     searchInputContainer?: string
@@ -18,19 +19,24 @@ export type SearchPropsType = {
     searchClear?: string
     searchButton?: string
     searchForm?: string
-  };
-  searchProduct: any
-  visibleState: boolean
-};
+    title?: string
+    iconClose?: string
+    animateShow?: string
+    animateHide?: string
+  }
+  showSearch?: boolean
+  handleOnSearch?: () => void
+}
 
 const Search: FC<SearchPropsType> = ({
+  lng,
   classes = {},
-  searchProduct,
-  visibleState
+  showSearch,
+  handleOnSearch
 }) => {
-  const i18n: any = useI18n();
-  const [searchValue, setSearchValue] = useState<string>("");
-  const inputRef = useRef(null)
+  const i18n: any = useI18n()
+  const router = useRouter()
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const {
     searchContainer = "search-searchContainer",
@@ -38,53 +44,54 @@ const Search: FC<SearchPropsType> = ({
     searchInput = "search-searchInput",
     searchClear = "search-searchClear",
     searchButton = "search-searchButton",
-    searchForm = "search-searchForm"
-  } = classes;
+    searchForm = "search-searchForm",
+    title = "search-title",
+    iconClose = "search-iconClose",
+    animateShow = "search-animateShow",
+    animateHide = "search-animateHide",
+  } = classes
 
-  useEffect(() => {
-    if (visibleState) inputRef.current.focus()
-  }, [visibleState])
+  const onSubmit = (data) => router.push(`/${lng}/products?q=${data.productName}`)
+
+  const onClear = () => reset({ productName: "" })
 
   return (
-    <>
-      <div className={searchContainer}>
-        <form
-          className={searchForm}
-          action="#"
-          onSubmit={(e) => {
-            e.preventDefault();
-            searchProduct(searchValue);
-          }}
-        >
-          <div className={searchInputContainer}>
+    <div className={`
+      ${searchContainer}
+      ${showSearch ? animateShow : animateHide}
+    `}>
+      <form className={searchForm} onSubmit={handleSubmit(onSubmit)} >
+        <div className={iconClose} onClick={handleOnSearch}>
+          <RiCloseFill />
+        </div>
+        <h2 className={title}>
+          {i18n.t("header.search")}
+        </h2>
+        <div className={searchInputContainer}>
+          <div className={searchInput}>
             <input
-              type="search"
-              className={searchInput}
+              type="text"
               placeholder={i18n.t("header.searchPlaceholder")}
-              ref={inputRef}
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
+              {...register("productName", { required: true })}
             />
-            {searchValue !== "" &&
+            {!errors.productName &&
               <div
                 className={searchClear}
-                onClick={() => setSearchValue("")}
-              >
-                <IconX />
+                onClick={onClear}>
+                <RiCloseCircleFill color="#D0D0D0" />
               </div>
             }
           </div>
           <button
             type="submit"
             className={searchButton}
-            disabled={!searchValue}
-            onClick={() => searchProduct(searchValue)}
+            disabled={errors.productName}
           >
-            <IconSearch color="#FFF" />
+            <RiSearchLine />
           </button>
-        </form>
-      </div>
-    </>
+        </div>
+      </form>
+    </div>
   )
 }
 

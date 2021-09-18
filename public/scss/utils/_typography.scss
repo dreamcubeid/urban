@@ -105,3 +105,9 @@ $headings: (
 {
     @include typography_builder($font_weight, $font_size, $line_height);
 }
+
+
+@mixin ExtraLargeReguler
+{
+    @include typographyBuilder(400, 25, 40);
+}
