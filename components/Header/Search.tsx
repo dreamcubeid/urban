@@ -2,13 +2,17 @@ import {
   FC,
 } from "react";
 import { useI18n } from "@sirclo/nexus";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import {
   RiCloseFill,
   RiCloseCircleFill,
   RiSearchLine,
 } from 'react-icons/ri'
+
+type Inputs = {
+  productName: string
+}
 
 export type SearchPropsType = {
   lng: string
@@ -36,7 +40,7 @@ const Search: FC<SearchPropsType> = ({
 }) => {
   const i18n: any = useI18n()
   const router = useRouter()
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>()
 
   const {
     searchContainer = "search-searchContainer",
@@ -51,7 +55,7 @@ const Search: FC<SearchPropsType> = ({
     animateHide = "search-animateHide",
   } = classes
 
-  const onSubmit = (data) => router.push(`/${lng}/products?q=${data.productName}`)
+  const onSubmit: SubmitHandler<Inputs> = (data) => router.push(`/${lng}/products?q=${data.productName}`)
 
   const onClear = () => reset({ productName: "" })
 
@@ -85,7 +89,7 @@ const Search: FC<SearchPropsType> = ({
           <button
             type="submit"
             className={searchButton}
-            disabled={errors.productName}
+            disabled={!!errors.productName}
           >
             <RiSearchLine />
           </button>
