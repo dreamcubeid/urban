@@ -45,7 +45,10 @@ const locale = {
     "quickview": "Show Quickview",
     "rating": "Rating",
     "ratingReviewTitle": "Rating & Review",
+    "recomendation": "Recomendation Product",
     "related": "Related Products",
+    "reset": "Reset",
+    "result": "Hasil",
     "review": "Review",
     "reviewer": "Name",
     "reviewsPerPage": "Reviews per page",
@@ -53,6 +56,7 @@ const locale = {
     "seeAll": "See All",
     "share": "Share",
     "shareProduct": "Share Product",
+    "show": "Show",
     "sort": "Sort",
     "successAddToCart": "Item has successfully add to cart",
     "summary": "Summary",
@@ -65,10 +69,7 @@ const locale = {
     "weight": "Weight",
     "whatsapp": "Whatsapp",
     "writeReview": "Write Review",
-    "yourReview": "Your Review",
-    "show": "Show",
-    "result": "Hasil",
-    "reset": "Reset",
+    "yourReview": "Your Review"
   }
 }
 

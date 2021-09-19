@@ -45,7 +45,10 @@ const locale = {
     "quickview": "Tampilkan Sekilas",
     "rating": "Penilaian",
     "ratingReviewTitle": "Penilaian & Ulasan",
-    "related": "Produk yang berkaitan",
+    "recomendation": "Produk Rekomendasi",
+    "related": "Produk Terkait",
+    "reset": "Bersihkan",
+    "result": "Hasil",
     "review": "Ulasan",
     "reviewer": "Nama",
     "reviewsPerPage": "Ulasan per halaman",
@@ -53,6 +56,7 @@ const locale = {
     "seeAll": "Lihat Semua",
     "share": "Bagikan",
     "shareProduct": "Bagikan Produk",
+    "show": "Menampilan",
     "sort": "Urutkan",
     "successAddToCart": "Barang sudah berhasil masuk keranjang",
     "summary": "Ringkasan",
@@ -65,10 +69,7 @@ const locale = {
     "weight": "Berat",
     "whatsapp": "Whatsapp",
     "writeReview": "Tulis Ulasan",
-    "yourReview": "Ulasan Anda",
-    "show": "Menampilan",
-    "result": "Hasil",
-    "reset": "Bersihkan",
+    "yourReview": "Ulasan Anda"
   }
 }
 

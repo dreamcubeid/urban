@@ -1,3 +1,4 @@
+/* library package */
 import {
   FC,
   useState,
@@ -7,20 +8,6 @@ import { LazyLoadComponent } from "react-lazy-load-image-component";
 import { toast } from "react-toastify";
 import dynamic from "next/dynamic";
 import Router from "next/router";
-import {
-  useI18n,
-  ProductDetail,
-  ProductReviews,
-  getProductDetail,
-  Products,
-  isProductRecommendationAllowed
-} from "@sirclo/nexus";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import Placeholder from "components/Placeholder";
-import { GRAPHQL_URI } from "components/Constants";
-import useWindowSize from "lib/useWindowSize";
-import { useBrand } from "lib/useBrand";
 import {
   ChevronLeft,
   ChevronRight,
@@ -32,17 +19,35 @@ import {
   Bell,
   X as XIcon
 } from "react-feather";
+import {
+  useI18n,
+  ProductDetail,
+  ProductReviews,
+  getProductDetail
+} from "@sirclo/nexus";
+
+/* locales */
+import locale from 'locales'
+
+/* library component */
+import useWindowSize from "lib/useWindowSize";
+import { useBrand } from "lib/useBrand";
+
+/* components */
+import SEO from "components/SEO";
+import Layout from "components/Layout/Layout";
+import Placeholder from "components/Placeholder";
+import { GRAPHQL_URI } from "components/Constants";
+
+/* style */
 import styles from "public/scss/pages/ProductDetail.module.scss";
 import stylesEstimate from "public/scss/components/EstimateShipping.module.scss";
+import ProductRecomendation from "components/ProductRecomendation"
 
-const EmptyComponent = dynamic(
-  () => import("components/EmptyComponent/EmptyComponent")
-);
+const EmptyComponent = dynamic(() => import("components/EmptyComponent/EmptyComponent"));
 const Popup = dynamic(() => import("components/Popup/Popup"));
 const PopupCart = dynamic(() => import("components/Popup/PopupCart"));
 const SocialShare = dynamic(() => import("components/SocialShare"));
-/* locales */
-import locale from "locales";
 
 
 const classesProductDetail = {
@@ -144,24 +149,6 @@ const classesProductReview = {
   reviewPopupButtonCloseClassName: styles.ratingReview_popupButtonClose
 }
 
-const classesProductRelate = {
-  productContainerClassName: ` mb-0 products_list ${styles.product} ${styles.productdetail_relatedProductItem}`,
-  stickerContainerClassName: styles.product_sticker,
-  outOfStockLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__outofstock}`,
-  saleLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__sale}`,
-  comingSoonLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__comingsoon}`,
-  openOrderLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__openorder}`,
-  preOrderLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__preorder}`,
-  newLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__new}`,
-  productImageContainerClassName: styles.product_link,
-  productImageClassName: styles.product_link__image,
-  productLabelContainerClassName: styles.product_label,
-  productTitleClassName: styles.product_label__title,
-  productPriceClassName: styles.product_labelPrice,
-  salePriceClassName: styles.product_labelPrice__sale,
-  priceClassName: styles.product_labelPrice__price,
-}
-
 const classesPaginationProductReview = {
   pagingClassName: styles.pagination,
   activeClassName: styles.pagination_active,
@@ -178,10 +165,6 @@ const classesPlaceholderProduct = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__cardDetail}`,
   placeholderTitle: `${styles.placeholderItem} ${styles.placeholderItem_product__title}`,
   placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_product__list}`,
-};
-
-const classesPlaceholderRelateProduct = {
-  placeholderImage: `${styles.placeholderItem} ${styles.productdetail_relatedProductItem}`,
 }
 
 const Product: FC<any> = ({
@@ -203,14 +186,12 @@ const Product: FC<any> = ({
   const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false);
   const [showModalErrorNotify, setShowModalErrorNotify] = useState<boolean>(false);
   const [totalAllReviews, setTotalAllReviews] = useState(null);
-  const [totalItems, setTotalItems] = useState(null);
 
   useEffect(() => {
     if (showCart) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "unset";
   }, [showCart]);
 
-  const allowedProductRecommendation = isProductRecommendationAllowed();
   const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart);
   const tooglePopup = () => setShowPopup(!showPopup);
   const toogleCart = () => setShowCart(!showCart);
@@ -486,53 +467,13 @@ const Product: FC<any> = ({
           </div>
         </div>
       }
-      {allowedProductRecommendation && (totalItems > 0 || totalItems === null) &&
-        <div className="container">
-          <div className="row">
-            <div className="col-12 col-lg-8 offset-lg-2">
-              <div className={styles.productdetail_relatedProductHeader}>
-                <h6 className={styles.productdetail_relatedProductTitle}>{i18n.t("product.related")}</h6>
-              </div>
-              <div className={styles.productdetail_relatedProduct}>
-                <LazyLoadComponent>
-                  <Products
-                    filter={{ openOrderScheduled: false, published: true }}
-                    classes={classesProductRelate}
-                    slug={slug}
-                    getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
-                    itemPerPage={4}
-                    isButton
-                    fullPath={`product/{id}`}
-                    pathPrefix={`product`}
-                    lazyLoadedImage={false}
-                    loadingComponent={
-                      <>
-                        <Placeholder
-                          classes={classesPlaceholderRelateProduct}
-                          withImage
-                        />
-                        <Placeholder
-                          classes={classesPlaceholderRelateProduct}
-                          withImage
-                        />
-                        <Placeholder
-                          classes={classesPlaceholderRelateProduct}
-                          withImage
-                        />
-                      </>
-                    }
-                    thumborSetting={{
-                      width: size.width < 768 ? 350 : 600,
-                      format: "webp",
-                      quality: 85
-                    }}
-                  />
-                </LazyLoadComponent>
-              </div>
-            </div>
-          </div>
-        </div>
-      }
+      <LazyLoadComponent>
+        <ProductRecomendation
+          type="upsell"
+          slug={slug}
+          title={i18n.t("product.recomendation")}
+        />
+      </LazyLoadComponent>
     </Layout>
   );
 };

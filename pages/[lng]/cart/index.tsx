@@ -8,19 +8,18 @@ import dynamic from 'next/dynamic'
 import {
   X as XIcon,
   Trash,
-  ArrowLeftCircle,
   ChevronDown,
   ChevronUp,
-  ArrowRightCircle
 } from 'react-feather'
 import { toast } from 'react-toastify'
 import {
   CartDetails,
   OrderSummary,
-  isProductRecommendationAllowed,
-  Products,
   useI18n
 } from '@sirclo/nexus'
+
+/* locales */
+import locale from 'locales'
 
 /* library template */
 import { useBrand } from 'lib/useBrand'
@@ -30,14 +29,13 @@ import useWindowSize from 'lib/useWindowSize'
 import Layout from 'components/Layout/Layout'
 import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 import Placeholder from 'components/Placeholder'
+import ProductRecomendation from 'components/ProductRecomendation'
 
 const Popup = dynamic(() => import('components/Popup/Popup'))
 
+/* styles */
 import styles from 'public/scss/pages/Cart.module.scss'
 import stylesOrderSummary from 'public/scss/components/OrderSummaryV2.module.scss'
-
-/* locales */
-import locale from "locales";
 
 
 const classesCartDetails = {
@@ -61,24 +59,6 @@ const classesCartDetails = {
   cartFooterClassName: `${styles.cart_cartFooter} ${styles.sirclo_form_row} w-100`,
   cartFooterTitleClassName: styles.cartFooter_title,
   cartFooterTextareaClassName: `form-control ${styles.sirclo_form_input} ${styles.cartFooter_input} py-2`,
-}
-
-const classesCrosselProducts = {
-  productContainerClassName: `col-6 mb-0 products_list ${styles.product}`,
-  stickerContainerClassName: styles.product_sticker,
-  outOfStockLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__outofstock}`,
-  saleLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__sale}`,
-  comingSoonLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__comingsoon}`,
-  openOrderLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__openorder}`,
-  preOrderLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__preorder}`,
-  newLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__new}`,
-  productImageContainerClassName: styles.product_link,
-  productImageClassName: styles.product_link__image,
-  productLabelContainerClassName: styles.product_label,
-  productTitleClassName: styles.product_label__title,
-  productPriceClassName: styles.product_labelPrice,
-  salePriceClassName: styles.product_labelPrice__sale,
-  priceClassName: styles.product_labelPrice__price,
 }
 
 const classesOrderSummary = {
@@ -125,10 +105,6 @@ const classesOrderSummary = {
   voucherButtonRemoveClassName: styles.ordersummary_voucherAppliedRemove,
 }
 
-const paginationClasses = {
-  pagingClassName: styles.cart_crossSellPaggination,
-  itemClassName: styles.cart_crossSellPagginationItem
-}
 
 const classesEmptyComponent = {
   emptyContainer: styles.cart_empty,
@@ -137,10 +113,6 @@ const classesEmptyComponent = {
 
 const classesPlaceholderOrderSummary = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__orderSummary}`
-}
-
-const classesPlaceholderProduct = {
-  placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__card}`,
 }
 
 const classesPlaceholderCart = {
@@ -155,14 +127,10 @@ const Cart: FC<any> = ({
 
   const i18n: any = useI18n()
   const size: any = useWindowSize()
-  const allowedProductRecommendation = isProductRecommendationAllowed()
 
   const [SKUs, setSKUs] = useState<Array<string>>(null)
   const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
   const [invalidMsg, setInvalidMsg] = useState<string>('')
-  const [pageInfo, setPageInfo] = useState({
-    itemPerPage: null,
-  })
 
   const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart);
 
@@ -232,48 +200,6 @@ const Cart: FC<any> = ({
               />
             }
           />
-          {allowedProductRecommendation && pageInfo.itemPerPage !== 10 && SKUs !== null &&
-            <div className={`row ${styles.cart_crossSell}`}>
-              <div className={`col-12 ${styles.cart_crossSellHeader}`}>
-                <h6 className={styles.cart_crossSellTitle}>{i18n.t("product.related")}</h6>
-              </div>
-              <LazyLoadComponent>
-                <Products
-                  SKUs={SKUs}
-                  classes={classesCrosselProducts}
-                  paginationClasses={paginationClasses}
-                  getCrossSellPageInfo={setPageInfo as any}
-                  itemPerPage={2}
-                  pathPrefix="product"
-                  lazyLoadedImage={false}
-                  newPagination
-                  buttonPrev={<ArrowLeftCircle />}
-                  buttonNext={<ArrowRightCircle />}
-                  loadingComponent={
-                    <>
-                      <div className="col-6">
-                        <Placeholder
-                          classes={classesPlaceholderProduct}
-                          withImage={true}
-                        />
-                      </div>
-                      <div className="col-6">
-                        <Placeholder
-                          classes={classesPlaceholderProduct}
-                          withImage={true}
-                        />
-                      </div>
-                    </>
-                  }
-                  thumborSetting={{
-                    width: size.width < 768 ? 350 : 600,
-                    format: "webp",
-                    quality: 85
-                  }}
-                />
-              </LazyLoadComponent>
-            </div>
-          }
           <OrderSummary
             classes={classesOrderSummary}
             currency="IDR"
@@ -307,6 +233,14 @@ const Cart: FC<any> = ({
           />
         </div>
       </section>
+
+      <LazyLoadComponent>
+        <ProductRecomendation
+          type="crossSell"
+          SKUs={SKUs}
+          title={i18n.t("product.recomendation")}
+        />
+      </LazyLoadComponent>
       {showModalErrorAddToCart &&
         <Popup
           withHeader
