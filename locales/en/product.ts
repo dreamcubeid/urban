@@ -69,7 +69,10 @@ const locale = {
     "weight": "Weight",
     "whatsapp": "Whatsapp",
     "writeReview": "Write Review",
-    "yourReview": "Your Review"
+    "yourReview": "Your Review",
+    "show": "Show",
+    "result": "Hasil",
+    "reset": "Reset",
   }
 }
 
