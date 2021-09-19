@@ -153,7 +153,7 @@ const ProductsComponent: FC<iProps> = ({
         filter: filterProduct,
         withSeparatedVariant: true,
         loadingComponent:
-          [0, 1, 2, 3, 4, 5, 6].map((_, i) => (
+          [0, 1, 2, 3, 4, 5, 6, 7].map((_, i) => (
             <div key={i}>
               <Placeholder classes={placeholder} withImage withList />
             </div>
@@ -163,7 +163,7 @@ const ProductsComponent: FC<iProps> = ({
       propsProduct = {
         ...baseProductsProps,
         loadingComponent:
-          [0, 1, 2, 3, 4, 5, 6].map((_, i) => (
+          [0, 1, 2, 3].map((_, i) => (
             <div key={i}>
               <Placeholder classes={placeholder} withImage withList />
             </div>
