@@ -10,7 +10,8 @@ const locale = {
     "upLevelPrompt": "Tinggal {MINIMUM_ORDER} transaksi pembelian untuk mencapai {NEXT_LEVEL}",
     "usePoints": "Gunakan Poin Anda",
     "warning": "Anda tidak bisa mendapatkan poin dari transaksi pembelian dengan menggunakan poin",
-    "yourPoints": "Poin Anda"
+    "yourPoints": "Poin Anda",
+    "getPointsMember": "Anda akan mendapatkan {POINTS} Poin untuk transaksi ini",
   }
 }
 

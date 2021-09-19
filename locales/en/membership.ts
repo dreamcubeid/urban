@@ -10,7 +10,8 @@ const locale = {
     "upLevelPrompt": "Make {MINIMUM_ORDER} transaction(s) left to reach {NEXT_LEVEL}",
     "usePoints": "Use Point",
     "warning": "You will not earn Points from transactions made with points",
-    "yourPoints": "Your Point"
+    "yourPoints": "Your Point",
+    "getPointsMember": "You will get {POINTS} Point for this transaction",
   }
 }
 

@@ -1,200 +1,192 @@
 @import '../utils/_variables.scss';
 @import './Buttons.module.scss';
 
-.orderSummary
+.header
 {
-  &Icon
+  @include flex(column, center, center);
+  margin: 16px 0 0;
+}
+
+.voucherButton
+{
+  @include flex(row, center, flex-start);
+  position: relative;
+  border: 1px solid rgba(233, 233, 233, 1);
+  margin-bottom: 12px;
+  border-radius: 3px;
+  height: 60px;
+  width: 100%;
+  cursor: pointer;
+  background: $color_white !important;
+
+  &::after
   {
+    @include flex(row, center, center);
     content: "";
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-
-  &_header
-  {
-    @include flex(column, center, center);
-    margin: 16px 0 0;
-  }
-
-  &_voucherButton
-  {
-    @include flex(row, center, flex-start);
-    position: relative;
-    border: 1px solid rgba(233, 233, 233, 1);
-    margin-bottom: 12px;
-    border-radius: 3px;
-    height: 60px;
-    width: 100%;
-    cursor: pointer;
-    background: $color_white !important;
-
-    &::after
-    {
-      @include flex(row, center, center);
-      @extend .orderSummaryIcon;
-      content: "";
-      width: 15px;
-      height: 15px;
-      position: absolute;
-      right: 0;
-      background-size: 10px auto;
-      margin-right: 10px;
-      background-image: url("data:image/svg+xml,%3Csvg width='9' height='14' viewBox='0 0 9 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.60803 13L7.60803 7L1.60803 1' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");    
-    }
-  }
-
-  &_pointsButton
-  {
-    @extend .orderSummary_voucherButton;
-    position: relative;
-    margin-bottom: 12px;
-  }
-
-  &_voucherText,
-  &_pointsText
-  {
-    @include typographyBuilder(400, 14, 18);
-    margin-left: 16px;
-  }
-
-  &_customVoucherIcon
-  {
-    @include flex(row, center, center);
-    @extend .orderSummaryIcon;
-    margin-left: 10px;
-    width: 20px;
-    height: 20px;
-    background-size: 20px auto;
-    background-image: url("data:image/svg+xml,%3Csvg width='21' height='20' viewBox='0 0 21 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0)'%3E%3Cpath d='M15.1667 5.70314C14.8417 5.37807 14.6515 4.9423 14.6339 4.48299C14.6164 4.02368 14.7729 3.57468 15.0722 3.22579C15.0969 3.19678 15.1098 3.15948 15.1082 3.12137C15.1066 3.08327 15.0907 3.04717 15.0636 3.02032L13.3397 1.29454C13.3113 1.26606 13.2726 1.25006 13.2323 1.25006C13.192 1.25006 13.1534 1.26606 13.1249 1.29454L10.3772 4.0422C10.2759 4.14355 10.1995 4.26713 10.1542 4.40314V4.40314C10.1091 4.53946 10.0328 4.66339 9.93142 4.76509C9.83006 4.8668 9.70638 4.94349 9.57021 4.98907V4.98907C9.43412 5.03442 9.31042 5.11078 9.20889 5.21212L2.1624 12.257C2.13392 12.2855 2.11792 12.3242 2.11792 12.3645C2.11792 12.4048 2.13392 12.4434 2.1624 12.4719L3.88623 14.1957C3.91308 14.2228 3.94917 14.2387 3.98728 14.2403C4.02538 14.2419 4.06268 14.2291 4.0917 14.2043C4.44051 13.9047 4.88961 13.748 5.34908 13.7654C5.80855 13.7828 6.24448 13.9732 6.56961 14.2983C6.89474 14.6234 7.08506 15.0593 7.10248 15.5188C7.11991 15.9783 6.96314 16.4274 6.66357 16.7762C6.63882 16.8052 6.62596 16.8425 6.62755 16.8806C6.62914 16.9187 6.64508 16.9548 6.67217 16.9817L8.396 18.7055C8.42449 18.734 8.46313 18.75 8.50342 18.75C8.54371 18.75 8.58234 18.734 8.61084 18.7055L15.6577 11.659C15.7591 11.5575 15.8354 11.4338 15.8808 11.2977V11.2977C15.9259 11.1614 16.0022 11.0374 16.1035 10.9357C16.2049 10.834 16.3286 10.7573 16.4647 10.7117V10.7117C16.6008 10.6664 16.7243 10.5901 16.8257 10.4887L19.5733 7.74103C19.6018 7.71253 19.6178 7.67389 19.6178 7.63361C19.6178 7.59332 19.6018 7.55468 19.5733 7.52618L17.8495 5.80236C17.8227 5.77527 17.7866 5.75933 17.7485 5.75774C17.7104 5.75614 17.6731 5.76901 17.644 5.79376C17.2956 6.09352 16.8469 6.25071 16.3876 6.23391C15.9283 6.2171 15.4923 6.02755 15.1667 5.70314V5.70314Z' stroke='%23F2A241' stroke-width='1.5' stroke-miterlimit='10'/%3E%3Cpath d='M16.0269 10.8598L15.382 10.2148M10.6531 5.48593L10.0082 4.841L10.6531 5.48593ZM12.3726 7.20546L11.9426 6.77577L12.3726 7.20546ZM14.0922 8.92538L13.6625 8.4953L14.0922 8.92538Z' stroke='%23F2A241' stroke-width='1.5' stroke-miterlimit='10' stroke-linecap='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0'%3E%3Crect width='20' height='20' fill='white' transform='translate(0.86792)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
-  }
-  
-  &_pointIcon
-  {
-    @include flex();
-    @extend .orderSummaryIcon;
-    margin-left: 10px;
-    width: 20px;
-    height: 20px;
-    background-size: 20px auto;
-    background-image: url("data:image/svg+xml,%3Csvg width='21' height='20' viewBox='0 0 21 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.5586 10C17.5586 5.85938 14.1992 2.5 10.0586 2.5C5.91797 2.5 2.55859 5.85938 2.55859 10C2.55859 14.1406 5.91797 17.5 10.0586 17.5C14.1992 17.5 17.5586 14.1406 17.5586 10Z' stroke='%23F2A241' stroke-miterlimit='10'/%3E%3Cpath d='M10.0586 14.0625C9.93314 14.0624 9.81065 14.0245 9.70701 13.9539C8.17186 12.9117 7.50702 12.1961 7.14061 11.7504C6.35936 10.7984 5.98515 9.82069 5.99608 8.7621C6.00819 7.54882 6.98124 6.56171 8.16522 6.56171C8.96209 6.56171 9.5324 6.97694 9.88787 7.35897C9.90978 7.38214 9.93618 7.4006 9.96546 7.41321C9.99475 7.42583 10.0263 7.43233 10.0582 7.43233C10.0901 7.43233 10.1216 7.42583 10.1509 7.41321C10.1802 7.4006 10.2066 7.38214 10.2285 7.35897C10.5844 6.97694 11.1543 6.56171 11.9511 6.56171C13.1351 6.56171 14.1082 7.54882 14.1203 8.7621C14.1312 9.82069 13.7566 10.7984 12.9758 11.7504C12.6093 12.1973 11.9445 12.9117 10.4094 13.9539C10.3059 14.0244 10.1837 14.0622 10.0586 14.0625Z' fill='%23F2A241'/%3E%3C/svg%3E%0A");  }
-
-  &_subTotal
-  {
-    @include typographyBuilder(600, 16, 24);
-    @include flex(row, center, space-between);
-    border: 1px solid rgba(254, 238, 222, 1);
-    border-top: 1px solid rgba(245, 235, 225, 1);
-    border-bottom: none;
-    padding: 16px;
-  }
-  
-  &_continueShopping
-  {
-    display: none;
-  }
-  
-  &_footer
-  {
-    border: 1px solid rgba(254, 238, 222, 1);
-    border-top: none;
-    border-radius: 0 0 3px 3px;
-    padding: 0 16px 16px 16px;
-    width: 100%;
-  }
-
-  &_submitButton
-  {
-    @extend .btn;
-    @extend .btn_animated;
-    @extend .btn_primary;
-    outline: none;
-    border: none;
-    width: 100%;
-    border-radius: 3px;
-    height: 46px;
-  }
-
-  &_voucherButtonApplied
-  {
-    @extend .orderSummary_voucherButton;
-    position: relative;
-
-    &::after
-    {
-      background-image: none;    
-    }
-  }
-
-  &_voucherRemoveIcon
-  {
-    @include flex(row, center, center);
-    @extend .orderSummaryIcon;
+    width: 15px;
+    height: 15px;
     position: absolute;
-    top: 18px;
-    right: 16px;
-    width: 20px;
-    height: 20px;
-    background-size: 20px auto;
-    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18.75 6.81984L17.1802 5.25L12 10.4302L6.81984 5.25L5.25 6.81984L10.4302 12L5.25 17.1802L6.81984 18.75L12 13.5698L17.1802 18.75L18.75 17.1802L13.5698 12L18.75 6.81984Z' fill='%23FA3C3C' fill-opacity='0.9'/%3E%3C/svg%3E%0A");
+    right: 0;
+    background-size: 10px auto;
+    margin-right: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg width='9' height='14' viewBox='0 0 9 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.60803 13L7.60803 7L1.60803 1' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");    
   }
+}
 
-  &_voucherAppliedText
+.pointEarnedBanner
+{
+  @include SmallSmall;
+  background-color: $color_elements;
+  border-radius: 2px;
+  padding: 8px 12px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.pointsButton
+{
+  @extend .voucherButton;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.voucherText,
+.pointsText
+{
+  @include typographyBuilder(400, 14, 18);
+  margin-left: 16px;
+}
+
+.customVoucherIcon
+{
+  @include flex(row, center, center);
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+  background-size: 20px auto;
+  background-image: url("data:image/svg+xml,%3Csvg width='21' height='20' viewBox='0 0 21 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0)'%3E%3Cpath d='M15.1667 5.70314C14.8417 5.37807 14.6515 4.9423 14.6339 4.48299C14.6164 4.02368 14.7729 3.57468 15.0722 3.22579C15.0969 3.19678 15.1098 3.15948 15.1082 3.12137C15.1066 3.08327 15.0907 3.04717 15.0636 3.02032L13.3397 1.29454C13.3113 1.26606 13.2726 1.25006 13.2323 1.25006C13.192 1.25006 13.1534 1.26606 13.1249 1.29454L10.3772 4.0422C10.2759 4.14355 10.1995 4.26713 10.1542 4.40314V4.40314C10.1091 4.53946 10.0328 4.66339 9.93142 4.76509C9.83006 4.8668 9.70638 4.94349 9.57021 4.98907V4.98907C9.43412 5.03442 9.31042 5.11078 9.20889 5.21212L2.1624 12.257C2.13392 12.2855 2.11792 12.3242 2.11792 12.3645C2.11792 12.4048 2.13392 12.4434 2.1624 12.4719L3.88623 14.1957C3.91308 14.2228 3.94917 14.2387 3.98728 14.2403C4.02538 14.2419 4.06268 14.2291 4.0917 14.2043C4.44051 13.9047 4.88961 13.748 5.34908 13.7654C5.80855 13.7828 6.24448 13.9732 6.56961 14.2983C6.89474 14.6234 7.08506 15.0593 7.10248 15.5188C7.11991 15.9783 6.96314 16.4274 6.66357 16.7762C6.63882 16.8052 6.62596 16.8425 6.62755 16.8806C6.62914 16.9187 6.64508 16.9548 6.67217 16.9817L8.396 18.7055C8.42449 18.734 8.46313 18.75 8.50342 18.75C8.54371 18.75 8.58234 18.734 8.61084 18.7055L15.6577 11.659C15.7591 11.5575 15.8354 11.4338 15.8808 11.2977V11.2977C15.9259 11.1614 16.0022 11.0374 16.1035 10.9357C16.2049 10.834 16.3286 10.7573 16.4647 10.7117V10.7117C16.6008 10.6664 16.7243 10.5901 16.8257 10.4887L19.5733 7.74103C19.6018 7.71253 19.6178 7.67389 19.6178 7.63361C19.6178 7.59332 19.6018 7.55468 19.5733 7.52618L17.8495 5.80236C17.8227 5.77527 17.7866 5.75933 17.7485 5.75774C17.7104 5.75614 17.6731 5.76901 17.644 5.79376C17.2956 6.09352 16.8469 6.25071 16.3876 6.23391C15.9283 6.2171 15.4923 6.02755 15.1667 5.70314V5.70314Z' stroke='%23F2A241' stroke-width='1.5' stroke-miterlimit='10'/%3E%3Cpath d='M16.0269 10.8598L15.382 10.2148M10.6531 5.48593L10.0082 4.841L10.6531 5.48593ZM12.3726 7.20546L11.9426 6.77577L12.3726 7.20546ZM14.0922 8.92538L13.6625 8.4953L14.0922 8.92538Z' stroke='%23F2A241' stroke-width='1.5' stroke-miterlimit='10' stroke-linecap='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0'%3E%3Crect width='20' height='20' fill='white' transform='translate(0.86792)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+}
+
+.pointIcon
+{
+  @include flex();
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+  background-size: 20px auto;
+  background-image: url("data:image/svg+xml,%3Csvg width='21' height='20' viewBox='0 0 21 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.5586 10C17.5586 5.85938 14.1992 2.5 10.0586 2.5C5.91797 2.5 2.55859 5.85938 2.55859 10C2.55859 14.1406 5.91797 17.5 10.0586 17.5C14.1992 17.5 17.5586 14.1406 17.5586 10Z' stroke='%23F2A241' stroke-miterlimit='10'/%3E%3Cpath d='M10.0586 14.0625C9.93314 14.0624 9.81065 14.0245 9.70701 13.9539C8.17186 12.9117 7.50702 12.1961 7.14061 11.7504C6.35936 10.7984 5.98515 9.82069 5.99608 8.7621C6.00819 7.54882 6.98124 6.56171 8.16522 6.56171C8.96209 6.56171 9.5324 6.97694 9.88787 7.35897C9.90978 7.38214 9.93618 7.4006 9.96546 7.41321C9.99475 7.42583 10.0263 7.43233 10.0582 7.43233C10.0901 7.43233 10.1216 7.42583 10.1509 7.41321C10.1802 7.4006 10.2066 7.38214 10.2285 7.35897C10.5844 6.97694 11.1543 6.56171 11.9511 6.56171C13.1351 6.56171 14.1082 7.54882 14.1203 8.7621C14.1312 9.82069 13.7566 10.7984 12.9758 11.7504C12.6093 12.1973 11.9445 12.9117 10.4094 13.9539C10.3059 14.0244 10.1837 14.0622 10.0586 14.0625Z' fill='%23F2A241'/%3E%3C/svg%3E%0A");  }
+
+.subTotal
+{
+  @include typographyBuilder(600, 16, 24);
+  @include flex(row, center, space-between);
+  border: 1px solid rgba(254, 238, 222, 1);
+  border-top: 1px solid rgba(245, 235, 225, 1);
+  border-bottom: none;
+  padding: 16px;
+}
+
+.continueShopping
+{
+  display: none;
+}
+
+.footer
+{
+  border: 1px solid rgba(254, 238, 222, 1);
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+  padding: 0 16px 16px 16px;
+  width: 100%;
+}
+
+.submitButton
+{
+  @extend .btn;
+  @extend .btn_animated;
+  @extend .btn_primary;
+  outline: none;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  height: 46px;
+}
+
+.voucherButtonApplied
+{
+  @extend .voucherButton;
+  position: relative;
+
+  &::after
   {
-    @extend .orderSummary_voucherText;
-    color: $color_orange;
-    max-width: 60%;
-    @include truncate(1);
+    background-image: none;    
   }
+}
+
+.voucherRemoveIcon
+{
+  @include flex(row, center, center);
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  width: 20px;
+  height: 20px;
+  background-size: 20px auto;
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18.75 6.81984L17.1802 5.25L12 10.4302L6.81984 5.25L5.25 6.81984L10.4302 12L5.25 17.1802L6.81984 18.75L12 13.5698L17.1802 18.75L18.75 17.1802L13.5698 12L18.75 6.81984Z' fill='%23FA3C3C' fill-opacity='0.9'/%3E%3C/svg%3E%0A");
+}
+
+.voucherAppliedText
+{
+  @extend .voucherText;
+  color: $color_orange;
+  max-width: 60%;
+  @include truncate(1);
 }
 
 
 @media screen and (max-width: #{$breakpoint_max_md}) 
 {
-  .orderSummary
+  .subTotal
   {
-    &_subTotal
-    {
-      @include flex(column, flex-start, center);
-      position: fixed;
-      height: 78px;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
-      box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.05);
-      background-color: $color_white;
-      border-radius: none;
-      border-top: none;
-    }
+    @include flex(column, flex-start, center);
+    position: fixed;
+    height: 78px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.05);
+    background-color: $color_white;
+    border-radius: none;
+    border-top: none;
+  }
 
-    &_header
-    {
-      margin-bottom: 3.5rem;
-    }
-  
-    &_subTotalText,
-    &_subTotalPrice
-    {
-      width: 50%;
-    }
+  .header
+  {
+    margin-bottom: 3.5rem;
+  }
 
-    &_subTotalText
-    {
-      @include typographyBuilder(400, 14, 24);
-    }
-     
-    &_footer
-    {
-      @include flex(row, center, flex-end);
-      position: fixed;
-      height: 78px;
-      padding: 0;
-      bottom: 0;
-      right: 16px;
-      border: none;
-      z-index: 11;
-      width: 40%;
-    }
+  .subTotalText,
+  .subTotalPrice
+  {
+    width: 50%;
+  }
+
+  .subTotalText
+  {
+    @include typographyBuilder(400, 14, 24);
+  }
+    
+  .footer
+  {
+    @include flex(row, center, flex-end);
+    position: fixed;
+    height: 78px;
+    padding: 0;
+    bottom: 0;
+    right: 16px;
+    border: none;
+    z-index: 11;
+    width: 40%;
   }
 }

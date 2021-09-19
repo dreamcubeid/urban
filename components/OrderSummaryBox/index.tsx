@@ -15,31 +15,33 @@ import stylesCartDetails from 'public/scss/components/CartDetails.module.scss'
 // import stylesPopup from 'public/scss/components/PopUpVoucherCoupon.module.scss'
 
 const classesOrderSummary = {
-  containerClassName: styles.orderSummary,
-  headerClassName: styles.orderSummary_header,
-  subTotalClassName: styles.orderSummary_subTotal,
-  subTotalTextClassName: styles.orderSummary_subTotalText,
-  subTotalPriceClassName: styles.orderSummary_subTotalPrice,
-  footerClassName: styles.orderSummary_footer,
-  continueShoppingClassName: styles.orderSummary_continueShopping,
-  submitButtonClassName: styles.orderSummary_submitButton,
+  containerClassName: styles.container,
+  headerClassName: styles.header,
+  subTotalClassName: styles.subTotal,
+  subTotalTextClassName: styles.subTotalText,
+  subTotalPriceClassName: styles.subTotalPrice,
+  footerClassName: styles.footer,
+  continueShoppingClassName: styles.continueShopping,
+  pointEarnedBannerClassName: styles.pointEarnedBanner,
+  submitButtonClassName: styles.submitButton,
   expandButtonClassName: stylesPriceBreakdown.expandButton,
   expandedDivClassName: stylesPriceBreakdown.expandedDiv,
 
   /* applied coupon and point */
-  voucherTextClassName: styles.orderSummary_voucherText,
-  voucherButtonAppliedClassName: styles.orderSummary_voucherButtonApplied,
-  voucherButtonClassName: styles.orderSummary_voucherButton,
-  voucherAppliedTextClassName: styles.orderSummary_voucherAppliedText,
-  voucherAppliedIconClassName: styles.orderSummary_voucherAppliedIcon,
-  voucherButtonRemoveClassName: styles.orderSummary_voucherButtonRemove,
-  voucherIconClassName: styles.orderSummary_voucherIcon,
-  pointsTextClassName: styles.orderSummary_pointsText,
-  pointsButtonClassName: styles.orderSummary_pointsButton,
-  pointsButtonAppliedClassName: styles.orderSummary_voucherButtonApplied,
-  pointsIconClassName: styles.orderSummary_pointsIcon,
-  pointsAppliedTextClassName: styles.orderSummary_voucherAppliedText,
+  voucherTextClassName: styles.voucherText,
+  voucherButtonAppliedClassName: styles.voucherButtonApplied,
+  voucherButtonClassName: styles.voucherButton,
+  voucherAppliedTextClassName: styles.voucherAppliedText,
+  voucherAppliedIconClassName: styles.voucherAppliedIcon,
+  voucherButtonRemoveClassName: styles.voucherButtonRemove,
+  voucherIconClassName: styles.voucherIcon,
+  pointsTextClassName: styles.pointsText,
+  pointsButtonClassName: styles.pointsButton,
+  pointsButtonAppliedClassName: styles.voucherButtonApplied,
+  pointsIconClassName: styles.pointsIcon,
+  pointsAppliedTextClassName: styles.voucherAppliedText,
 
+  //TODO: POP UP VOCHER POINT
   // /* Pop Up */
   // popupClassName: stylesPopup.popup,
   // closeButtonClassName: stylesPopup.closeButton,
@@ -67,9 +69,6 @@ const classesOrderSummary = {
   // pointValueClassName: stylesPopup.pointValue,
   // pointLabelClassName: stylesPopup.pointLabel,
   // numberOfPointsClassName: stylesPopup.numberOfPoints,
-
-  /* hidden */
-  pointEarnedBannerClassName: "d-none",
 }
 
 const classesCartDetails = {
@@ -110,17 +109,17 @@ const OrderSummaryBox: FC<iProps> = ({
   withCartDetails
 }) => {
 
-  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
-  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
+  // const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
+  // const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
 
   const icons = {
     expand: <span className={stylesPriceBreakdown.customChevronDownIcon}></span>,
     collapse: <span className={stylesPriceBreakdown.customChevronUpIcon}></span>,
-    voucher: <span className={styles.orderSummary_customVoucherIcon}></span>,
-    voucherApplied: <span className={styles.orderSummary_customVoucherIcon}></span>,
-    voucherRemoved: <span className={styles.orderSummary_voucherRemoveIcon}></span>,
-    points: <span className={styles.orderSummary_pointIcon}></span>,
-    pointsApplied: <span className={styles.orderSummary_pointIcon}></span>,
+    voucher: <span className={styles.customVoucherIcon}></span>,
+    voucherApplied: <span className={styles.customVoucherIcon}></span>,
+    voucherRemoved: <span className={styles.voucherRemoveIcon}></span>,
+    points: <span className={styles.pointIcon}></span>,
+    pointsApplied: <span className={styles.pointIcon}></span>,
     close: <Icon.RiCloseFill />
   }
 
@@ -135,7 +134,8 @@ const OrderSummaryBox: FC<iProps> = ({
 
   return (
     <>
-      {withCartDetails &&
+      {/* //TODO: CART DETAILS */}
+      {/* {withCartDetails &&
         <section className={stylesCartDetails.section}>
           <h2 className={stylesCartDetails.Title}>{i18n.t("orderSummary.yourCart")}</h2>
           <CartDetails
@@ -164,7 +164,7 @@ const OrderSummaryBox: FC<iProps> = ({
             }
           />
         </section>
-      }
+      } */}
       <OrderSummary
         isAccordion
         classes={classesOrderSummary}

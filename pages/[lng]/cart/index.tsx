@@ -3,7 +3,7 @@ import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import { parseCookies } from 'lib/parseCookies'
-import Router from 'next/router'
+// import Router from 'next/router'
 import dynamic from 'next/dynamic'
 import { Trash } from 'react-feather'
 import {
@@ -115,7 +115,7 @@ const Cart: FC<any> = ({
             <OrderSummaryBox
               lng={lng}
               i18n={i18n}
-              page="cart"
+              page="place_order"
             />
           </div>
         </div>
