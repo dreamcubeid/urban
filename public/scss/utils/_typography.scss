@@ -107,7 +107,61 @@ $headings: (
 }
 
 
+
+/* design system typhography */
+@mixin h1
+{
+  @include typographyBuilder(700, 40, 56);
+}
+
+@mixin h2
+{
+  @include typographyBuilder(700, 32, 48);
+}
+
+@mixin h3
+{
+  @include typographyBuilder(700, 28, 40);
+}
+
+
 @mixin ExtraLargeReguler
 {
     @include typographyBuilder(400, 25, 40);
 }
+
+@mixin LargeReguler
+{
+    @include typographyBuilder(400, 20, 24);
+}
+
+@mixin LargeSemiBold
+{
+    @include typographyBuilder(500, 20, 24);
+}
+
+@mixin RegulerReguler
+{
+    @include typographyBuilder(400, 16, 24);
+}
+
+@mixin RegulerSemiBold
+{
+    @include typographyBuilder(500, 16, 24);
+}
+
+@mixin SmallSmall
+{
+    @include typographyBuilder(400, 12, 16);
+}
+
+@mixin SmallSemiBold
+{
+    @include typographyBuilder(500, 12, 16);
+}
+
+@mixin ExtraSmallSemiBold
+{
+    @include typographyBuilder(500, 10, 16);
+}
+

@@ -5,16 +5,9 @@ import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import { parseCookies } from 'lib/parseCookies'
 import Router from 'next/router'
 import dynamic from 'next/dynamic'
-import {
-  X as XIcon,
-  Trash,
-  ChevronDown,
-  ChevronUp,
-} from 'react-feather'
-import { toast } from 'react-toastify'
+import { Trash } from 'react-feather'
 import {
   CartDetails,
-  OrderSummary,
   useI18n
 } from '@sirclo/nexus'
 
@@ -27,15 +20,14 @@ import useWindowSize from 'lib/useWindowSize'
 
 /* components */
 import Layout from 'components/Layout/Layout'
-import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
-import Placeholder from 'components/Placeholder'
 import ProductRecomendation from 'components/ProductRecomendation'
+import OrderSummaryBox from 'components/OrderSummaryBox'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 
 const Popup = dynamic(() => import('components/Popup/Popup'))
 
 /* styles */
 import styles from 'public/scss/pages/Cart.module.scss'
-import stylesOrderSummary from 'public/scss/components/OrderSummaryV2.module.scss'
 
 
 const classesCartDetails = {
@@ -61,64 +53,6 @@ const classesCartDetails = {
   cartFooterTextareaClassName: `form-control ${styles.sirclo_form_input} ${styles.cartFooter_input} py-2`,
 }
 
-const classesOrderSummary = {
-  containerClassName: stylesOrderSummary.container,
-  headerClassName: stylesOrderSummary.header,
-  voucherButtonClassName: stylesOrderSummary.voucherButton,
-  voucherIconClassName: stylesOrderSummary.voucherIcon,
-  voucherTextClassName: stylesOrderSummary.voucherText,
-  pointsButtonClassName: stylesOrderSummary.pointsButton,
-  pointsIconClassName: stylesOrderSummary.pointsIcon,
-  pointsTextClassName: stylesOrderSummary.pointsText,
-  subTotalClassName: stylesOrderSummary.subTotal,
-  subTotalTextClassName: stylesOrderSummary.subTotalText,
-  subTotalPriceClassName: stylesOrderSummary.subTotalPrice,
-  footerClassName: stylesOrderSummary.footer,
-  submitButtonClassName: stylesOrderSummary.submitButton,
-  continueShoppingClassName: stylesOrderSummary.continueShopping,
-
-  //Popup
-  popupClassName: styles.ordersummary_overlay,
-  numberOfPointsClassName: styles.ordersummary_popupPoints,
-  labelClassName: styles.ordersummary_popupPointsLabel,
-  valueClassName: styles.ordersummary_popupPointsValue,
-  closeButtonClassName: styles.ordersummary_popupClose,
-  voucherContainerClassName: `${styles.ordersummary_popupVoucherContainer} ${styles.ordersummary_popup}`,
-  voucherFormContainerClassName: `${styles.ordersummary_voucherFormContainer} ${styles.ordersummary_popupFormContainer}`,
-  voucherFormClassName: `${styles.ordersummary_voucherForm} ${styles.sirclo_form_row}`,
-  voucherInputClassName: `form-control ${styles.sirclo_form_input} ${styles.ordersummary_popupFormInput}`,
-  voucherSubmitButtonClassName: `btn ${styles.btn_primary} ${styles.ordersummary_popupFormButton}`,
-  voucherListClassName: styles.ordersummary_popupVoucher,
-  voucherListHeaderClassName: styles.ordersummary_popupVoucherTitle,
-  voucherClassName: styles.ordersummary_popupVoucherItem,
-  voucherDetailClassName: styles.ordersummary_popupVoucherDetail,
-  voucherFooterClassName: styles.ordersummary_popupVoucherFooter,
-  voucherApplyButtonClassName: `btn ${styles.btn_primary}`,
-  pointsContainerClassName: styles.ordersummary_popup,
-  expandedDivClassName: styles.ordersummary_expanded,
-  expandedLabelClassName: styles.ordersummary_expandedLabel,
-  expandedPriceClassName: styles.ordersummary_expandedPrice,
-  expandButtonClassName: styles.ordersummary_expandedButton,
-  voucherButtonAppliedClassName: styles.ordersummary_voucherAppliedButton,
-  voucherAppliedIconClassName: styles.ordersummary_voucherAppliedIcon,
-  voucherAppliedTextClassName: styles.ordersummary_voucherAppliedText,
-  voucherButtonRemoveClassName: styles.ordersummary_voucherAppliedRemove,
-}
-
-
-const classesEmptyComponent = {
-  emptyContainer: styles.cart_empty,
-  emptyTitle: styles.cart_emptyTitle
-}
-
-const classesPlaceholderOrderSummary = {
-  placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__orderSummary}`
-}
-
-const classesPlaceholderCart = {
-  placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__cart}`
-}
-
 const Cart: FC<any> = ({
   lng,
   lngDict,
@@ -133,6 +67,7 @@ const Cart: FC<any> = ({
   const [invalidMsg, setInvalidMsg] = useState<string>('')
 
   const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart);
+  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("product.products")]
 
   return (
     <Layout
@@ -145,6 +80,9 @@ const Cart: FC<any> = ({
       withFooter={false}
       customClassName={`${styles.cart_layout} ${styles.main__noNavbar}`}
     >
+      <section className={styles.products_breadcumb}>
+        <Breadcrumb title={i18n.t("product.all")} links={linksBreadcrumb} lng={lng} />
+      </section>
       {invalidMsg !== "" &&
         <div className={styles.cartError}>
           <div className={styles.cartError_inner}>
@@ -152,85 +90,34 @@ const Cart: FC<any> = ({
           </div>
         </div>
       }
-      <section className={styles.cart}>
-        <div className={styles.cart_container}>
-          <h3>{i18n.t("cart.title")}</h3>
-          <CartDetails
-            getSKU={(SKUs: any) => setSKUs(SKUs)}
-            classes={classesCartDetails}
-            itemRedirectPathPrefix="product"
-            isEditable={true}
-            removeIcon={<Trash />}
-            onErrorMsg={() => setShowModalErrorAddToCart(true)}
-            onInvalidMsg={(msg) => setInvalidMsg(msg)}
-            thumborSetting={{
-              width: size.width < 768 ? 200 : 400,
-              format: "webp",
-              quality: 85,
-            }}
-            loadingComponent={
-              <div className="row">
-                <div className="col-4 pr-0">
-                  <Placeholder classes={classesPlaceholderCart} withImage />
-                </div>
-                <div className="col-8">
-                  <Placeholder classes={classesPlaceholderCart} withImage />
-                </div>
-                <div className="col-4 pr-0">
-                  <Placeholder classes={classesPlaceholderCart} withImage />
-                </div>
-                <div className="col-8">
-                  <Placeholder classes={classesPlaceholderCart} withImage />
-                </div>
-              </div>
-            }
-            emptyCartPlaceHolder={
-              <EmptyComponent
-                classes={classesEmptyComponent}
-                title={i18n.t("cart.isEmpty")}
-                button={
-                  <button
-                    className={`${styles.btn} ${styles.btn_primary} ${styles.btn_long} my-1`}
-                    onClick={() => Router.push(
-                      "/[lng]/products",
-                      `/${lng}/products`
-                    )}
-                  >{i18n.t("cart.shopNow")}</button>
-                }
-              />
-            }
-          />
-          <OrderSummary
-            classes={classesOrderSummary}
-            currency="IDR"
-            submitButtonLabel={i18n.t("orderSummary.placeOrder")}
-            continueShoppingLabel={i18n.t("orderSummary.viewCart")}
-            page={"cart"}
-            continueShoppingRoute="cart"
-            isAccordion={true}
-            onErrorMsg={() => setShowModalErrorAddToCart(true)}
-            onErrorMsgCoupon={(msg) => toast.error(msg)}
-            icons={{
-              voucher: <img src="/images/mdi_ticket-percent-black.svg" alt="icon" />,
-              voucherApplied: <img src="/images/mdi_ticket-percent.svg" alt="icon" />,
-              points: <img src="/images/mdi_star-circle.svg" alt="icon" />,
-              pointsApplied: <img src="/images/mdi_star-circle.svg" alt="icon" />,
-              close: <XIcon />,
-              collapse: <ChevronUp />,
-              expand: <ChevronDown />,
-              voucherRemoved: <XIcon />
-            }}
-            loadingComponent={
-              <div className="row m-3 mb-0">
-                <div className="col-6 pl-0">
-                  <Placeholder classes={classesPlaceholderOrderSummary} withImage />
-                </div>
-                <div className="col-6 px-0">
-                  <Placeholder classes={classesPlaceholderOrderSummary} withImage />
-                </div>
-              </div>
-            }
-          />
+      <section className="container">
+        <div className={styles.container}>
+          <div className={styles.cardDetailContiner}>
+            <CartDetails
+              getSKU={(SKUs: any) => setSKUs(SKUs)}
+              classes={classesCartDetails}
+              itemRedirectPathPrefix="product"
+              isEditable={true}
+              removeIcon={<Trash />}
+              onErrorMsg={() => setShowModalErrorAddToCart(true)}
+              onInvalidMsg={(msg) => setInvalidMsg(msg)}
+              thumborSetting={{
+                width: size.width < 768 ? 200 : 400,
+                format: "webp",
+                quality: 85,
+              }}
+              loadingComponent={<>TODO: SKELETON</>}
+              emptyCartPlaceHolder={<>TODO: Empty</>}
+            />
+          </div>
+
+          <div className={styles.orderSummaryContainer}>
+            <OrderSummaryBox
+              lng={lng}
+              i18n={i18n}
+              page="cart"
+            />
+          </div>
         </div>
       </section>
 

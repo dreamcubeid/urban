@@ -13,7 +13,8 @@ const locale = {
     "price": "Harga",
     "quantity": "Kuantitas",
     "shopNow": "Belanja Sekarang",
-    "title": "Keranjang",
+    "title": "Keranjang Anda",
+    "cart": "Keranjang",
     "unknownSKU": "SKU tidak diketahui",
     "unpublishedProduct": "Produk tidak diterbitkan",
     "writeNoteToSeller": "Tulis catatan untuk penjual"
