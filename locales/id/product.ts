@@ -45,7 +45,7 @@ const locale = {
     "quickview": "Tampilkan Sekilas",
     "rating": "Penilaian",
     "ratingReviewTitle": "Penilaian & Ulasan",
-    "recomendation": "Produk Rekomendasi",
+    "recomendation": "Pilihan lainnya untukmu",
     "related": "Produk Terkait",
     "reset": "Bersihkan",
     "result": "Hasil",

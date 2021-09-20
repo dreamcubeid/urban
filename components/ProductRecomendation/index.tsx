@@ -20,8 +20,8 @@ const classesPaggination = {
 export type Iprops = {
   type: "upsell" | "crossSell"
   slug?: string
-  SKUs?: any
-  title: any
+  SKUs?: string | Array<string>
+  title: string
 }
 
 const ProductRecomendation: FC<Iprops> = ({
@@ -57,7 +57,7 @@ const ProductRecomendation: FC<Iprops> = ({
           newPagination
           buttonNext={<Icon.arrowRight />}
           buttonPrev={<Icon.arrowLeft />}
-          fullPath={`product / { id }`}
+          fullPath={`product/{slug}`}
           pathPrefix={`product`}
           thumborSetting={{
             width: size.width < 768 ? 512 : 800,
