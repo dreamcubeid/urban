@@ -56,7 +56,7 @@ const locale = {
     "seeAll": "Lihat Semua",
     "share": "Bagikan",
     "shareProduct": "Bagikan Produk",
-    "show": "Menampilan",
+    "show": "Menampilkan",
     "sort": "Urutkan",
     "successAddToCart": "Barang sudah berhasil masuk keranjang",
     "summary": "Ringkasan",
