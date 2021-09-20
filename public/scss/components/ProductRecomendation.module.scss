@@ -1,0 +1,74 @@
+@import '../utils/_variables.scss';
+@import './Buttons.module.scss';
+
+.container
+{
+  @extend .grid;
+  @include grid-(4);
+  @include gap-x-(24px);
+  @include gap-y-(24px);
+  position: relative;
+  margin-bottom: 64px;
+}
+
+.title
+{
+  @include typographyBuilder(700, 32, 48);
+  margin-bottom: 24px;
+}
+
+.pagination
+{
+  @include flex(row, center, flex);
+  @include position(absolute, -52px, 0);
+  background: transparent;
+}
+
+.paginationItem
+{
+  @extend .btn;
+  @extend .btn_transparent;
+  margin-left: 10px;
+
+  svg
+  {
+    @include fixedSize(24px);
+    margin: 0;
+  }
+
+  &:disabled
+  {
+    border: none;
+  }
+}
+
+@media (max-width: #{$breakpoint_min_sm}) 
+{
+  .container
+  {
+    @include grid-(2);
+  }
+
+  .title
+  {
+    margin-bottom: 58px;
+  }
+
+  .pagination
+  {
+    top: -48px;
+    left: 0;
+    right: auto;
+  }
+
+  .paginationItem
+  {
+    padding: 0;
+    margin-left: 0;
+
+    &:first-child
+    {
+      margin-right: 16px;
+    }
+  }
+}

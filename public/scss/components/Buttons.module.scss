@@ -26,10 +26,10 @@
   &:disabled
   {
     @include buttonVariant($color_grey, $color_white, $color_grey);
+    cursor: not-allowed;
 
     &:hover
     {
-      cursor: default;
       border-color: $color_grey !important;
       color: $color_grey !important;
     }
@@ -46,7 +46,7 @@
 
     & > svg
     {
-      color: $color_blue !important;
+      color: $color_black;
     }
   }
 
@@ -60,6 +60,8 @@
   {
     @extend .btn;
     width: 100%;
+    padding: 0;
+    border: none;
     @include buttonVariant($color_black, transparent, transparent);
   }
 
