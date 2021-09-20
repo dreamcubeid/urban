@@ -113,12 +113,14 @@ const Header: FC<THeader> = ({
         </div>
 
         <div className={`${styles.item} ${styles.mobile_menu}`}>
-          <div className={`${styles.mobile_cart}`}>
-            <RiShoppingBag2Line />
-            <span>
-              {dataCart?.totalItem}
-            </span>
-          </div>
+          <Link href="/[lng]/cart" as={`/${lng}/cart`}>
+            <div className={`${styles.mobile_cart}`}>
+              <RiShoppingBag2Line />
+              <span>
+                {dataCart?.totalItem}
+              </span>
+            </div>
+          </Link>
           <button
             type="button"
             className={`${styles.mobile_toggle} ${mobileState ? styles.mobile_toggle__active : ''}`}
@@ -133,15 +135,17 @@ const Header: FC<THeader> = ({
         </div>
 
         <div className={`${styles.item} ${styles.shortcuts}`}>
-          <div className={`${styles.shortcuts_item} ${styles.shortcuts_item__cart}`}>
-            <RiShoppingBag2Line />
-            <span className={styles.shortcuts_label}>
-              {i18n.t("header.cart")}
-            </span>
-            <span className={styles.shortcuts_badge}>
-              {dataCart?.totalItem}
-            </span>
-          </div>
+          <Link href="/[lng]/cart" as={`/${lng}/cart`}>
+            <div className={`${styles.shortcuts_item} ${styles.shortcuts_item__cart}`}>
+              <RiShoppingBag2Line />
+              <span className={styles.shortcuts_label}>
+                {i18n.t("header.cart")}
+              </span>
+              <span className={styles.shortcuts_badge}>
+                {dataCart?.totalItem}
+              </span>
+            </div>
+          </Link>
 
           <PrivateComponent
             Auth={

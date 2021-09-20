@@ -1,0 +1,110 @@
+@import "../utils/_variables.scss";
+
+.icon
+{
+  content: "";
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.expandButton
+{
+  cursor: pointer;
+  order: 1;
+  height: 32px;
+  position: absolute;
+  margin: 12px 0 0 62px;
+  display: none;
+}
+
+.expandedDiv
+{
+  background: $color_elements_line;
+  border: 1px solid $color_elements_line_darker;
+  padding: 12px 0 0;
+  width: 100%;
+  order: 2;
+  border-bottom: none;
+  border-radius: 3px 3px 0 0;
+  
+  & > div 
+  {
+    @include flex(row, flex-start, space-between);
+    @include SmallSmall;
+    font-size: 14px;
+    padding-bottom: 12px;
+    margin: 0 18px;
+
+    &:last-child
+    {
+      border-bottom: 1px dashed $color_elements_placeholder;
+    }
+  }
+
+  & > div:not(:first-of-type)
+  {
+    [class*="expandedPrice"]
+    {
+      color: $color_black;
+    }
+  }
+  & > div:not(:first-of-type):not(:nth-child(2))
+  {
+    [class*="expandedPrice"]
+    {
+      color: $color_red_other;
+    }
+  }
+}
+
+.customChevronDownIcon
+{
+  @include flex(row, center, center);
+  @extend .icon;
+  width: 20px;
+  height: 20px;
+  background-size: 20px auto;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='7.3' stroke='%23444444' stroke-width='1.4'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.0705 6.43372L5.4048 6.07764C5.42657 6.05443 5.45226 6.03618 5.4804 6.02397C5.50854 6.01176 5.53857 6.00579 5.5688 6.00645C5.59903 6.00708 5.62883 6.01433 5.65655 6.02773C5.68423 6.04114 5.70926 6.06047 5.73024 6.08459L7.79544 8.46114C7.81664 8.48554 7.84207 8.505 7.87016 8.5184C7.89827 8.53179 7.92853 8.53884 7.95913 8.53913C7.98973 8.53943 8.02008 8.53296 8.04839 8.52011C8.07668 8.50726 8.1024 8.48829 8.12402 8.4643L10.2789 6.07479C10.3003 6.0511 10.3256 6.03232 10.3535 6.01948C10.3814 6.00664 10.4113 6.00003 10.4415 6C10.4717 5.99997 10.5016 6.00655 10.5295 6.01932C10.5574 6.0321 10.5827 6.05085 10.6041 6.07447L10.9327 6.43689C10.9757 6.48461 10.9999 6.54931 11 6.61676C11.0001 6.68422 10.9759 6.74895 10.933 6.79677L8.11202 9.92533C8.09039 9.94932 8.06465 9.96828 8.03631 9.9811C8.00796 9.99392 7.97762 10.0003 7.94699 9.99999C7.91639 9.99963 7.88616 9.99251 7.85804 9.97904C7.82996 9.96557 7.80459 9.94602 7.78344 9.92154L5.06422 6.79329C5.04327 6.76922 5.02684 6.74083 5.01584 6.70974C5.00484 6.67865 4.99947 6.64545 5.00004 6.61205C5.00064 6.57866 5.00716 6.54574 5.01924 6.51512C5.03133 6.48454 5.04873 6.45687 5.0705 6.43372Z' fill='%23444444' stroke='%23444444' stroke-width='0.4'/%3E%3C/svg%3E%0A");  
+}
+
+.customChevronUpIcon
+{
+  @include flex(row, center, center);
+  @extend .icon;
+  width: 20px;
+  height: 20px;
+  background-size: 20px auto;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle r='7.3' transform='matrix(1 0 0 -1 8 8)' stroke='%23444444' stroke-width='1.4'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5.0705 9.56628L5.4048 9.92236C5.42657 9.94557 5.45226 9.96382 5.4804 9.97603C5.50854 9.98824 5.53857 9.99421 5.5688 9.99355C5.59903 9.99292 5.62883 9.98567 5.65655 9.97227C5.68423 9.95886 5.70926 9.93953 5.73024 9.91541L7.79544 7.53886C7.81664 7.51446 7.84207 7.495 7.87016 7.4816C7.89827 7.46821 7.92853 7.46116 7.95913 7.46087C7.98973 7.46057 8.02008 7.46704 8.04839 7.47989C8.07668 7.49274 8.1024 7.51171 8.12402 7.5357L10.2789 9.92521C10.3003 9.9489 10.3256 9.96768 10.3535 9.98052C10.3814 9.99336 10.4113 9.99997 10.4415 10C10.4717 10 10.5016 9.99345 10.5295 9.98068C10.5574 9.9679 10.5827 9.94915 10.6041 9.92553L10.9327 9.56311C10.9757 9.51539 10.9999 9.45069 11 9.38324C11.0001 9.31578 10.9759 9.25105 10.933 9.20323L8.11202 6.07467C8.09039 6.05068 8.06465 6.03172 8.03631 6.0189C8.00796 6.00608 7.97762 5.99966 7.94699 6.00001C7.91639 6.00037 7.88616 6.00749 7.85804 6.02096C7.82996 6.03443 7.80459 6.05398 7.78344 6.07846L5.06422 9.20671C5.04327 9.23078 5.02684 9.25917 5.01584 9.29026C5.00484 9.32135 4.99947 9.35455 5.00004 9.38795C5.00064 9.42134 5.00716 9.45426 5.01924 9.48488C5.03133 9.51546 5.04873 9.54313 5.0705 9.56628Z' fill='%23444444' stroke='%23444444' stroke-width='0.4'/%3E%3C/svg%3E%0A");  
+}
+
+@media screen and (max-width: #{$breakpoint_max_md}) 
+{
+  .expandButton
+  {
+    @include flex(row, center, center);
+    @include position(fixed, auto, auto, 25px, 26%);
+    @include fixedSize(32px);
+    border-radius: 2px;
+    background: $color_elements_line;
+    z-index: 20;
+  }
+
+  .expandedDiv
+  {
+    @include typographyBuilder(400, 14, 18);
+    @include position(fixed, auto, 0, 75px, 0);
+    border-top: 1px solid $color_elements_line_darker;
+    border-radius: 2px 2px 0px 0px;
+    z-index: 21;
+    border: none;
+
+    & > div:last-child
+    {
+      margin: 0;
+      padding: 0 18px 12px;
+      border-bottom: 1px dashed $color_elements_line_darker;
+    }
+  }
+}
+

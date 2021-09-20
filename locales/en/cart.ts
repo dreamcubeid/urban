@@ -13,7 +13,8 @@ const locale = {
     "price": "Price",
     "quantity": "Quantity",
     "shopNow": "Shop Now",
-    "title": "Cart",
+    "title": "Your Cart",
+    "cart": "Cart",
     "unknownSKU": "Unknown SKU",
     "unpublishedProduct": "Unpublish Product",
     "writeNoteToSeller": "Write Note To Seller"
