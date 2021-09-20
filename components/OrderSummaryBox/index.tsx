@@ -1,17 +1,17 @@
 /* library package */
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { toast } from 'react-toastify'
-import { OrderSummary, CartDetails } from '@sirclo/nexus'
+import { OrderSummary } from '@sirclo/nexus'
 // import dynamic from 'next/dynamic'
 
 /* component */
-import Placeholder from 'components/Placeholder'
+// import Placeholder from 'components/Placeholder'
 import Icon from '../Icon/Icon'
 
 /* styles */
 import styles from 'public/scss/components/OrderSummary.module.scss'
 import stylesPriceBreakdown from 'public/scss/components/PriceBreakdown.module.scss'
-import stylesCartDetails from 'public/scss/components/CartDetails.module.scss'
+// import stylesCartDetails from 'public/scss/components/CartDetails.module.scss'
 // import stylesPopup from 'public/scss/components/PopUpVoucherCoupon.module.scss'
 
 const classesOrderSummary = {
@@ -71,27 +71,27 @@ const classesOrderSummary = {
   // numberOfPointsClassName: stylesPopup.numberOfPoints,
 }
 
-const classesCartDetails = {
-  className: stylesCartDetails.container,
-  cartHeaderClassName: stylesCartDetails.cartHeader,
-  itemClassName: stylesCartDetails.item,
-  itemImageClassName: stylesCartDetails.itemImage,
-  itemTitleClassName: stylesCartDetails.itemTitle,
-  titleClassName: stylesCartDetails.title,
-  selectedVariantClassName: stylesCartDetails.selectedVariant,
-  itemRegularPriceClassName: stylesCartDetails.itemRegularPrice,
-  itemSalePriceClassName: stylesCartDetails.itemSalePrice,
-  qtyBoxClassName: `${stylesCartDetails.qtyBox} id`,
-  itemRegularAmountClassName: stylesCartDetails.itemRegularAmount,
-  changeQtyButtonClassName: 'd-none',
-  removeButtonClassName: 'd-none',
-  cartFooterClassName: 'd-none',
-}
+// const classesCartDetails = {
+//   className: stylesCartDetails.container,
+//   cartHeaderClassName: stylesCartDetails.cartHeader,
+//   itemClassName: stylesCartDetails.item,
+//   itemImageClassName: stylesCartDetails.itemImage,
+//   itemTitleClassName: stylesCartDetails.itemTitle,
+//   titleClassName: stylesCartDetails.title,
+//   selectedVariantClassName: stylesCartDetails.selectedVariant,
+//   itemRegularPriceClassName: stylesCartDetails.itemRegularPrice,
+//   itemSalePriceClassName: stylesCartDetails.itemSalePrice,
+//   qtyBoxClassName: `${stylesCartDetails.qtyBox} id`,
+//   itemRegularAmountClassName: stylesCartDetails.itemRegularAmount,
+//   changeQtyButtonClassName: 'd-none',
+//   removeButtonClassName: 'd-none',
+//   cartFooterClassName: 'd-none',
+// }
 
-const classesCartPlaceholder = {
-  placeholderList: stylesCartDetails.placeholderList,
-  placeholderImage: stylesCartDetails.placeholderImage,
-}
+// const classesCartPlaceholder = {
+//   placeholderList: stylesCartDetails.placeholderList,
+//   placeholderImage: stylesCartDetails.placeholderImage,
+// }
 
 type iProps = {
   i18n: any
@@ -104,33 +104,33 @@ type iProps = {
 }
 const OrderSummaryBox: FC<iProps> = ({
   i18n,
-  lng,
+  // lng,
   page,
-  withCartDetails
+  // withCartDetails
 }) => {
 
   // const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
   // const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
 
   const icons = {
-    expand: <span className={stylesPriceBreakdown.customChevronDownIcon}></span>,
-    collapse: <span className={stylesPriceBreakdown.customChevronUpIcon}></span>,
-    voucher: <span className={styles.customVoucherIcon}></span>,
-    voucherApplied: <span className={styles.customVoucherIcon}></span>,
-    voucherRemoved: <span className={styles.voucherRemoveIcon}></span>,
-    points: <span className={styles.pointIcon}></span>,
-    pointsApplied: <span className={styles.pointIcon}></span>,
-    close: <Icon.RiCloseFill />
+    expand: <Icon.orderSummary.expand />,
+    collapse: <Icon.orderSummary.collapse />,
+    voucher: <Icon.orderSummary.voucher />,
+    voucherApplied: <Icon.orderSummary.voucherApplied />,
+    voucherRemoved: <Icon.orderSummary.voucherRemoved />,
+    points: <Icon.orderSummary.points />,
+    pointsApplied: <Icon.orderSummary.pointsApplied />,
+    close: <Icon.orderSummary.close />
   }
 
-  const getNewclassesCartDetails = () => {
-    if (lng === "en") return {
-      ...classesCartDetails,
-      qtyBoxClassName: `${stylesCartDetails.qtyBox} en`,
-    }
+  // const getNewclassesCartDetails = () => {
+  //   if (lng === "en") return {
+  //     ...classesCartDetails,
+  //     qtyBoxClassName: `${stylesCartDetails.qtyBox} en`,
+  //   }
 
-    return classesCartDetails
-  }
+  //   return classesCartDetails
+  // }
 
   return (
     <>

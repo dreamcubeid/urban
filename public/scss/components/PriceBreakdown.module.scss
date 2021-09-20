@@ -10,33 +10,36 @@
 
 .expandButton
 {
-  @include flex(row, center, space-between);
-  @include typographyBuilder(600, 12, 15);
-  text-transform: uppercase;
   cursor: pointer;
   order: 1;
   height: 32px;
   position: absolute;
-  margin: 12px 0 0 70px;
+  margin: 12px 0 0 62px;
+  display: none;
 }
 
 .expandedDiv
 {
-  padding: 1rem 1rem 0;
+  background: $color_elements_line;
+  border: 1px solid $color_elements_line_darker;
+  padding: 12px 0 0;
   width: 100%;
-  font-weight: 300;
-  font-size: 13px;
-  line-height: 125%;
   order: 2;
-  border: 1px solid rgba(254, 238, 222, 1);
   border-bottom: none;
   border-radius: 3px 3px 0 0;
   
   & > div 
   {
     @include flex(row, flex-start, space-between);
-    @include typographyBuilder(400, 14, 17);
-    padding-bottom: 12px; 
+    @include SmallSmall;
+    font-size: 14px;
+    padding-bottom: 12px;
+    margin: 0 18px;
+
+    &:last-child
+    {
+      border-bottom: 1px dashed $color_elements_placeholder;
+    }
   }
 
   & > div:not(:first-of-type)
@@ -50,7 +53,7 @@
   {
     [class*="expandedPrice"]
     {
-      color: $color_green;
+      color: $color_red_other;
     }
   }
 }
@@ -79,24 +82,29 @@
 {
   .expandButton
   {
-    position: fixed;
-    bottom: 25px;
+    @include flex(row, center, center);
+    @include position(fixed, auto, auto, 25px, 26%);
+    @include fixedSize(32px);
+    border-radius: 2px;
+    background: $color_elements_line;
     z-index: 20;
-    left: 26%;
   }
 
   .expandedDiv
   {
     @include typographyBuilder(400, 14, 18);
-    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.05);
-    border-radius: 8px 8px 0 0;
-    position: fixed;
-    bottom: 75px;
+    @include position(fixed, auto, 0, 75px, 0);
+    border-top: 1px solid $color_elements_line_darker;
+    border-radius: 2px 2px 0px 0px;
     z-index: 21;
-    left: 0;
-    right: 0;
-    background-color: $color_white;
     border: none;
+
+    & > div:last-child
+    {
+      margin: 0;
+      padding: 0 18px 12px;
+      border-bottom: 1px dashed $color_elements_line_darker;
+    }
   }
 }
 

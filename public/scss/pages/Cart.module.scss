@@ -7,3 +7,11 @@
   grid-template-columns: 65% calc(35% - 24px);
   margin-top: 25px;
 }
+
+@media screen and (max-width: #{$breakpoint_max_md}) 
+{
+  .container
+  {
+    @include grid-(1);
+  }
+}

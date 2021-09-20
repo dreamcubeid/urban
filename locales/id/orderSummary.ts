@@ -3,7 +3,7 @@ const locale = {
     "allEmpty": "Semua kolom tidak boleh kosong",
     "billingEmpty": "Semua kolom di alamat penagihan tidak boleh kosong",
     "discountBundle": "Paket Diskon",
-    "placeOrder": "Buat Pesanan",
+    "placeOrder": "Pesan Sekarang",
     "pointsApplied": "Point digunakan",
     "pointsLeft": "Point tersisa",
     "shipping": "Biaya pengiriman",
