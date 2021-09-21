@@ -134,7 +134,6 @@
 .itemSalePrice
 {
   @include SmallSemiBold;
-  font-size: 14px;
   color: $color_error
 }
 
@@ -172,7 +171,9 @@
 
 .itemRegularAmount
 {
-  @include RegulerSemiBold;
+  @include SmallSemiBold;
+  font-size: 14px;
+  font-size: 1;
 }
 
 .placeholderContainer
