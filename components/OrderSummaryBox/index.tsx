@@ -135,6 +135,8 @@ const OrderSummaryBox: FC<iProps> = ({
     if (lng === "en") return {
       ...classesCartDetails,
       qtyBoxClassName: `${stylesCartDetails.qtyBox} en`,
+      voucherDetailCodeClassName: `${stylesPopup.voucherDetailCode} en`,
+
     }
 
     return classesCartDetails
@@ -142,7 +144,6 @@ const OrderSummaryBox: FC<iProps> = ({
 
   return (
     <>
-      {/* //TODO: CART DETAILS */}
       {withCartDetails &&
         <section className={stylesCartDetails.section}>
           <div className={stylesCartDetails.header}>

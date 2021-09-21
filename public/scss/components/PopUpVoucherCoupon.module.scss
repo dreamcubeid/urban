@@ -25,7 +25,7 @@
 {
   @include transition();
   @include flex(row, center, center);
-  @include position(absolute, 8px, 16px);
+  @include position(absolute, 16px, 16px);
   padding: 0;
   outline: none;
   cursor: pointer;
@@ -53,7 +53,7 @@
   @include fixedWidth(100%);
   height: 60px;
   position: relative;
-  margin: 0;
+  margin: 8px 0 0;
   padding: 0;
 
   &Container
@@ -145,6 +145,11 @@
     position: relative;
     margin: 0;
     padding: 0;
+
+    [class*="_pointsInsufficient"]
+    {
+      padding: 0 !important;
+    }
   }
 }
 
@@ -153,7 +158,8 @@
   @extend .voucherSubmitButton;
   @include flex(row, center, center);
   @include fixedWidth(100%);
-  margin-top: 20px !important;
+  height: 52px !important;
+  margin-top: 24px !important;
 }
 
 .voucherList
@@ -312,8 +318,8 @@
 .voucherSubmitButton
 {
   @include transition();
+  @include RegulerReguler;
   @include flex(row, center, center);
-  @include typographyBuilder(600, 14, 14);
   @extend .btn;
   @extend .btn_primary;
   position: relative;
@@ -339,8 +345,12 @@
 
 .pointValue
 {
-  @include typography_builder(400, 14, 21);
-  margin: 12px 0 10px;
+  @include SmallSmall;
+  @include fixedWidth(100%);
+  @include fixedHeight(40px);
+  margin: 12px 0 24px;
+  padding: 12px;
+  background: $color_elements_line;
 }
 
 .numberOfPoints
@@ -364,15 +374,23 @@
 
 .pointLabel
 {
-  @include typographyBuilder(500, 16, 24);
-  min-height: 36px;
+  @include RegulerSemiBold;
+  margin-top: 16px !important;
+
+  &::before
+  {
+    content: "";
+    @include fixedSize(16px);
+    display: block;
+    margin-right: 10px !important;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M8 15.5C3.85775 15.5 0.5 12.1423 0.5 8C0.5 3.85775 3.85775 0.5 8 0.5C12.1423 0.5 15.5 3.85775 15.5 8C15.5 12.1423 12.1423 15.5 8 15.5ZM6.125 5.75L4.25 7.625L8 11.375L11.75 7.625L9.875 5.75H6.125Z' fill='%232E77D0'/%3E%3C/svg%3E");
+  }
 }
 
 .totalPoints
 {
-  @include typographyBuilder(400, 14, 21);
-
-  [class*="pointIcon"]
+  svg
   {
     display: none;
   }
@@ -382,15 +400,14 @@
 {
   @include transition();
   @include flex(row, center, center);
-  @include fixedSize(47px);
-  box-shadow: 0 0 0 transparent;
-  border: solid 1px $color_black;
-  border-radius: 3px;;
+  @include fixedSize(60px);
+  @extend .btn;
+  @extend .btn_transparent;
   position: relative;
   margin: 0;
   padding: 0;
   cursor: pointer;
-
+  border: none;
   font-size: 0;
   color: rgba($color_white, 0);
 
@@ -401,14 +418,14 @@
 
   &[class*="increment"]
   {
-    background-image: url("data:image/svg+xml,%3Csvg width='13' height='14' viewBox='0 0 13 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.14844 5.84814H0.390625V7.89893H5.14844V13.2896H7.32812V7.89893H12.0859V5.84814H7.32812V0.867676H5.14844V5.84814Z' fill='%23444444'/%3E%3C/svg%3E%0A");
-    order: 3;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M5.25 5.25V0.75H6.75V5.25H11.25V6.75H6.75V11.25H5.25V6.75H0.75V5.25H5.25Z' fill='%23222222'/%3E%3C/svg%3E");
+    grid-column-start: 3;
   }
-
+  
   &[class*="decrement"]
   {
-    background-image: url("data:image/svg+xml,%3Csvg width='7' height='3' viewBox='0 0 7 3' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.847656 2.63721H6.56641V0.867676H0.847656V2.63721Z' fill='%23444444'/%3E%3C/svg%3E%0A");
-    order: 2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='2' viewBox='0 0 12 2' fill='none'%3E%3Cpath d='M0.166656 0.166992H11.8333V1.83366H0.166656V0.166992Z' fill='%23222222'/%3E%3C/svg%3E");    grid-column-start: 1;
+    grid-row-start: 1;
   }
 
   &:hover,
@@ -425,23 +442,26 @@
 {
   &Form
   {
-    @include flex(row, center, space-between);
+    @extend .grid;
     @include fixedWidth(100%);
+    @include gap-x-(12px);
+    grid-template-rows: 60px 161px 60px;
+    grid-template-rows: auto;
 
     input[class*="form-control"]
     {
       @include transition();
       @include flex(row, center, flex-start);
       @include typographyBuilder(400, 16, 16);
-      @include fixedWidth(calc(100% - ((48px + 8px) * 2)));
+      @include fixedWidth(100%);
+      grid-column-start: 2;
       position: relative;
-      height: 48px;
+      height: 60px;
       margin: 0;
       padding: 0 12px;
       box-shadow: 0 0 0 transparent;
       border-radius: 2px;
       border: solid 1px $color_elements_line;
-      order: 1;
   
       &:hover,
       &:focus
@@ -454,6 +474,8 @@
 
   &Insufficient
   {
+    padding: 0;
+
     &,
     & > p
     {
@@ -466,8 +488,8 @@
 
     p
     {
-      @include typographyBuilder(400, 14, 36);
-      color: $color_red;
+      @include ExtraSmallReguler;
+      color: $color_text_secondary;
     }
 
     &:empty
@@ -482,13 +504,13 @@
     & > p
     {
       @include flex(row, center, center);
-      @include typography_builder(400, 11, 11);
+      @include ExtraSmallReguler;
       @include fixedWidth(100%);
       position: relative;
       margin: 10px 0 0;
       padding: 0;
       text-align: center;
-      color: $color_red;
+      color: $color_text_secondary;
     }
   
     p
