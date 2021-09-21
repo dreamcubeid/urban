@@ -67,7 +67,7 @@ const Cart: FC<any> = ({
   const [invalidMsg, setInvalidMsg] = useState<string>('')
 
   const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart);
-  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("product.products")]
+  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("cart.cart")]
 
   return (
     <Layout
@@ -81,7 +81,7 @@ const Cart: FC<any> = ({
       customClassName={`${styles.cart_layout} ${styles.main__noNavbar}`}
     >
       <section className={styles.products_breadcumb}>
-        <Breadcrumb title={i18n.t("product.all")} links={linksBreadcrumb} lng={lng} />
+        <Breadcrumb title={i18n.t("cart.title")} links={linksBreadcrumb} lng={lng} />
       </section>
       {invalidMsg !== "" &&
         <div className={styles.cartError}>

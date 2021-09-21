@@ -3,23 +3,17 @@
 
 .section
 {
-  border: 1px solid rgba(254, 238, 222, 1);
-  padding: 16px 10px 0 16px;
-  border-radius: 4px;
-  margin-top: 30px;
-
-  h2
-  {
-    @include typography_builder(500, 14, 21);
-    margin-bottom: 15px;
-  }
+  border: 1px solid $color_elements_line_darker;
+  padding: 16px;
+  margin: 24px 0 16px 0;
+  background: $color_elements_line;
+  max-height: 228px;
+  overflow: hidden;
 }
 
 .container
 {
-  overflow-y: auto;
   max-height: 300px;
-  @extend .scrollbar_main;
 }
 
 .cartHeader
@@ -27,22 +21,59 @@
   display: none;
 }
 
+.header
+{
+  @include flex(row, center, space-between);
+  margin-bottom: 12px;
+}
+
+.changeCart
+{
+  @include SmallSmall;
+  @include flex(row, center, flex-start);
+  color: $color_blue;
+  cursor: pointer;
+
+  &:hover
+  {
+    opacity: .7;
+  }
+
+  &::before
+  {
+    content: "";
+    @include fixedSize(8px);
+    display: block;
+    margin-right: 9px;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='10' viewBox='0 0 6 10' fill='none'%3E%3Cpath d='M2.21859 5.00048L5.51858 8.30048L4.57592 9.24315L0.333252 5.00048L4.57592 0.757812L5.51858 1.70048L2.21859 5.00048Z' fill='%232E77D0'/%3E%3C/svg%3E");
+  }
+}
+
+.cartBody
+{
+  padding: 8px;
+  background: $color_white;
+  max-height: 168px;
+  overflow-y: auto;
+  @extend .scrollbar_secondary;
+}
+
 .item
 {
   display: grid;
-  grid-template-columns: 100px auto;
+  grid-template-columns: 64px auto;
   column-gap: 16px;
-
-  &:not(:last-child)
-  {
-    margin-bottom: 12px;
-  }
+  padding: 12px 0;
+  border-bottom: 1px solid $color_elements;
+  margin-bottom: 0;
 }
 
 .itemImage
 {
-  width: 100px;
+  width: 64px;
   grid-row:  1 / span 4;
+  border-radius: 2px;
 
   img
   {
@@ -63,26 +94,34 @@
 
 .title
 {
-  @include typography_builder(500, 16, 24);
+  @include SmallSmall;
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+.selectedVariantContainer
+{
+  @include flex(row, center, flex-start);
+  @include SmallSmall;
+  display: inline-block;
+  text-transform: capitalize;
+
+  &::before
+  {
+    content: ",";
+    margin-right: 4px;
+  }
 }
 
 .selectedVariant
 {
-  @include typography_builder(500, 12, 12);
-  border-radius: 2px;
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  height: 18px;
-  padding: 0 6px;
-  background-color: $color_text_secondary;
-  color: $color_white;
-  margin-bottom: 8px;
+  display: inline-block;
 }
 
 .itemRegularPrice
 {
-  @include typography_builder(400, 14, 12);
+  @include SmallSmall;
+  color: $color_text_secondary;
 
   &:not(:only-of-type)
   {
@@ -94,12 +133,14 @@
 
 .itemSalePrice
 {
-  @include typography_builder(400, 14, 12);
+  @include SmallSemiBold;
+  font-size: 14px;
+  color: $color_error
 }
 
 .qtyBox
 {
-  @include typography_builder(400, 14, 12);
+  @include SmallSmall;
   display: flex;
   align-items: center;
 
@@ -131,7 +172,7 @@
 
 .itemRegularAmount
 {
-  @include typography_builder(500, 16, 12);
+  @include RegulerSemiBold;
 }
 
 .placeholderContainer

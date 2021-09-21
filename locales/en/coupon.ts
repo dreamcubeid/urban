@@ -4,7 +4,7 @@ const locale = {
     "couponPlaceholder": "Input your voucher",
     "discount": "Discount",
     "enough": "You can get discount",
-    "header": "Vouchers available",
+    "header": "Choose Vouchers available",
     "max": "Max",
     "minPoints": "Minimal points to redeem is",
     "minPurchase": "With Minimum Purchase",

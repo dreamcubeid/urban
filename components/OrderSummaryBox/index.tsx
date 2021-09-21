@@ -1,18 +1,19 @@
 /* library package */
 import { FC } from 'react'
 import { toast } from 'react-toastify'
-import { OrderSummary } from '@sirclo/nexus'
+import { OrderSummary, CartDetails } from '@sirclo/nexus'
+import Link from 'next/link'
 // import dynamic from 'next/dynamic'
 
 /* component */
-// import Placeholder from 'components/Placeholder'
+import Placeholder from 'components/Placeholder'
 import Icon from '../Icon/Icon'
 
 /* styles */
 import styles from 'public/scss/components/OrderSummary.module.scss'
+import stylesCartDetails from 'public/scss/components/CartDetails.module.scss'
 import stylesPriceBreakdown from 'public/scss/components/PriceBreakdown.module.scss'
-// import stylesCartDetails from 'public/scss/components/CartDetails.module.scss'
-// import stylesPopup from 'public/scss/components/PopUpVoucherCoupon.module.scss'
+import stylesPopup from 'public/scss/components/PopUpVoucherCoupon.module.scss'
 
 const classesOrderSummary = {
   containerClassName: styles.container,
@@ -41,57 +42,64 @@ const classesOrderSummary = {
   pointsIconClassName: styles.pointsIcon,
   pointsAppliedTextClassName: styles.voucherAppliedText,
 
-  //TODO: POP UP VOCHER POINT
-  // /* Pop Up */
-  // popupClassName: stylesPopup.popup,
-  // closeButtonClassName: stylesPopup.closeButton,
-  // voucherContainerClassName: stylesPopup.voucherContainer,
-  // pointsContainerClassName: `${stylesPopup.voucherContainer} ${stylesPopup.voucherContainer__noGradient}`,
-  // voucherFormContainerClassName: stylesPopup.voucherFormContainer,
-  // voucherFormClassName: `groocery-form ${stylesPopup.voucherForm}`,
-  // voucherInputClassName: "form-control",
-  // /* Voucher Pop */
-  // voucherSubmitButtonClassName: stylesPopup.voucherFormSubmit,
-  // voucherListClassName: stylesPopup.voucherList,
-  // voucherListHeaderClassName: stylesPopup.voucherListHeader,
-  // voucherClassName: stylesPopup.voucher,
-  // voucherDetailClassName: stylesPopup.voucherDetail,
-  // voucherApplyButtonClassName: stylesPopup.voucherApplyButton,
-  // voucherFooterClassName: stylesPopup.voucherFooter,
+  /* Pop Up */
+  popupClassName: stylesPopup.popup,
+  closeButtonClassName: stylesPopup.closeButton,
+  voucherContainerClassName: stylesPopup.voucherContainer,
+  pointsContainerClassName: `${stylesPopup.voucherContainer} ${stylesPopup.voucherContainer__noGradient}`,
+  voucherFormContainerClassName: stylesPopup.voucherFormContainer,
+  voucherFormClassName: `groocery-form ${stylesPopup.voucherForm}`,
+  voucherInputClassName: "form-control",
+  /* Voucher  up */
+  voucherSubmitButtonClassName: stylesPopup.voucherFormSubmit,
+  voucherListClassName: stylesPopup.voucherList,
+  voucherListHeaderClassName: stylesPopup.voucherListHeader,
+  voucherClassName: stylesPopup.voucher,
+  voucherDetailClassName: stylesPopup.voucherDetail,
+  voucherApplyButtonClassName: stylesPopup.voucherApplyButton,
+  voucherFooterClassName: stylesPopup.voucherFooter,
+  voucherDetailHeaderClassName: stylesPopup.voucherDetailHeader,
+  voucherDetailCodeClassName: stylesPopup.voucherDetailCode,
+  voucherDetailTitleClassName: stylesPopup.voucherDetailTitle,
+  voucherDetailDescClassName: stylesPopup.voucherDetailDesc,
+  voucherDetailEstimateClassName: stylesPopup.voucherDetailEstimate,
+  voucherDetailEstimateDescClassName: stylesPopup.voucherDetailEstimateDesc,
   /* point Pop-up */
-  // totalPointsClassName: stylesPopup.totalPoints,
-  // pointsFormContainerClassName: styles.pointsFormContainer,
-  // pointsFormClassName: stylesPopup.pointsForm,
-  // changePointsClassName: stylesPopup.changePoints,
-  // pointsSubmitButtonClassName: stylesPopup.pointsSubmitButton,
-  // pointsWarningClassName: stylesPopup.pointsWarning,
-  // pointsInsufficientClassName: stylesPopup.pointsInsufficient,
-  // pointValueClassName: stylesPopup.pointValue,
-  // pointLabelClassName: stylesPopup.pointLabel,
-  // numberOfPointsClassName: stylesPopup.numberOfPoints,
+  totalPointsClassName: stylesPopup.totalPoints,
+  pointsFormContainerClassName: styles.pointsFormContainer,
+  pointsFormClassName: stylesPopup.pointsForm,
+  changePointsClassName: stylesPopup.changePoints,
+  pointsSubmitButtonClassName: stylesPopup.pointsSubmitButton,
+  pointsWarningClassName: stylesPopup.pointsWarning,
+  pointsInsufficientClassName: stylesPopup.pointsInsufficient,
+  pointValueClassName: stylesPopup.pointValue,
+  pointLabelClassName: stylesPopup.pointLabel,
+  numberOfPointsClassName: stylesPopup.numberOfPoints,
 }
 
-// const classesCartDetails = {
-//   className: stylesCartDetails.container,
-//   cartHeaderClassName: stylesCartDetails.cartHeader,
-//   itemClassName: stylesCartDetails.item,
-//   itemImageClassName: stylesCartDetails.itemImage,
-//   itemTitleClassName: stylesCartDetails.itemTitle,
-//   titleClassName: stylesCartDetails.title,
-//   selectedVariantClassName: stylesCartDetails.selectedVariant,
-//   itemRegularPriceClassName: stylesCartDetails.itemRegularPrice,
-//   itemSalePriceClassName: stylesCartDetails.itemSalePrice,
-//   qtyBoxClassName: `${stylesCartDetails.qtyBox} id`,
-//   itemRegularAmountClassName: stylesCartDetails.itemRegularAmount,
-//   changeQtyButtonClassName: 'd-none',
-//   removeButtonClassName: 'd-none',
-//   cartFooterClassName: 'd-none',
-// }
+const classesCartDetails = {
+  className: stylesCartDetails.container,
+  cartHeaderClassName: stylesCartDetails.cartHeader,
+  itemClassName: stylesCartDetails.item,
+  itemImageClassName: stylesCartDetails.itemImage,
+  itemTitleClassName: stylesCartDetails.itemTitle,
+  titleClassName: stylesCartDetails.title,
+  selectedVariantClassName: stylesCartDetails.selectedVariant,
+  itemRegularPriceClassName: stylesCartDetails.itemRegularPrice,
+  itemSalePriceClassName: stylesCartDetails.itemSalePrice,
+  qtyBoxClassName: `${stylesCartDetails.qtyBox} id`,
+  itemRegularAmountClassName: stylesCartDetails.itemRegularAmount,
+  cartBodyClassName: stylesCartDetails.cartBody,
+  selectedVariantContainerClassName: stylesCartDetails.selectedVariantContainer,
+  changeQtyButtonClassName: 'd-none',
+  removeButtonClassName: 'd-none',
+  cartFooterClassName: 'd-none',
+}
 
-// const classesCartPlaceholder = {
-//   placeholderList: stylesCartDetails.placeholderList,
-//   placeholderImage: stylesCartDetails.placeholderImage,
-// }
+const classesCartPlaceholder = {
+  placeholderList: stylesCartDetails.placeholderList,
+  placeholderImage: stylesCartDetails.placeholderImage,
+}
 
 type iProps = {
   i18n: any
@@ -104,9 +112,9 @@ type iProps = {
 }
 const OrderSummaryBox: FC<iProps> = ({
   i18n,
-  // lng,
+  lng,
   page,
-  // withCartDetails
+  withCartDetails = true
 }) => {
 
   // const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
@@ -123,21 +131,30 @@ const OrderSummaryBox: FC<iProps> = ({
     close: <Icon.orderSummary.close />
   }
 
-  // const getNewclassesCartDetails = () => {
-  //   if (lng === "en") return {
-  //     ...classesCartDetails,
-  //     qtyBoxClassName: `${stylesCartDetails.qtyBox} en`,
-  //   }
+  const getNewclassesCartDetails = () => {
+    if (lng === "en") return {
+      ...classesCartDetails,
+      qtyBoxClassName: `${stylesCartDetails.qtyBox} en`,
+    }
 
-  //   return classesCartDetails
-  // }
+    return classesCartDetails
+  }
 
   return (
     <>
       {/* //TODO: CART DETAILS */}
-      {/* {withCartDetails &&
+      {withCartDetails &&
         <section className={stylesCartDetails.section}>
-          <h2 className={stylesCartDetails.Title}>{i18n.t("orderSummary.yourCart")}</h2>
+          <div className={stylesCartDetails.header}>
+            <h2 className={stylesCartDetails.title}>
+              {i18n.t("cart.title")}
+            </h2>
+            <Link href="lng/cart" as={`${lng}/cart`}>
+              <p className={stylesCartDetails.changeCart}>
+                {i18n.t("orderSummary.changeCart")}
+              </p>
+            </Link>
+          </div>
           <CartDetails
             currency="IDR"
             withSeparatedVariant={true}
@@ -152,19 +169,21 @@ const OrderSummaryBox: FC<iProps> = ({
             }}
             loadingComponent={
               [0, 1].map((_, i) => (
-                <div key={i} className={stylesCartDetails.placeholderContainer}>
-                  <Placeholder
-                    classes={classesCartPlaceholder}
-                    withImage
-                    withList
-                    listMany={3}
-                  />
+                <div>
+                  <div key={i} className={stylesCartDetails.placeholderContainer}>
+                    <Placeholder
+                      classes={classesCartPlaceholder}
+                      withImage
+                      withList
+                      listMany={3}
+                    />
+                  </div>
                 </div>
               ))
             }
           />
         </section>
-      } */}
+      }
       <OrderSummary
         isAccordion
         classes={classesOrderSummary}

@@ -1,0 +1,499 @@
+@import '../utils/_variables.scss';
+@import './Buttons.module.scss';
+
+.popup
+{
+  @include flex(row, center, center);
+  @include fixedWidth(100%);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1038;
+  background-color: rgba($color_black, 0.75);
+  
+  & > [class*="popupBackgroundClassName"]
+  {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.closeButton
+{
+  @include transition();
+  @include flex(row, center, center);
+  @include position(absolute, 8px, 22px);
+  padding: 0;
+  outline: none;
+  cursor: pointer;
+
+  border: none;
+  background-size: auto 24px;
+  background-color: transparent;
+
+  svg
+  {
+    @include fixedSize(11px);
+    color: $color_black;
+  }
+
+  &:hover,
+  &:focus
+  {
+    opacity: 0.5;
+  }
+}
+
+.voucherForm
+{
+  @include flex(row, center, space-between);
+  @include fixedWidth(100%);
+  height: 60px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+
+  &Container
+  {
+    @include flex(row, center, flex-start);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  input[class*="form-control"]
+  {
+    @include transition();
+    @include flex(row, center, flex-start);
+    @include typographyBuilder(400, 16, 16);
+    position: relative;
+    height: 100%;
+    margin: 0 12px 0 0;
+    padding: 0 12px;
+    box-shadow: 0 0 0 transparent;
+    border-radius: 2px;
+    border: solid 1px $color_elements_line;
+
+    &:hover,
+    &:focus
+    {
+      outline: none;
+      box-shadow: 0 0 0 transparent;
+    }
+  }
+}
+
+.pointsContainer
+{
+  padding-top: 12px !important;
+
+  &::after
+  {
+    background: transparent !important;
+  }
+}
+
+.voucherContainer
+{
+  @include flex(column, flex-start, flex-start);
+  position: relative;
+  margin: 0;
+  padding: 24px 16px 24px;
+  background-color: $color_white;
+  border-radius: 2px;
+
+  max-width: calc(100% - (24px * 2));
+  max-height: calc(100% - (24px * 2));
+
+  @media screen and (min-width: #{$breakpoint_min_md})
+  {
+    max-width: 360px;
+  }
+
+  &::after
+  {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  &__noGradient
+  {
+    padding-top: 0;
+
+    &::after
+    {
+      content: none;
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  [class*="pointsFormContainerClassName"]
+  {
+    @include flex(column, flex-start, flex-start);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.pointsSubmitButton
+{
+  @extend .voucherSubmitButton;
+  @include flex(row, center, center);
+  @include fixedWidth(100%);
+  margin-top: 20px !important;
+}
+
+.voucherList
+{
+  @extend .scrollbar_secondary;
+  @include flex(column, flex-start, flex-start);
+  @include fixedWidth(100%);
+  flex-grow: 1;
+  position: relative;
+  margin: 24px auto 0;
+  padding: 0 5px 0 0;
+
+  overflow: auto;
+  overflow-y: auto;
+
+
+  &Header
+  {
+    @include flex(row, center, flex-start);
+    @include typography_builder(500, 14, 21);
+    @include fixedWidth(100%);
+    color: $color_text_secondary;
+    position: relative;
+    margin: 0 0 12px;
+    padding: 0;
+  }
+}
+
+.voucherDetailHeader
+{
+  width: 100%;
+  border-bottom: 1px dashed $color_placeholder;
+  padding: 0 12px 8px 12px;
+}
+
+.voucherDetailCode
+{
+  @include flex(row, center, flex-start);
+  
+  & > span
+  {
+    @include SmallSmall;
+    color: $color_blue;
+
+    svg
+    {
+      margin: 0 5px 1px 0;
+    }
+  }
+
+  &::before
+  {
+    @include ExtraSmallReguler;
+    content: "KODE KUPON:";
+    margin-right: 5px;
+    color: $color_text_secondary;
+  }
+  
+  &[class$="en"]::before
+  {
+    content: "COUPON_CODE:";
+  }
+}
+
+.voucherDetailTitle
+{
+  @include SmallSemiBold;
+  margin: 2px 0;
+}
+
+.voucherDetailDesc
+{
+  @include ExtraSmallReguler;
+  color: $color_text_secondary;
+}
+
+.voucherDetailEstimate
+{
+  padding: 8px 12px 0 12px;
+}
+
+.voucherDetailEstimateDesc
+{
+  @include ExtraSmallReguler;
+  color: $color_line_black;
+}
+
+
+.voucher
+{
+  @include flex(row, center, space-between);
+  @include fixedWidth(100%);
+  position: relative;
+  margin: 0 0 10px;
+  padding: 8px 0;
+
+  border-radius: 2px;
+  border: solid 1px $color_placeholder;
+  background-color: $color_white; 
+
+  &:last-of-type,
+  &:last-child
+  {
+    margin-bottom: 0;
+  }
+
+  &Detail
+  {
+    @include flex(column, flex-start, flex-start);
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    & > p
+    {
+      @include flex(row, center, flex-start);
+      @include typographyBuilder(400, 14, 14);
+      color: $color_text_secondary;
+      margin: 0;
+      padding: 0;
+
+      & + p
+      {
+        @include typographyBuilder(400, 11, 14);
+        color: $color_grey;
+        margin: 2px 0 0;
+      }
+    }
+  }
+  
+  &Footer
+  {
+    @include flex(row, center, center);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+  &ApplyButton
+  {
+    @include flex(row, center, center);
+    @include fixedSize(100%);
+    @include fontSize(0);
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background-color: rgba($color_white, 0);
+    color: rgba($color_white, 0);
+  }
+}
+
+.voucherFormSubmit,
+.voucherSubmitButton
+{
+  @include transition();
+  @include flex(row, center, center);
+  @include typographyBuilder(600, 14, 14);
+  @extend .btn;
+  @extend .btn_primary;
+  position: relative;
+  margin: 0;
+  padding: 0 12px;
+  border-radius: 2px;
+  height: 100%;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  min-width: 100px;
+
+  &:hover
+  {
+    opacity: .7;
+
+    &::after
+    {
+      display: none;
+    }
+  }
+}
+
+.pointValue
+{
+  @include typography_builder(400, 14, 21);
+  margin: 12px 0 10px;
+}
+
+.numberOfPoints
+{
+  @include flex(column, flex-start, flex-start);
+  @include fixedWidth(100%);
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.pointLabel,
+.totalPoints
+{
+  @include flex(row, center, flex-start);
+  @include fixedWidth(100%);
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.pointLabel
+{
+  @include typographyBuilder(500, 16, 24);
+  min-height: 36px;
+}
+
+.totalPoints
+{
+  @include typographyBuilder(400, 14, 21);
+
+  [class*="pointIcon"]
+  {
+    display: none;
+  }
+}
+
+.changePoints
+{
+  @include transition();
+  @include flex(row, center, center);
+  @include fixedSize(47px);
+  box-shadow: 0 0 0 transparent;
+  border: solid 1px $color_black;
+  border-radius: 3px;;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+
+  font-size: 0;
+  color: rgba($color_white, 0);
+
+  background-color: $color_white;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 16px auto;
+
+  &[class*="increment"]
+  {
+    background-image: url("data:image/svg+xml,%3Csvg width='13' height='14' viewBox='0 0 13 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.14844 5.84814H0.390625V7.89893H5.14844V13.2896H7.32812V7.89893H12.0859V5.84814H7.32812V0.867676H5.14844V5.84814Z' fill='%23444444'/%3E%3C/svg%3E%0A");
+    order: 3;
+  }
+
+  &[class*="decrement"]
+  {
+    background-image: url("data:image/svg+xml,%3Csvg width='7' height='3' viewBox='0 0 7 3' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.847656 2.63721H6.56641V0.867676H0.847656V2.63721Z' fill='%23444444'/%3E%3C/svg%3E%0A");
+    order: 2;
+  }
+
+  &:hover,
+  &:focus
+  {
+    background-color: $color_white;
+    border: solid 1px $color_black;
+    box-shadow: 0 0 0 transparent;
+    outline: none;
+  }
+}
+
+.points
+{
+  &Form
+  {
+    @include flex(row, center, space-between);
+    @include fixedWidth(100%);
+
+    input[class*="form-control"]
+    {
+      @include transition();
+      @include flex(row, center, flex-start);
+      @include typographyBuilder(400, 16, 16);
+      @include fixedWidth(calc(100% - ((48px + 8px) * 2)));
+      position: relative;
+      height: 48px;
+      margin: 0;
+      padding: 0 12px;
+      box-shadow: 0 0 0 transparent;
+      border-radius: 2px;
+      border: solid 1px $color_elements_line;
+      order: 1;
+  
+      &:hover,
+      &:focus
+      {
+        outline: none;
+        box-shadow: 0 0 0 transparent;
+      }
+    }
+  }
+
+  &Insufficient
+  {
+    &,
+    & > p
+    {
+      @include flex(row, center, flex-start);
+      @include fixedWidth(100%);
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    p
+    {
+      @include typographyBuilder(400, 14, 36);
+      color: $color_red;
+    }
+
+    &:empty
+    {
+      padding: 12px 0 0;
+    }
+  }
+
+  &Warning
+  {
+    &,
+    & > p
+    {
+      @include flex(row, center, center);
+      @include typography_builder(400, 11, 11);
+      @include fixedWidth(100%);
+      position: relative;
+      margin: 10px 0 0;
+      padding: 0;
+      text-align: center;
+      color: $color_red;
+    }
+  
+    p
+    {
+      margin: 0;
+    }
+  }
+}

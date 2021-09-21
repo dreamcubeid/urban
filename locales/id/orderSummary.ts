@@ -13,7 +13,8 @@ const locale = {
     "usePoints": "Gunakan poin",
     "useVoucher": "Gunakan voucher",
     "viewCart": "Liat Keranjang",
-    "voucherApplied": "Voucher digunakan"
+    "voucherApplied": "Voucher digunakan",
+    "changeCart": "Ubah Keranjang"
   }
 }
 
