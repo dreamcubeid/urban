@@ -1,4 +1,6 @@
 @import '../utils/_variables.scss';
+@import '../components/Buttons.module.scss';
+@import '../components/Form.module.scss';
 
 .container
 {
@@ -8,10 +10,201 @@
   margin-top: 25px;
 }
 
+.item
+{
+  @extend .grid;
+  @include gap-x-(12px);
+  padding: 24px 0;
+  border-bottom: 1px solid $color_elements_line_darker;
+  align-self: flex-start;
+  grid-template-columns: 72px 65px calc(100% - 161px);
+}
+
+.itemImage
+{
+  @include fixedSize(72px);
+  @include row-span-(5);
+
+  img
+  {
+    width: 100%;
+  }
+}
+
+.itemTitle
+{
+  @include RegulerReguler;
+  @include col-span-(2);
+}
+
+.itemPrice
+{
+  @include grid-start-(3,2);
+  margin-top: 10px;
+
+  [class*="discount"]
+  {
+    @include SmallSmall;
+    color: $color_text_secondary;
+    text-decoration: line-through;
+  }
+}
+
+.itemSalePriceWrapper
+{
+  @include RegulerReguler;
+  color: $color_red;
+}
+
+.itemEdit
+{
+  display: none;
+}
+
+.itemRegularPrice
+{
+  @include RegulerReguler;
+
+  &:only-of-type
+  {
+    color: $color_black;
+    margin-top: 18px;
+  }
+}
+
+.itemSalePrice
+{
+
+}
+
+.itemRegularAmount
+{
+}
+
+.itemSalePriceWrapper
+{
+  
+}
+
+.itemDiscountNote
+{
+  
+}
+
+.itemQty
+{
+  @include grid-start-(2, 2);
+}
+
+.qtyBox
+{
+  position: relative;
+  margin-top: 14px;
+
+  input[type="number"]
+  {
+    @extend .form_input;
+    border: 1px solid $color_placeholder;
+    margin-bottom: 0;
+    width: 100%;
+    height: 56px;
+  }
+}
+
+.changeQtyButton
+{
+  @extend .btn_transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  width: 10px;
+
+  &:first-child
+  {
+    width: 20px;
+    @include position(absolute, auto, 10px, 8px);
+  }
+  
+  &:last-child
+  {
+    width: 20px;
+    @include position(absolute, 8px, 10px);
+  }
+
+  &:disabled
+  {
+    pointer-events: none;
+    cursor: not-allowed;
+    border-color: $color_white !important;
+    outline: none !important;
+  }
+}
+
+
+.itemAmount
+{
+  @include grid-start-(2, 4);
+  @include RegulerSemiBold;
+  margin-top: 8px;
+
+  &:before
+  {
+    content: "Total";
+    @include SmallSmall;
+    color: $color_text_secondary;
+  }
+}
+
+.itemRemove
+{
+  @include grid-start-(3, 4);
+  @include flex(row, center, flex-end);
+}
+
+.removeButton
+{
+  @include fixedSize(40px);
+  @include flex(row, center, center);
+  cursor: pointer;
+  background: $color_elements_line;
+  border-radius: 2px;
+
+  &:hover
+  {
+    opacity: .7
+  }
+  
+  svg
+  {
+    @include fixedSize(14px);
+    color: $color_black;
+  }
+}
+
+.cartFooter
+{
+  padding: 24px 0 42px;
+}
+
+.cartFooterTextarea
+{
+  @extend .form_input;
+  padding: 18px 16px;
+  width: 340px;
+  min-height: 60px !important;
+  max-height: 100%;
+}
+
+
 @media screen and (max-width: #{$breakpoint_max_md}) 
 {
   .container
   {
     @include grid-(1);
+  }
+
+  .cartFooterTextarea
+  {
+    min-width: 100%;
   }
 }

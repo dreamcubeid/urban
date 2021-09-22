@@ -5,7 +5,7 @@ import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import { parseCookies } from 'lib/parseCookies'
 // import Router from 'next/router'
 import dynamic from 'next/dynamic'
-import { Trash } from 'react-feather'
+import Icon from 'components/Icon/Icon'
 import {
   CartDetails,
   useI18n
@@ -32,25 +32,28 @@ import styles from 'public/scss/pages/Cart.module.scss'
 
 const classesCartDetails = {
   className: styles.cart,
-  cartHeaderClassName: "d-none",
-  itemClassName: styles.cartItem,
-  itemImageClassName: styles.cartItem_image,
-  itemTitleClassName: styles.cartItem_detail,
-  itemPriceClassName: styles.cartItem_priceCalculate,
-  itemRegularPriceClassName: styles.cartItem_priceRegular,
-  itemSalePriceClassName: styles.cartItem_priceSale,
-  itemSalePriceWrapperClassName: styles.cartItem_priceSaleWrapper,
-  itemDiscountNoteClassName: styles.cartItem_discNote,
-  itemRegularAmountClassName: "d-none",
+  itemClassName: styles.item,
+  itemImageClassName: styles.itemImage,
+  itemTitleClassName: styles.itemTitle,
+  itemPriceClassName: styles.itemPrice,
+  itemRegularPriceClassName: styles.itemRegularPrice,
+  itemSalePriceClassName: styles.itemSalePrice,
+  itemSalePriceWrapperClassName: styles.itemSalePriceWrapper,
+  itemDiscountNoteClassName: styles.itemDiscountNote,
+  itemQtyClassName: styles.itemQty,
+  qtyBoxClassName: styles.qtyBox,
+  itemAmountClassName: styles.itemAmount,
+  itemRemoveClassName: styles.itemRemove,
+  cartFooterClassName: styles.cartFooter,
+  cartFooterTextareaClassName: styles.cartFooterTextarea,
+  itemEditClassName: styles.itemEdit,
+  itemRegularAmountClassName: styles.itemRegularAmount,
+  changeQtyButtonClassName: styles.changeQtyButton,
+  removeButtonClassName: styles.removeButton,
+  // hidden
+  cartFooterTitleClassName: "d-none",
   headerQtyClassName: "d-none",
-  itemQtyClassName: styles.cartItem_qty,
-  qtyBoxClassName: styles.cartItem_qtyBox,
-  itemAmountClassName: styles.cartItem_price,
-  itemEditClassName: "d-none",
-  itemRemoveClassName: styles.cartItem_remove,
-  cartFooterClassName: `${styles.cart_cartFooter} ${styles.sirclo_form_row} w-100`,
-  cartFooterTitleClassName: styles.cartFooter_title,
-  cartFooterTextareaClassName: `form-control ${styles.sirclo_form_input} ${styles.cartFooter_input} py-2`,
+  cartHeaderClassName: "d-none",
 }
 
 const Cart: FC<any> = ({
@@ -83,6 +86,9 @@ const Cart: FC<any> = ({
       <section className={styles.products_breadcumb}>
         <Breadcrumb title={i18n.t("cart.title")} links={linksBreadcrumb} lng={lng} />
       </section>
+
+      <section className="container">
+      </section>
       {invalidMsg !== "" &&
         <div className={styles.cartError}>
           <div className={styles.cartError_inner}>
@@ -90,36 +96,37 @@ const Cart: FC<any> = ({
           </div>
         </div>
       }
-      <section className="container">
-        <div className={styles.container}>
-          <div className={styles.cardDetailContiner}>
-            <CartDetails
-              getSKU={(SKUs: any) => setSKUs(SKUs)}
-              classes={classesCartDetails}
-              itemRedirectPathPrefix="product"
-              isEditable={true}
-              removeIcon={<Trash />}
-              onErrorMsg={() => setShowModalErrorAddToCart(true)}
-              onInvalidMsg={(msg) => setInvalidMsg(msg)}
-              thumborSetting={{
-                width: size.width < 768 ? 200 : 400,
-                format: "webp",
-                quality: 85,
-              }}
-              loadingComponent={<>TODO: SKELETON</>}
-              emptyCartPlaceHolder={<>TODO: Empty</>}
-            />
+      <LazyLoadComponent>
+        <section className="container">
+          <div className={styles.container}>
+            <div className={styles.cardDetailContiner}>
+              <CartDetails
+                getSKU={(SKUs: any) => setSKUs(SKUs)}
+                classes={classesCartDetails}
+                itemRedirectPathPrefix="product"
+                isEditable={true}
+                removeIcon={<Icon.CartDetails.removeIcon />}
+                onErrorMsg={() => setShowModalErrorAddToCart(true)}
+                onInvalidMsg={(msg) => setInvalidMsg(msg)}
+                thumborSetting={{
+                  width: size.width < 768 ? 200 : 400,
+                  format: "webp",
+                  quality: 85,
+                }}
+                loadingComponent={<>TODO: SKELETON</>}
+                emptyCartPlaceHolder={<>TODO: Empty</>}
+              />
+            </div>
+            <div className={styles.orderSummaryContainer}>
+              <OrderSummaryBox
+                lng={lng}
+                i18n={i18n}
+                page="cart"
+              />
+            </div>
           </div>
-
-          <div className={styles.orderSummaryContainer}>
-            <OrderSummaryBox
-              lng={lng}
-              i18n={i18n}
-              page="place_order"
-            />
-          </div>
-        </div>
-      </section>
+        </section>
+      </LazyLoadComponent>
 
       <LazyLoadComponent>
         <ProductRecomendation

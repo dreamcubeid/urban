@@ -5,7 +5,8 @@ import {
   RiCoupon3Fill,
   RiCopperDiamondFill,
   RiArrowDownSLine,
-  RiArrowUpSLine
+  RiArrowUpSLine,
+  RiDeleteBin2Line
 } from 'react-icons/ri'
 
 const Icon: any = {
@@ -13,7 +14,6 @@ const Icon: any = {
   arrowLeft: RiArrowLeftLine,
   RiCloseFill: RiCloseFill,
   coupon: RiCoupon3Fill,
-
   orderSummary: {
     expand: RiArrowDownSLine,
     collapse: RiArrowUpSLine,
@@ -23,6 +23,9 @@ const Icon: any = {
     points: RiCopperDiamondFill,
     pointsApplied: RiCopperDiamondFill,
     close: RiCloseFill,
+  },
+  CartDetails: {
+    removeIcon: RiDeleteBin2Line
   }
 }
 
