@@ -48,6 +48,7 @@ const classesCollapsibleNav = {
   navItemClassName: styles.navigation_item,
   selectedNavClassName: styles.menu_itemSelected,
   navValueClassName: styles.navigation_value,
+  navValueActiveClassName: styles.navigation_value,
   navValueContainerClassName: styles.navigation_valueContainer,
   dropdownIconClassName: styles.navigation_dropdownIcon,
   childNavClassName: styles.menu_sub,
