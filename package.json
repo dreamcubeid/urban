@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@brainhubeu/react-carousel": "^1.19.26",
-    "@sirclo/nexus": "^0.0.0-qa.323",
+    "@sirclo/nexus": "2.2.1",
     "bootstrap": "^4.5.0",
     "cookie": "^0.4.1",
     "env-cmd": "^10.1.0",

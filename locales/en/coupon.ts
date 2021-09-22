@@ -1,11 +1,11 @@
 const locale = {
   "coupon": {
     "apply": "Apply",
-    "code": "COUPON CODE:",
+    "code": "COUPON:",
     "couponPlaceholder": "Input your voucher",
     "discount": "Discount",
     "enough": "You can get discount",
-    "header": "Choose Vouchers available",
+    "header": "Choose coupon available",
     "max": "Max",
     "minPoints": "Minimal points to redeem is",
     "minPurchase": "With Minimum Purchase",
