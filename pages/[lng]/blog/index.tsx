@@ -88,61 +88,71 @@ const Blog: FC<any> = ({
       <div className={styles.wrapper}>
 
         <div className="container">
+          <div className="row">
 
-          <div className={`row ${styles.header}`}>
-            <div className={`col-12 col-md-8 ${styles.header_image}`}>
-              <img src={headerImage} alt={i18n.t("blog.title")} title={i18n.t("blog.title")} />
+            <div className="col-12 col-md-8">
+
+              <div className={`row ${styles.header}`}>
+                <div className={`col-12 col-md-8 ${styles.header_image}`}>
+                  <img src={headerImage} alt={i18n.t("blog.title")} title={i18n.t("blog.title")} />
+                </div>
+              </div>
+
+              <div className={styles.sort}></div>
+
+              <Blogs
+                classes={classesBlogs}
+                withPagination
+                paginationClasses={classesPagination}
+                paginationNextLabel={<FiChevronRight />}
+                paginationPrevLabel={<FiChevronLeft />}
+                itemPerPage={5}
+                thumborSetting={{
+                  width: size.width < 768 ? 375 : 512,
+                  format: "webp",
+                  quality: 85,
+                }}
+                LoadingComponent={
+                  <Placeholder
+                    withList
+                    withImage
+                    listMany={5}
+                    classes={{
+                      placeholderList: styles.placeholder
+                    }}
+                  />
+                }
+                emptyStateComponent={
+                  <div className={styles.empty}>
+                    <div className={styles.empty_icon}>
+                      <RiQuestionFill />
+                    </div>
+                    <p className={styles.empty_label}>
+                      {i18n.t("blog.isEmpty")}
+                    </p>
+                  </div>
+                }
+              />
+
             </div>
-            <div className={`col-12 col-md-4 ${styles.header_category}`}>
+
+            <div className={`col-12 col-md-4 ${styles.sidebar}`}>
               {(totalCategories > 0 || totalCategories === null) &&
-                  <>
-                    <h2>
-                      {i18n.t("blog.categories")}
-                    </h2>
+                <div className={styles.sidebar_item}>
+                  <div className={styles.sidebar_title}>
+                    {i18n.t("blog.categories")}
+                  </div>
+                  <div className={styles.sidebar_body}>
                     <BlogCategories
                       classes={classesBlogCategories}
                       getCategoriesCount={(categoriesCount) => setTotalCategories(categoriesCount)}
                     />
-                  </>
-                }
-            </div>
-          </div>
-
-          <div className={styles.sort}></div>
-
-          <Blogs
-            classes={classesBlogs}
-            withPagination
-            paginationClasses={classesPagination}
-            paginationNextLabel={<FiChevronRight />}
-            paginationPrevLabel={<FiChevronLeft />}
-            itemPerPage={5}
-            thumborSetting={{
-              width: size.width < 768 ? 375 : 512,
-              format: "webp",
-              quality: 85,
-            }}
-            LoadingComponent={
-              <Placeholder
-                withList
-                withImage
-                listMany={5}
-                classes={{
-                  placeholderList: styles.placeholder
-                }}
-              />
-            }
-            emptyStateComponent={
-              <div className={styles.empty}>
-                <div className={styles.empty_icon}>
-                  <RiQuestionFill />
+                  </div>
                 </div>
-                <p className={styles.empty_label}>
-                  {i18n.t("blog.isEmpty")}
-                </p>
-              </div>
-            }
-          />
+              }
+            </div>
+
+          </div>
 
         </div>
       </div>

@@ -665,3 +665,40 @@
     margin-top: 12px;
   }
 }
+
+@media (max-width: #{$breakpoint_max_md})
+{
+  .blog
+  {
+
+    &_item
+    {
+      @include flex(column, flex-start, flex-start);
+
+      &Content
+      {
+        padding: 0;
+      }
+
+      &Description
+      {
+        & > div
+        {
+          &:first-child,
+          &:first-of-type
+          {
+            padding: 16px 0 0;
+          }
+        }
+      }
+
+      &Image
+      {
+        &Container
+        {
+          @include fixedWidth(100%);
+        }
+      }
+    }
+  }
+}
