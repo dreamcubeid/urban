@@ -198,11 +198,14 @@
 .voucherDetailCode
 {
   @include flex(row, center, flex-start);
+  @include ExtraSmallReguler;
+  color: $color_text_secondary;
   
   & > span
   {
     @include SmallSmall;
     color: $color_blue;
+    margin-left: 5px;
 
     svg
     {
@@ -210,18 +213,6 @@
     }
   }
 
-  &::before
-  {
-    @include ExtraSmallReguler;
-    content: "KODE KUPON:";
-    margin-right: 5px;
-    color: $color_text_secondary;
-  }
-  
-  &[class$="en"]::before
-  {
-    content: "COUPON_CODE:";
-  }
 }
 
 .voucherDetailTitle

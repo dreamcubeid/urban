@@ -56,8 +56,6 @@ const classesOrderSummary = {
   voucherListHeaderClassName: stylesPopup.voucherListHeader,
   voucherClassName: stylesPopup.voucher,
   voucherDetailClassName: stylesPopup.voucherDetail,
-  voucherApplyButtonClassName: stylesPopup.voucherApplyButton,
-  voucherFooterClassName: stylesPopup.voucherFooter,
   voucherDetailHeaderClassName: stylesPopup.voucherDetailHeader,
   voucherDetailCodeClassName: stylesPopup.voucherDetailCode,
   voucherDetailTitleClassName: stylesPopup.voucherDetailTitle,
@@ -135,8 +133,6 @@ const OrderSummaryBox: FC<iProps> = ({
     if (lng === "en") return {
       ...classesCartDetails,
       qtyBoxClassName: `${stylesCartDetails.qtyBox} en`,
-      voucherDetailCodeClassName: `${stylesPopup.voucherDetailCode} en`,
-
     }
 
     return classesCartDetails

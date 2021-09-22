@@ -1,6 +1,7 @@
 const locale = {
   "coupon": {
     "apply": "Apply",
+    "code": "COUPON CODE:",
     "couponPlaceholder": "Input your voucher",
     "discount": "Discount",
     "enough": "You can get discount",
