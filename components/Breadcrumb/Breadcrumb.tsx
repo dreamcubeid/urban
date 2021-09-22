@@ -1,8 +1,23 @@
+/* Library Packages */
 import { FC } from 'react'
 import Link from 'next/link'
+
+/* Styles */
 import styles from 'public/scss/components/Breadcrumbs.module.scss'
 
-const Breadcrumb: FC<any> = ({ title, links, lng }) => {
+type BreadcrumbPropType = {
+  title: string
+  lng: string
+  links: any
+  fluidContainer?: boolean
+}
+
+const Breadcrumb: FC<BreadcrumbPropType> = ({ 
+  title, 
+  links, 
+  lng,
+  fluidContainer = false
+}) => {
 
   const redirectLinks = [
     "Home",
@@ -24,7 +39,7 @@ const Breadcrumb: FC<any> = ({ title, links, lng }) => {
 
   return (
     <section className={styles.breadcrumb_container}>
-      <div className="container">
+      <div className={`${fluidContainer ? 'container-fluid' : 'container'}`}>
         <ol className={`breadcrumb ${styles.breadcrumb}`}>
           {
             links.map((link: string, i: number) => {
@@ -49,7 +64,7 @@ const Breadcrumb: FC<any> = ({ title, links, lng }) => {
             })
           }
         </ol>
-        <h2>{title}</h2>
+        <h1>{title}</h1>
       </div>
     </section>
   )
