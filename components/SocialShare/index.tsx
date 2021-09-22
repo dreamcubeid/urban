@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC } from 'react'
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -12,61 +12,114 @@ import {
   EmailIcon,
   TelegramShareButton,
   TelegramIcon
-} from "react-share";
-import styles from "public/scss/components/SocialShare.module.scss";
+} from 'react-share'
+
+import styles from 'public/scss/components/SocialShare.module.scss'
 
 type TypeSocialShare = {
   i18n?: any,
   urlSite: string,
-  size?: number
+  borderRadius?: number | undefined,
+  round?: boolean,
+  iconFillColor?: string
+  size?: string | number | undefined,
+  withLabel?: boolean
+  bgStyle?: {
+    fill?: string
+  },
+  classes?: {
+    socialShareParentDivClassName?: string
+    socialShareItemClassName?: string
+  }
 }
 
 const SocialShare: FC<TypeSocialShare> = ({
   i18n,
   urlSite,
-  size = 40
+  borderRadius,
+  round = false,
+  iconFillColor = 'white',
+  size = 40,
+  withLabel = true,
+  bgStyle = {},
+  classes = {
+    socialShareParentDivClassName: styles.socialShare,
+    socialShareItemClassName: styles.socialShare_item,
+  }
 }) => {
 
+  const iconProps = {
+    size,
+    borderRadius,
+    round,
+    bgStyle,
+    iconFillColor
+  }
+
   return (
-    <div className={styles.socialShare}>
-      <div className={styles.socialShare_item}>
+    <div className={classes.socialShareParentDivClassName}>
+      <div className={classes.socialShareItemClassName}>
         <FacebookShareButton url={urlSite}>
-          <FacebookIcon size={size} />
+          <FacebookIcon {...iconProps} />
         </FacebookShareButton>
-        <span>{i18n.t("socialShare.facebook")}</span>
+        {withLabel && 
+          <span>
+            {i18n.t("socialShare.facebook")}
+          </span>
+        }
       </div>
-      <div className={styles.socialShare_item}>
+      <div className={classes.socialShareItemClassName}>
         <TwitterShareButton url={urlSite}>
-          <TwitterIcon size={size} />
+          <TwitterIcon {...iconProps} />
         </TwitterShareButton>
-        <span>{i18n.t("socialShare.twitter")}</span>
+        {withLabel && 
+          <span>
+            {i18n.t("socialShare.twitter")}
+          </span>
+        }
       </div>
-      <div className={styles.socialShare_item}>
+      <div className={classes.socialShareItemClassName}>
         <LinkedinShareButton url={urlSite}>
-          <LinkedinIcon size={size} />
+          <LinkedinIcon {...iconProps} />
         </LinkedinShareButton>
-        <span>{i18n.t("socialShare.linkedin")}</span>
+        {withLabel && 
+          <span>
+            {i18n.t("socialShare.linkedin")}
+          </span>
+        }
       </div>
-      <div className={styles.socialShare_item}>
-        <WhatsappShareButton url={urlSite}>
-          <WhatsappIcon size={size} />
-        </WhatsappShareButton>
-        <span>{i18n.t("socialShare.whatsapp")}</span>
-      </div>
-      <div className={styles.socialShare_item}>
+      <div className={classes.socialShareItemClassName}>
         <EmailShareButton url={urlSite}>
-          <EmailIcon size={size} />
+          <EmailIcon {...iconProps} />
         </EmailShareButton>
-        <span>{i18n.t("socialShare.email")}</span>
+        {withLabel && 
+          <span>
+            {i18n.t("socialShare.email")}
+          </span>
+        }
       </div>
-      <div className={styles.socialShare_item}>
+      <div className={classes.socialShareItemClassName}>
+        <WhatsappShareButton url={urlSite}>
+          <WhatsappIcon {...iconProps} />
+        </WhatsappShareButton>
+        {withLabel && 
+          <span>
+            {i18n.t("socialShare.whatsapp")}
+          </span>
+        }
+      </div>
+      <div className={classes.socialShareItemClassName}>
         <TelegramShareButton url={urlSite}>
-          <TelegramIcon size={size} />
+          <TelegramIcon {...iconProps} />
         </TelegramShareButton>
-        <span>{i18n.t("socialShare.telegram")}</span>
+        {withLabel && 
+          <span>
+            {i18n.t("socialShare.telegram")}
+          </span>
+        }
       </div>
     </div>
   )
 }
 
-export default SocialShare;
+export default SocialShare
