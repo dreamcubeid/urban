@@ -32,7 +32,7 @@
     &_link
     {
         @include flex(row, center, center);
-        @include typographyBuilder(400, 16, 24);
+        @include RegulerReguler;
         @include fixedSize(100%);
         color: $color_text;
         text-decoration: none;

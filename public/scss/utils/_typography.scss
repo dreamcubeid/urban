@@ -106,9 +106,10 @@ $headings: (
     @include typography_builder($font_weight, $font_size, $line_height);
 }
 
+/**
+ * Design System Typography
+ */
 
-
-/* design system typhography */
 @mixin h1
 {
   @include typographyBuilder(700, 40, 56);
@@ -123,7 +124,6 @@ $headings: (
 {
   @include typographyBuilder(700, 28, 40);
 }
-
 
 @mixin ExtraLargeReguler
 {
@@ -164,4 +164,3 @@ $headings: (
 {
     @include typographyBuilder(500, 10, 16);
 }
-
