@@ -1,7 +1,7 @@
 const locale = {
   "coupon": {
     "apply": "Terapkan",
-    "code": "KUPON:",
+    "code": "KODE KUPON:",
     "couponPlaceholder": "Masukkan kode kupon",
     "discount": "Diskon",
     "enough": "Anda mendapat potongan sebesar",
