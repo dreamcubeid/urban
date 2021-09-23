@@ -1,10 +1,11 @@
 const locale = {
   "coupon": {
     "apply": "Terapkan",
+    "code": "KODE KUPON:",
     "couponPlaceholder": "Masukkan kode kupon",
     "discount": "Diskon",
     "enough": "Anda mendapat potongan sebesar",
-    "header": "Voucher tersedia",
+    "header": "Pilih kupon yang tersedia",
     "max": "Maks",
     "minPoints": "Minimal poin yang ditukarkan adalah",
     "minPurchase": "Dengan minimal pembelian",
