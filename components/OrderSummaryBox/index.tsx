@@ -1,13 +1,14 @@
 /* library package */
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { toast } from 'react-toastify'
 import { OrderSummary, CartDetails } from '@sirclo/nexus'
 import Link from 'next/link'
-// import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic'
 
 /* component */
 import Placeholder from 'components/Placeholder'
 import Icon from '../Icon/Icon'
+const Popup = dynamic(() => import('components/Popup/Popup'))
 
 /* styles */
 import styles from 'public/scss/components/OrderSummary.module.scss'
@@ -112,11 +113,11 @@ const OrderSummaryBox: FC<iProps> = ({
   i18n,
   lng,
   page,
-  withCartDetails = true
+  withCartDetails
 }) => {
 
-  // const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
-  // const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
+  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
+  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
 
   const icons = {
     expand: <Icon.orderSummary.expand />,
@@ -198,10 +199,24 @@ const OrderSummaryBox: FC<iProps> = ({
           <p className="m-0 p-0">{i18n.t("global.loading")}</p>
         }
       />
-      {/* TODO: UNTUK TASK Error ordr summary box */}
-      {/* {showModalErrorAddToCart &&
-        <ErrorPopup toggleModal={toogleErrorAddToCart} />
-      } */}
+      {showModalErrorAddToCart &&
+        <Popup
+          setPopup={toogleErrorAddToCart}
+          mobileFull={false}
+        >
+          <div className={styles.popupErrorContainer}>
+            <h3 className={styles.popupErrorTitle}>{i18n.t("cart.errorSKUTitle")}</h3>
+            <p className={styles.popupErrorDesc}>{i18n.t("cart.errorSKUDesc")} </p>
+            <button
+              className={styles.backBtn}
+              onClick={toogleErrorAddToCart}
+              data-identity="ordersummary-back-btn"
+            >
+              {i18n.t("global.back")}
+            </button>
+          </div>
+        </Popup>
+      }
     </>
   )
 }

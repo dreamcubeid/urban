@@ -3,6 +3,7 @@ import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import { parseCookies } from 'lib/parseCookies'
+import Link from 'next/link'
 // import Router from 'next/router'
 import dynamic from 'next/dynamic'
 import Icon from 'components/Icon/Icon'
@@ -23,12 +24,11 @@ import Layout from 'components/Layout/Layout'
 import ProductRecomendation from 'components/ProductRecomendation'
 import OrderSummaryBox from 'components/OrderSummaryBox'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
-
-const Popup = dynamic(() => import('components/Popup/Popup'))
+import Placeholder from 'components/Placeholder'
+const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComponent'))
 
 /* styles */
 import styles from 'public/scss/pages/Cart.module.scss'
-
 
 const classesCartDetails = {
   className: styles.cart,
@@ -56,6 +56,10 @@ const classesCartDetails = {
   cartHeaderClassName: "d-none",
 }
 
+const classesCartPlaceholder = {
+  placeholderList: styles.placeholderList,
+  placeholderImage: styles.placeholderImage,
+}
 const Cart: FC<any> = ({
   lng,
   lngDict,
@@ -66,10 +70,8 @@ const Cart: FC<any> = ({
   const size: any = useWindowSize()
 
   const [SKUs, setSKUs] = useState<Array<string>>(null)
-  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
   const [invalidMsg, setInvalidMsg] = useState<string>('')
 
-  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart);
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("cart.cart")]
 
   return (
@@ -89,32 +91,59 @@ const Cart: FC<any> = ({
 
       <section className="container">
       </section>
-      {invalidMsg !== "" &&
-        <div className={styles.cartError}>
-          <div className={styles.cartError_inner}>
-            {invalidMsg}
-          </div>
-        </div>
-      }
       <LazyLoadComponent>
         <section className="container">
           <div className={styles.container}>
             <div className={styles.cardDetailContiner}>
+              {invalidMsg !== "" &&
+                <div className={styles.cartError}>
+                  {invalidMsg}
+                </div>
+              }
               <CartDetails
                 getSKU={(SKUs: any) => setSKUs(SKUs)}
                 classes={classesCartDetails}
                 itemRedirectPathPrefix="product"
                 isEditable={true}
                 removeIcon={<Icon.CartDetails.removeIcon />}
-                onErrorMsg={() => setShowModalErrorAddToCart(true)}
+                onErrorMsg={() => { }}
                 onInvalidMsg={(msg) => setInvalidMsg(msg)}
                 thumborSetting={{
                   width: size.width < 768 ? 200 : 400,
                   format: "webp",
                   quality: 85,
                 }}
-                loadingComponent={<>TODO: SKELETON</>}
-                emptyCartPlaceHolder={<>TODO: Empty</>}
+                loadingComponent={
+                  [0, 1, 2].map((_, i) => (
+                    <div>
+                      <div key={i} className={styles.placeholderContainer}>
+                        <Placeholder
+                          classes={classesCartPlaceholder}
+                          withImage
+                          withList
+                          listMany={3}
+                        />
+                      </div>
+                    </div>
+                  ))
+                }
+                emptyCartPlaceHolder={
+                  <>
+                    <EmptyComponent
+                      logo={<div className={styles.iconEmpty} />}
+                      classes={{ emptyContainer: styles.emptyContainer }}
+                      desc={i18n.t("product.isEmpty")}
+                    />
+                    <Link href="lng/products" as={`${lng}/products`}>
+                      <button
+                        type="submit" className={styles.continueShoppingBtn}
+                        data-identity="cart-continueShoppingBtn"
+                      >
+                        {i18n.t("global.continueShopping")}
+                      </button>
+                    </Link>
+                  </>
+                }
               />
             </div>
             <div className={styles.orderSummaryContainer}>
@@ -127,7 +156,6 @@ const Cart: FC<any> = ({
           </div>
         </section>
       </LazyLoadComponent>
-
       <LazyLoadComponent>
         <ProductRecomendation
           type="crossSell"
@@ -135,19 +163,6 @@ const Cart: FC<any> = ({
           title={i18n.t("product.recomendation")}
         />
       </LazyLoadComponent>
-      {showModalErrorAddToCart &&
-        <Popup
-          withHeader
-          setPopup={toogleErrorAddToCart}
-          mobileFull={false}
-          classPopopBody
-        >
-          <div className={styles.popup_popupError}>
-            <h3 className={styles.popup_popupErrorTitle}>{i18n.t("cart.errorSKUTitle")}</h3>
-            <p className={styles.popup_popupErrorDesc}>{i18n.t("cart.errorSKUDesc")} </p>
-          </div>
-        </Popup>
-      }
     </Layout>
   )
 }
