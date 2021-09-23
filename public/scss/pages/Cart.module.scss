@@ -11,6 +11,43 @@
   margin-top: 25px;
 }
 
+.cardDetailHeader
+{
+  @include flex(row, center, space-between);
+  margin-bottom: 24px;
+
+  p
+  {
+    &:first-child
+    {
+      @include RegulerSemiBold;
+    }
+
+    &:last-child
+    {
+      @include flex(row, center, flex-start);
+      @include RegulerReguler;
+      color: $color_blue;
+      cursor: pointer;
+
+      &:hover
+      {
+        opacity: .7;
+      }
+      
+      &::before
+      {
+        content: "";
+        @include fixedSize(10px);
+        display: block;
+        background-repeat: no-repeat;
+        margin-right: 11px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M4.33301 4.3335V0.333496H5.66634V4.3335H9.66634V5.66683H5.66634V9.66683H4.33301V5.66683H0.333008V4.3335H4.33301Z' fill='%232E77D0'/%3E%3C/svg%3E");
+      }
+    }
+  }
+}
+
 .item
 {
   @extend .grid;

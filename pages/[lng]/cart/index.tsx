@@ -94,7 +94,19 @@ const Cart: FC<any> = ({
       <LazyLoadComponent>
         <section className="container">
           <div className={styles.container}>
-            <div className={styles.cardDetailContiner}>
+            <div className={styles.cardDetailContainer}>
+              <div className={styles.cardDetailHeader}>
+                <p>
+                  {i18n.t("cart.youHave")}{" "}
+                  {SKUs?.length || 0}{" "}
+                  {i18n.t("cart.item")}
+                </p>
+                <Link href="lng/products" as={`${lng}/products`}>
+                  <p>
+                    {i18n.t("cart.shoppingAgain")}
+                  </p>
+                </Link>
+              </div>
               {invalidMsg !== "" &&
                 <div className={styles.cartError}>
                   {invalidMsg}
