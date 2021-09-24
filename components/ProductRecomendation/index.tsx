@@ -33,7 +33,7 @@ const ProductRecomendation: FC<Iprops> = ({
 
   const size = useWindowSize()
   const allowedProductRecommendation = isProductRecommendationAllowed()
-  const [totalItems, setTotalItems] = useState<any>(null)
+  const [totalItems, setTotalItems] = useState<number>(null)
 
   if (!allowedProductRecommendation) return <></>
   if (totalItems === 0) return <></>
