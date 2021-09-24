@@ -1,0 +1,50 @@
+.pagination
+{
+    @include flex(row, center, center, true);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+
+    &_item
+    {
+        @include transition();
+        @include flex(row, center, center);
+        @include fixedSize(44px);
+        position: relative;
+        margin: 0 8px;
+        padding: 0;
+        border-radius: 2px;
+        border: solid 1px $color_elements_line_darker;
+        background-color: $color_white;
+        color: $color_text;
+
+        &__active,
+        &:hover
+        {
+            @extend .pagination_item;
+            border-color: $color_black;
+            color: $color_text;
+        }
+    }
+
+    &_link
+    {
+        @include flex(row, center, center);
+        @include RegulerReguler;
+        @include fixedSize(100%);
+        color: $color_text;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover,
+        &:focus,
+        &:active
+        {
+            color: $color_text;
+            text-decoration: none;
+        }
+    }
+}

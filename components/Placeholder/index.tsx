@@ -1,16 +1,19 @@
+/* Library Packages */
 import { FC } from 'react'
+
+/* Styles */
 import styles from 'public/scss/components/Placeholder.module.scss'
 
 export type PlaceholderPropsType = {
   classes?: {
-    placeholderImage?: string;
-    placeholderTitle?: string;
-    placeholderList?: string;
-  };
-  withImage?: boolean;
-  withTitle?: boolean;
-  withList?: boolean;
-  listMany?: number;
+    placeholderImage?: string
+    placeholderTitle?: string
+    placeholderList?: string
+  }
+  withImage?: boolean
+  withTitle?: boolean
+  withList?: boolean
+  listMany?: number
 };
 
 const Placeholder: FC<PlaceholderPropsType> = ({
@@ -24,7 +27,7 @@ const Placeholder: FC<PlaceholderPropsType> = ({
     placeholderImage = "placeholder_placeholderImage",
     placeholderTitle = "placeholder_placeholderTitle",
     placeholderList = "placeholder_placeholderList"
-  } = classes;
+  } = classes
 
   const loopList = (length) => {
     let element = []
@@ -43,4 +46,4 @@ const Placeholder: FC<PlaceholderPropsType> = ({
   )
 }
 
-export default Placeholder;
+export default Placeholder

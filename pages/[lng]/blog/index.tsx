@@ -1,24 +1,31 @@
-import { FC, useState } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import dynamic from "next/dynamic";
+/* Library Packages */
+import { FC, useState } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import {
   useI18n,
   Blogs,
   BlogCategories,
   getBlogHeaderImage,
-  BlogRecent,
   isBlogAllowed
-} from "@sirclo/nexus";
-import useWindowSize from "lib/useWindowSize";
-import { useBrand } from "lib/useBrand";
-import Layout from "components/Layout/Layout";
-import { GRAPHQL_URI } from "components/Constants";
-import styles from "public/scss/pages/Blog.module.scss";
+} from '@sirclo/nexus'
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'
+import { RiQuestionFill } from 'react-icons/ri'
 
-const EmptyComponent = dynamic(() => import("components/EmptyComponent/EmptyComponent"));
-const Placeholder = dynamic(() => import("components/Placeholder"));
-/* locales */
-import locale from "locales";
+/* Library Template */
+import useWindowSize from 'lib/useWindowSize'
+import { useBrand } from 'lib/useBrand'
+import { GRAPHQL_URI } from 'components/Constants'
+
+/* Components */
+import Layout from 'components/Layout/Layout'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+import Placeholder from 'components/Placeholder'
+
+/* Locales */
+import locale from 'locales'
+
+/* Styles */
+import styles from 'public/scss/pages/Blog.module.scss'
 
 const classesBlogs = {
   blogsContainerClassName: styles.blog,
@@ -26,42 +33,26 @@ const classesBlogs = {
   categoryClassName: styles.blog_itemCategory,
   imageContainerClassName: styles.blog_itemImageContainer,
   imageClassName: styles.blog_itemImage,
-  descriptionClassName: styles.blog_itemContent,
+  descriptionClassName: styles.blog_itemDescription,
   titleClassName: styles.blog_itemTitle,
   authorClassName: styles.blog_itemAuthor,
-  descriptionInnerFooterClassName: styles.blog_itemInnerFooter,
-  dateClassName: styles.blog_itemInnerFooterDate,
+  descriptionInnerFooterClassName: styles.blog_itemFooter,
+  dateClassName: styles.blog_itemDate,
+  contentContainerClassName: styles.blog_itemContent,
   authorPicClassName: "d-none"
 }
 
 const classesBlogCategories = {
-  containerClassName: styles.blog_category,
-  categoryClassName: styles.blog_categoryItem,
-  linkClassName: styles.blog_categoryLink,
+  containerClassName: styles.category,
+  categoryClassName: styles.category_item,
+  linkClassName: styles.category_link,
 }
-
-const classesEmptyComponent = {
-  emptyContainer: styles.blog_empty,
-  emptyTitle: styles.blog_emptyTitle
-};
 
 const classesPagination = {
   pagingClassName: styles.pagination,
-  activeClassName: styles.pagination_active,
-  itemClassName: styles.pagination_item
-}
-
-const classesPlaceholderBlogs = {
-  placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_blogsList}`
-}
-
-const classesBlogRecent = {
-  containerClassName: styles.blog_recent,
-  blogRecentClassName: styles.blog_recentItem,
-  imageClassName: styles.blog_recentItemImage,
-  labelContainerClassName: styles.blog_recentItemContent,
-  titleClassName: styles.blog_recentItemContentTitle,
-  dateClassName: styles.blog_recentItemContentDate
+  activeClassName: styles.pagination_item__active,
+  itemClassName: styles.pagination_item,
+  linkClassName: styles.pagination_link
 }
 
 const Blog: FC<any> = ({
@@ -70,11 +61,14 @@ const Blog: FC<any> = ({
   headerImage,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
-  const size = useWindowSize();
 
-  const [totalCategories, setTotalCategories] = useState(null);
-  const BlogAllowed = isBlogAllowed();
+  const i18n: any = useI18n()
+  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("blog.title")]
+
+  const size = useWindowSize()
+  const BlogAllowed = isBlogAllowed()
+
+  const [totalCategories, setTotalCategories] = useState(null)
 
   return (
     <Layout
@@ -84,83 +78,92 @@ const Blog: FC<any> = ({
       brand={brand}
       withAllowed={BlogAllowed}
     >
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-            <div
-              className={`${styles.blog_headerContainer} ${!headerImage && styles.blog_headerWithoutBackground}`}
-              style={{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${headerImage})` }}
-            >
-              <h1 className={styles.blog_headerTitle}>
-                {i18n.t("blog.title")}
-              </h1>
+
+      <Breadcrumb 
+        lng={lng}
+        title={i18n.t("blog.title")} 
+        links={linksBreadcrumb} 
+      />
+
+      <div className={styles.wrapper}>
+
+        <div className="container">
+          <div className="row">
+
+            <div className="col-12 col-md-8">
+
+              <div className={`row ${styles.header}`}>
+                <div className={`col-12 col-md-8 ${styles.header_image}`}>
+                  <img src={headerImage} alt={i18n.t("blog.title")} title={i18n.t("blog.title")} />
+                </div>
+              </div>
+
+              <div className={styles.sort}></div>
+
+              <Blogs
+                classes={classesBlogs}
+                withPagination
+                paginationClasses={classesPagination}
+                paginationNextLabel={<FiChevronRight />}
+                paginationPrevLabel={<FiChevronLeft />}
+                itemPerPage={5}
+                thumborSetting={{
+                  width: size.width < 768 ? 375 : 512,
+                  format: "webp",
+                  quality: 85,
+                }}
+                LoadingComponent={
+                  <Placeholder
+                    withList
+                    withImage
+                    listMany={5}
+                    classes={{
+                      placeholderList: styles.placeholder
+                    }}
+                  />
+                }
+                emptyStateComponent={
+                  <div className={styles.empty}>
+                    <div className={styles.empty_icon}>
+                      <RiQuestionFill />
+                    </div>
+                    <p className={styles.empty_label}>
+                      {i18n.t("blog.isEmpty")}
+                    </p>
+                  </div>
+                }
+              />
+
             </div>
-            <Blogs
-              classes={classesBlogs}
-              paginationClasses={classesPagination}
-              withPagination
-              itemPerPage={4}
-              thumborSetting={{
-                width: size.width < 768 ? 375 : 512,
-                format: "webp",
-                quality: 85,
-              }}
-              LoadingComponent={
-                <>
-                  <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  <Placeholder classes={classesPlaceholderBlogs} withImage />
-                </>
+
+            <div className={`col-12 col-md-4 ${styles.sidebar}`}>
+              {(totalCategories > 0 || totalCategories === null) &&
+                <div className={styles.sidebar_item}>
+                  <div className={styles.sidebar_title}>
+                    {i18n.t("blog.categories")}
+                  </div>
+                  <div className={styles.sidebar_body}>
+                    <BlogCategories
+                      classes={classesBlogCategories}
+                      getCategoriesCount={(categoriesCount) => setTotalCategories(categoriesCount)}
+                    />
+                  </div>
+                </div>
               }
-              emptyStateComponent={
-                <EmptyComponent
-                  classes={classesEmptyComponent}
-                  title={i18n.t("blog.isEmpty")}
-                />
-              }
-            />
-            {(totalCategories > 0 || totalCategories === null) &&
-              <>
-                <h2 className={styles.blog_titleSide}>
-                  {i18n.t("blog.categories")}
-                </h2>
-                <BlogCategories
-                  classes={classesBlogCategories}
-                  getCategoriesCount={(categoriesCount) => setTotalCategories(categoriesCount)}
-                />
-              </>
-            }
-            <h2 className={styles.blog_titleSide}>
-              {i18n.t("blog.recentPost")}
-            </h2>
-            <BlogRecent
-              classes={classesBlogRecent}
-              limit={5}
-              linkPrefix="blog"
-              thumborSetting={{
-                width: 100,
-                format: "webp",
-                quality: 85
-              }}
-              loadingComponent={
-                <>
-                  <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  <Placeholder classes={classesPlaceholderBlogs} withImage />
-                </>
-              }
-            />
+            </div>
+
           </div>
+
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
   const lngDict = locale(params.lng)
-  const brand = await useBrand(req);
-  const headerImage = await getBlogHeaderImage(GRAPHQL_URI(req));
+  const brand = await useBrand(req)
+  const headerImage = await getBlogHeaderImage(GRAPHQL_URI(req))
 
   return {
     props: {
@@ -168,8 +171,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
       lngDict,
       headerImage,
       brand: brand || ""
-    },
-  };
+    }
+  }
 }
 
-export default Blog;
+export default Blog
