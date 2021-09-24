@@ -54,7 +54,7 @@ const ProductRecomendation: FC<Iprops> = ({
           itemPerPage={4}
           slug={slug}
           SKUs={SKUs}
-          newPagination
+          newPagination={type === "crossSell"}
           buttonNext={<Icon.arrowRight />}
           buttonPrev={<Icon.arrowLeft />}
           fullPath={`product/{slug}`}
