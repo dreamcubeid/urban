@@ -1,12 +1,17 @@
 @import '../utils/_variables.scss';
 @import './Buttons.module.scss';
 
+.container
+{
+  margin-bottom: 42px;
+}
+
 .header
 {
   @include flex(column, center, center);
   border-bottom: 1px solid $color_elements_line_darker;
   padding-bottom: 12px;
-  margin: 16px 0 24px;
+  margin: 0 0 24px;
 }
 
 .voucherButton
@@ -155,6 +160,47 @@
   }
 }
 
+.popupErrorContainer
+{
+  @include flex(column, center, flex-start);
+  padding: 24px 16px;
+  border-top: 4px solid $color_red;
+  width: 340px;
+  max-width: 100%;
+}
+
+.popupErrorTitle
+{
+  @include LargeSemiBold;
+  text-align: center;
+}
+
+.popupErrorDesc
+{
+  @include SmallSmall;
+  color: $color_text;
+  padding: 10px;
+  background: $color_elements_line;
+  text-align: center;
+  margin: 12px 0 24px;
+  max-width: 340px;
+}
+
+.backBtn
+{
+  @extend .btn_primary;
+  width: 100%;
+  outline: none;
+  border: none;
+  height: 52px;
+
+  &::after
+  {
+    display: none !important;
+  }
+}
+
+
 
 @media screen and (max-width: #{$breakpoint_max_md}) 
 {
@@ -198,6 +244,11 @@
   .submitButton
   {
     padding: 0 18px;
+  }
+
+  .popupErrorContainer
+  {
+    width: 100%;
   }
     
   .footer

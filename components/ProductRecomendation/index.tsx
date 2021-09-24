@@ -33,7 +33,7 @@ const ProductRecomendation: FC<Iprops> = ({
 
   const size = useWindowSize()
   const allowedProductRecommendation = isProductRecommendationAllowed()
-  const [totalItems, setTotalItems] = useState<any>(null)
+  const [totalItems, setTotalItems] = useState<number>(null)
 
   if (!allowedProductRecommendation) return <></>
   if (totalItems === 0) return <></>
@@ -54,7 +54,7 @@ const ProductRecomendation: FC<Iprops> = ({
           itemPerPage={4}
           slug={slug}
           SKUs={SKUs}
-          newPagination
+          newPagination={type === "crossSell"}
           buttonNext={<Icon.arrowRight />}
           buttonPrev={<Icon.arrowLeft />}
           fullPath={`product/{slug}`}

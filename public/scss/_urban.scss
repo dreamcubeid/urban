@@ -4,6 +4,11 @@
  */
 @import './utils/_variables.scss';
 
+body
+{
+  color: $color_black;
+}
+
 .container
 {
   padding: 0 42px 0;

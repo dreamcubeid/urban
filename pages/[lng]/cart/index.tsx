@@ -3,9 +3,10 @@ import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import { parseCookies } from 'lib/parseCookies'
+import Link from 'next/link'
 // import Router from 'next/router'
 import dynamic from 'next/dynamic'
-import { Trash } from 'react-feather'
+import Icon from 'components/Icon/Icon'
 import {
   CartDetails,
   useI18n
@@ -23,36 +24,42 @@ import Layout from 'components/Layout/Layout'
 import ProductRecomendation from 'components/ProductRecomendation'
 import OrderSummaryBox from 'components/OrderSummaryBox'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
-
-const Popup = dynamic(() => import('components/Popup/Popup'))
+import Placeholder from 'components/Placeholder'
+const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComponent'))
 
 /* styles */
 import styles from 'public/scss/pages/Cart.module.scss'
 
-
 const classesCartDetails = {
   className: styles.cart,
-  cartHeaderClassName: "d-none",
-  itemClassName: styles.cartItem,
-  itemImageClassName: styles.cartItem_image,
-  itemTitleClassName: styles.cartItem_detail,
-  itemPriceClassName: styles.cartItem_priceCalculate,
-  itemRegularPriceClassName: styles.cartItem_priceRegular,
-  itemSalePriceClassName: styles.cartItem_priceSale,
-  itemSalePriceWrapperClassName: styles.cartItem_priceSaleWrapper,
-  itemDiscountNoteClassName: styles.cartItem_discNote,
-  itemRegularAmountClassName: "d-none",
+  itemClassName: styles.item,
+  itemImageClassName: styles.itemImage,
+  itemTitleClassName: styles.itemTitle,
+  itemPriceClassName: styles.itemPrice,
+  itemRegularPriceClassName: styles.itemRegularPrice,
+  itemSalePriceClassName: styles.itemSalePrice,
+  itemSalePriceWrapperClassName: styles.itemSalePriceWrapper,
+  itemDiscountNoteClassName: styles.itemDiscountNote,
+  itemQtyClassName: styles.itemQty,
+  qtyBoxClassName: styles.qtyBox,
+  itemAmountClassName: styles.itemAmount,
+  itemRemoveClassName: styles.itemRemove,
+  cartFooterClassName: styles.cartFooter,
+  cartFooterTextareaClassName: styles.cartFooterTextarea,
+  itemEditClassName: styles.itemEdit,
+  itemRegularAmountClassName: styles.itemRegularAmount,
+  changeQtyButtonClassName: styles.changeQtyButton,
+  removeButtonClassName: styles.removeButton,
+  // hidden
+  cartFooterTitleClassName: "d-none",
   headerQtyClassName: "d-none",
-  itemQtyClassName: styles.cartItem_qty,
-  qtyBoxClassName: styles.cartItem_qtyBox,
-  itemAmountClassName: styles.cartItem_price,
-  itemEditClassName: "d-none",
-  itemRemoveClassName: styles.cartItem_remove,
-  cartFooterClassName: `${styles.cart_cartFooter} ${styles.sirclo_form_row} w-100`,
-  cartFooterTitleClassName: styles.cartFooter_title,
-  cartFooterTextareaClassName: `form-control ${styles.sirclo_form_input} ${styles.cartFooter_input} py-2`,
+  cartHeaderClassName: "d-none",
 }
 
+const classesCartPlaceholder = {
+  placeholderList: styles.placeholderList,
+  placeholderImage: styles.placeholderImage,
+}
 const Cart: FC<any> = ({
   lng,
   lngDict,
@@ -63,10 +70,8 @@ const Cart: FC<any> = ({
   const size: any = useWindowSize()
 
   const [SKUs, setSKUs] = useState<Array<string>>(null)
-  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
   const [invalidMsg, setInvalidMsg] = useState<string>('')
 
-  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart);
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("cart.cart")]
 
   return (
@@ -83,44 +88,86 @@ const Cart: FC<any> = ({
       <section className={styles.products_breadcumb}>
         <Breadcrumb title={i18n.t("cart.title")} links={linksBreadcrumb} lng={lng} />
       </section>
-      {invalidMsg !== "" &&
-        <div className={styles.cartError}>
-          <div className={styles.cartError_inner}>
-            {invalidMsg}
-          </div>
-        </div>
-      }
+
       <section className="container">
-        <div className={styles.container}>
-          <div className={styles.cardDetailContiner}>
-            <CartDetails
-              getSKU={(SKUs: any) => setSKUs(SKUs)}
-              classes={classesCartDetails}
-              itemRedirectPathPrefix="product"
-              isEditable={true}
-              removeIcon={<Trash />}
-              onErrorMsg={() => setShowModalErrorAddToCart(true)}
-              onInvalidMsg={(msg) => setInvalidMsg(msg)}
-              thumborSetting={{
-                width: size.width < 768 ? 200 : 400,
-                format: "webp",
-                quality: 85,
-              }}
-              loadingComponent={<>TODO: SKELETON</>}
-              emptyCartPlaceHolder={<>TODO: Empty</>}
-            />
-          </div>
-
-          <div className={styles.orderSummaryContainer}>
-            <OrderSummaryBox
-              lng={lng}
-              i18n={i18n}
-              page="place_order"
-            />
-          </div>
-        </div>
       </section>
-
+      <LazyLoadComponent>
+        <section className="container">
+          <div className={styles.container}>
+            <div className={styles.cardDetailContainer}>
+              <div className={styles.cardDetailHeader}>
+                <p>
+                  {i18n.t("cart.youHave")}{" "}
+                  {SKUs?.length || 0}{" "}
+                  {i18n.t("cart.item")}
+                </p>
+                <Link href="lng/products" as={`${lng}/products`}>
+                  <p>
+                    {i18n.t("cart.shoppingAgain")}
+                  </p>
+                </Link>
+              </div>
+              {invalidMsg !== "" &&
+                <div className={styles.cartError}>
+                  {invalidMsg}
+                </div>
+              }
+              <CartDetails
+                getSKU={(SKUs: any) => setSKUs(SKUs)}
+                classes={classesCartDetails}
+                itemRedirectPathPrefix="product"
+                isEditable={true}
+                removeIcon={<Icon.CartDetails.removeIcon />}
+                onErrorMsg={() => { }}
+                onInvalidMsg={(msg) => setInvalidMsg(msg)}
+                thumborSetting={{
+                  width: size.width < 768 ? 200 : 400,
+                  format: "webp",
+                  quality: 85,
+                }}
+                loadingComponent={
+                  [0, 1, 2].map((_, i) => (
+                    <div>
+                      <div key={i} className={styles.placeholderContainer}>
+                        <Placeholder
+                          classes={classesCartPlaceholder}
+                          withImage
+                          withList
+                          listMany={3}
+                        />
+                      </div>
+                    </div>
+                  ))
+                }
+                emptyCartPlaceHolder={
+                  <>
+                    <EmptyComponent
+                      logo={<div className={styles.iconEmpty} />}
+                      classes={{ emptyContainer: styles.emptyContainer }}
+                      desc={i18n.t("product.isEmpty")}
+                    />
+                    <Link href="lng/products" as={`${lng}/products`}>
+                      <button
+                        type="submit" className={styles.continueShoppingBtn}
+                        data-identity="cart-continueShoppingBtn"
+                      >
+                        {i18n.t("global.continueShopping")}
+                      </button>
+                    </Link>
+                  </>
+                }
+              />
+            </div>
+            <div className={styles.orderSummaryContainer}>
+              <OrderSummaryBox
+                lng={lng}
+                i18n={i18n}
+                page="cart"
+              />
+            </div>
+          </div>
+        </section>
+      </LazyLoadComponent>
       <LazyLoadComponent>
         <ProductRecomendation
           type="crossSell"
@@ -128,19 +175,6 @@ const Cart: FC<any> = ({
           title={i18n.t("product.recomendation")}
         />
       </LazyLoadComponent>
-      {showModalErrorAddToCart &&
-        <Popup
-          withHeader
-          setPopup={toogleErrorAddToCart}
-          mobileFull={false}
-          classPopopBody
-        >
-          <div className={styles.popup_popupError}>
-            <h3 className={styles.popup_popupErrorTitle}>{i18n.t("cart.errorSKUTitle")}</h3>
-            <p className={styles.popup_popupErrorDesc}>{i18n.t("cart.errorSKUDesc")} </p>
-          </div>
-        </Popup>
-      }
     </Layout>
   )
 }

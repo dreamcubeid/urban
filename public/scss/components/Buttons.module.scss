@@ -70,6 +70,7 @@
     @include flex(row, center, center);
     color: $color_white;
     background-color: $color_black;
+    border-radius: 2px;
     
     &:hover,
     &:focus,

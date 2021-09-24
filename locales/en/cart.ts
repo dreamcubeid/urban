@@ -7,6 +7,7 @@ const locale = {
     "invalidItems": "List of invalid products: ",
     "isEmpty": "You haven't added items yet",
     "item": "Item",
+    "youHave": "You Have",
     "limitStock": "Cannot exceed the available stock",
     "noteToSeller": "Note to Seller",
     "outofStock": "Out of Stock",
@@ -17,7 +18,8 @@ const locale = {
     "cart": "Cart",
     "unknownSKU": "Unknown SKU",
     "unpublishedProduct": "Unpublish Product",
-    "writeNoteToSeller": "Write Note To Seller"
+    "writeNoteToSeller": "Write Note To Seller",
+    "shoppingAgain": "Continue Shopping",
   }
 }
 

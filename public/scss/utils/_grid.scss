@@ -29,6 +29,12 @@
   grid-row: span $qty / span $qty;
 }
 
+@mixin grid-start-($col: 1, $row: 1)
+{
+  grid-row-start: $row;
+  grid-column-start: $col;
+}
+
 @mixin col-span-($qty: 2)
 {
   grid-column: span $qty / span $qty;

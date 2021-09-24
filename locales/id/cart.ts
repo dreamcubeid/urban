@@ -7,6 +7,7 @@ const locale = {
     "invalidItems": "Daftar produk yang tidak valid: ",
     "isEmpty": "Anda belum menambahkan barang",
     "item": "Barang",
+    "youHave": "Terdapat",
     "limitStock": "Tidak bisa melebihi stok yang tersedia",
     "noteToSeller": "Catatan untuk penjual",
     "outofStock": "Stok Habis",
@@ -17,7 +18,8 @@ const locale = {
     "cart": "Keranjang",
     "unknownSKU": "SKU tidak diketahui",
     "unpublishedProduct": "Produk tidak diterbitkan",
-    "writeNoteToSeller": "Tulis catatan untuk penjual"
+    "writeNoteToSeller": "Tulis catatan untuk penjual",
+    "shoppingAgain": "Belanja Lagi",
   }
 }
 
