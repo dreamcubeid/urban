@@ -89,8 +89,6 @@ const Cart: FC<any> = ({
         <Breadcrumb title={i18n.t("cart.title")} links={linksBreadcrumb} lng={lng} />
       </section>
 
-      <section className="container">
-      </section>
       <LazyLoadComponent>
         <section className="container">
           <div className={styles.container}>

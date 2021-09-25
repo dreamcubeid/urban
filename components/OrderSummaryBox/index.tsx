@@ -15,6 +15,7 @@ import styles from 'public/scss/components/OrderSummary.module.scss'
 import stylesCartDetails from 'public/scss/components/CartDetails.module.scss'
 import stylesPriceBreakdown from 'public/scss/components/PriceBreakdown.module.scss'
 import stylesPopup from 'public/scss/components/PopUpVoucherCoupon.module.scss'
+import stylesErrorAddToCart from 'public/scss/components/ErrorAddToCart.module.scss'
 
 const classesOrderSummary = {
   containerClassName: styles.container,
@@ -204,11 +205,11 @@ const OrderSummaryBox: FC<iProps> = ({
           setPopup={toogleErrorAddToCart}
           mobileFull={false}
         >
-          <div className={styles.popupErrorContainer}>
-            <h3 className={styles.popupErrorTitle}>{i18n.t("cart.errorSKUTitle")}</h3>
-            <p className={styles.popupErrorDesc}>{i18n.t("cart.errorSKUDesc")} </p>
+          <div className={stylesErrorAddToCart.popupErrorContainer}>
+            <h3 className={stylesErrorAddToCart.popupErrorTitle}>{i18n.t("cart.errorSKUTitle")}</h3>
+            <p className={stylesErrorAddToCart.popupErrorDesc}>{i18n.t("cart.errorSKUDesc")} </p>
             <button
-              className={styles.backBtn}
+              className={stylesErrorAddToCart.backBtn}
               onClick={toogleErrorAddToCart}
               data-identity="ordersummary-back-btn"
             >

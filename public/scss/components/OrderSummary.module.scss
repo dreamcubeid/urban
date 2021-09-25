@@ -160,48 +160,6 @@
   }
 }
 
-.popupErrorContainer
-{
-  @include flex(column, center, flex-start);
-  padding: 24px 16px;
-  border-top: 4px solid $color_red;
-  width: 340px;
-  max-width: 100%;
-}
-
-.popupErrorTitle
-{
-  @include LargeSemiBold;
-  text-align: center;
-}
-
-.popupErrorDesc
-{
-  @include SmallSmall;
-  color: $color_text;
-  padding: 10px;
-  background: $color_elements_line;
-  text-align: center;
-  margin: 12px 0 24px;
-  max-width: 340px;
-}
-
-.backBtn
-{
-  @extend .btn_primary;
-  width: 100%;
-  outline: none;
-  border: none;
-  height: 52px;
-
-  &::after
-  {
-    display: none !important;
-  }
-}
-
-
-
 @media screen and (max-width: #{$breakpoint_max_md}) 
 {
   .subTotal

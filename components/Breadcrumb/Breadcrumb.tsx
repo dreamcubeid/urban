@@ -6,15 +6,16 @@ import Link from 'next/link'
 import styles from 'public/scss/components/Breadcrumbs.module.scss'
 
 type BreadcrumbPropType = {
-  title: string
-  lng: string
-  links: any
+  title?: string
+  lng?: string
+  links?: any
   fluidContainer?: boolean
+  currentStep?: any
 }
 
-const Breadcrumb: FC<BreadcrumbPropType> = ({ 
-  title, 
-  links, 
+const Breadcrumb: FC<BreadcrumbPropType> = ({
+  title,
+  links,
   lng,
   fluidContainer = false
 }) => {
