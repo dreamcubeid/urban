@@ -10,7 +10,7 @@
 {
   @extend .grid;
   @include grid-(2);
-  @include grid-y-(2);
+  grid-template-rows: auto fit-content;
   @include gap-x-(24px);
   margin-bottom: 42px;
 }
