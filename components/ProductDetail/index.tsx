@@ -1,20 +1,15 @@
 /* library package */
-import { FC, useState } from 'react'
-import dynamic from 'next/dynamic'
-import Router from 'next/router'
-import { ProductDetail, formatPrice } from '@sirclo/nexus'
+import { FC } from 'react'
+import { ProductDetail } from '@sirclo/nexus'
 
 /* library component */
-import useWindowSize from 'lib/useWindowSize'
+import useProductDetail from './hooks/useProductDetail'
 
 /* components */
 import Placeholder from 'components/Placeholder'
-const Popup = dynamic(() => import('components/Popup/Popup'))
 
 /* styles */
 import styles from 'public/scss/pages/ProductDetail.module.scss'
-import stylesSuccessAddToCart from 'public/scss/components/SuccessAddToCart.module.scss'
-import stylesErrorAddToCart from 'public/scss/components/ErrorAddToCart.module.scss'
 
 const productDetailClass = {
   productDetailParentDivClassName: styles.productDetailParentDiv,
@@ -90,23 +85,22 @@ const ProductDetailComponent: FC<IProps> = ({
   setProductId
 }) => {
 
-  const size = useWindowSize()
-  const IS_PROD = process.env.IS_PROD
-
-  const [successAddToCart, setSuccessAddToCart] = useState(null)
-  const [errorAddToCart, setErrorAddToCart] = useState(null)
-  const [errorNotify, setErrorNotify] = useState<boolean>(false)
-  const [successNotify, setSuccessNotify] = useState<boolean>(false)
-
-  const toogleErrorAddToCart = () => setErrorAddToCart(!errorAddToCart)
-  const toogleHideSuccedAddToCart = () => setSuccessAddToCart(false)
-  const toogleErrorNotify = () => setErrorNotify(!errorNotify)
-  const toogleSuccessNotify = () => setSuccessNotify(!successNotify)
-
-  const toogleSuccessAddToCart = (data: any) => {
-    const detailProduct = data?.filter((data: any) => data?.slug === slug)
-    setSuccessAddToCart(detailProduct[0])
-  }
+  const {
+    successAddToCart,
+    errorAddToCart,
+    errorNotify,
+    successNotify,
+    toogleErrorAddToCart,
+    toogleErrorNotify,
+    toogleSuccessNotify,
+    size,
+    IS_PROD,
+    toogleSuccessAddToCart,
+    ModalSuccessAddToCart,
+    ModalErrorAddToCart,
+    ModalErrorNotify,
+    ModalSuccessNotify
+  } = useProductDetail({ lng, i18n, slug })
 
   return (
     <section className="container">
@@ -162,65 +156,10 @@ const ProductDetailComponent: FC<IProps> = ({
           </div>
         }
       />
-
-      {successAddToCart &&
-        <Popup
-          setPopup={toogleHideSuccedAddToCart}
-          mobileFull={false}
-        >
-          <div className={stylesSuccessAddToCart.container}>
-            <h2 className={stylesSuccessAddToCart.title}>{i18n.t("cart.successAddToCart")}</h2>
-            <div className={stylesSuccessAddToCart.detail}>
-              <img
-                src={successAddToCart?.imageURL}
-                className={stylesSuccessAddToCart.image}
-              />
-              <div>
-                <h4 className={stylesSuccessAddToCart.detailTitle}>{successAddToCart?.title}</h4>
-                <div className={stylesSuccessAddToCart.detailPriceContainer}>
-                  {successAddToCart?.discount.value !== 0 &&
-                    <span className={stylesSuccessAddToCart.detailSale}> {formatPrice(successAddToCart?.price?.value, "IDR")} </span>
-                  }
-                  <p className={stylesSuccessAddToCart.detailPrice}> {formatPrice(successAddToCart?.salePrice?.value, 'IDR')} </p>
-                </div>
-              </div>
-            </div>
-            <div className={stylesSuccessAddToCart.footer}>
-              <button
-                className={stylesSuccessAddToCart.viewCartBtn}
-                onClick={() => Router.push("/[lng]/cart", `/${lng}/cart`)}
-              >
-                {i18n.t("orderSummary.viewCart")}
-              </button>
-              <button
-                className={stylesSuccessAddToCart.continueShoppingBtn}
-                onClick={() => Router.push("/[lng]/products", `/${lng}/products`)}
-              >
-                {i18n.t("global.continueShopping")}
-              </button>
-            </div>
-          </div>
-        </Popup>
-      }
-
-      {errorAddToCart &&
-        <Popup
-          setPopup={toogleErrorAddToCart}
-          mobileFull={false}
-        >
-          <div className={stylesErrorAddToCart.popupErrorContainer}>
-            <h3 className={stylesErrorAddToCart.popupErrorTitle}>{i18n.t("cart.errorSKUTitle")}</h3>
-            <p className={stylesErrorAddToCart.popupErrorDesc}>{i18n.t("cart.errorSKUDesc")} </p>
-            <button
-              className={stylesErrorAddToCart.backBtn}
-              onClick={toogleErrorAddToCart}
-              data-identity="addToCart-back-btn"
-            >
-              {i18n.t("global.back")}
-            </button>
-          </div>
-        </Popup>
-      }
+      {successAddToCart && <ModalSuccessAddToCart />}
+      {errorAddToCart && <ModalErrorAddToCart />}
+      {errorNotify && <ModalErrorNotify />}
+      {successNotify && <ModalSuccessNotify />}
     </section >
   )
 }
