@@ -163,8 +163,7 @@ const ProductDetailComponent: FC<IProps> = ({
         }
       />
 
-      {
-        successAddToCart &&
+      {successAddToCart &&
         <Popup
           setPopup={toogleHideSuccedAddToCart}
           mobileFull={false}
@@ -204,8 +203,7 @@ const ProductDetailComponent: FC<IProps> = ({
         </Popup>
       }
 
-      {
-        errorAddToCart &&
+      {errorAddToCart &&
         <Popup
           setPopup={toogleErrorAddToCart}
           mobileFull={false}
