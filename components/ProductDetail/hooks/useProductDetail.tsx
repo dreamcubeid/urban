@@ -3,9 +3,6 @@ import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import { formatPrice } from '@sirclo/nexus'
 
-/* library template */
-import useWindowSize from 'lib/useWindowSize'
-
 /* components */
 const Popup = dynamic(() => import('components/Popup/Popup'))
 import Router from 'next/router'
@@ -16,7 +13,6 @@ import stylesErrorAddToCart from 'public/scss/components/ErrorAddToCart.module.s
 
 const useProductDetail = ({ lng, i18n, slug }) => {
 
-  const size = useWindowSize()
   const IS_PROD = process.env.IS_PROD
 
   const [successAddToCart, setSuccessAddToCart] = useState(null)
@@ -118,7 +114,6 @@ const useProductDetail = ({ lng, i18n, slug }) => {
     toogleErrorAddToCart,
     toogleErrorNotify,
     toogleSuccessNotify,
-    size,
     IS_PROD,
     toogleSuccessAddToCart,
     ModalSuccessAddToCart,

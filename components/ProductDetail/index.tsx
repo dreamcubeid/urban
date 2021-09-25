@@ -7,6 +7,7 @@ import useProductDetail from './hooks/useProductDetail'
 
 /* components */
 import Placeholder from 'components/Placeholder'
+import Icon from 'components/Icon/Icon'
 
 /* styles */
 import styles from 'public/scss/pages/ProductDetail.module.scss'
@@ -23,8 +24,6 @@ const productDetailClass = {
   detailTitleContainerClassName: styles.detailTitleContainer,
   detailTitleClassName: styles.detailTitle,
   detailTitleStarClassName: styles.detailTitleStar,
-  detailTitleStarNumberClassName: styles.detailTitleStarNumber,
-  selectedVariantContainerClassName: styles.selectedVariantContainer,
   selectetVariantClassName: styles.selectetVariant,
   variantContainerClassName: styles.variantContainer,
   variantOptionsContainerClassName: styles.variantOptionsContainer,
@@ -46,6 +45,7 @@ const productDetailClass = {
   closeButtonClassName: styles.closeButton,
   dotClassName: styles.dot,
   arrowClassName: styles.arrow,
+  detailTitleStarNumberClassName: styles.detailTitleStarNumber
 }
 
 const openOrderClass = {
@@ -93,7 +93,6 @@ const ProductDetailComponent: FC<IProps> = ({
     toogleErrorAddToCart,
     toogleErrorNotify,
     toogleSuccessNotify,
-    size,
     IS_PROD,
     toogleSuccessAddToCart,
     ModalSuccessAddToCart,
@@ -116,8 +115,8 @@ const ProductDetailComponent: FC<IProps> = ({
         }}
         getProductID={(id) => setProductId(id)}
         qtyLabel={i18n.t("product.quantity")}
-        enableArrow={size?.width < 576 ? true : false}
-        enableDots={size?.width < 576 ? true : false}
+        enableArrow
+        enableDots
         onComplete={(data: any) => {
           toogleSuccessAddToCart(data?.saveCart ? data?.saveCart?.lineItems :
             data?.saveCartByMemberID?.lineItems)
@@ -126,11 +125,11 @@ const ProductDetailComponent: FC<IProps> = ({
         onError={toogleErrorAddToCart}
         onErrorMsg={(msg) => msg && toogleErrorNotify}
         withEstimateShipping={IS_PROD === "false" ? true : false}
-        prevIcon={<span className={styles.prevIcon}>{"<"}</span>}
-        nextIcon={<span className={styles.nextIcon}>{">"}</span>}
-        notifyIcon={<></>/* TODO: NOTIFY */}
-        openOrderIconDate={<></>/* TODO: OPEN ORDER */}
-        openOrderIconTime={<></>/* TODO: OPEN ORDER */}
+        prevIcon={<Icon.productDetail.prevIcon />}
+        nextIcon={<Icon.productDetail.nextIcon />}
+        notifyIcon={<Icon.productDetail.notifyIcon />}
+        openOrderIconDate={<Icon.productDetail.openOrderIconDate />}
+        openOrderIconTime={<Icon.productDetail.openOrderIconTime />}
         isButton={{
           0: true,
           1: true,

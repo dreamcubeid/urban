@@ -10,13 +10,14 @@
 {
   @extend .grid;
   @include grid-(2);
+  @include grid-y-(2);
   @include gap-x-(24px);
   margin-bottom: 42px;
 }
 
 .imageRow
 {
-  margin-bottom: 24px;
+  position: relative;
 
   ul
   {
@@ -37,6 +38,7 @@
 .propertyRow
 {
   @include flex(column, flex-start, flex-start);
+  @include row-span-(2);
   margin-top: -12px;
 
   & > div:first-child 
@@ -148,16 +150,6 @@
   margin-left: 6px;
 }
 
-.selectedVariantContainer
-{
-// TODO: akan dikerjakan
-}
-
-.selectetVariant
-{
-  // TODO: akan dikerjakan
-}
-
 .variantContainer
 {
   @include flex(column, flex-start, center);
@@ -221,12 +213,6 @@
     border: 1px solid $color_elements_line_darker;
     padding: 6px 12px;
     cursor: pointer;
-
-    &:hover
-    {
-      background-color: $color_black;
-      color: $color_white;
-    }
   }
 }
 
@@ -361,27 +347,24 @@
 
 .arrow
 {
-  // TODO: akan dikerjakan
-}
+  @include position(absolute, 47%, 50%);
+  transform: translate(50%,-50%);
+  cursor: pointer;
 
-@media screen and (max-width: #{$breakpoint_max_md}) 
-{
-  .row
+  &:hover
   {
-    @include grid-(1);
+    opacity: .5;
   }
 
-  .addToCartBtn,
-  .buyNowBtn
+  &:first-child
   {
-    @include col-span-(2);
+    left: calc(-50% + 20px);
   }
 
-  .buyNowBtn
+  &:nth-child(3)
   {
-    margin-top: 12px !important;
+    right: 20px;
   }
-
 }
 
 
@@ -434,6 +417,32 @@
 }
 
 
+
+@media screen and (max-width: #{$breakpoint_max_md}) 
+{
+  .row
+  {
+    @include grid-(1);
+    @include grid-y-(1);
+  }
+
+  .addToCartBtn,
+  .buyNowBtn
+  {
+    @include col-span-(2);
+  }
+
+  .imageRow
+  {
+    margin-bottom: 24px;
+  }
+
+  .buyNowBtn
+  {
+    margin-top: 12px !important;
+  }
+
+}
 
 // TODO: REFACTOR TO ESTIMATE STYLE
 .estimateShippingLogoImg
