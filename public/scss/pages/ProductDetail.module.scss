@@ -213,6 +213,12 @@
     border: 1px solid $color_elements_line_darker;
     padding: 6px 12px;
     cursor: pointer;
+
+    &:hover
+    {
+      background-color: $color_black;
+      color: $color_white;
+    }
   }
 }
 
