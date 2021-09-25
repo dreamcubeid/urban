@@ -36,7 +36,7 @@
 
 .propertyRow
 {
-  @include flex(column, flex-start, center);
+  @include flex(column, flex-start, flex-start);
   margin-top: -12px;
 
   & > div:first-child 
@@ -384,6 +384,54 @@
 
 }
 
+
+// skeleton
+.placeholderContainer
+{
+  @extend .grid;
+  @include grid-(2);
+  @include gap-x-(24px);
+  @include gap-y-(24px);
+  margin-bottom: 42px;
+}
+
+.placeholderList
+{
+  height: 20px;
+  width: 100%;
+
+  &:nth-child(3)
+  {
+    width: 60%;
+  }
+
+  &:nth-child(4)
+  {
+    width: 0%;
+  }
+
+  &:nth-child(5)
+  {
+    width: 30%;
+  }
+
+  &:nth-child(7)
+  {
+    width: 70%;
+  }
+  
+  &:last-child
+  {
+    width: 80%;
+  }
+}
+
+.placeholderImage
+{
+  @include row-span-(9);
+  height: 425px;
+  width: 100%;
+}
 
 
 

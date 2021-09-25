@@ -152,22 +152,19 @@ const ProductDetailComponent: FC<IProps> = ({
           </div>
         }
         loadingComponent={
-          [0, 1, 2].map((_, i) => (
-            <div>
-              <div key={i} className={styles.placeholderContainer}>
-                <Placeholder
-                  classes={classesCartPlaceholder}
-                  withImage
-                  withList
-                  listMany={3}
-                />
-              </div>
-            </div>
-          ))
+          <div className={styles.placeholderContainer}>
+            <Placeholder
+              classes={classesCartPlaceholder}
+              withImage
+              withList
+              listMany={8}
+            />
+          </div>
         }
       />
 
-      {successAddToCart &&
+      {
+        successAddToCart &&
         <Popup
           setPopup={toogleHideSuccedAddToCart}
           mobileFull={false}
@@ -207,7 +204,8 @@ const ProductDetailComponent: FC<IProps> = ({
         </Popup>
       }
 
-      {errorAddToCart &&
+      {
+        errorAddToCart &&
         <Popup
           setPopup={toogleErrorAddToCart}
           mobileFull={false}
@@ -225,7 +223,7 @@ const ProductDetailComponent: FC<IProps> = ({
           </div>
         </Popup>
       }
-    </section>
+    </section >
   )
 }
 
