@@ -73,7 +73,7 @@ const classesCartPlaceholder = {
 
 type IProps = {
   lng: string,
-  i18n: any,
+  i18n: string,
   slug: string
   setProductId?: any
 }

@@ -20,7 +20,7 @@ const locale = {
     "unpublishedProduct": "Produk tidak diterbitkan",
     "writeNoteToSeller": "Tulis catatan untuk penjual",
     "shoppingAgain": "Belanja Lagi",
-    "successAddToCart": "Sukses Masuk Keranjang!"
+    "successAddToCart": "Berhasil ditambahkan ke keranjang belanja"
   }
 }
 

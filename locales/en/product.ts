@@ -24,7 +24,7 @@ const locale = {
     "isEmptyReview": "There are no reviews yet",
     "minute": "Min",
     "new": "New",
-    "quantity": "Kuantitas",
+    "quantity": "Quantity",
     "newArrivals": "New Arrivals",
     "next": "Next",
     "noRelated": "No related products!",

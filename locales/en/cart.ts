@@ -20,7 +20,7 @@ const locale = {
     "unpublishedProduct": "Unpublish Product",
     "writeNoteToSeller": "Write Note To Seller",
     "shoppingAgain": "Continue Shopping",
-    "successAddToCart": "Success Add to Cart!"
+    "successAddToCart": "Item was successfully added to your cart"
   }
 }
 
