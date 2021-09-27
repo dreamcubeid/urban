@@ -67,7 +67,7 @@
     order: 5;
   }
 
-  [class*="estimateShippingWrapper"]
+  [class*="EstimateShipping"]
   {
     order: 6;
   }
@@ -446,13 +446,6 @@
     margin-top: 12px !important;
   }
 
-}
-
-// TODO: REFACTOR TO ESTIMATE STYLE
-.estimateShippingLogoImg
-{
-  @include fixedWidth(34px);
-  @include fixedHeight(24px);
 }
 
 

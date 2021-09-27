@@ -12,6 +12,7 @@ import Icon from 'components/Icon/Icon'
 /* styles */
 import styles from 'public/scss/pages/ProductDetail.module.scss'
 import stylesNotify from 'public/scss/components/Notify.module.scss'
+import stylesEstimateShipping from 'public/scss/components/EstimateShipping.module.scss'
 
 const productDetailClass = {
   productDetailParentDivClassName: styles.productDetailParentDiv,
@@ -71,7 +72,13 @@ const openOrderClass = {
 }
 
 const estimateShippingClass = {
-  estimateShippingLogoImgClassName: styles.estimateShippingLogoImg,
+  estimateShippingWrapperClassName: stylesEstimateShipping.estimateShippingWrapper,
+  estimateShippingTitleClassName: stylesEstimateShipping.estimateShippingTitle,
+  estimateShippingLogoClassName: stylesEstimateShipping.estimateShippingLogo,
+  estimateShippingLogoImgClassName : stylesEstimateShipping.estimateShippingLogoImg,
+  estimateShippingDetailClassName: stylesEstimateShipping.estimateShippingDetail,
+  estimateShippingShowCourierClassName: stylesEstimateShipping.estimateShippingShowCourier,
+  estimateShippingCostClassName: stylesEstimateShipping.estimateShippingCost
 }
 
 const classesCartPlaceholder = {
