@@ -8,6 +8,11 @@
   grid-template-columns: repeat($qty,minmax(0,1fr));
 } 
 
+@mixin grid-y-($qty: 3)
+{
+  grid-template-rows: repeat($qty,minmax(0,1fr));
+} 
+
 @mixin gap-($qty: 16px)
 {
   grid-gap: $qty;

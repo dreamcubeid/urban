@@ -6,7 +6,10 @@ import {
   RiCopperDiamondFill,
   RiArrowDownSLine,
   RiArrowUpSLine,
-  RiDeleteBin2Line
+  RiDeleteBin2Line,
+  RiCalendarLine,
+  RiTimeLine,
+  RiNotification2Fill
 } from 'react-icons/ri'
 
 const Icon: any = {
@@ -26,6 +29,13 @@ const Icon: any = {
   },
   CartDetails: {
     removeIcon: RiDeleteBin2Line
+  },
+  productDetail: {
+    prevIcon: RiArrowLeftLine,
+    nextIcon: RiArrowRightLine,
+    notifyIcon: RiNotification2Fill,
+    openOrderIconDate: RiCalendarLine,
+    openOrderIconTime: RiTimeLine,
   }
 }
 

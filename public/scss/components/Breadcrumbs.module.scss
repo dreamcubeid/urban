@@ -61,7 +61,11 @@
     margin: 0;
     padding: 0;
 
-      
+    h1
+    {
+      text-transform: capitalize;
+    }
+
     h2
     {
       @include typographyBuilder(700, 32, 48);

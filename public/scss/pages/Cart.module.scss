@@ -1,7 +1,6 @@
 @import '../utils/_variables.scss';
 @import '../components/Buttons.module.scss';
 @import '../components/Form.module.scss';
-@import '../components/Placeholder.module.scss';
 
 .container
 {
@@ -320,7 +319,6 @@
 
 .placeholderList
 {
-  @extend .placeholderItem;
   height: 20px;
   width: 100%;
 
@@ -337,7 +335,6 @@
 
 .placeholderImage
 {
-  @extend .placeholderItem;
   grid-row:  1 / span 3;
   height: 125px;
   width: 100%;

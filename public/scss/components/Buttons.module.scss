@@ -5,19 +5,19 @@
 {
   $this: &;
 
-  @include buttonVariant($color_white, $color_blue, $color_blue);
   @include transition();
   @include typography_builder(800, 14, 18);
   @include truncate(1);
   @include flex(row, center, center);
   text-decoration: none;
   text-align: center;
+  border-radius: 2px;
 
   width: fit-content;
   margin: 0;
   padding: 15px 20px;
   cursor: pointer;
-
+  
   & > svg
   {
     margin-right: 5px;
@@ -47,7 +47,7 @@
     & > svg
     {
       color: $color_black;
-    }
+    }  
   }
 
   &_long
@@ -65,12 +65,20 @@
     @include buttonVariant($color_black, transparent, transparent);
   }
 
+  &_iconHover
+  {
+    @include fixedSize(16px);
+    content: "";
+    background-repeat: no-repeat;
+    margin: 4px 0 0 12px;
+  }
+
   &_primary
   {
     @include flex(row, center, center);
     color: $color_white;
     background-color: $color_black;
-    border-radius: 2px;
+    border: 1px solid $color_black;
     
     &:hover,
     &:focus,
@@ -78,23 +86,63 @@
     {
       color: $color_white;
       background-color: $color_black;
-   
+
       &::after
       {
-        @include fixedSize(16px);
-        content: "";
-        background-repeat: no-repeat;
-        margin: 4px 0 0 12px;
+        @extend .btn_iconHover;
         background-image: url("data:image/svg+xml,%3Csvg width='11' height='12' viewBox='0 0 11 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.28141 5.33333L4.70541 1.75733L5.64808 0.814667L10.8334 6L5.64808 11.1853L4.70541 10.2427L8.28141 6.66667H0.166748V5.33333H8.28141Z' fill='white'/%3E%3C/svg%3E%0A");
-      }   
+      } 
+    }
+
+  }
+  
+  &_secondary
+  {
+    @include flex(row, center, center);
+    color: $color_black;
+    background-color: $color_white;
+    border: 1px solid $color_black;
+    
+    &:hover,
+    &:focus,
+    &:active
+    {
+      color: $color_black;
+      background-color: $color_white;
+      border: 1px solid $color_black;
+
+      &::after
+      {
+        @extend .btn_iconHover;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='12' viewBox='0 0 11 12' fill='none'%3E%3Cpath d='M8.28141 5.33333L4.70541 1.75733L5.64808 0.814667L10.8334 6L5.64808 11.1853L4.70541 10.2427L8.28141 6.66667H0.166748V5.33333H8.28141Z' fill='%23222222'/%3E%3C/svg%3E");
+      } 
     }
   }
 
+  &_text
+  {
+    @extend .btn_secondary;
+    border: 1px solid $color_white;
+    
+    &:hover,
+    &:focus,
+    &:active
+    {
+      border: 1px solid $color_white;
+
+      &::after
+      {
+        @extend .btn_iconHover;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='12' viewBox='0 0 11 12' fill='none'%3E%3Cpath d='M8.28141 5.33333L4.70541 1.75733L5.64808 0.814667L10.8334 6L5.64808 11.1853L4.70541 10.2427L8.28141 6.66667H0.166748V5.33333H8.28141Z' fill='%23222222'/%3E%3C/svg%3E");
+      } 
+    }
+  }
+  
   &_animated
   {
     @include transition(ease, 0.3s);
   }
-
+  
   &_light
   {
     @extend .btn;

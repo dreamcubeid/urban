@@ -31,7 +31,7 @@
     position: relative;
     width: 40vw;
     background: $color_white;
-    border-radius: 5px;
+    border-radius: 2px;
 
     @media screen and (max-width: 991px) {
       width: 70vw;
@@ -48,7 +48,8 @@
     position: relative;
     width: fit-content;
     background: $color_white;
-    border-radius: 5px;
+    border-radius: 2px;
+    animation: animateUp .7s ease forwards;
 
     @media screen and (max-width: 575px) {
       margin: 0 1rem;
@@ -820,4 +821,11 @@
       }
     }
   }
+}
+
+@keyframes animateUp 
+{
+  0%{opacity: 0}
+  70%{ transform: translateY(-22px); opacity: .5}
+  100%{ transform: translateY(-22px); opacity: 1}
 }

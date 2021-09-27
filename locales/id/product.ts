@@ -42,6 +42,7 @@ const locale = {
     "preOrder": "Pre Order",
     "prev": "Sebelumnya",
     "products": "Produk",
+    "quantity": "Kuantitas",
     "quickview": "Tampilkan Sekilas",
     "rating": "Penilaian",
     "ratingReviewTitle": "Penilaian & Ulasan",
