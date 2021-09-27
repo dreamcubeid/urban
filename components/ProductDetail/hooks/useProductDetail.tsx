@@ -95,13 +95,13 @@ const useProductDetail = ({ lng, i18n, slug }) => {
       mobileFull={false}
     >
       <div className={stylesNotify.popupErrorContainer}>
-        <h3 className={stylesNotify.popupErrorTitle}>{i18n.t("product.notifyTitleError")}</h3>
-        <p className={stylesNotify.popupErrorDesc}>{i18n.t("product.notifyError")} </p>
+        <h3 className={stylesNotify.popupTitle}>{i18n.t("product.notifyTitleError")}</h3>
+        <p className={stylesNotify.popupDesc}>{i18n.t("product.notifyError")} </p>
         <button
           className={stylesNotify.continueShoppingBtn}
-          onClick={() => Router.push("/[lng]/products", `/${lng}/products`)}
+          onClick={toogleErrorNotify}
         >
-          {i18n.t("global.continueShopping")}
+          {i18n.t("paymentStatus.tryAgain")}
         </button>
       </div>
     </Popup>
@@ -112,9 +112,9 @@ const useProductDetail = ({ lng, i18n, slug }) => {
       setPopup={toogleSuccessNotify}
       mobileFull={false}
     >
-      <div className={stylesNotify.popupErrorContainer}>
-        <h3 className={stylesNotify.popupErrorTitle}>{i18n.t("product.notifyTitleSuccess")}</h3>
-        <p className={stylesNotify.popupErrorDesc}>{i18n.t("product.notifySuccess")} </p>
+      <div className={stylesNotify.popupSuccessContainer}>
+        <h3 className={stylesNotify.popupTitle}>{i18n.t("product.notifyTitleSuccess")}</h3>
+        <p className={stylesNotify.popupDesc}>{i18n.t("product.notifySuccess")} </p>
         <button
           className={stylesNotify.continueShoppingBtn}
           onClick={() => Router.push("/[lng]/products", `/${lng}/products`)}

@@ -132,12 +132,7 @@ const ProductDetailComponent: FC<IProps> = ({
         }}
         onCompleteMsg={toogleSuccessNotify}
         onError={toogleErrorAddToCart}
-        onErrorMsg={(msg) => {
-
-          console.log("🚀 ~ file: index.tsx ~ line 139 ~ msg", msg)
-          msg && toogleErrorNotify()
-        }
-        }
+        onErrorMsg={(msg) => msg && toogleErrorNotify()}
         withEstimateShipping={IS_PROD === "false" ? true : false}
         prevIcon={<Icon.productDetail.prevIcon />}
         nextIcon={<Icon.productDetail.nextIcon />}
