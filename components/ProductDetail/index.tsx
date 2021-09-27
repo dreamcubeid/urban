@@ -11,6 +11,7 @@ import Icon from 'components/Icon/Icon'
 
 /* styles */
 import styles from 'public/scss/pages/ProductDetail.module.scss'
+import stylesNotify from 'public/scss/components/Notify.module.scss'
 
 const productDetailClass = {
   productDetailParentDivClassName: styles.productDetailParentDiv,
@@ -48,6 +49,13 @@ const productDetailClass = {
   detailTitleStarNumberClassName: styles.detailTitleStarNumber
 }
 
+const notifyMeClass = {
+  notifyMeClassName: stylesNotify.notifyMe,
+  notifyMeLabelClassName: stylesNotify.notifyMeLabel,
+  notifyMeInputClassName: stylesNotify.notifyMeInput,
+  notifyMeSubmitClassName: stylesNotify.notifyMeSubmit,
+}
+
 const openOrderClass = {
   openOrderClassName: styles.openOrder,
   openOrderTitleClassName: styles.openOrderTitle,
@@ -73,7 +81,7 @@ const classesCartPlaceholder = {
 
 type IProps = {
   lng: string,
-  i18n: string,
+  i18n: any,
   slug: string
   setProductId?: any
 }
@@ -110,6 +118,7 @@ const ProductDetailComponent: FC<IProps> = ({
         accordionIcon={<div>accordion</div>}
         classes={{
           ...productDetailClass,
+          ...notifyMeClass,
           ...openOrderClass,
           ...estimateShippingClass
         }}
@@ -123,7 +132,12 @@ const ProductDetailComponent: FC<IProps> = ({
         }}
         onCompleteMsg={toogleSuccessNotify}
         onError={toogleErrorAddToCart}
-        onErrorMsg={(msg) => msg && toogleErrorNotify}
+        onErrorMsg={(msg) => {
+
+          console.log("🚀 ~ file: index.tsx ~ line 139 ~ msg", msg)
+          msg && toogleErrorNotify()
+        }
+        }
         withEstimateShipping={IS_PROD === "false" ? true : false}
         prevIcon={<Icon.productDetail.prevIcon />}
         nextIcon={<Icon.productDetail.nextIcon />}
