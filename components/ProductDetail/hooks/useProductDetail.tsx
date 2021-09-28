@@ -10,6 +10,7 @@ import Router from 'next/router'
 /* styles */
 import stylesSuccessAddToCart from 'public/scss/components/SuccessAddToCart.module.scss'
 import stylesErrorAddToCart from 'public/scss/components/ErrorAddToCart.module.scss'
+import stylesNotify from 'public/scss/components/Notify.module.scss'
 
 const useProductDetail = ({ lng, i18n, slug }) => {
 
@@ -93,16 +94,34 @@ const useProductDetail = ({ lng, i18n, slug }) => {
       setPopup={toogleErrorNotify}
       mobileFull={false}
     >
-      {/* TODO: Modal Error notify */}
+      <div className={stylesNotify.popupErrorContainer}>
+        <h3 className={stylesNotify.popupTitle}>{i18n.t("product.notifyTitleError")}</h3>
+        <p className={stylesNotify.popupDesc}>{i18n.t("product.notifyError")} </p>
+        <button
+          className={stylesNotify.continueShoppingBtn}
+          onClick={toogleErrorNotify}
+        >
+          {i18n.t("paymentStatus.tryAgain")}
+        </button>
+      </div>
     </Popup>
   )
 
   const ModalSuccessNotify = () => (
     <Popup
-      setPopup={toogleErrorNotify}
+      setPopup={toogleSuccessNotify}
       mobileFull={false}
     >
-      {/* TODO: Modal Error notify */}
+      <div className={stylesNotify.popupSuccessContainer}>
+        <h3 className={stylesNotify.popupTitle}>{i18n.t("product.notifyTitleSuccess")}</h3>
+        <p className={stylesNotify.popupDesc}>{i18n.t("product.notifySuccess")} </p>
+        <button
+          className={stylesNotify.continueShoppingBtn}
+          onClick={() => Router.push("/[lng]/products", `/${lng}/products`)}
+        >
+          {i18n.t("global.continueShopping")}
+        </button>
+      </div>
     </Popup>
   )
 

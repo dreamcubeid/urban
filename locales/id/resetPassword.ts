@@ -1,7 +1,7 @@
 const locale = {
   "resetPassword": {
     "enterEmailBody": "Silahkan masukan e-mail yang sudah didaftarkan. Kami akan kirimkan link undangan untuk atur ulang kata sandi anda.",
-    "inputEmail": "user@mail.com",
+    "inputEmail": "Masukkan email anda",
     "inputPass": "Masukan kata sandi baru",
     "reset": "Setel Ulang",
     "setNew": "Setel Ulang Kata Sandi",
