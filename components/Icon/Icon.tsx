@@ -36,6 +36,7 @@ const Icon: any = {
     notifyIcon: RiNotification2Fill,
     openOrderIconDate: RiCalendarLine,
     openOrderIconTime: RiTimeLine,
+    estimateIconClose: RiCloseFill,
   }
 }
 

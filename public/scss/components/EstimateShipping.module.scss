@@ -1,4 +1,5 @@
 @import '../utils/_variables.scss';
+@import './Popup.module.scss';
 
 .estimateShippingWrapper
 {
@@ -17,7 +18,6 @@
   @include position(absolute, auto, 36px);
   @include flex(row);
   @include fixedWidth(34px);
-  @include fixedHeight(24px);
   
   &::before
   {
@@ -61,4 +61,120 @@
 .estimateShippingCost
 {
   @include SmallSemiBold;
+}
+
+.estimateShippingPopupContainer
+{
+  @extend .popup_overlay;
+}
+
+.estimateShippingPopupContent
+{
+  @extend .popup_container;
+  @include flex(column, flex-start, flex-start);
+  padding: 16px 16px 0;
+  border-top: 4px solid $color_blue;
+  width: 340px;
+  max-width: 100%;
+  border-radius: 2px,
+}
+
+.estimateShippingPopupTitle
+{
+  @include RegulerSemiBold;
+}
+
+.estimateShippingPopupButtonClose
+{
+  svg
+  {
+    @include position(absolute, 20px, 15px);
+    @include fixedSize(16px);
+    cursor: pointer;
+  }
+}
+
+.estimateShippingPopupBody
+{
+  padding: 0 12px;
+  background: $color_elements;
+  border: 1px solid $color_elements_line_darker;
+  margin: 10px 0 4px;
+  border-radius: 2px;
+}
+
+.estimateShippingPopupLineInfo
+{
+  @extend .grid;
+  @include gap-x-(42px);
+  grid-template-columns: 50px auto;
+  padding: 12px 0;
+  border-bottom: 1px solid $color_elements_line;
+
+  &:last-child
+  {
+    @include grid-(1);
+    border-bottom: none;
+
+    [class*="estimateShippingPopupLabel"]
+    {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.estimateShippingPopupLabel
+{
+  @include SmallSemiBold;
+  color: $color_text_secondary;
+}
+
+.estimateShippingPopupValue
+{
+  @include SmallSmall;
+}
+
+.estimateShippingPopupProvider
+{
+  @extend .scrollbar_main;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.estimateShippingPopupLineProvider
+{
+  @include flex(row, center, space-between);
+  padding: 12px;
+  margin-right: 8px;
+  border-bottom: 1px solid $color_elements_line;
+}
+
+.estimateShippingPopupProviderImg
+{
+  @include grid-start-(1, 1);
+  @include row-span-(2);
+  @include fixedWidth(34px);
+
+  img
+  {
+    @include fixedWidth(34px);
+  }
+}
+
+.estimateShippingPopupProviderLabel
+{
+  @include SmallSemiBold;
+  margin-left: 12px;
+  flex-grow: 1;
+
+  &:last-child
+  {
+    border-bottom: 0;
+  }
+}
+
+.estimateShippingPopupProviderValue
+{
+  @include SmallSmall;
 }
