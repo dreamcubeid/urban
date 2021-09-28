@@ -12,6 +12,7 @@ import Icon from 'components/Icon/Icon'
 /* styles */
 import styles from 'public/scss/pages/ProductDetail.module.scss'
 import stylesNotify from 'public/scss/components/Notify.module.scss'
+import stylesEstimate from 'public/scss/components/EstimateShipping.module.scss'
 
 const productDetailClass = {
   productDetailParentDivClassName: styles.productDetailParentDiv,
@@ -71,7 +72,27 @@ const openOrderClass = {
 }
 
 const estimateShippingClass = {
-  estimateShippingLogoImgClassName: styles.estimateShippingLogoImg,
+  estimateShippingWrapperClassName: stylesEstimate.estimateShippingWrapper,
+  estimateShippingTitleClassName: stylesEstimate.estimateShippingTitle,
+  estimateShippingLogoClassName: stylesEstimate.estimateShippingLogo,
+  estimateShippingLogoImgClassName : stylesEstimate.estimateShippingLogoImg,
+  estimateShippingDetailClassName: stylesEstimate.estimateShippingDetail,
+  estimateShippingShowCourierClassName: stylesEstimate.estimateShippingShowCourier,
+  estimateShippingCostClassName: stylesEstimate.estimateShippingCost,
+
+  estimateShippingPopupContainerClassName: stylesEstimate.estimateShippingPopupContainer,
+  estimateShippingPopupContentClassName: stylesEstimate.estimateShippingPopupContent,
+  estimateShippingPopupTitleClassName: stylesEstimate.estimateShippingPopupTitle,
+  estimateShippingPopupButtonCloseClassName: stylesEstimate.estimateShippingPopupButtonClose,
+  estimateShippingPopupBodyClassName: stylesEstimate.estimateShippingPopupBody,
+  estimateShippingPopupLineInfoClassName: stylesEstimate.estimateShippingPopupLineInfo,
+  estimateShippingPopupLabelClassName: stylesEstimate.estimateShippingPopupLabel,
+  estimateShippingPopupValueClassName: stylesEstimate.estimateShippingPopupValue,
+  estimateShippingPopupProviderClassName: stylesEstimate.estimateShippingPopupProvider,
+  estimateShippingPopupLineProviderClassName: stylesEstimate.estimateShippingPopupLineProvider,
+  estimateShippingPopupProviderImgClassName: stylesEstimate.estimateShippingPopupProviderImg,
+  estimateShippingPopupProviderLabelClassName: stylesEstimate.estimateShippingPopupProviderLabel,
+  estimateShippingPopupProviderValueClassName: stylesEstimate.estimateShippingPopupProviderValue,
 }
 
 const classesCartPlaceholder = {
@@ -129,8 +150,8 @@ const ProductDetailComponent: FC<IProps> = ({
         onComplete={(data: any) => {
           toogleSuccessAddToCart(data?.saveCart ? data?.saveCart?.lineItems :
             data?.saveCartByMemberID?.lineItems)
-        }}
-        onCompleteMsg={toogleSuccessNotify}
+          }}
+          onCompleteMsg={toogleSuccessNotify}
         onError={toogleErrorAddToCart}
         onErrorMsg={(msg) => msg && toogleErrorNotify()}
         withEstimateShipping={IS_PROD === "false" ? true : false}
@@ -139,6 +160,7 @@ const ProductDetailComponent: FC<IProps> = ({
         notifyIcon={<Icon.productDetail.notifyIcon />}
         openOrderIconDate={<Icon.productDetail.openOrderIconDate />}
         openOrderIconTime={<Icon.productDetail.openOrderIconTime />}
+        estimateIconClose={<Icon.productDetail.estimateIconClose />}
         isButton={{
           0: true,
           1: true,
