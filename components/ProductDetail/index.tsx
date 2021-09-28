@@ -82,7 +82,6 @@ const estimateShippingClass = {
 
   estimateShippingPopupContainerClassName: stylesEstimate.estimateShippingPopupContainer,
   estimateShippingPopupContentClassName: stylesEstimate.estimateShippingPopupContent,
-  estimateShippingPopupHeaderClassName: stylesEstimate.estimateShippingPopupHeader,
   estimateShippingPopupTitleClassName: stylesEstimate.estimateShippingPopupTitle,
   estimateShippingPopupButtonCloseClassName: stylesEstimate.estimateShippingPopupButtonClose,
   estimateShippingPopupBodyClassName: stylesEstimate.estimateShippingPopupBody,
