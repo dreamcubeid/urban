@@ -46,6 +46,12 @@
     order: 1;
   }
 
+  & > div:nth-child(4):not(.propertyInnerContainer)
+  {
+    order: 4;
+    width: 100%;
+  }
+
   [class*="price"],
   & > p,
   {

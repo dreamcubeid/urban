@@ -13,6 +13,7 @@ import Icon from 'components/Icon/Icon'
 import styles from 'public/scss/pages/ProductDetail.module.scss'
 import stylesNotify from 'public/scss/components/Notify.module.scss'
 import stylesEstimate from 'public/scss/components/EstimateShipping.module.scss'
+import stylesOpenOrder from 'public/scss/components/OpenOrder.module.scss'
 
 const productDetailClass = {
   productDetailParentDivClassName: styles.productDetailParentDiv,
@@ -58,17 +59,17 @@ const notifyMeClass = {
 }
 
 const openOrderClass = {
-  openOrderClassName: styles.openOrder,
-  openOrderTitleClassName: styles.openOrderTitle,
-  openOrderContainerClassName: styles.openOrderContainer,
-  openOrderDateClassName: styles.openOrderDate,
-  openOrderTimeClassName: styles.openOrderTime,
-  openOrderTimeoutClassName: styles.openOrderTimeout,
-  openOrderTimeoutDescClassName: styles.openOrderTimeoutDesc,
-  openOrderTimeoutBtnClassName: styles.openOrderTimeoutBtn,
-  countDownContainerClassName: styles.countDownContainer,
-  countDownItemClassName: styles.countDownItem,
-  countDownItemTextClassName: styles.countDownItemText,
+  openOrderClassName: stylesOpenOrder.openOrder,
+  openOrderTitleClassName: stylesOpenOrder.openOrderTitle,
+  openOrderContainerClassName: stylesOpenOrder.openOrderContainer,
+  openOrderDateClassName: stylesOpenOrder.openOrderDate,
+  openOrderTimeClassName: stylesOpenOrder.openOrderTime,
+  openOrderTimeoutClassName: stylesOpenOrder.openOrderTimeout,
+  openOrderTimeoutDescClassName: stylesOpenOrder.openOrderTimeoutDesc,
+  openOrderTimeoutBtnClassName: stylesOpenOrder.openOrderTimeoutBtn,
+  countDownContainerClassName: stylesOpenOrder.countDownContainer,
+  countDownItemClassName: stylesOpenOrder.countDownItem,
+  countDownItemTextClassName: stylesOpenOrder.countDownItemText,
 }
 
 const estimateShippingClass = {
@@ -79,7 +80,6 @@ const estimateShippingClass = {
   estimateShippingDetailClassName: stylesEstimate.estimateShippingDetail,
   estimateShippingShowCourierClassName: stylesEstimate.estimateShippingShowCourier,
   estimateShippingCostClassName: stylesEstimate.estimateShippingCost,
-
   estimateShippingPopupContainerClassName: stylesEstimate.estimateShippingPopupContainer,
   estimateShippingPopupContentClassName: stylesEstimate.estimateShippingPopupContent,
   estimateShippingPopupTitleClassName: stylesEstimate.estimateShippingPopupTitle,

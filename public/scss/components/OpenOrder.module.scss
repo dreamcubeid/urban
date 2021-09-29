@@ -1,0 +1,103 @@
+@import '../utils/_variables.scss';
+@import './Buttons.module.scss';
+
+.openOrder
+{
+  margin-top: 24px;
+  width: 100%;
+}
+
+.openOrderTitle
+{
+  @include SmallSemiBold;
+}
+
+.openOrderContainer
+{
+  @extend .grid;
+  @include grid-(2);
+  @include gap-x-(8px);
+  margin-top: 8px;
+  width: 100%;
+}
+
+.openOrderDate,
+.openOrderTime
+{
+  @include flex(row, center);
+  @include SmallSemiBold;
+  height: 42px;
+  padding: 0 12px;
+  background: $color_elements;
+  border-radius: 2px;
+  width: fit-content;
+
+  svg
+  {
+    color: $color_blue;
+    margin-top: 2px;
+    margin-right: 11px;
+  }
+}
+
+.openOrderTimeout
+{
+  @include RegulerBold;
+  @include flex(row, center, center);
+  width: fit-content;
+  background-color: $color_elements;
+  height: 48px;
+  margin-top: 8px;
+  color: $color_red_other;
+  padding: 0 12px;
+}
+
+.openOrderTimeoutDesc
+{
+  display: none;
+}
+
+.openOrderTimeoutBtn
+{
+  @extend .btn_secondary;
+  @include RegulerReguler;
+  max-width: 340px;
+  height: 52px;
+  margin: 24px 0;
+}
+
+.countDownContainer
+{
+  @include flex(row, center, flex-start);
+  height: 48px;
+  padding: 0 12px;
+  background: $color_elements;
+  border-radius: 2px;
+  margin-top: 6px;
+}
+
+.countDownItem,
+.countDownItemText
+{
+  @include RegulerBold;
+  display: inline;
+}
+
+.countDownItem
+{
+  margin-left: 2px;
+  color: $color_red_other;
+}
+
+.countDownItemText
+{
+  margin-right: 2px;
+}
+
+@media screen and (max-width: #{$breakpoint_max_sm}) 
+{
+  .openOrderTimeoutBtn
+  {
+    @include fixedSize(100%);
+  }
+}
