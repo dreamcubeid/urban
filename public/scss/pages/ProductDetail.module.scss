@@ -32,7 +32,16 @@
 
 .accordion
 {
-  // TODO: akan dikerjakan
+  @include flex(row, center, space-between);
+  @include SmallSemiBold;
+  margin-bottom: 20px;
+  cursor: pointer;
+  color: $color_black;
+
+  &:hover
+  {
+    opacity: .7;
+  }
 }
 
 .propertyRow
@@ -77,20 +86,12 @@
   {
     order: 6;
   }
-  
-  [class*="additionalInfo"]
-  {
-    // TODO: additional
-    order: 7;
-    display: none;
-  }
-  
-  [class*="customDetail"]
-  {
-    // TODO: review rating
-    display: none;
-    order: 8;
-  }
+}
+
+.customDetail
+{
+  @include fixedWidth(100%);
+  order: 7;
 }
 
 .propertyInnerContainer
@@ -132,19 +133,10 @@
   }
 }
 
-.detailTitleContainer
-{
-  // TODO: akan dikerjakan
-}
 
 .detailTitle
 {
   display: none;
-}
-
-.detailTitleStar
-{
-  // TODO: akan dikerjakan
 }
 
 .detailTitleStarNumber
@@ -306,7 +298,12 @@
 
 .additionalInfo
 {
-  // TODO: akan dikerjakan
+  @include fixedWidth(100%);
+  @include RegulerReguler;
+  color: $color_text_secondary;
+  padding: 32px 0 24px;
+  border-top: 1px solid $color_elements_line_darker;
+  order: 8;
 }
 
 .salePrice
@@ -328,31 +325,6 @@
   {
     color: $color_red;
   }
-}
-
-.tab
-{
-  // TODO: akan dikerjakan
-}
-
-.lightboxPopup
-{
-  // TODO: akan dikerjakan
-}
-
-.lightboxContent
-{
-  // TODO: akan dikerjakan
-}
-
-.closeButton
-{
-  // TODO: akan dikerjakan
-}
-
-.dot
-{
-    // TODO: akan dikerjakan
 }
 
 .arrow

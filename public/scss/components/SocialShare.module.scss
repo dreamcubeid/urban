@@ -1,21 +1,29 @@
-.socialShare
+@import '../utils/_variables.scss';
+
+.socialShareParentDiv
 {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  @include flex(row, center, space-between);
+  margin-top: 24px;
+  padding: 31px 0;
+  border-top: 1px solid $color_elements_line_darker;
 
-  &_item
+  p
   {
-    width: calc(100% / 3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 28px;
+    @include SmallSemiBold;
+  }
+}
 
-    span
+.socialShareItem
+{
+  color: $color_placeholder;
+
+  svg
+  {
+    margin-left: 15px;
+
+    &:hover
     {
-      margin-top: 5px;
+      opacity: .7;
     }
   }
 }

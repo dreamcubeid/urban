@@ -8,12 +8,14 @@ import useProductDetail from './hooks/useProductDetail'
 /* components */
 import Placeholder from 'components/Placeholder'
 import Icon from 'components/Icon/Icon'
+import SocialShare from 'components/SocialShare'
 
 /* styles */
 import styles from 'public/scss/pages/ProductDetail.module.scss'
 import stylesNotify from 'public/scss/components/Notify.module.scss'
 import stylesEstimate from 'public/scss/components/EstimateShipping.module.scss'
 import stylesOpenOrder from 'public/scss/components/OpenOrder.module.scss'
+import styleSocialShare from 'public/scss/components/SocialShare.module.scss'
 
 const productDetailClass = {
   productDetailParentDivClassName: styles.productDetailParentDiv,
@@ -24,9 +26,7 @@ const productDetailClass = {
   propertyRowClassName: styles.propertyRow,
   propertyInnerContainerClassName: styles.propertyInnerContainer,
   propertyFooterContainerClassname: styles.propertyFooterContainer,
-  detailTitleContainerClassName: styles.detailTitleContainer,
   detailTitleClassName: styles.detailTitle,
-  detailTitleStarClassName: styles.detailTitleStar,
   selectetVariantClassName: styles.selectetVariant,
   variantContainerClassName: styles.variantContainer,
   variantOptionsContainerClassName: styles.variantOptionsContainer,
@@ -42,11 +42,6 @@ const productDetailClass = {
   priceClassName: styles.price,
   addToCartBtnClassName: styles.addToCartBtn,
   buyNowBtnClassName: styles.buyNowBtn,
-  tabsClasses: styles.tab,
-  lightboxPopupClassName: styles.lightboxPopup,
-  lightboxContentClassName: styles.lightboxContent,
-  closeButtonClassName: styles.closeButton,
-  dotClassName: styles.dot,
   arrowClassName: styles.arrow,
   detailTitleStarNumberClassName: styles.detailTitleStarNumber
 }
@@ -95,6 +90,10 @@ const estimateShippingClass = {
   estimateShippingPopupProviderValueClassName: stylesEstimate.estimateShippingPopupProviderValue,
 }
 
+const socialShareClasses = {
+  socialShareParentDivClassName: styleSocialShare.socialShareParentDiv,
+  socialShareItemClassName: styleSocialShare.socialShareItem,
+}
 const classesCartPlaceholder = {
   placeholderList: styles.placeholderList,
   placeholderImage: styles.placeholderImage,
@@ -105,13 +104,15 @@ type IProps = {
   i18n: any,
   slug: string
   setProductId?: any
+  urlSite?: string
 }
 
 const ProductDetailComponent: FC<IProps> = ({
   lng,
   i18n,
   slug,
-  setProductId
+  setProductId,
+  urlSite
 }) => {
 
   const {
@@ -136,7 +137,7 @@ const ProductDetailComponent: FC<IProps> = ({
         slug={slug}
         withButtonBuyNow
         lazyLoadedImage={false}
-        accordionIcon={<div>accordion</div>}
+        accordionIcon={<Icon.productDetail.accordionIcon />}
         classes={{
           ...productDetailClass,
           ...notifyMeClass,
@@ -151,7 +152,7 @@ const ProductDetailComponent: FC<IProps> = ({
           toogleSuccessAddToCart(data?.saveCart ? data?.saveCart?.lineItems :
             data?.saveCartByMemberID?.lineItems)
           }}
-          onCompleteMsg={toogleSuccessNotify}
+        onCompleteMsg={toogleSuccessNotify}
         onError={toogleErrorAddToCart}
         onErrorMsg={(msg) => msg && toogleErrorNotify()}
         withEstimateShipping={IS_PROD === "false" ? true : false}
@@ -171,8 +172,12 @@ const ProductDetailComponent: FC<IProps> = ({
           quality: 85,
         }}
         customDetailComponent={
-          <div className={styles.customDetail}>
-            {/* TODO: DETAIL */}
+          <div className={`tes ${styles.customDetail}`}>
+            <SocialShare 
+              i18n={i18n}
+              urlSite={urlSite}
+              classes={socialShareClasses}
+            />
           </div>
         }
         loadingComponent={

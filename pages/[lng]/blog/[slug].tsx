@@ -138,7 +138,6 @@ const BlogSlug: FC<any> = ({
                 <SocialShare 
                   i18n={i18n} 
                   urlSite={urlSite}
-                  withLabel={false}
                   classes={classesSocialShare}
                   size={32}
                   iconFillColor={'#D0D0D0'}
