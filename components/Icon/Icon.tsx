@@ -9,8 +9,16 @@ import {
   RiDeleteBin2Line,
   RiCalendarLine,
   RiTimeLine,
-  RiNotification2Fill
+  RiNotification2Fill,
+  RiFacebookFill,
+  RiTwitterFill,
+  RiLinkedinBoxFill,
+  RiWhatsappFill,
+  RiMailFill,
+  RiTelegramFill,
 } from 'react-icons/ri'
+
+import { GoPlus } from 'react-icons/go'
 
 const Icon: any = {
   arrowRight: RiArrowRightLine,
@@ -37,6 +45,15 @@ const Icon: any = {
     openOrderIconDate: RiCalendarLine,
     openOrderIconTime: RiTimeLine,
     estimateIconClose: RiCloseFill,
+    accordionIcon: GoPlus,
+  },
+  socialShare:{
+    FacebookIcon: RiFacebookFill,
+    TwitterIcon: RiTwitterFill,
+    LinkedinIcon: RiLinkedinBoxFill,
+    WhatsappIcon: RiWhatsappFill,
+    EmailIcon: RiMailFill,
+    TelegramIcon: RiTelegramFill,
   }
 }
 

@@ -25,6 +25,7 @@ const Product: FC<any> = ({
   lngDict,
   slug,
   data,
+  urlSite,
   brand
 }) => {
 
@@ -62,6 +63,7 @@ const Product: FC<any> = ({
           i18n={i18n}
           setProductId={setProductId}
           slug={slug}
+          urlSite={urlSite}
         />
       </LazyLoadComponent>
 

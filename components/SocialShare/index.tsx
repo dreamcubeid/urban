@@ -1,32 +1,22 @@
 import { FC } from 'react'
 import {
   FacebookShareButton,
-  FacebookIcon,
   TwitterShareButton,
-  TwitterIcon,
   LinkedinShareButton,
-  LinkedinIcon,
   WhatsappShareButton,
-  WhatsappIcon,
   EmailShareButton,
-  EmailIcon,
   TelegramShareButton,
-  TelegramIcon
 } from 'react-share'
+
+import Icon from '../Icon/Icon'
+
+
 
 import styles from 'public/scss/components/SocialShare.module.scss'
 
 type TypeSocialShare = {
   i18n?: any,
   urlSite: string,
-  borderRadius?: number | undefined,
-  round?: boolean,
-  iconFillColor?: string
-  size?: string | number | undefined,
-  withLabel?: boolean
-  bgStyle?: {
-    fill?: string
-  },
   classes?: {
     socialShareParentDivClassName?: string
     socialShareItemClassName?: string
@@ -36,87 +26,35 @@ type TypeSocialShare = {
 const SocialShare: FC<TypeSocialShare> = ({
   i18n,
   urlSite,
-  borderRadius,
-  round = false,
-  iconFillColor = 'white',
-  size = 40,
-  withLabel = true,
-  bgStyle = {},
   classes = {
     socialShareParentDivClassName: styles.socialShare,
     socialShareItemClassName: styles.socialShare_item,
   }
 }) => {
 
-  const iconProps = {
-    size,
-    borderRadius,
-    round,
-    bgStyle,
-    iconFillColor
-  }
 
   return (
     <div className={classes.socialShareParentDivClassName}>
+      <p>{i18n.t("product.shareProduct")}</p>
       <div className={classes.socialShareItemClassName}>
         <FacebookShareButton url={urlSite}>
-          <FacebookIcon {...iconProps} />
+          <Icon.socialShare.FacebookIcon />
         </FacebookShareButton>
-        {withLabel && 
-          <span>
-            {i18n.t("socialShare.facebook")}
-          </span>
-        }
-      </div>
-      <div className={classes.socialShareItemClassName}>
         <TwitterShareButton url={urlSite}>
-          <TwitterIcon {...iconProps} />
+          <Icon.socialShare.TwitterIcon />
         </TwitterShareButton>
-        {withLabel && 
-          <span>
-            {i18n.t("socialShare.twitter")}
-          </span>
-        }
-      </div>
-      <div className={classes.socialShareItemClassName}>
         <LinkedinShareButton url={urlSite}>
-          <LinkedinIcon {...iconProps} />
+          <Icon.socialShare.LinkedinIcon />
         </LinkedinShareButton>
-        {withLabel && 
-          <span>
-            {i18n.t("socialShare.linkedin")}
-          </span>
-        }
-      </div>
-      <div className={classes.socialShareItemClassName}>
         <EmailShareButton url={urlSite}>
-          <EmailIcon {...iconProps} />
+          <Icon.socialShare.WhatsappIcon />
         </EmailShareButton>
-        {withLabel && 
-          <span>
-            {i18n.t("socialShare.email")}
-          </span>
-        }
-      </div>
-      <div className={classes.socialShareItemClassName}>
         <WhatsappShareButton url={urlSite}>
-          <WhatsappIcon {...iconProps} />
+          <Icon.socialShare.EmailIcon />
         </WhatsappShareButton>
-        {withLabel && 
-          <span>
-            {i18n.t("socialShare.whatsapp")}
-          </span>
-        }
-      </div>
-      <div className={classes.socialShareItemClassName}>
         <TelegramShareButton url={urlSite}>
-          <TelegramIcon {...iconProps} />
+          <Icon.socialShare.TelegramIcon />
         </TelegramShareButton>
-        {withLabel && 
-          <span>
-            {i18n.t("socialShare.telegram")}
-          </span>
-        }
       </div>
     </div>
   )
