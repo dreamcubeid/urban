@@ -10,8 +10,6 @@ import {
 
 import Icon from '../Icon/Icon'
 
-
-
 import styles from 'public/scss/components/SocialShare.module.scss'
 
 type TypeSocialShare = {
@@ -21,6 +19,7 @@ type TypeSocialShare = {
     socialShareParentDivClassName?: string
     socialShareItemClassName?: string
   }
+  [otherProp: string]: any
 }
 
 const SocialShare: FC<TypeSocialShare> = ({
@@ -29,7 +28,8 @@ const SocialShare: FC<TypeSocialShare> = ({
   classes = {
     socialShareParentDivClassName: styles.socialShare,
     socialShareItemClassName: styles.socialShare_item,
-  }
+  },
+  ...props
 }) => {
 
 
@@ -38,22 +38,22 @@ const SocialShare: FC<TypeSocialShare> = ({
       <p>{i18n.t("product.shareProduct")}</p>
       <div className={classes.socialShareItemClassName}>
         <FacebookShareButton url={urlSite}>
-          <Icon.socialShare.FacebookIcon />
+          <Icon.socialShare.FacebookIcon {...props} />
         </FacebookShareButton>
         <TwitterShareButton url={urlSite}>
-          <Icon.socialShare.TwitterIcon />
+          <Icon.socialShare.TwitterIcon {...props} />
         </TwitterShareButton>
         <LinkedinShareButton url={urlSite}>
-          <Icon.socialShare.LinkedinIcon />
+          <Icon.socialShare.LinkedinIcon {...props} />
         </LinkedinShareButton>
         <EmailShareButton url={urlSite}>
-          <Icon.socialShare.WhatsappIcon />
+          <Icon.socialShare.WhatsappIcon {...props} />
         </EmailShareButton>
         <WhatsappShareButton url={urlSite}>
-          <Icon.socialShare.EmailIcon />
+          <Icon.socialShare.EmailIcon {...props} />
         </WhatsappShareButton>
         <TelegramShareButton url={urlSite}>
-          <Icon.socialShare.TelegramIcon />
+          <Icon.socialShare.TelegramIcon {...props} />
         </TelegramShareButton>
       </div>
     </div>
