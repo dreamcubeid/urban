@@ -150,6 +150,11 @@ $headings: (
     @include typographyBuilder(500, 16, 24);
 }
 
+@mixin RegulerBold
+{
+    @include typographyBuilder(700, 16, 24);
+}
+
 @mixin SmallSmall
 {
     @include typographyBuilder(400, 12, 16);
