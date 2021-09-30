@@ -19,10 +19,13 @@ import {
 } from 'react-icons/ri'
 
 import { GoPlus } from 'react-icons/go'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
 const Icon: any = {
   arrowRight: RiArrowRightLine,
   arrowLeft: RiArrowLeftLine,
+  chevronLeft: FiChevronLeft,
+  chevronRight: FiChevronRight,
   RiCloseFill: RiCloseFill,
   coupon: RiCoupon3Fill,
   orderSummary: {
