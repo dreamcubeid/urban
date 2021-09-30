@@ -20,6 +20,8 @@ const useProductDetail = ({ lng, i18n, slug }) => {
   const [errorAddToCart, setErrorAddToCart] = useState(null)
   const [errorNotify, setErrorNotify] = useState<boolean>(false)
   const [successNotify, setSuccessNotify] = useState<boolean>(false)
+  const [productId, setProductId] = useState<string>("")
+
 
   const toogleErrorAddToCart = () => setErrorAddToCart(!errorAddToCart)
   const toogleHideSuccedAddToCart = () => setSuccessAddToCart(false)
@@ -138,7 +140,9 @@ const useProductDetail = ({ lng, i18n, slug }) => {
     ModalSuccessAddToCart,
     ModalErrorAddToCart,
     ModalErrorNotify,
-    ModalSuccessNotify
+    ModalSuccessNotify,
+    productId,
+    setProductId
   }
 }
 

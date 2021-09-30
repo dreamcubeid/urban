@@ -1,5 +1,5 @@
 /* library package */
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
 
 import {
@@ -30,7 +30,6 @@ const Product: FC<any> = ({
 }) => {
 
   const i18n: any = useI18n()
-  const [productId, setProductId] = useState<string>("")
   const linksBreadcrumb = [`${i18n.t("header.home")}`, slug?.replaceAll("-", " ")]
 
   return (
@@ -61,14 +60,10 @@ const Product: FC<any> = ({
         <ProductDetail
           lng={lng}
           i18n={i18n}
-          setProductId={setProductId}
           slug={slug}
           urlSite={urlSite}
         />
       </LazyLoadComponent>
-
-      {/* TODO: reviewRating */}
-      {<div className="d-none"> {productId}</div>}
 
       <LazyLoadComponent>
         <ProductRecomendation

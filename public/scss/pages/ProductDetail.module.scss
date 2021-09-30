@@ -17,7 +17,8 @@
 
 .imageRow
 {
-  position: relative;
+  @include position(sticky, 12px);
+  position: sticky;
 
   ul
   {
@@ -416,6 +417,7 @@
 
   .imageRow
   {
+    position: relative;
     margin-bottom: 24px;
   }
 

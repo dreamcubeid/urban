@@ -1,6 +1,6 @@
 /* library package */
-import { FC } from 'react'
-import { ProductDetail } from '@sirclo/nexus'
+import { FC, useState } from 'react'
+import { ProductDetail, ProductReviews } from '@sirclo/nexus'
 
 /* library component */
 import useProductDetail from './hooks/useProductDetail'
@@ -16,6 +16,8 @@ import stylesNotify from 'public/scss/components/Notify.module.scss'
 import stylesEstimate from 'public/scss/components/EstimateShipping.module.scss'
 import stylesOpenOrder from 'public/scss/components/OpenOrder.module.scss'
 import styleSocialShare from 'public/scss/components/SocialShare.module.scss'
+import stylesReview from 'public/scss/components/RatingReview.module.scss'
+import stylesPagination from 'public/scss/components/Pagination.module.scss'
 
 const productDetailClass = {
   productDetailParentDivClassName: styles.productDetailParentDiv,
@@ -90,6 +92,43 @@ const estimateShippingClass = {
   estimateShippingPopupProviderValueClassName: stylesEstimate.estimateShippingPopupProviderValue,
 }
 
+const classesReview = {
+  reviewImageTitleClassName: stylesReview.reviewImageTitle,
+  reviewImageContainerClassName: stylesReview.reviewImageContainer,
+  reviewImageClassName: stylesReview.reviewImage,
+  sortClassName: stylesReview.sort,
+  sortOptionsClassName: stylesReview.sortOptions,
+  filtersClassName: stylesReview.filters,
+  filterClassName: stylesReview.filter,
+  activeFilterClassName: stylesReview.activeFilter,
+  filterLabelClassName: stylesReview.filterLabel,
+  filterInputClassName: stylesReview.filterInput,
+  filterIconClassName: stylesReview.filterIcon,
+  reviewListContainerClassName: stylesReview.reviewListContainer,
+  reviewListImageContainerClassName: stylesReview.reviewListImageContainer,
+  reviewListImageClassName: stylesReview.reviewListImage,
+  reviewListDescriptionClassName: stylesReview.reviewListDescription,
+  reviewListStarContainerClassName: stylesReview.reviewListStarContainer,
+  itemPerPageClassName: stylesReview.itemPerPage,
+  itemPerPageLabelClassName: stylesReview.itemPerPageLabel,
+  itemPerPageOptionsClassName: stylesReview.itemPerPageOptions,
+  reviewPopupContainerClassName: stylesReview.reviewPopupContainer,
+  reviewPopupContentClassName: stylesReview.reviewPopupContent,
+  reviewPopupButtonCloseClassName: stylesReview.reviewPopupButtonClose,
+  reviewPopupImagePopupClassName: stylesReview.reviewPopupImagePopup,
+  reviewPopupPreviewClassName: stylesReview.reviewPopupPreview,
+  reviewPopupImagePreviewClassName: stylesReview.reviewPopupImagePreview,
+  reviewPopupLeftButtonClassName: stylesReview.reviewPopupLeftButton,
+  reviewPopupRightButtonClassName: stylesReview.reviewPopupRightButton
+}
+
+const classesPagination = {
+  pagingClassName: `${stylesPagination.pagination} order-6`,
+  activeClassName: stylesPagination.pagination_item__active,
+  itemClassName: stylesPagination.pagination_item,
+  linkClassName: stylesPagination.pagination_link
+}
+
 const socialShareClasses = {
   socialShareParentDivClassName: styleSocialShare.socialShareParentDiv,
   socialShareItemClassName: styleSocialShare.socialShareItem,
@@ -99,11 +138,15 @@ const classesCartPlaceholder = {
   placeholderImage: styles.placeholderImage,
 }
 
+const classesReviewPlaceholder = {
+  placeholderList: stylesReview.placeholderList,
+  placeholderImage: stylesReview.placeholderImage,
+}
+
 type IProps = {
   lng: string,
   i18n: any,
   slug: string
-  setProductId?: any
   urlSite?: string
 }
 
@@ -111,9 +154,10 @@ const ProductDetailComponent: FC<IProps> = ({
   lng,
   i18n,
   slug,
-  setProductId,
   urlSite
 }) => {
+
+  const [showReview, setShowReview] = useState<boolean>(true)
 
   const {
     successAddToCart,
@@ -128,8 +172,22 @@ const ProductDetailComponent: FC<IProps> = ({
     ModalSuccessAddToCart,
     ModalErrorAddToCart,
     ModalErrorNotify,
-    ModalSuccessNotify
+    ModalSuccessNotify,
+    productId,
+    setProductId
   } = useProductDetail({ lng, i18n, slug })
+
+  const getClassReview = () => {
+    if (lng === "en") return {
+      ...classesReview,
+      itemPerPageOptions:  stylesReview.itemPerPageOptionsEn,
+      reviewPopupButtonCloseClassName: stylesReview.reviewPopupButtonCloseEn
+    }
+
+    return classesReview
+  }
+
+  const toogleShowReview = () => setShowReview(!showReview)
 
   return (
     <section className="container">
@@ -172,13 +230,58 @@ const ProductDetailComponent: FC<IProps> = ({
           quality: 85,
         }}
         customDetailComponent={
-          <div className={`tes ${styles.customDetail}`}>
-            <SocialShare 
-              i18n={i18n}
-              urlSite={urlSite}
-              classes={socialShareClasses}
-            />
-          </div>
+          <>
+            <div className={`${styles.customDetail}`}>
+              <SocialShare 
+                i18n={i18n}
+                urlSite={urlSite}
+                classes={socialShareClasses}
+              />
+            </div>
+            <div className={`${stylesReview.reviewRatingContainer}`}>
+              <div onClick={toogleShowReview}  className={`${stylesReview.reviewRatingHeader}`}>
+                <p>{i18n.t("product.review")}</p>
+                <Icon.productDetail.accordionIcon size=".8em" />
+              </div>
+              {showReview &&
+                <ProductReviews
+                  productID={productId}
+                  productName={slug}
+                  classes={getClassReview()}
+                  reviewsPaginationClasses={classesPagination}
+                  itemPerPageOptions={[5, 10, 25, 50]}
+                  iconClose={<Icon.RiCloseFill />}
+                  iconLeft={<Icon.chevronLeft />}
+                  iconRight={<Icon.chevronRight />}
+                  reviewsNextLabel={<Icon.arrowRight />}
+                  reviewsPrevLabel={<Icon.arrowLeft />}
+                  loadingComponent={
+                    <div className={stylesReview.placeholderContainer}>
+                      <Placeholder
+                        classes={classesReviewPlaceholder}
+                        withImage
+                        withList
+                        listMany={3}
+                      />
+                    </div>
+                  }
+                  thumborSetting={{
+                    width: 500,
+                    format: 'webp',
+                    quality: 85,
+                  }}
+                  customEmptyComponentReviewsByAdmin={<></>}
+                  customEmptyComponentReviews={
+                    <div className={stylesReview.emptyContainer}>
+                      <h5 className={stylesReview.emptyTitle}>
+                        {i18n.t("testimonial.isEmpty")}
+                      </h5>
+                    </div>
+                  }
+                />
+              }
+            </div>
+          </>
         }
         loadingComponent={
           <div className={styles.placeholderContainer}>
