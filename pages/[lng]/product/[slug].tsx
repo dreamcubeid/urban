@@ -1,5 +1,5 @@
 /* library package */
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
 
 import {

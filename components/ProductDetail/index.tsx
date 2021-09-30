@@ -266,7 +266,7 @@ const ProductDetailComponent: FC<IProps> = ({
                     </div>
                   }
                   thumborSetting={{
-                    width: 300,
+                    width: 500,
                     format: 'webp',
                     quality: 85,
                   }}
