@@ -1,9 +1,17 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { Links, useI18n } from "@sirclo/nexus";
-import Layout from "components/Layout/Layout";
-import { useBrand } from "lib/useBrand";
-import styles from "public/scss/pages/Tautan.module.scss";
+/* library package */
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { Links, useI18n } from '@sirclo/nexus'
+
+/* library template */
+import { useBrand } from 'lib/useBrand'
+
+/* component */
+import Layout from 'components/Layout/Layout'
+
+/* styles */
+import styles from 'public/scss/pages/Tautan.module.scss'
+
 /* locales */
 import locale from "locales";
 
@@ -31,16 +39,11 @@ const TautanPage: FC<any> = ({
       lng={lng}
       lngDict={lngDict}
       brand={brand}
+      sectionClassName={styles.tautan_container}
       withHeader={false}
       withFooter={false}
     >
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-            <Links classes={classesLinks} />
-          </div>
-        </div>
-      </div>
+        <Links classes={classesLinks} />
     </Layout>
   )
 }
