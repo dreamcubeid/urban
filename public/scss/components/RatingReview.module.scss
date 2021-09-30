@@ -6,10 +6,15 @@
 .reviewRatingContainer
 {
   @include flex(column, flex-start, flex-start);
+  @include fixedWidth(100%);
   padding: 32px 0;
   border-top: 1px solid $color_elements_line_darker;
   order: 9;
-  width: 100%;
+  
+  & > div 
+  {
+    @include fixedWidth(100%);
+  }
 }
 
 .reviewRatingHeader
@@ -53,35 +58,35 @@
   @include grid-(3);
   @include gap-x-(12px);
   @include gap-y-(12px);
-  width: 100%;
+  @include fixedWidth(100%);
 }
 
 .placeholderList
 {
-  width: 100%;
+  @include fixedWidth(100%);
   height: 40px;
   margin-top: 10px;
-
+  
   &:nth-child(2)
   {
     @include grid-start-(1, 1);
   }
-
+  
   &:nth-child(3)
   {
     @include grid-start-(2, 1);
   }
-
+  
   &:nth-child(4)
   {
     @include grid-start-(3, 1);
   }
-
+  
 }
 .placeholderImage
 {
   @include col-span-(3);
-  width: 100%;
+  @include fixedWidth(100%);
   height: 200px;
 }
 
