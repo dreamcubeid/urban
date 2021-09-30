@@ -3,7 +3,7 @@ const locale = {
     "addToCart": "Masukan Keranjang",
     "additionalInfo": "Informasi tambahan",
     "adjust": "Sesuaikan",
-    "all": "Semua",
+    "all": "Semua Produk",
     "back": "Kembali",
     "backToHome": "Kembali ke Beranda",
     "buyNow": "Beli Sekarang",
