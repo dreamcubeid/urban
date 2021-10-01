@@ -1,33 +1,35 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { SetNewPassword, useI18n } from "@sirclo/nexus";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import Loader from "components/Loader/Loader";
-import { useBrand } from "lib/useBrand";
-import { toast } from "react-toastify";
-import {
-  Eye,
-  EyeOff,
-  CheckCircle
-} from "react-feather";
-import styles from "public/scss/pages/ResetPassword.module.scss";
+/*library package */
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { SetNewPassword, useI18n } from '@sirclo/nexus'
+import { toast } from 'react-toastify'
+import Icon from 'components/Icon/Icon'
+/* library component */
+import { useBrand } from 'lib/useBrand'
+import useWindowSize from 'lib/useWindowSize'
+/* library component */
+import SEO from 'components/SEO'
+import Layout from 'components/Layout/Layout'
+import Loader from 'components/Loader/Loader'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+/* styles */
+import styles from 'public/scss/pages/ResetPassword.module.scss'
+import stylesPasswordStrength from 'public/scss/components/PasswordStrength.module.scss'
 /* locales */
 import locale from "locales";
 
 const classesSetNewPassword = {
-  containerClassName: styles.resetPassword_innerForm,
-  inputContainerClassName: styles.sirclo_form_row,
-  inputClassName: `form-control mb-4 ${styles.sirclo_form_input}`,
-  passwordViewButtonClassName: `${styles.sirclo_form_input_btn}`,
-  passwordStrengthBarClassName: styles.passwordBar,
-  passwordStrengthBarContainerClassName: styles.passwordValidation,
-  passwordCriteriaListClassName: styles.formPassword,
-  passwordCriteriaClassName: styles.formPasswordList,
-  buttonClassName: `btn 
-  ${styles.btn_primary} ${styles.btn_long} 
-  ${styles.btn_full_width} ${styles.btn_center}`,
-  errorClassName: styles.resetPassword_error
+  containerClassName: styles.container,
+  inputContainerClassName: styles.inputContainer,
+  inputClassName: styles.input,
+  passwordViewButtonClassName: styles.passwordViewButton,
+  passwordStrengthBarClassName: stylesPasswordStrength.passwordStrengthBar,
+  passwordStrengthBarContainerClassName: stylesPasswordStrength.passwordStrengthBarContainer,
+  passwordCriteriaListClassName: stylesPasswordStrength.passwordCriteriaList,
+  passwordCriteriaClassName: stylesPasswordStrength.passwordCriteria,
+  passwordStrengthLabelClassName: stylesPasswordStrength.passwordStrengthLabel,
+  buttonClassName: styles.button,
+  errorClassName: styles.error,
 }
 
 const ResetPasswordPage: FC<any> = ({
@@ -35,7 +37,10 @@ const ResetPasswordPage: FC<any> = ({
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
+
+  const i18n: any = useI18n()
+  const size = useWindowSize()
+  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("resetPassword.setNew")]
 
   return (
     <Layout
@@ -45,26 +50,23 @@ const ResetPasswordPage: FC<any> = ({
       brand={brand}
     >
       <SEO title={i18n.t("resetPassword.setNew")} />
-      <section>
-        <div className="container">
-          <div className={styles.resetPassword_container}>
-            <div className={styles.resetPassword_inner}>
-              <div className={styles.resetPassword_inner_title}>
-                <h3>{i18n.t("resetPassword.setNew")}</h3>
-              </div>
-              <SetNewPassword
-                classes={classesSetNewPassword}
-                onErrorMsg={toast.error}
-                onSuccessMsg={toast.success}
-                passwordViewIcon={<Eye />}
-                passwordHideIcon={<EyeOff />}
-                passwordFulfilledCriteriaIcon={<CheckCircle color="green" size={16} />}
-                passwordUnfulfilledCriteriaIcon={<CheckCircle color="gray" size={16} />}
-                loadingComponent={<Loader color="text-light" />}
-              />
-            </div>
-          </div>
-        </div>
+      <Breadcrumb
+        title={i18n.t("resetPassword.setNew")}
+        links={linksBreadcrumb}
+        lng={lng}
+        titleMiddle={size.width > 767}
+      />
+      <section className={`container ${styles.section}`}>
+        <SetNewPassword
+          classes={classesSetNewPassword}
+          onErrorMsg={toast.error}
+          onSuccessMsg={toast.success}
+          passwordViewIcon={<Icon.setNewPassword.passwordViewIcon />}
+          passwordHideIcon={<Icon.setNewPassword.passwordHideIcon />}
+          passwordFulfilledCriteriaIcon={<Icon.setNewPassword.passwordCriteriaIcon color="#1DB954" size={16} />}
+          passwordUnfulfilledCriteriaIcon={<Icon.setNewPassword.passwordCriteriaIcon color="#E5E7EF" size={16} />}
+          loadingComponent={<Loader color="text-light" />}
+        />
       </section>
     </Layout>
   );

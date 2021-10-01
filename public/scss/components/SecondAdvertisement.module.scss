@@ -17,15 +17,10 @@
     &_item
     {
         width: 100% !important;
-        
-        &:hover
-        {
-            opacity: .5;
-            cursor: pointer;
-        }
 
         img, iframe
         {
+            cursor: pointer;
             width: 100% !important;
             height: 355px;
         }

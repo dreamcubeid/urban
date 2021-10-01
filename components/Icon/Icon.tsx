@@ -16,6 +16,9 @@ import {
   RiWhatsappFill,
   RiMailFill,
   RiTelegramFill,
+  RiCheckboxCircleFill,
+  RiEyeCloseLine,
+  RiEyeLine
 } from 'react-icons/ri'
 
 import { GoPlus } from 'react-icons/go'
@@ -57,6 +60,11 @@ const Icon: any = {
     WhatsappIcon: RiWhatsappFill,
     EmailIcon: RiMailFill,
     TelegramIcon: RiTelegramFill,
+  },
+  setNewPassword: {
+    passwordViewIcon: RiEyeCloseLine,
+    passwordHideIcon: RiEyeLine,
+    passwordCriteriaIcon: RiCheckboxCircleFill
   }
 }
 
