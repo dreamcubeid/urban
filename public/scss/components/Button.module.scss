@@ -1,12 +1,15 @@
-@import "../base/colors.scss";
+@import '../utils/variables';
 
 .btn
 {
-  border-radius: 4px;
-  font-family: 'roboto-black';
-  font-size: 13px;
-  border: none;
+  @include transition();
+  @include flex(row, center, center);
+  @include buttonVariant($color_white, $color_black, $color_black);
+  @include typographyBuilder(400, 16, 24);
+  border-radius: 2px;
+  padding: 14px 15px;
 
+  &:hover,
   &:active,
   &:focus
   {
@@ -14,6 +17,28 @@
     box-shadow: none;
   }
 
+  &[disabled]
+  {
+    opacity: 0.7;
+  }
+
+  &_primary
+  {
+
+  }
+
+  &_secondary
+  {
+
+  }
+
+  &_long,
+  &__long
+  {
+    @include fixedWidth(100%);
+  }
+
+  /*
   &_primary
   {
     color: $color_white !important;
@@ -122,4 +147,5 @@
     color: $color_blue !important;
     background: transparent !important;
   }
+  */
 }
