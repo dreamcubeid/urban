@@ -3,6 +3,7 @@
 
 .container
 {
+  @include position(sticky, 16px);
   margin-bottom: 42px;
 }
 
@@ -162,6 +163,11 @@
 
 @media screen and (max-width: #{$breakpoint_max_md}) 
 {
+  .container
+  {
+    position: relative;
+  }
+
   .subTotal
   {
     @include flex(column, flex-start, center);
