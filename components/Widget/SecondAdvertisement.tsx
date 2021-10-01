@@ -15,11 +15,11 @@ const SecondAdvertisement: FC = () => {
   const size = useWindowSize();
 
   return (
-    <div className={styles.SecondAdvertisement}>
+    <div className={styles.secondAdvertisement}>
       <Widget
         pos="main-content-2"
-        containerClassName={styles.SecondAdvertisement_container}
-        widgetClassName={styles.SecondAdvertisement_item}
+        containerClassName={styles.secondAdvertisement_container}
+        widgetClassName={styles.secondAdvertisement_item}
         loadingComponent={<Placeholder classes={placeholder} withImage />}
         thumborSetting={{
           width: size.width < 575 ? 1000 : 400,

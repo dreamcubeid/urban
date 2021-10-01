@@ -20,7 +20,12 @@ const MainAdvertisement: FC = () => {
         pos="main-content-1"
         containerClassName={styles.mainAdvertisement_container}
         widgetClassName={styles.mainAdvertisement_item}
-        loadingComponent={<Placeholder classes={placeholder} withImage />}
+        loadingComponent={
+          <div className={styles.mainAdvertisement_placeholderContainer}>
+            <Placeholder classes={placeholder} withImage />  
+            <Placeholder classes={placeholder} withImage />  
+          </div>
+        }
         thumborSetting={{
           width: size.width < 575 ? 800 : 400,
           format: "webp",

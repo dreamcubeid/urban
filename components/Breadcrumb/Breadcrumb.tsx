@@ -9,6 +9,7 @@ type BreadcrumbPropType = {
   title?: string
   lng?: string
   links?: any
+  titleMiddle?: any
   fluidContainer?: boolean
   currentStep?: any
 }
@@ -17,6 +18,7 @@ const Breadcrumb: FC<BreadcrumbPropType> = ({
   title,
   links,
   lng,
+  titleMiddle,
   fluidContainer = false
 }) => {
 
@@ -65,7 +67,9 @@ const Breadcrumb: FC<BreadcrumbPropType> = ({
             })
           }
         </ol>
-        <h1>{title}</h1>
+        <h1 className={titleMiddle ? styles.breadcrumb_titleMiddle : ""}>
+          {title}
+        </h1>
       </div>
     </section>
   )

@@ -55,6 +55,12 @@
     }
   }
 
+  &_titleMiddle
+  {
+    margin: 0 auto;
+    width: fit-content;
+  }
+
   &_container
   {
     @include flex(row, center, flex-start);

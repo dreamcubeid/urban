@@ -29,8 +29,16 @@
         }
     }
 
+    &_placeholderContainer
+    {
+        @extend .grid;
+        @include grid-(2);
+        @include gap-x-(24px);
+    }
+    
     &_placeholder
     {
+        width: 100%;
         height: 300px;
     }
 
@@ -40,6 +48,13 @@
 
         &_container
         {
+            @include grid-(1);
+            @include gap-y-(24px);
+        }
+
+        &_placeholderContainer
+        {
+            @extend .grid;
             @include grid-(1);
             @include gap-y-(24px);
         }
