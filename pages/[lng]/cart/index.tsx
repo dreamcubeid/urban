@@ -2,7 +2,6 @@
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
-import { parseCookies } from 'lib/parseCookies'
 import Link from 'next/link'
 // import Router from 'next/router'
 import dynamic from 'next/dynamic'

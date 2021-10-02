@@ -1,15 +1,12 @@
 @import '../utils/_variables.scss';
 @import './Buttons.module.scss';
+@import './Popup.module.scss';
 
 .popup
 {
   @include flex(row, center, center);
   @include fixedWidth(100%);
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  @extend .popup_overlay;
   z-index: 1038;
   background-color: rgba($color_black, 0.75);
   
@@ -58,7 +55,7 @@
 
   &Container
   {
-    @include flex(row, center, flex-start);
+    @extend .popup_container;
     @include fixedWidth(100%);
     position: relative;
     margin: 0;
