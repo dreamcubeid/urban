@@ -15,6 +15,13 @@
   @include col-span-(2);
 }
 
+.signupLabel,
+.shippingCheckboxLabel
+{
+  @include RegulerReguler;
+  margin-left: 12px;
+}
+
 .form
 {
   @include fixedWidth(100%);
@@ -48,25 +55,6 @@
   position: relative;
 }
 
-.billingAddressHeader
-{
-
-}
-
-.billingAddressLabel
-{
-
-}
-
-.errorMessage
-{
-
-}
-
-.checkoutAsMember
-{
-
-}
 
 .loginLabel
 {
@@ -85,32 +73,6 @@
     margin-left: 4px;
   }
 }
-
-.signupContainer
-{
-
-}
-
-.shippingCheckboxContainer
-{
-
-}
-
-.shippingCheckboxTitle
-{
-
-}
-
-.shippingCheckbox
-{
-
-}
-
-.shippingCheckboxLabel
-{
-
-}
-
 
 .submitButton
 {

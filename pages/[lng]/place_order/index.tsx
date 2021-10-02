@@ -34,18 +34,11 @@ const placeOrderClasses = {
   formClassName: styles.form,
   formGroupClassName: styles.formGroup,
   inputClassName: styles.input,
-  billingAddressHeaderClassName: styles.billingAddressHeader,
-  billingAddressLabelClassName: styles.billingAddressLabel,
-  errorMessageClassName: styles.errorMessage,
-  checkoutAsMemberClassName: styles.checkoutAsMember,
   loginLabelClassName: styles.loginLabel,
-  signupContainerClassName: styles.signupContainer,
-  shippingCheckboxContainerClassName: styles.shippingCheckboxContainer,
-  shippingCheckboxTitleClassName: styles.shippingCheckboxTitle,
-  shippingCheckboxClassName: styles.shippingCheckbox,
-  shippingCheckboxLabelClassName: styles.shippingCheckboxLabel,
   submitButtonClassName: styles.submitButton,
-  billingAddressContainerClassName: styles.billingAddressContainer
+  billingAddressContainerClassName: styles.billingAddressContainer,
+  signupLabelClassName: styles.signupLabel,
+  shippingCheckboxLabelClassName: styles.shippingCheckboxLabel
 }
 
 const passwordStrengthClasses = {

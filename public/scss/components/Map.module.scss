@@ -10,6 +10,7 @@
 .mapSelectArea
 {
   @extend .btn_transparent;
+  @include SmallSemiBold;
   height: 103px;
   border: 1px solid $color_placeholder;
   color: $color_text_secondary;
