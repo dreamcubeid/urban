@@ -55,7 +55,6 @@
 
   &Container
   {
-    @extend .popup_container;
     @include fixedWidth(100%);
     position: relative;
     margin: 0;
@@ -102,6 +101,7 @@
   padding: 32px 16px 24px;
   background-color: $color_white;
   border-radius: 2px;
+  @extend .popup_container;
 
   max-width: calc(100% - (24px * 2));
   max-height: calc(100% - (24px * 2));
@@ -308,8 +308,8 @@
   @include transition();
   @include RegulerReguler;
   @include flex(row, center, center);
-  @extend .btn;
   @extend .btn_primary;
+  background-color: $color_black !important;
   position: relative;
   margin: 0;
   padding: 0 12px;
@@ -319,10 +319,11 @@
   text-align: center;
   cursor: pointer;
   min-width: 100px;
-
+  
   &:hover
   {
     opacity: .7;
+    background-color: $color_black !important;
 
     &::after
     {
