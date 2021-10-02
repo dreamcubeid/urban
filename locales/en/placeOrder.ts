@@ -6,7 +6,8 @@ const locale = {
     "orderSummary": "Order Summary",
     "shipToDiffAddress": "Ship to different address?",
     "signUp": "Also sign me up on Checkout",
-    "userInformation": "Information"
+    "userInformation": "Information",
+    "submitButton": "Place Order"
   }
 }
 

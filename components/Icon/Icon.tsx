@@ -23,6 +23,7 @@ import {
 
 import { GoPlus } from 'react-icons/go'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { BiCurrentLocation } from 'react-icons/bi'
 
 const Icon: any = {
   arrowRight: RiArrowRightLine,
@@ -31,6 +32,7 @@ const Icon: any = {
   chevronRight: FiChevronRight,
   RiCloseFill: RiCloseFill,
   coupon: RiCoupon3Fill,
+  mapCenterIcon: BiCurrentLocation,
   orderSummary: {
     expand: RiArrowDownSLine,
     collapse: RiArrowUpSLine,

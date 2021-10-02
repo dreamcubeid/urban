@@ -42,7 +42,7 @@
   &::before
   {
     content: "";
-    @include fixedSize(8px);
+    @include fixedSize(16px);
     display: block;
     margin-right: 9px;
     background-repeat: no-repeat;

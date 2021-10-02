@@ -6,7 +6,8 @@ const locale = {
     "orderSummary": "Ringkasan Pesanan",
     "shipToDiffAddress": "Kirim ke alamat berbeda?",
     "signUp": "Daftarkan akun baru",
-    "userInformation": "Informasi"
+    "userInformation": "Informasi",
+    "submitButton": "Pesan Sekarang"
   }
 }
 

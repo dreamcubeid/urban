@@ -5,6 +5,9 @@ import { OrderSummary, CartDetails } from '@sirclo/nexus'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
+/* library component */
+import useWindowSize from 'lib/useWindowSize'
+
 /* component */
 import Placeholder from 'components/Placeholder'
 import Icon from '../Icon/Icon'
@@ -50,7 +53,7 @@ const classesOrderSummary = {
   voucherContainerClassName: stylesPopup.voucherContainer,
   pointsContainerClassName: `${stylesPopup.voucherContainer} ${stylesPopup.voucherContainer__noGradient}`,
   voucherFormContainerClassName: stylesPopup.voucherFormContainer,
-  voucherFormClassName: `groocery-form ${stylesPopup.voucherForm}`,
+  voucherFormClassName: `${stylesPopup.voucherForm}`,
   voucherInputClassName: "form-control",
   /* Voucher  up */
   voucherSubmitButtonClassName: stylesPopup.voucherFormSubmit,
@@ -117,6 +120,7 @@ const OrderSummaryBox: FC<iProps> = ({
   withCartDetails
 }) => {
 
+  const size = useWindowSize()
   const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
   const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
 
@@ -185,7 +189,12 @@ const OrderSummaryBox: FC<iProps> = ({
       }
       <OrderSummary
         isAccordion
-        classes={classesOrderSummary}
+        classes={{
+          ...classesOrderSummary,
+          footerClassName: page !== "cart" && size.width > 767
+            ? "d-none"
+            : classesOrderSummary.footerClassName
+        }}
         currency="IDR"
         submitButtonLabel={i18n.t("orderSummary.placeOrder")}
         page={page}

@@ -1,0 +1,176 @@
+@import '../utils/_variables.scss';
+@import './Buttons.module.scss';
+@import './Popup.module.scss';
+
+.mapNote
+{
+  display: block;
+}
+
+.mapSelectArea
+{
+  @extend .btn_transparent;
+  height: 103px;
+  border: 1px solid $color_placeholder;
+  color: $color_text_secondary;
+  
+  &:hover
+  {
+    border: 1px solid $color_placeholder;
+  }
+}
+
+.mapArea
+{
+  width: 100%;
+  height: 200px;
+  position: relative;
+
+  div
+  {
+    border-radius: 2px;
+  }
+}
+
+.mapPopup
+{
+  @extend .popup_overlay;
+
+  & [class*="autocomplete-dropdown-container"]
+  {
+    @include position(absolute, 50px, auto, auto, 24px);
+    z-index: 1;
+    width: calc(100% - 35px);
+    border: 1px solid $color_elements_line_darker;
+    background: $color_white;
+    text-align: left;
+
+    div 
+    {
+      padding: 10px;
+    }
+
+    div:nth-child(odd) 
+    {
+      background-color: $color_white !important;
+    }
+
+    div:nth-child(even) 
+    {
+      background-color: $color_elements_line !important;
+    }
+  }
+}
+
+.mapPopupBackground
+{
+  @extend .popup_container;
+  @include fixedWidth(704px);
+}
+
+.map
+{
+  @include fixedHeight(333px);
+  position: relative;
+
+  input
+  {
+    @include position(absolute, 12px, auto, auto, 24px);
+    @include SmallSmall;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    padding: 0 12px;
+    width: 277px;
+    border: none;
+    outline: none;
+    z-index: 2;
+    border-radius: 2px;
+    height: 34px;
+    color: $color_placeholder;
+
+  }
+}
+
+.mapHeaderWrapper
+{
+  @include flex(row, center, center);
+  @include fixedWidth(100%);
+  position: relative;
+  width: 100%;
+  padding: 0 18px;
+  height: 48px;
+}
+
+.mapHeaderTitle
+{
+  @include RegulerReguler;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.mapHeaderCloseButton
+{
+  @include position(absolute, 18px, 18px);
+  @extend .btn_transparent;
+  width: fit-content;
+  padding: 0 !important;
+
+  svg
+  {
+    margin: 0;
+  }
+}
+
+.mapLabelAddress
+{
+  @include flex(row, center, flex-start);
+  @include SmallSmall;
+  padding: 8px 16px;
+  height: fit-content;
+  border-bottom: 1px solid $color_elements_line_darker;
+}
+
+.mapCenterButton
+{
+  @include position(absolute, 12px , 12px);
+  @include fixedSize(34px);
+  @extend .btn_transparent;
+  background-color: $color_white;
+  border-radius: 2px;
+  width: fit-content;
+  z-index: 2;
+  padding: 0 !important;
+
+  svg
+  {
+    margin-right: 0;
+  }
+}
+
+.mapButtonFooter
+{
+  @extend .btn_primary;
+  width: calc(100% - 32px);
+  height: 52px;
+  background-color: $color_black !important;
+  margin: 16px auto;
+  
+  &:hover
+  {
+    background-color: $color_black !important;
+  }
+}
+
+@media screen and (max-width: #{$breakpoint_max_md}) 
+{
+  .map
+  {
+    @include fixedHeight(calc(100vh - 164px))
+  }
+
+  .mapPopupBackground
+  {
+    @include fixedWidth(100%);
+    @include fixedHeight(100vh);
+    animation: none;
+  }
+}
