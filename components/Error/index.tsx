@@ -20,7 +20,7 @@ const ErrorComponent: FC<any> = ({
   const _handleSetLngLocale = async () => {
     const allowPathname = (allowedLang.includes(window.location.pathname.substring(1, 3)));
     const activeLang = allowPathname ? window.location.pathname.substring(1, 3) : 'id';
-    const { default: lngDict = {} } = await import(`locales/${activeLang}.json`);
+    const { default: lngDict = {} } = await import(`locales/${activeLang}/_${activeLang}.ts`);
     setLang(activeLang);
     i18n?.locale(lng, lngDict);
   }
