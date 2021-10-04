@@ -1,11 +1,13 @@
 const locale = {
   "lookbook": {
-    "errorButton": "Kembali ke Halaman Awal",
+    "back": "Kembali ke Daftar Lookbook",
+    "errorButton": "Kembali",
     "errorDesc": "Coba beberapa saat lagi",
     "errorTitle": "Terjadi kesalahan",
-    "isEmpty": "Belum ada lookbook",
+    "isEmpty": "Lookbook belum tersedia",
     "seeCollection": "Lihat Koleksi",
     "seeMore": "Lebih Banyak",
+    "share": "Bagikan Lookbook",
     "title": "Lookbook"
   }
 }
