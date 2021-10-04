@@ -22,7 +22,7 @@ import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import Icon from 'components/Icon/Icon'
 import Stepper from 'components/Stepper'
 const Placeholder = dynamic(() => import("components/Placeholder"));
-const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
+// const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
 /* styles */
 import styles from 'public/scss/pages/Placeorder.module.scss'
 import stylesPasswordStrength from 'public/scss/components/PasswordStrength.module.scss'
@@ -74,7 +74,7 @@ type PrivateComponentPropsType = {
 const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
   <PrivateRoute
     page="place_order"
-    loadingComponent={<LoaderPages />}
+    // loadingComponent={<LoaderPages />}
     redirectCart="products"
   >
     {children}
@@ -135,11 +135,22 @@ const PlaceOrderPage: FC<any> = ({
             passwordFulfilledCriteriaIcon={<Icon.setNewPassword.passwordCriteriaIcon color="#1DB954" size={16} />}
             passwordUnfulfilledCriteriaIcon={<Icon.setNewPassword.passwordCriteriaIcon color="#E5E7EF" size={16} />}
             loadingComponent={
-              <Placeholder
-                classes={placeholderClasses}
-                withList
-                listMany={3}
-              />
+              <>
+                <div className={styles.placeOrder}>
+                  <Placeholder
+                    classes={placeholderClasses}
+                    withList
+                    listMany={9}
+                  />
+                </div>
+                <div className={styles.orderSummaryBoxContainer}>
+                  <Placeholder
+                    classes={placeholderClasses}
+                    withList
+                    listMany={4}
+                  />
+                </div>
+              </>
             }
             mapCenterIcon={<Icon.mapCenterIcon />}
             mapButtonCloseIcon={<Icon.RiCloseFill />}

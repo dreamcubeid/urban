@@ -36,7 +36,6 @@ const classesCartDetails = {
   itemTitleClassName: styles.itemTitle,
   itemPriceClassName: styles.itemPrice,
   itemRegularPriceClassName: styles.itemRegularPrice,
-  itemSalePriceClassName: styles.itemSalePrice,
   itemSalePriceWrapperClassName: styles.itemSalePriceWrapper,
   itemDiscountNoteClassName: styles.itemDiscountNote,
   itemQtyClassName: styles.itemQty,
@@ -46,7 +45,6 @@ const classesCartDetails = {
   cartFooterClassName: styles.cartFooter,
   cartFooterTextareaClassName: styles.cartFooterTextarea,
   itemEditClassName: styles.itemEdit,
-  itemRegularAmountClassName: styles.itemRegularAmount,
   changeQtyButtonClassName: styles.changeQtyButton,
   removeButtonClassName: styles.removeButton,
   // hidden
