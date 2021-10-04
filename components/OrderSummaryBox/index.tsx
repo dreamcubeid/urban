@@ -32,6 +32,7 @@ const classesOrderSummary = {
   submitButtonClassName: styles.submitButton,
   expandButtonClassName: stylesPriceBreakdown.expandButton,
   expandedDivClassName: stylesPriceBreakdown.expandedDiv,
+  deductionPriceClassName: stylesPriceBreakdown.deductionPrice,
 
   /* applied coupon and point */
   voucherTextClassName: styles.voucherText,
