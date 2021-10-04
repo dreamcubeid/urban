@@ -1,20 +1,27 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { GiftCard, useI18n } from "@sirclo/nexus";
-import { useBrand } from "lib/useBrand";
-import Layout from "components/Layout/Layout";
-import styles from "public/scss/pages/GiftCard.module.scss";
-/* locales */
-import locale from "locales";
+/* Library Packages */
+import { FC, useState } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { GiftCard, useI18n } from '@sirclo/nexus'
+
+/* Library Template */
+import { useBrand } from 'lib/useBrand'
+
+/* Components */
+import Layout from 'components/Layout/Layout'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+
+/* Locales */
+import locale from 'locales'
+
+/* Styles */
+import styles from 'public/scss/pages/GiftCard.module.scss'
 
 const classesGiftCard = {
-  containerClassName: `${styles.giftcard_item} ${styles.giftcard_item__form}`,
-  inputContainerClassName: styles.sirclo_form_row,
-  labelClassName: styles.giftcard_label,
-  inputClassName: `form-control ${styles.sirclo_form_input}`,
-  buttonClassName: `btn mt-3
-    ${styles.btn_primary} ${styles.btn_long} 
-    ${styles.btn_full_width} ${styles.btn_center}`
+  containerClassName: styles.form,
+  inputContainerClassName: styles.form_inputContainer,
+  labelClassName: styles.form_inputLabel,
+  inputClassName: styles.form_input,
+  buttonClassName: styles.form_button
 }
 
 const GiftCardPage: FC<any> = ({
@@ -24,6 +31,7 @@ const GiftCardPage: FC<any> = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
   const i18n: any = useI18n()
+  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("giftCard.title")]
 
   return (
     <Layout
@@ -33,21 +41,36 @@ const GiftCardPage: FC<any> = ({
       brand={brand}
       titleHeader={i18n.t("giftCard.title")}
     >
-      <section className={styles.giftcard_wrapper}>
+
+      <Breadcrumb 
+        lng={lng}
+        title={i18n.t("giftCard.title")} 
+        links={linksBreadcrumb}
+        withTitle={false}
+      />
+
+      <div className={styles.wrapper}>
         <div className="container">
           <div className="row">
-            <div className="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 d-flex flex-column align-items-start justify-content-start flex-nowrap">
-              <div className={styles.giftcard_header}>
-                <h1>{i18n.t("giftCard.title")}</h1>
-                <p>{i18n.t("giftCard.desc")}</p>
+            <div className="col-12 col-md-6 offset-md-3">
+
+              <div className={styles.header}>
+                <h1 className={styles.header_title}>
+                  {i18n.t("giftCard.title")}
+                </h1>
+                <p className={styles.header_description}>
+                  {i18n.t("giftCard.desc")}
+                </p>
               </div>
+
               <GiftCard
                 classes={classesGiftCard}
               />
             </div>
           </div>
         </div>
-      </section>
+      </div>
+
     </Layout>
   )
 }
@@ -58,7 +81,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const lngDict = locale(params.lng)
 
-  const brand = await useBrand(req);
+  const brand = await useBrand(req)
 
   return {
     props: {
@@ -69,4 +92,4 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
 }
 
-export default GiftCardPage;
+export default GiftCardPage
