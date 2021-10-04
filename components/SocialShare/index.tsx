@@ -1,3 +1,4 @@
+/* Library Packages */
 import { FC } from 'react'
 import {
   FacebookShareButton,
@@ -8,17 +9,22 @@ import {
   TelegramShareButton,
 } from 'react-share'
 
+/* Components */
 import Icon from '../Icon/Icon'
 
+/* Styles */
 import styles from 'public/scss/components/SocialShare.module.scss'
 
 type TypeSocialShare = {
-  i18n?: any,
-  urlSite: string,
+  i18n?: any
+  urlSite: string
   classes?: {
     socialShareParentDivClassName?: string
     socialShareItemClassName?: string
+    socialShareLabelClassName?: string
   }
+  withLabel?: boolean
+  customLabel?: string
   [otherProp: string]: any
 }
 
@@ -28,14 +34,21 @@ const SocialShare: FC<TypeSocialShare> = ({
   classes = {
     socialShareParentDivClassName: styles.socialShare,
     socialShareItemClassName: styles.socialShare_item,
+    socialShareLabelClassName: styles.socialShare_label,
   },
+  withLabel = true,
+  customLabel = i18n.t("product.shareProduct"),
   ...props
 }) => {
 
 
   return (
     <div className={classes.socialShareParentDivClassName}>
-      <p>{i18n.t("product.shareProduct")}</p>
+      {withLabel && 
+        <p className={classes.socialShareLabelClassName}>
+          {customLabel}
+        </p>
+      }
       <div className={classes.socialShareItemClassName}>
         <FacebookShareButton url={urlSite}>
           <Icon.socialShare.FacebookIcon {...props} />
