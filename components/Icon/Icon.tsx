@@ -18,7 +18,8 @@ import {
   RiTelegramFill,
   RiCheckboxCircleFill,
   RiEyeCloseLine,
-  RiEyeLine
+  RiEyeLine,
+  RiQuestionFill
 } from 'react-icons/ri'
 
 import { GoPlus } from 'react-icons/go'
@@ -31,6 +32,9 @@ const Icon: any = {
   chevronRight: FiChevronRight,
   RiCloseFill: RiCloseFill,
   coupon: RiCoupon3Fill,
+  article: {
+    emptyIcon: RiQuestionFill
+  },
   orderSummary: {
     expand: RiArrowDownSLine,
     collapse: RiArrowUpSLine,
