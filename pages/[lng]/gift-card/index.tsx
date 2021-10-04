@@ -1,5 +1,5 @@
 /* Library Packages */
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { GiftCard, useI18n } from '@sirclo/nexus'
 
