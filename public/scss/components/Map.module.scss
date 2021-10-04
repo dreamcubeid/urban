@@ -4,7 +4,8 @@
 
 .mapNote
 {
-  display: block;
+  @include position(absolute);
+  top: 22px !important;
 }
 
 .mapSelectArea
@@ -23,13 +24,16 @@
 
 .mapArea
 {
-  width: 100%;
-  height: 200px;
+  border: 1px solid $color_elements_placeholder;
   position: relative;
+  border-radius: 2px;
 
-  div
+  & > div
   {
-    border-radius: 2px;
+    position: relative;
+    width: calc(100% - 32px);
+    height: calc(143px - 51px);
+    margin: 23px auto 16px auto;
   }
 }
 

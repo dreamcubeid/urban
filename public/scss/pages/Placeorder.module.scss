@@ -29,10 +29,12 @@
 
 .formGroup
 {
+  position: relative;
   margin-bottom: 12px;
-
+  
   label
   {
+    @include position(absolute, 8px, auto, auto, 16px);
     @include SmallSmall;
     color: $color_text_secondary;
   }
@@ -46,6 +48,7 @@
 .input
 {
   @extend .form_input;
+  padding: 18px 0 0 16px;
 }
 
 .billingAddressContainer
