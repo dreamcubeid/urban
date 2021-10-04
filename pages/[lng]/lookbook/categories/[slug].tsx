@@ -1,42 +1,71 @@
-import { FC, useState } from "react"
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { useRouter } from "next/router";
+/* Library Packages */
+import { FC, useState } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 import {
   isLookbookAllowed,
   LookbookSingle,
   useI18n
-} from "@sirclo/nexus"
-import { useBrand } from "lib/useBrand";
-import useWindowSize from "lib/useWindowSize";
-import Layout from "components/Layout/Layout"
-import Placeholder from "components/Placeholder";
+} from '@sirclo/nexus'
 
-import styles from "public/scss/pages/Lookbook.module.scss";
-/* locales */
-import locale from "locales";
+/* Library Template */
+import { useBrand } from 'lib/useBrand'
+import useWindowSize from 'lib/useWindowSize'
+
+/* Components */
+import Layout from 'components/Layout/Layout'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+import Placeholder from 'components/Placeholder'
+import Icon from 'components/Icon/Icon'
+
+/* Locales */
+import locale from 'locales'
+
+/* Styles */
+import styles from 'public/scss/pages/Lookbook.module.scss'
+
+const SocialShare = dynamic(() => import("components/SocialShare"))
 
 const classesLookbookSingle = {
-  containerClassName: `${styles.lookbook} ${styles.lookbook__detail}`,
+  containerClassName: styles.lookbook,
   rowClassName: styles.lookbook_row,
-  imageClassName: `${styles.lookbook_itemImage} d-block w-100`
+  imageClassName: styles.lookbookSingle_image
 }
 
 const classesPlaceholderLookbook = {
   placeholderList: `${styles.lookbook_placeholder} d-block p-0 mt-0 mb-3 mx-auto w-100`
 }
 
+const classesSocialShare = {
+  socialShareParentDivClassName: styles.sharer_items,
+  socialShareItemClassName: styles.sharer_item,
+  socialShareLabelClassName: styles.sharer_label
+}
+
 const LookbookSinglePage: FC<any> = ({
   lng,
   lngDict,
   slug,
-  brand
+  brand,
+  urlSite
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
-  const router = useRouter();
-  const size = useWindowSize();
-  const LookbookAllowed = isLookbookAllowed();
 
-  const [title, setTitle] = useState<string>("");
+  const i18n: any = useI18n()
+  const router = useRouter()
+  const size = useWindowSize()
+  const LookbookAllowed = isLookbookAllowed()
+
+  const [title, setTitle] = useState<string>("")
+  const linksBreadcrumb = [
+    i18n.t("header.home"), 
+    i18n.t("lookbook.title"),
+    title
+  ]
+
+  const handleBackButton = () => {
+    router.back()
+  }
 
   return (
     <Layout
@@ -46,45 +75,69 @@ const LookbookSinglePage: FC<any> = ({
       brand={brand}
       withAllowed={LookbookAllowed}
     >
-      <div className={`${styles.lookbook_wrapper} container`}>
-        <div className="row">
-          <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
 
-            <div className={`${styles.contact_info} ${styles.contact_info__top}`}>
-              <h1>{title}</h1>
+      <Breadcrumb 
+        lng={lng}
+        title={title} 
+        links={linksBreadcrumb} 
+      />
+
+      <div className={styles.wrapper}>
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              
+              <LookbookSingle
+                classes={classesLookbookSingle}
+                slug={slug}
+                getTitle={setTitle}
+                loadingComponent={
+                  <div className={styles.lookbook_placeholderWrapper}>
+                    <Placeholder
+                      classes={classesPlaceholderLookbook}
+                      withList
+                      listMany={5}
+                    />
+                  </div>
+                }
+                emptyStateComponent={
+                  <div className={styles.empty}>
+                    <div className={styles.empty_icon}>
+                      <Icon.article.emptyIcon />
+                    </div>
+                    <div className={styles.empty_labelWrapper}>
+                      <p>{i18n.t("lookbook.isEmpty")}</p>
+                    </div>
+                  </div>
+                }
+                thumborSetting={{
+                  width: size.width < 768 ? 400 : 600,
+                  format: "webp",
+                  quality: 85,
+                }}
+              />
+
+              <div className={styles.sharer}>
+                <SocialShare 
+                  i18n={i18n} 
+                  urlSite={urlSite}
+                  classes={classesSocialShare}
+                  customLabel={i18n.t("lookbook.share")}
+                />
+              </div>
+
+              <div className={styles.lookbook_nav}>
+                <button onClick={handleBackButton} className={styles.lookbook_navButton}>
+                  <span>
+                    <Icon.productDetail.prevIcon />
+                  </span>
+                  <span>
+                    {i18n.t("lookbook.back")}
+                  </span>
+                </button>
+              </div>
+              
             </div>
-
-            <LookbookSingle
-              classes={classesLookbookSingle}
-              slug={slug}
-              getTitle={setTitle}
-              loadingComponent={
-                <div className="mt-3">
-                  <Placeholder
-                    classes={classesPlaceholderLookbook}
-                    withList
-                    listMany={5}
-                  />
-                </div>
-              }
-              emptyStateComponent={
-                <p className="d-flex flex-row align-items-center justify-content-center text-align-center p-5">
-                  {i18n.t("lookbook.isEmpty")}
-                </p>
-              }
-              thumborSetting={{
-                width: size.width < 768 ? 400 : 600,
-                format: "webp",
-                quality: 85,
-              }}
-            />
-
-            <div className={`${styles.lookbook_nav} d-flex flex-row align-items-center justify-content-between`}>
-              <button onClick={() => router.back()}>
-                {i18n.t("global.back")}
-              </button>
-            </div>
-
           </div>
         </div>
       </div>
@@ -93,18 +146,22 @@ const LookbookSinglePage: FC<any> = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
-  const lngDict = locale(params.lng);
+  
+  const { slug } = params
+  const lngDict = locale(params.lng)
+  const brand = await useBrand(req)
 
-  const brand = await useBrand(req);
+  const urlSite = `https://${req.headers.host}/${params.lng}/blog/${slug}`
 
   return {
     props: {
       lng: params.lng,
       slug: params.slug,
       lngDict,
-      brand: brand || ''
-    },
-  };
+      brand: brand || '',
+      urlSite: urlSite
+    }
+  }
 }
 
-export default LookbookSinglePage;
+export default LookbookSinglePage
