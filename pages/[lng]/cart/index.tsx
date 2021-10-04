@@ -2,7 +2,6 @@
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
-import { parseCookies } from 'lib/parseCookies'
 import Link from 'next/link'
 // import Router from 'next/router'
 import dynamic from 'next/dynamic'
@@ -37,7 +36,6 @@ const classesCartDetails = {
   itemTitleClassName: styles.itemTitle,
   itemPriceClassName: styles.itemPrice,
   itemRegularPriceClassName: styles.itemRegularPrice,
-  itemSalePriceClassName: styles.itemSalePrice,
   itemSalePriceWrapperClassName: styles.itemSalePriceWrapper,
   itemDiscountNoteClassName: styles.itemDiscountNote,
   itemQtyClassName: styles.itemQty,
@@ -47,7 +45,6 @@ const classesCartDetails = {
   cartFooterClassName: styles.cartFooter,
   cartFooterTextareaClassName: styles.cartFooterTextarea,
   itemEditClassName: styles.itemEdit,
-  itemRegularAmountClassName: styles.itemRegularAmount,
   changeQtyButtonClassName: styles.changeQtyButton,
   removeButtonClassName: styles.removeButton,
   // hidden
@@ -179,18 +176,9 @@ const Cart: FC<any> = ({
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
-  res,
   params
 }) => {
   const lngDict = locale(params.lng)
-
-  if (process.env.IS_PROD !== "false") {
-    const cookies = parseCookies(req)
-    res.writeHead(307, {
-      Location: `/${cookies.ACTIVE_LNG || "id"}`,
-    });
-    res.end()
-  }
 
   const brand = await useBrand(req)
 

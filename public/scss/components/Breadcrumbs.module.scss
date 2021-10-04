@@ -70,6 +70,7 @@
     h1
     {
       text-transform: capitalize;
+      margin-bottom: 0;
     }
 
     h2
@@ -78,13 +79,30 @@
       margin-bottom: 0;
     }
   }
+
+  &_blackContainer
+  {
+    background: $color_black;
+    color: $color_white;
+    padding-bottom: 32px;
+
+    [class*="breadcrumb_item"]
+    {
+      color: $color_white;
+      
+      &::before
+      {
+        color: $color_white;
+      }
+    }
+  }
 }
 
 @media (max-width: $breakpoint_max_lg)
 {
   .breadcrumb
   {
-    margin: 70px 0 0;
-    padding: 24px 0 0;
+    margin: 0 0 0;
+    padding: 32px 0 0;
   }
 }

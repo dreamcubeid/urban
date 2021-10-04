@@ -12,6 +12,7 @@ type BreadcrumbPropType = {
   titleMiddle?: any
   fluidContainer?: boolean
   currentStep?: any
+  bgBlack?: boolean
 }
 
 const Breadcrumb: FC<BreadcrumbPropType> = ({
@@ -19,7 +20,8 @@ const Breadcrumb: FC<BreadcrumbPropType> = ({
   links,
   lng,
   titleMiddle,
-  fluidContainer = false
+  fluidContainer = false,
+  bgBlack
 }) => {
 
   const redirectLinks = [
@@ -41,7 +43,10 @@ const Breadcrumb: FC<BreadcrumbPropType> = ({
   };
 
   return (
-    <section className={styles.breadcrumb_container}>
+    <section className={`
+      ${styles.breadcrumb_container}
+      ${bgBlack ? styles.breadcrumb_blackContainer : ""} 
+    `}>
       <div className={`${fluidContainer ? 'container-fluid' : 'container'}`}>
         <ol className={`breadcrumb ${styles.breadcrumb}`}>
           {

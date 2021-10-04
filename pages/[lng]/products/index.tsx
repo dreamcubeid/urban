@@ -35,7 +35,7 @@ const ProductsPage: FC<any> = ({
       titleSeo={i18n.t("product.title")}
     >
       <section className={styleProducts.products_breadcumb}>
-        <Breadcrumb title={i18n.t("product.all")} links={linksBreadcrumb} lng={lng} />
+        <Breadcrumb title={i18n.t("product.title")} links={linksBreadcrumb} lng={lng} />
       </section>
 
       <LazyLoadComponent>

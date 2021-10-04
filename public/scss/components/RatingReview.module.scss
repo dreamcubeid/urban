@@ -126,7 +126,7 @@
 {
   @include flex(row, center, flex-start);
   order: 3;
-  max-width: 100%;
+  width: auto;
   overflow-x: auto;
 }
 

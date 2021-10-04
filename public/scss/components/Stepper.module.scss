@@ -1,0 +1,85 @@
+@import '../utils/_variables.scss';
+
+
+.stepSection
+{
+  @include fixedHeight(56px);
+  @include flex(row, center, center);
+  background: $color_elements;
+}
+
+.stepContainer
+{
+  @include flex(row, center, space-between);
+  background: $color_elements;
+}
+
+.stepItem
+{
+  @include flex(row, center, space-between);
+  position: relative;
+
+  [class*="stepNumber"]
+  {
+    background: $color_placeholder;
+    color: $color_white;
+  }
+
+  p
+  {
+    color: $color_placeholder;
+    margin-left: 12px;
+  }
+
+  &:not(:last-child)
+  {
+    &::after
+    {
+      @include position(absolute, auto, -142px);
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: $color_elements_line_darker;
+    }
+  }
+}
+
+.stepNumber
+{
+  @include flex(row, center, center);
+  @include fixedSize(20px);
+  @include SmallSemiBold;
+  border-radius: 100%;
+}
+
+.progressCircleContainer
+{
+  position: relative;
+}
+
+.stepsNumberMobile
+{
+  @include position(absolute, 50%, 50%);
+  transform: translate(50%,-50%);
+  z-index: 2;
+}
+
+.titleStepperMobile
+{
+  @include RegulerSemiBold;
+}
+
+.stepItemActive
+{
+  
+  [class*="stepNumber"]
+  {
+    background: $color_black;
+    color: $color_white;
+  }
+
+  p
+  {
+    color: $color_black;
+  }
+}
