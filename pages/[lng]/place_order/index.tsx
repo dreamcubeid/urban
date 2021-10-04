@@ -18,12 +18,11 @@ import useWindowSize from 'lib/useWindowSize'
 import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import OrderSummaryBox from 'components/OrderSummaryBox'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+import Icon from 'components/Icon/Icon'
+import Stepper from 'components/Stepper'
 const Placeholder = dynamic(() => import("components/Placeholder"));
 const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
-// import Footer from 'components/Footer/Footer'
-import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
-// import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
-import Icon from 'components/Icon/Icon'
 /* styles */
 import styles from 'public/scss/pages/Placeorder.module.scss'
 import stylesPasswordStrength from 'public/scss/components/PasswordStrength.module.scss'
@@ -115,6 +114,12 @@ const PlaceOrderPage: FC<any> = ({
           title={i18n.t("placeOrder.checkOrder")}
           links={linksBreadcrumb}
           lng={lng}
+        />
+
+        <Stepper
+          isMobile={size.width < 767}
+          i18n={i18n}
+          page="place_order"
         />
 
         <section className={`container ${styles.section}`}>

@@ -41,6 +41,7 @@ import pageHeader from './pageHeader'
 import notificationOptIn from './notificationOptIn'
 import settingNotification from './settingNotification'
 import whatsAppOTPInput from './whatsAppOTPInput'
+import pageStepper from './pageStepper'
 
 const id = {
   ...account,
@@ -86,6 +87,7 @@ const id = {
   ...notificationOptIn,
   ...settingNotification,
   ...whatsAppOTPInput,
+  ...pageStepper
 }
 
 export default id

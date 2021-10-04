@@ -3,6 +3,7 @@
  * Global css styles
  */
 @import './utils/_variables.scss';
+@import './components/ProgressCircle.scss';
 
 body
 {
@@ -34,8 +35,6 @@ h3
   @include typographyBuilder(700, 28, 40);
 }
 
-
- 
 @media (max-width: #{$breakpoint_min_sm}) 
 {
   .container
