@@ -1,27 +1,35 @@
-import { FC, useState } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+/* Library Packages */
+import { FC, useState } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import {
 	Article,
 	ArticleCategories,
 	useI18n
-} from "@sirclo/nexus";
-import Layout from "components/Layout/Layout";
-import SEO from "components/SEO";
-import Placeholder from "components/Placeholder";
-import { useBrand } from "lib/useBrand";
-import styles from "public/scss/pages/Article.module.scss";
-/* locales */
+} from '@sirclo/nexus'
+
+/* Library Template */
+import { useBrand } from 'lib/useBrand'
+
+/* Components */
+import Layout from 'components/Layout/Layout'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+import Placeholder from 'components/Placeholder'
+
+/* Locales */
 import locale from "locales";
 
+/* Styles */
+import styles from 'public/scss/pages/Article.module.scss'
+
 const classesPlaceholderArticle = {
-	placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_article}`,
+	placeholderImage: styles.article_placeholder,
 }
 
 const classesArticleCategories = {
-	articleCategoriesContainerClass: styles.article_categories,
-	categoryTitleClass: styles.article_categories_title,
-	articleCategoriesUlClass: styles.article_categoriesOrder,
-	articleCategoriesLiClass: styles.article_categoriesOrder_list,
+	articleCategoriesContainerClass: styles.sidebar_item,
+	categoryTitleClass: styles.sidebar_title,
+	articleCategoriesUlClass: styles.category,
+	articleCategoriesLiClass: styles.category_item,
 }
 
 const ArticleDetail: FC<any> = ({
@@ -30,9 +38,10 @@ const ArticleDetail: FC<any> = ({
 	slug,
 	brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const i18n: any = useI18n();
 
-	const [title, setTitle] = useState<string>("");
+	const i18n: any = useI18n()
+	const [title, setTitle] = useState<string>("")
+  const linksBreadcrumb = [i18n.t("header.home"), title]
 
 	return (
 		<Layout
@@ -41,45 +50,62 @@ const ArticleDetail: FC<any> = ({
 			lngDict={lngDict}
 			brand={brand}
 		>
-			<SEO title={title} />
-			<section>
-				<div className="container">
-					<div className="row">
-						<div className="col-12 col-md-9">
-							<h3 className={styles.article_title}>{title}</h3>
-							<Article
-								containerClassName={styles.article}
-								slug={slug as string}
-								getTitle={setTitle}
-								loadingComponent={
-									<Placeholder classes={classesPlaceholderArticle} withImage />
-								}
-							/>
-						</div>
-						<div className="col-12 col-md-3">
-							<ArticleCategories
-								classes={classesArticleCategories}
-							/>
-						</div>
-					</div>
-				</div>
-			</section>
+
+      <Breadcrumb 
+        lng={lng}
+        title={title} 
+        links={linksBreadcrumb} 
+      />
+
+      <div className={styles.wrapper}>
+
+        <div className="container">
+          <div className="row">
+            <div className="col-12 col-md-8 col-lg-8">
+
+              <div className={styles.single}>
+                <Article
+                  containerClassName={styles.article}
+                  slug={slug as string}
+                  getTitle={setTitle}
+                  loadingComponent={
+                    <Placeholder 
+                      classes={classesPlaceholderArticle}
+                      withImage 
+                    />
+                  }
+                  errorComponent={
+                    <p>error</p>
+                  }
+                />
+              </div>
+
+            </div>
+            <div className={`col-12 col-md-4 offset-lg-1 col-lg-3 ${styles.sidebar}`}>
+              <ArticleCategories
+                classes={classesArticleCategories}
+              />
+            </div>
+
+          </div>
+        </div>
+      </div>
 		</Layout>
-	);
-};
+	)
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
 	const lngDict = locale(params.lng)
-	const brand = await useBrand(req);
+	const brand = await useBrand(req)
 
 	return {
 		props: {
 			lng: params.lng,
 			lngDict,
 			slug: params.slug,
-			brand: brand || ""
+			brand: brand || ''
 		}
-	};
+	}
 }
 
-export default ArticleDetail;
+export default ArticleDetail
