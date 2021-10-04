@@ -7,12 +7,14 @@ import styles from 'public/scss/components/Breadcrumbs.module.scss'
 
 type BreadcrumbPropType = {
   title?: string
-  lng?: string
   links?: any
+  lng?: string
   titleMiddle?: any
   fluidContainer?: boolean
   currentStep?: any
   bgBlack?: boolean
+  titleClassName?: any
+  withTitle?: boolean
 }
 
 const Breadcrumb: FC<BreadcrumbPropType> = ({
@@ -21,7 +23,9 @@ const Breadcrumb: FC<BreadcrumbPropType> = ({
   lng,
   titleMiddle,
   fluidContainer = false,
-  bgBlack
+  bgBlack,
+  titleClassName = '',
+  withTitle = true
 }) => {
 
   const redirectLinks = [
@@ -72,9 +76,11 @@ const Breadcrumb: FC<BreadcrumbPropType> = ({
             })
           }
         </ol>
-        <h1 className={titleMiddle ? styles.breadcrumb_titleMiddle : ""}>
-          {title}
-        </h1>
+        {withTitle &&
+          <h1 className={`${titleClassName} ${titleMiddle ? styles.breadcrumb_titleMiddle : ''}`}>
+            {title}
+          </h1>
+        }
       </div>
     </section>
   )
