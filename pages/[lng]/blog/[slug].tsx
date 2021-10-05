@@ -58,7 +58,8 @@ const classesBlogRecent = {
 
 const classesSocialShare = {
   socialShareParentDivClassName: styles.sharer_items,
-  socialShareItemClassName: styles.sharer_item
+  socialShareItemClassName: styles.sharer_item,
+  socialShareLabelClassName: styles.sharer_label
 }
 
 const BlogSlug: FC<any> = ({
@@ -132,20 +133,11 @@ const BlogSlug: FC<any> = ({
               />
 
               <div className={styles.sharer}>
-                <p className={styles.sharer_label}>
-                  {i18n.t("blog.share")}
-                </p>
                 <SocialShare 
                   i18n={i18n} 
                   urlSite={urlSite}
                   classes={classesSocialShare}
-                  size={32}
-                  iconFillColor={'#D0D0D0'}
-                  bgStyle={
-                    {
-                      fill: 'rgba(255, 255, 255, 0)'
-                    }
-                  }
+                  customLabel={i18n.t("blog.share")}
                 />
               </div>
 

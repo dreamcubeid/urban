@@ -588,9 +588,10 @@
   @include fixedWidth(100%);
   position: relative;
   margin: 24px 0;
-  padding: 24px 0 0;
-
+  padding: 24px 0;
+  border: none;
   border-top: solid 1px $color_elements_line_darker;
+  border-bottom: solid 1px $color_elements_line_darker;
 
   &_label,
   &_items,
@@ -610,12 +611,14 @@
 
   &_items
   {
-    @include flex(row, center, flex-end);
+    @include flex(row, center, space-between);
+    @include fixedWidth(100%);
   }
 
   &_item
   {
     @include flex(row, center, center);
+    color: $color_placeholder;
 
     button
     {
@@ -628,11 +631,12 @@
       background: transparent;
       border: none;
       box-shadow: 0 0 0 transparent;
+      color: $color_placeholder;
 
       svg
       {
         @include transition();
-        @include fixedSize(100%);
+        @include fixedSize(20px);
       }
 
       &:hover,
@@ -646,10 +650,7 @@
 
       &:hover
       {
-        svg
-        {
-          filter: brightness(25%);
-        }
+        color: $color_black !important;
       }
     }
   }
