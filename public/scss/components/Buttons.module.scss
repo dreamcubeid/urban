@@ -95,6 +95,19 @@
       } 
     }
 
+    &:disabled
+    {
+      cursor: not-allowed;
+      background-color: $color_elements_line_darker;
+      border: none;
+
+      &::after
+      {
+        display: none;
+        background-image: none;
+      } 
+    }
+
   }
   
   &_secondary

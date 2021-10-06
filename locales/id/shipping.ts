@@ -14,13 +14,16 @@ const locale = {
     "pickingUp": "Kurir dalam perjalanan menuju toko",
     "returned": "Kurir mengembalikan pesanan ke toko",
     "setPinpoint": "Set Pin Lokasi",
-    "shipTo": "Dikirim ke",
+    "shipTo": "Informasi Pengiriman",
     "shippingMethod": "Metode Pengiriman",
     "subtitleContactInfo": "*tagihan akan dikirim ke kontak ini",
     "subtitleShipTo": "*pesanan Anda akan dikirimkan",
     "track": "Lacak Pesanan",
     "trackDriver": "Lacak kurir",
-    "updatePinpoint": "Ubah Pin Lokasi"
+    "updatePinpoint": "Ubah Pin Lokasi",
+    "change": "Ubah",
+    "submitButton": "Pesan Sekarang",
+    "chooseCourier": "Pilih Kurir Pengiriman"
   }
 }
 

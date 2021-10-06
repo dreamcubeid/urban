@@ -14,13 +14,16 @@ const locale = {
     "pickingUp": "Driver is on the way to pick up",
     "returned": "Driver will return the order to merchant",
     "setPinpoint": "Set Location Pin",
-    "shipTo": "Ship to",
+    "shipTo": "Shipping Information",
     "shippingMethod": "Shipping Method",
     "subtitleContactInfo": "*a bill will be sent to this contact",
     "subtitleShipTo": "*your order will be shipped",
     "track": "Track your order",
     "trackDriver": "Track Driver",
-    "updatePinpoint": "Change Location Pin"
+    "updatePinpoint": "Change Location Pin",
+    "change": "Change",
+    "submitButton": "Place Order",
+    "chooseCourier": "Choose Delivery Courier"
   }
 }
 

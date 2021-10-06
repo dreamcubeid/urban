@@ -2,7 +2,7 @@
 import { FC } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { toast } from 'react-toastify'
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import {
   PlaceOrderForm,
