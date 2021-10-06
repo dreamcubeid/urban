@@ -20,7 +20,7 @@
 
 .expandedDiv
 {
-  background: $color_elements_line;
+  background: $color_elements;
   border: 1px solid $color_elements_line_darker;
   padding: 12px 0 0;
   width: 100%;
@@ -99,10 +99,10 @@
   {
     @include typographyBuilder(400, 14, 18);
     @include position(fixed, auto, 0, 75px, 0);
-    border-top: 1px solid $color_elements_line_darker;
     border-radius: 2px 2px 0px 0px;
     z-index: 21;
     border: none;
+    border-top: 1px solid $color_elements_line_darker;
 
     & > div:last-child
     {

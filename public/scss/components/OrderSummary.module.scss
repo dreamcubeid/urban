@@ -86,7 +86,7 @@
 {
   @include RegulerSemiBold;
   @include flex(row, center, space-between);
-  background: $color_elements_line;
+  background: $color_elements;
   border: 1px solid $color_elements_line_darker;
   border-top: none;
   margin-bottom: 24px;

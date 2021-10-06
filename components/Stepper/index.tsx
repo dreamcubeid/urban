@@ -28,7 +28,7 @@ const stepper: FC<IProps> = ({
 
   const steps = {
     place_order: i18n.t("pageStepper.customerInfo"),
-    shipping_method: i18n.t("styles.stepNumber"),
+    shipping_method: i18n.t("pageStepper.shippingDetails"),
     payment_method: i18n.t("pageStepper.paymentMethod"),
   }
 
@@ -64,15 +64,15 @@ const stepper: FC<IProps> = ({
             <>
               <div className={`${styles.stepItem} ${getActive(page, "place_order")}`}>
                 <div className={styles.stepNumber}>{stepsNumber[page]}</div>
-                <p>{steps[page]}</p>
+                <p>{steps["place_order"]}</p>
               </div>
               <div className={`${styles.stepItem} ${getActive(page, "shipping_method")}`}>
                 <div className={styles.stepNumber}>{stepsNumber[page]}</div>
-                <p>{steps[page]}</p>
+                <p>{steps["shipping_method"]}</p>
               </div>
               <div className={`${styles.stepItem} ${getActive(page, "payment_method")}`}>
                 <div className={styles.stepNumber}>{stepsNumber[page]}</div>
-                <p>{steps[page]}</p>
+                <p>{steps["payment_method"]}</p>
               </div>
             </>
           }

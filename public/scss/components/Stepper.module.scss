@@ -6,6 +6,7 @@
   @include fixedHeight(56px);
   @include flex(row, center, center);
   background: $color_elements;
+  border-bottom: 1px solid $color_elements_line_darker;
 }
 
 .stepContainer
