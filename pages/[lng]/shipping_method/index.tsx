@@ -23,8 +23,8 @@ import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import Icon from 'components/Icon/Icon'
 import OrderSummaryBox from 'components/OrderSummaryBox'
 import Stepper from 'components/Stepper'
+import LoaderPages from 'components/Loader/LoaderPages'
 const Placeholder = dynamic(() => import("components/Placeholder"));
-const LoaderPages = dynamic(() => import('components/Loader/LoaderPages'))
 /* styles */
 import styles from 'public/scss/pages/ShippingMethod.module.scss'
 import stylesMap from 'public/scss/components/Map.module.scss'

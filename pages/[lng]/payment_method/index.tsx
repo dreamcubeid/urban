@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { toast } from "react-toastify"
+import { toast } from 'react-toastify'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import {
@@ -14,20 +14,21 @@ import {
 /* locales */
 import locale from 'locales'
 /* library component */
-import { useBrand } from "lib/useBrand"
+import { useBrand } from 'lib/useBrand'
+import { useWhatsAppOTPSetting } from 'lib/client'
 import useWindowSize from 'lib/useWindowSize'
 /* copmonents */
 import SEO from 'components/SEO'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import Layout from 'components/Layout/Layout'
-import Breadcrumb from "components/Breadcrumb/Breadcrumb"
 import Stepper from 'components/Stepper'
 import Icon from 'components/Icon/Icon'
 import OrderSummaryBox, { classesOrderSummary } from 'components/OrderSummaryBox'
-const LoaderPages = dynamic(() => import('components/Loader/LoaderPages'))
+import LoaderPages from 'components/Loader/LoaderPages'
 const Placeholder = dynamic(() => import('components/Placeholder'))
 
 /* styles */
-import styles from "public/scss/pages/PaymentMethod.module.scss"
+import styles from 'public/scss/pages/PaymentMethod.module.scss'
 import stylesCustomerDetail from 'public/scss/components/CustomerDetail.module.scss'
 
 const classesListPaymentMethod = {
@@ -91,8 +92,10 @@ const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
 const PaymentMethods: FC<any> = ({
   lng,
   lngDict,
+  hasOtp,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log("🚀 ~ file: index.tsx ~ line 98 ~ hasOtp", hasOtp)
   const i18n: any = useI18n()
   const size = useWindowSize()
   const { data } = useShippingMethod()
@@ -199,6 +202,7 @@ const PaymentMethods: FC<any> = ({
                 ...classesOrderSummary
               }}
               onErrorMsg={(msg) => toast.error(msg)}
+              withNotificationOptInModal={hasOtp}
               onErrorMsgCoupon={(msg) => toast.error(msg)}
               loadingComponent={
                 <Placeholder
@@ -243,11 +247,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
 
   const lngDict = locale(params.lng)
   const brand = await useBrand(req)
+  const hasOtp = await useWhatsAppOTPSetting(req)
 
   return {
     props: {
       lng: params.lng,
       lngDict,
+      hasOtp,
       brand: brand || ""
     }
   };

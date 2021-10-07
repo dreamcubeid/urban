@@ -224,6 +224,7 @@
 .pointButton
 {
   @extend .pointsButton;
+  margin-top: 12px;
   
   & > svg
   {

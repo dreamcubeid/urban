@@ -21,8 +21,8 @@ import OrderSummaryBox from 'components/OrderSummaryBox'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import Icon from 'components/Icon/Icon'
 import Stepper from 'components/Stepper'
-const Placeholder = dynamic(() => import("components/Placeholder"));
-const LoaderPages = dynamic(() => import('components/Loader/LoaderPages'))
+import LoaderPages from 'components/Loader/LoaderPages'
+const Placeholder = dynamic(() => import('components/Placeholder'));
 /* styles */
 import styles from 'public/scss/pages/Placeorder.module.scss'
 import stylesPasswordStrength from 'public/scss/components/PasswordStrength.module.scss'
