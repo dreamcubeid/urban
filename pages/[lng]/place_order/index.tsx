@@ -42,7 +42,6 @@ const placeOrderClasses = {
 
 const passwordStrengthClasses = {
   passwordStrengthBarClassName: stylesPasswordStrength.passwordStrengthBar,
-  passwordStrengthBarContainerClassName: stylesPasswordStrength.passwordStrengthBarContainer,
   passwordCriteriaListClassName: stylesPasswordStrength.passwordCriteriaList,
   passwordCriteriaClassName: stylesPasswordStrength.passwordCriteria,
 }

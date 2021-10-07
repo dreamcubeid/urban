@@ -16,7 +16,8 @@ const locale = {
     "total": "Total Bill",
     "uniqueCode": "Unique Code",
     "voucher": "Voucher",
-    "warning": "Unable to proceed transaction amount below 10,000"
+    "warning": "Unable to proceed transaction amount below 10,000",
+    "choosePayment": "Select Payment",
   }
 }
 

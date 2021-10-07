@@ -1,531 +1,354 @@
-@import "../base/colors";
-@import "../components/CustomerDetail.module.scss";
-@import "../components/Button.module.scss";
-@import "../components/Form.module.scss";
-@import "../components/OrderSummary.module.scss";
-@import "../components/Popup.module.scss";
+@import '../utils/_variables.scss';
+@import '../components/Buttons.module.scss';
+@import '../components/Form.module.scss';
+@import '../components/OrderSummary.module.scss';
 
-.payment
+.section
 {
-  background: $color_white;
+  @extend .grid;
+  @include grid-(3);
+  @include gap-x-(24px);
+  margin: 24px auto 100px;
+}
 
-  &_container
+.paymentContainer
+{
+  @include col-span-(2);
+}
+
+.title
+{
+  @include RegulerSemiBold;
+  margin-bottom: 12px;;
+}
+
+.listPaymentDiv
+{
+  
+}
+
+.paymentItemEnabled
+{
+  margin-bottom: 12px;
+  padding: 16px 16px 10px 16px;
+  border: 1px solid $color_placeholder;
+  border-radius: 2px;
+}
+
+.paymentItemDisabled
+{
+  
+}
+
+.paymentType
+{
+  @include flex(row, center, flex-start);
+  @include RegulerReguler;
+  cursor: pointer;
+
+  &:hover
   {
-    padding: 2rem 0;
-
-    @media screen and (max-width: 991px){
-      min-height: 95vh;
-    }
-  }
-
-  &_heading
-  {
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-
-    h6
+    [class*="checkmark"]
     {
-      margin: 0;
-      margin-left: 1rem;
-      color: $color_black;
-    }
-  }
+      border: 1px solid $color_black;
 
-  &_headingIcon
-  {
-    cursor: pointer;
-  }
-
-  &_line
-  {
-    border-color: $color_gray_low;
-  }
-
-  &_lineSecond
-  {
-    border-color: $color_gray_low;
-    margin: 0;
-  }
-
-  &_steps
-  {
-    padding: 0 1rem;
-    display: flex;
-    justify-content: center;
-  }
-
-  &_shipping
-  {
-    padding: 1rem;
-    margin-bottom: 2rem;
-    border: 1px solid $color_gray_primary;
-    border-radius: 5px;
-  }
-
-  &_shippingTitle
-  {
-    font-size: 14px;
-    font-weight: 900;
-  }
-
-  &_shippingCost
-  {
-    font-size: 13px;
-    font-weight: 900;
-  }
-
-  &_listTitle
-  {
-    font-size: 14px;
-    font-weight: 900;
-    color: $color_gray_dark;
-  }
-
-  &_listItemDisabled
-  {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: $color_gray_primary;
-    border: 1px solid $color_gray_primary;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-
-  &_listItemEnabled
-  {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid $color_blue;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-
-  &_listItemOverlay
-  {
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    padding: 0 1rem;
-    background-color: rgba(0, 0, 0, 0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &_listItemPopup
-  {
-    position: relative;
-    z-index: 10;
-    padding: 15px 10px;
-    background: $color_white;
-    border-radius: 5px;
-
-    &__close
-    {
-      position: absolute;
-      right: 0;
-      top: 0;
-      background: transparent;
-      border: none;
-      padding: .25rem .5rem;
-      cursor: pointer;
-
-      &:focus,
-      &:active
+      &::before
       {
-        outline: 0;
-        border: none; 
+        content: "";
+        @include fixedSize(12px);
+        @include position(absolute, 50%, auto, auto, 15%);
+        transform: translateY(-50%);
+        display: block;
+        border-radius: 100%;
+        background: $color_black;
       }
-    }
-
-    &__payment
-    {
-      margin: calc(45px + 27px) 0 0;
-      padding: 0 16px;
     }
   }
+}
 
-  &_listItemPopupForm
+.radioButtonContainer
+{
+  margin-right: 12px;
+}
+
+.radioButton
+{
+  display: none;
+
+  &:checked + label
   {
-    &__body
+    border: 1px solid $color_black;
+
+    &::before
     {
-      margin-top: 1rem;
-    }
-
-    &__input
-    {
-      width: 300px !important;
-      border-radius: 0 !important;
-
-      @media screen and (max-width: 575px) {
-        width: max-content !important;
-      }
-    }
-
-    &__button
-    {
-      background: $color_blue;
-      color: $color_white;
-      height: calc(2em + 1rem + 4px);
-      border-color: #ced4da !important;
-      border-left: 0 !important;
-      border-top-left-radius: 0 !important;
-      border-bottom-left-radius: 0 !important;
-      border-radius: 0 !important;
-    }
-  }
-
-  &_listItemPayment
-  {
-    display: flex;
-    flex: 1;
-    padding: 1rem;
-
-    @media screen and (max-width: 575px) {
-      padding: 1rem;
-    }
-
-    &__radio
-    {
-      margin-top: 2px;
-      margin-right: 1rem;
-      padding-right: 0;
-    }
-
-    & > p
-    {
-      margin-bottom: 0;
-    }
-
-    &__image
-    {
-      text-align: right;
-      padding: 1rem;
-
-      @media screen and (max-width: 575px) {
-        text-align: left;
-        padding: 0 1rem;
-      }
-
-      img
-      {
-        height: 25px;
-      }
-    }
-
-    &__warning
-    {
+      content: "";
+      @include fixedSize(12px);
+      @include position(absolute, 50%, auto, auto, 15%);
+      transform: translateY(-50%);
       display: block;
-      width: 100%;
-      padding: 0 1rem;
-      color: $color_red;
-      font-size: 14px;
+      border-radius: 100%;
+      background: $color_black;
     }
   }
-  
-  &_listItemBody
-  {
-    flex-grow: 1;
-    padding: 1rem;
-    border-radius: 5px;
-    background: $color_blue_light;
-    
-    @media screen and (max-width: 575px) {
-      padding: 1rem;
-    }
-  }
-  
-  &_listItemDetail
-  {
-    margin-bottom: 2rem;
-  }
+}
 
-  &_listItemTable
-  {
-    position: relative;
-    width: 100%;
-    border-collapse: collapse;
-  }
+.checkmark
+{
+  content: "";
+  @include fixedSize(20px);
+  margin-top: 5px;
+  position: relative;
+  cursor: pointer;
+  display: block;
+  border-radius: 50%;
+  background: $color_white;
+  border: 1px solid $color_placeholder;
 
-  &_listItemTableRow
+  &:hover
   {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: .25rem 0;
+    border: 1px solid $color_black;
 
-    &:last-child
+    &::before
     {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid $color_black;
-      font-family: "roboto-black";
-      font-size: 1.2rem;
-      text-transform: uppercase;
-    }
-
-    &__label
-    {
-      text-align: left;
-      display: flex;
-      align-items: center;
-    }
-
-    &__value
-    {
-      text-align: right;
-    }
-
-    &__priceSale
-    {
-      &:first-of-type:not(:only-of-type)
-      {
-        text-decoration: line-through;
-        color: $color_gray_dark;
-
-        @media screen and (max-width: 575px) {
-          display: inherit;
-        }
-      }
-    }
-
-    &__price
-    {
-      margin-left: .5rem;
+      content: "";
+      @include fixedSize(12px);
+      @include position(absolute, 50%, auto, auto, 15%);
+      transform: translateY(-50%);
+      display: block;
+      border-radius: 100%;
+      background: $color_black;
     }
   }
+}
 
-  &_footer
+.paymentImg
+{
+  display: none;
+}
+
+.paymentWarningText
+{
+
+}
+
+.paymentMethodDetails
+{
+  background: $color_elements;
+  border-radius: 2px;
+  padding: 16px;
+  margin-top: 23px;
+}
+
+.paymentMethodDetailBody
+{
+  @include RegulerReguler;
+}
+
+.selectedPaymentMethod
+{
+  width: 100%;
+}
+
+.paymentDetailsRow
+{
+  @include flex(row, center, space-between);
+
+  &:last-child
   {
-    margin-top: 1.5rem;
-
-    &__promotion
-    {
-      margin: .5rem 0;
-    }
-
-    &__agreement
-    {
-      text-align: right;
-
-      @media screen and (max-width: 575px) {
-        text-align: left;
-      }
-    }
-
-    &__check
-    {
-      position: relative;
-      top: 1px;
-      margin-right: .5rem;
-    }
-
-    &__button
-    {
-      text-align: right;
-      margin: 1rem 0;
-    }
-  }
-
-  &_empty
-  {
-    padding: 2rem 0;
-    text-align: center;
-
-    &__icon
-    {
-      width: 3rem !important;
-      height: 3rem !important;
-    }
-
-    &__title
-    {
-      font-family: "roboto-medium";
-      font-size: 1rem;
-      text-transform: uppercase;
-      margin: 1rem 0 .5rem 0;
-    }
-  }
-
-  &_popupProcessOverlay
-  {
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-  &_popupProcessContainer
-  {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @media screen and (max-width: 991px) {
-      padding: 0 1rem;
-    }
-  }
-
-  &_popupProcessInner
-  {
-    display: flex;
-    align-items: center;
-    width: max-content;
-    height: auto;
-    padding: 1.5rem;
-    text-align: center;
-    border-radius: 5px;
-    background-color: $color_white;
-    box-shadow: 0 0 15px rgba(0,0,0,.15);
-
-    @media screen and (max-width: 991px) {
-      width: 100%;
-    }
-  }
-
-  &_pointButton
-  {
-    display: flex;
-    width: max-content;
-    min-width: 300px;
-
-    @media screen and (max-width: 575px) {
-      width: 100%;
-    }
-  }
-
-  &_pointAppliedText,
-  &_voucherAppliedText
-  {
-    flex-grow: 1;
-    text-align: left;
-  }
-
-  &_pointAppliedRemove,
-  &_voucherAppliedRemove
-  {
-    cursor: pointer;
-  }
-
-  &_containerPointPopup
-  {
-    position: relative;
-    z-index: 10;
-    padding: 15px 16px;
-    background: $color_white;
-    border-radius: 5px;
-
-    &__close
-    {
-      position: absolute;
-      right: 0;
-      top: 0;
-      background: transparent;
-      border: none;
-      padding: .25rem .5rem;
-      cursor: pointer;
-
-      &:focus,
-      &:active
-      {
-        outline: 0;
-        border: none; 
-      }
-    }
-  }
-
-  &_pointsPopupLabel
-  {
-    font-size: 14px;
-  }
-
-  &_pointsPopupValue
-  {
-    font-size: 12px;
-  }
-
-  &_buttonChangePoint
-  {
-    width: 45px;
-    background: transparent;
-    border: 1px solid $color_blue;
-    border-radius: 3px;
-    margin-left: 5px;
-    transition: 0.3s all ease;
-    font-size: 20px;
-
-    &:hover,
-    &:active
-    {
-      background: $color_blue;
-      color: $color_white;
-    }
-  }
-
-  &_pointsFormContainer
-  {
+    @include RegulerSemiBold;
     margin: 16px 0;
+    padding-top: 16px;
+    border-top: 1px dashed $color_text_secondary;
+  }
+}
+
+.paymentDetailsLabel
+{
+
+}
+
+.paymentDetailsValue
+{
+  text-align: right;
+}
+
+.paymentMethodDetailFooter
+{
+  @include flex(column, flex-start, flex-start);
+}
+
+.promotionButtonGroup
+{
+  @include fixedWidth(100%);
+  order: 1;
+}
+
+.couponButton
+{
+  @extend .voucherButton;
+
+  & > svg
+  {
+    margin-right: 16px;
+  }
+  
+  &:after
+  {
+    display: none;
+  }
+}
+
+.pointButton
+{
+  @extend .pointsButton;
+  
+  & > svg
+  {
+    margin-right: 16px;
   }
 
-  &_pointsForm
+  &:after
   {
-    display: flex;
+    display: none;
+  }
+}
 
-    & > input
-    {
-      border-radius: 3px !important;
+.agreementContainer
+{
+  @include SmallSmall;
+  @include flex(row, center, center);
+  @include fixedWidth(100%);
+  text-align: center;
+  color: $color_text_secondary;
+  order: 3;
+}
 
-      &:focus
-      {
-        background: $color_blue_light;
-        border: 1px solid $color_blue;
-      }
-    }
+.agreementCheckbox
+{
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+
+
+.buttonContainer
+{
+  @include fixedWidth(100%);
+  order: 2;
+}
+
+.button
+{
+  @extend .btn_primary;
+  @include fixedWidth(100%);
+  @include fixedHeight(52px);
+  margin-bottom: 16px;
+
+  &::before
+  {
+    content: "";
+    @include fixedSize(16px);
+    background-repeat: no-repeat;
+    margin-right: 8px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='14' viewBox='0 0 13 14' fill='none'%3E%3Cpath d='M11.1667 5.6667H11.8333C12.0101 5.6667 12.1797 5.73694 12.3047 5.86196C12.4298 5.98699 12.5 6.15656 12.5 6.33337V13C12.5 13.1768 12.4298 13.3464 12.3047 13.4714C12.1797 13.5965 12.0101 13.6667 11.8333 13.6667H1.16667C0.989856 13.6667 0.820286 13.5965 0.695262 13.4714C0.570238 13.3464 0.5 13.1768 0.5 13V6.33337C0.5 6.15656 0.570238 5.98699 0.695262 5.86196C0.820286 5.73694 0.989856 5.6667 1.16667 5.6667H1.83333V5.00003C1.83333 4.3872 1.95404 3.78036 2.18856 3.21418C2.42308 2.64799 2.76683 2.13354 3.20017 1.7002C3.63351 1.26686 4.14796 0.923117 4.71414 0.688595C5.28033 0.454073 5.88716 0.333366 6.5 0.333366C7.11284 0.333366 7.71967 0.454073 8.28586 0.688595C8.85204 0.923117 9.36649 1.26686 9.79983 1.7002C10.2332 2.13354 10.5769 2.64799 10.8114 3.21418C11.046 3.78036 11.1667 4.3872 11.1667 5.00003V5.6667ZM1.83333 7.00003V12.3334H11.1667V7.00003H1.83333ZM5.83333 8.33337H7.16667V11H5.83333V8.33337ZM9.83333 5.6667V5.00003C9.83333 4.11598 9.48214 3.26813 8.85702 2.64301C8.2319 2.01789 7.38406 1.6667 6.5 1.6667C5.61595 1.6667 4.7681 2.01789 4.14298 2.64301C3.51786 3.26813 3.16667 4.11598 3.16667 5.00003V5.6667H9.83333Z' fill='white'/%3E%3C/svg%3E");
+  }
+}
+
+.basePrice
+{
+  @include SmallSmall;
+  font-size: 14px;
+  color: $color_text_secondary;
+  text-decoration: line-through;
+}
+
+.salePrice
+{
+  margin-left: 8px;
+}
+
+.shippingPrice
+{
+  color: $color_text_secondary;
+  text-decoration: line-through;
+  font-size: 14px;
+  display: block;
+  
+  &:only-of-type
+  {
+    @include RegulerReguler;
+    color: $color_black;
+    text-decoration: none;
+  }
+}
+
+.shippingDiscount
+{
+  margin-left: 8px;
+}
+
+
+.paymentDetailsDeduction
+{
+  color: $color_red_other;
+}
+
+.shippingPrice
+{
+
+}
+
+.shippingDiscount
+{
+
+}
+
+.placeholderList
+{
+  height: 60px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.placeholderCustomerDetailList
+{
+  height: 20px;
+  width: 100%;
+  margin-bottom: 12px;
+  &:first-child
+  {
+    width: 30%;
   }
 
-  &_pointsInsufficient
+  &:nth-child(3)
   {
-    color: $color_red;
+    width: 60%;
+  }
+  
+  &:last-child
+  {
+    width: 80%;
+  }
+}
 
-    & > p
-    {
-      font-size: 12px;
-      margin: 0;
-    }
+
+
+@media screen and (max-width: #{$breakpoint_max_md}) 
+{
+  .section
+  {
+    @include grid-(1);
+    @include gap-x-(0px);
+    @include gap-y-(24px);
   }
 
-  &_pointsWarning
+  .paymentContainer
   {
-    width: 400px;
-    text-align: center;
-    color: $color_red;
+    @include col-span-(1);
+  }
 
-    @media screen and (max-width: 575px) {
-      width: 100%;
-    }
-
-    & > p
-    {
-      font-size: 12px;
-      margin: 0;
-    }
+  .basePrice
+  {
+    display: block;
   }
 }

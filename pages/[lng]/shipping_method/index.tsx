@@ -34,7 +34,6 @@ import stylesCustomerDetail from 'public/scss/components/CustomerDetail.module.s
 const classesCustomerDetail = {
   customerDetailBoxClass: `container ${stylesCustomerDetail.customerDetaiBox}`,
   addressContainerClassName: stylesCustomerDetail.infoaddressContainer,
-  addressDetailClassName: stylesCustomerDetail.infoPersonaddressDetail,
   addressValueClassName: stylesCustomerDetail.infoPersonValueaddressValue,
   changePinClassName: "d-none",
 }
@@ -104,7 +103,7 @@ const ShippingMethodPage: FC<any> = ({
 
   let withButtonProps = {}
   if (size?.width > 767) withButtonProps = {
-    withButton: () => router.push("/[lng]/shipping_method", `/${lng}/shipping_method`)
+    withButton: () => router.push("/[lng]/payment_method", `/${lng}/payment_method`)
   }
 
   return (
@@ -189,8 +188,8 @@ const ShippingMethodPage: FC<any> = ({
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
 
-  const lngDict = locale(params.lng);
-  const brand = await useBrand(req);
+  const lngDict = locale(params.lng)
+  const brand = await useBrand(req)
 
   return {
     props: {

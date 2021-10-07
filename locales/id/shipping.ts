@@ -23,7 +23,8 @@ const locale = {
     "updatePinpoint": "Ubah Pin Lokasi",
     "change": "Ubah",
     "submitButton": "Pesan Sekarang",
-    "chooseCourier": "Pilih Kurir Pengiriman"
+    "chooseCourier": "Pilih Kurir Pengiriman",
+    "deliveryCourier": "Kurir Pengiriman"
   }
 }
 

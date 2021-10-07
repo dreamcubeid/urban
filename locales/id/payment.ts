@@ -16,7 +16,8 @@ const locale = {
     "total": "Total Tagihan",
     "uniqueCode": "Kode Unik",
     "voucher": "Voucher",
-    "warning": "Transaksi di bawah 10,000 tidak dapat diproses"
+    "warning": "Transaksi di bawah 10,000 tidak dapat diproses",
+    "choosePayment": "Pilih Pembayaran",
   }
 }
 

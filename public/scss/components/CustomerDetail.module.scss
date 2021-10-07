@@ -13,9 +13,25 @@
   padding-bottom: 16px;
 }
 
-.infoaddressContainer
+.customerDetaiBoxShipping
 {
+  border-top: 1px dashed $color_elements_line_darker;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
 
+.customerDetailShipping
+{
+  p
+  {
+    @include RegulerReguler;
+  }
+
+  span
+  {
+    @include RegulerReguler;
+    color: $color_text_secondary;
+  }
 }
 
 .infoPersonaddressDetail
@@ -64,6 +80,17 @@
       background-repeat: no-repeat;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M5 10.0001C2.2385 10.0001 0 7.76162 0 5.00012C0 2.23862 2.2385 0.00012207 5 0.00012207C7.7615 0.00012207 10 2.23862 10 5.00012C10 7.76162 7.7615 10.0001 5 10.0001ZM4.5015 7.00012L8.0365 3.46462L7.3295 2.75762L4.5015 5.58612L3.087 4.17162L2.38 4.87862L4.5015 7.00012Z' fill='%231DB954'/%3E%3C/svg%3E");
     }
+  }
+}
+
+.notesTitle
+{
+  text-transform: uppercase !important;
+  color: $color_text_secondary !important;
+
+  &::after
+  {
+    display: none !important;
   }
 }
 

@@ -1,112 +1,85 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { toast } from "react-toastify"
 import Link from 'next/link'
-import Router from "next/router";
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic'
 import {
   CustomerDetail,
   ListPaymentMethod,
   PrivateRoute,
   useI18n,
-  useShippingMethod
-} from "@sirclo/nexus";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import Breadcrumb from "components/Breadcrumb/Breadcrumb";
-import Loader from "components/Loader/Loader";
-import EmptyComponent from "components/EmptyComponent/EmptyComponent";
-import { useBrand } from "lib/useBrand";
-import { ArrowLeft, Info } from "react-feather";
-import { toast } from "react-toastify";
-import styles from "public/scss/pages/PaymentMethod.module.scss";
-
-const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
-const Placeholder = dynamic(() => import("components/Placeholder"));
+  useShippingMethod,
+  useBuyerNotes
+} from '@sirclo/nexus'
 /* locales */
-import locale from "locales";
+import locale from 'locales'
+/* library component */
+import { useBrand } from "lib/useBrand"
+import useWindowSize from 'lib/useWindowSize'
+/* copmonents */
+import SEO from 'components/SEO'
+import Layout from 'components/Layout/Layout'
+import Breadcrumb from "components/Breadcrumb/Breadcrumb"
+import Stepper from 'components/Stepper'
+import Icon from 'components/Icon/Icon'
+import OrderSummaryBox, { classesOrderSummary } from 'components/OrderSummaryBox'
+const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"))
+const Placeholder = dynamic(() => import("components/Placeholder"))
 
-
-const classesCustomerDetail = {
-  customerDetailBoxClass: styles.customer,
-  addressContainerClassName: styles.customer_info,
-  addressDetailClassName: styles.customer_infoPerson,
-  addressValueClassName: styles.customer_infoPersonValue
-};
+// import Loader from "components/Loader/Loader"
+/* styles */
+import styles from "public/scss/pages/PaymentMethod.module.scss"
+import stylesCustomerDetail from 'public/scss/components/CustomerDetail.module.scss'
 
 const classesListPaymentMethod = {
-  listPaymentDivClassName: "container",
-  paymentItemEnabledClassName: `row ${styles.payment_listItemEnabled}`,
-  paymentItemDisabledClassName: `row ${styles.payment_listItemDisabled}`,
-  paymentTypeClassName: `align-self-center ${styles.payment_listItemPayment}`,
-  radioButtonContainerClassName: styles.payment_listItemPayment__radio,
-  paymentImgClassName: `align-self-center ${styles.payment_listItemPayment__image}`,
-  paymentWarningTextClassName: styles.payment_listItemPayment__warning,
-  paymentMethodDetailsClassName: `col-12 ${styles.payment_listItemBody}`,
-  paymentMethodDetailBodyClassName: styles.payment_listItemDetail,
-  selectedPaymentMethodClassName: styles.payment_listItemTable,
-  paymentDetailsRowClassName: styles.payment_listItemTableRow,
-  paymentDetailsLabelClassName: styles.payment_listItemTableRow__label,
-  paymentDetailsValueClassName: styles.payment_listItemTableRow__value,
-  // footer
-  paymentMethodDetailFooterClassName: styles.payment_footer,
-  promotionButtonGroupClassName: styles.payment_footer__promotion,
-  couponButtonClassName: `btn ${styles.btn_black} ${styles.btn_long} ${styles.payment_pointButton} mb-3 px-3`,
-  voucherAppliedTextClassName: styles.payment_voucherAppliedText,
-  voucherButtonRemoveClassName: styles.payment_voucherAppliedRemove,
-  popupClassName: styles.payment_listItemOverlay,
-  voucherContainerClassName: styles.payment_listItemPopup,
-  closeButtonClassName: styles.payment_listItemPopup__close,
-  voucherFormContainerClassName: `${styles.payment_listItemPopupForm__body} ${styles.payment_listItemPopup__payment}`,
-  voucherFormClassName: `form-inline ${styles.sirclo_form_row}`,
-  voucherInputClassName: `form-control ${styles.sirclo_form_input} ${styles.payment_listItemPopupForm__input}`,
-  voucherSubmitButtonClassName: `btn btn-black-outer ${styles.payment_listItemPopupForm__button}`,
-  voucherListClassName: styles.ordersummary_popupVoucher,
-  voucherListHeaderClassName: styles.ordersummary_popupVoucherTitle,
-  voucherClassName: styles.ordersummary_popupVoucherItem,
-  voucherDetailClassName: styles.ordersummary_popupVoucherDetail,
-  voucherFooterClassName: styles.ordersummary_popupVoucherFooter,
-  voucherApplyButtonClassName: `btn ${styles.btn_primary}`,
-  agreementContainerClassName: styles.payment_footer__agreement,
-  agreementCheckboxClassName: styles.payment_footer__check,
-  buttonContainerClassName: styles.payment_footer__button,
-  buttonClassName: `btn ${styles.btn_primary} ${styles.btn_long}`,
-  basePriceClassName: styles.payment_listItemTableRow__priceSale,
-  salePriceClassName: styles.payment_listItemTableRow__price,
-  shippingPriceClassName: styles.payment_listItemTableRow__priceSale,
-  shippingDiscountClassName: styles.payment_listItemTableRow__price,
-  //point
-  popupBackgroundClassName: styles.payment_listItemOverlay,
-  pointsContainerClassName: styles.payment_containerPointPopup,
-  numberOfPointsClassName: styles.payment_pointsPopup,
-  pointsFormContainerClassName: styles.payment_pointsFormContainer,
-  pointsFormClassName: styles.payment_pointsForm,
-  pointsLabelClassName: styles.payment_pointsPopupLabel,
-  pointsValueClassName: styles.payment_pointsPopupValue,
-  changePointsClassName: styles.payment_buttonChangePoint,
-  pointsInsufficientClassName: styles.payment_pointsInsufficient,
-  pointsSubmitButtonClassName: `btn ${styles.btn_primary} ${styles.btn_long} w-100 mt-4 mb-0`,
-  pointsWarningClassName: styles.payment_pointsWarning,
-  pointButtonClassName: `btn ${styles.btn_black} ${styles.btn_long} ${styles.payment_pointButton} mb-3 px-3`,
-  pointAppliedTextClassName: styles.payment_pointAppliedText,
-  pointButtonRemoveClassName: styles.payment_pointAppliedRemove,
-};
-
-const classesEmptyComponent = {
-  emptyContainer: styles.payment_empty,
-  emptyTitle: styles.payment_empty__title
+  listPaymentDivClassName: styles.listPaymentDiv,
+  paymentItemEnabledClassName: styles.paymentItemEnabled,
+  paymentItemDisabledClassName: styles.paymentItemDisabled,
+  paymentTypeClassName: styles.paymentType,
+  radioButtonContainerClassName: styles.radioButtonContainer,
+  paymentImgClassName: styles.paymentImg,
+  paymentWarningTextClassName: styles.paymentWarningText,
+  paymentMethodDetailsClassName: styles.paymentMethodDetails,
+  paymentMethodDetailBodyClassName: styles.paymentMethodDetailBody,
+  selectedPaymentMethodClassName: styles.selectedPaymentMethod,
+  paymentDetailsRowClassName: styles.paymentDetailsRow,
+  paymentDetailsLabelClassName: styles.paymentDetailsLabel,
+  paymentDetailsValueClassName: styles.paymentDetailsValue,
+  paymentMethodDetailFooterClassName: styles.paymentMethodDetailFooter,
+  promotionButtonGroupClassName: styles.promotionButtonGroup,
+  couponButtonClassName: styles.couponButton,
+  pointButtonClassName: styles.pointButton,
+  agreementContainerClassName: styles.agreementContainer,
+  agreementCheckboxClassName: styles.agreementCheckbox,
+  buttonContainerClassName: styles.buttonContainer,
+  radioButtonClassName: styles.radioButton,
+  buttonClassName: styles.button,
+  basePriceClassName: styles.basePrice,
+  salePriceClassName: styles.salePrice,
+  shippingPriceClassName: styles.shippingPrice,
+  shippingDiscountClassName: styles.shippingDiscount,
+  checkmarkClassName: styles.checkmark,
+  paymentDetailsDeductionClassName: styles.paymentDetailsDeduction
 }
 
-const classesPlaceholderCustomerDetail = {
-  placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_customerDetail}`
+const classesCustomerDetail = {
+  customerDetailBoxClass: `container ${stylesCustomerDetail.customerDetaiBox}`,
+  addressDetailClassName: stylesCustomerDetail.infoPersonaddressDetail,
+  addressValueClassName: stylesCustomerDetail.infoPersonValueaddressValue,
+  changePinClassName: "d-none",
 }
 
-const classesPlaceholderPayment = {
-  placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_paymentMethod}`
+const classesCustomerDetailPlaceholder = {
+  placeholderList: styles.placeholderCustomerDetailList,
+}
+
+const placeholderClasses = {
+  placeholderList: styles.placeholderList,
 }
 
 type PrivateComponentPropsType = {
-  children: any;
-};
+  children: any
+}
 
 const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
   <PrivateRoute
@@ -122,22 +95,22 @@ const PaymentMethods: FC<any> = ({
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
-  const { data } = useShippingMethod();
+  const i18n: any = useI18n()
+  const size = useWindowSize()
+  const { data } = useShippingMethod()
+  const { data: notes } = useBuyerNotes()
 
-  const CustomerDetailHeader = ({ title, linkTo, withLogo = false }) => (
-    <div className={styles.customer_infoHeader}>
-      <div className={styles.customer_infoHeaderContainer}>
-        <h3 className={styles.customer_infoHeaderTitle}>{title}</h3>
-        {withLogo &&
-          <Info color="#767676" size="18" />
-        }
-      </div>
-      <Link href={`/[lng]/${linkTo}`} as={`/${lng}/${linkTo}`}>
-        <a className={styles.customer_infoHeaderLink}>{i18n.t("shipping.change")}</a>
-      </Link>
-    </div>
-  )
+  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("placeOrder.checkOrder")]
+
+  const icons = {
+    closeButtonIcon: <Icon.orderSummary.close />,
+    voucherIcon: <Icon.orderSummary.voucher />,
+    pointIcon: <Icon.orderSummary.points />,
+    removeVoucherIcon: <Icon.orderSummary.voucherRemoved />,
+    removePointIcon: <Icon.orderSummary.voucherRemoved />,
+    voucherAppliedIcon: <Icon.orderSummary.voucherApplied />,
+    pointAppliedIcon: <Icon.orderSummary.voucherRemoved />,
+  }
 
   return (
     <PrivateRouteWrapper>
@@ -147,123 +120,136 @@ const PaymentMethods: FC<any> = ({
         lngDict={lngDict}
         brand={brand}
         withHeader={false}
+        withFooter={false}
       >
         <SEO title="Payment Method" />
-        <div className={styles.payment}>
-          <div className="row mx-0">
-            <div className="col-12 p-0">
-              <div className={styles.payment_container}>
-                <div className="container">
-                  <div className={styles.payment_heading}>
-                    <div
-                      className={styles.payment_headingIcon}
-                      onClick={() => Router.push("/[lng]/products", `/${lng}/products`)}
-                    >
-                      <ArrowLeft color="black" />
-                    </div>
-                    <h6>{i18n.t("placeOrder.checkOrder")}</h6>
-                  </div>
-                </div>
-                <hr className={styles.payment_line} />
-                <div className={styles.payment_steps}>
-                  <Breadcrumb currentStep={3} />
-                </div>
-                <hr className={`${styles.payment_lineSecond}`} />
-                <div className="container">
-                  <div className="row">
-                    <div className="col-12 col-md-12 col-lg-6 offset-lg-3">
-                      <CustomerDetail
-                        classes={classesCustomerDetail}
-                        isBilling={true}
-                        contactInfoHeader={
-                          <CustomerDetailHeader
-                            title={i18n.t("shipping.contactInfo")}
-                            linkTo="place_order"
-                            withLogo
-                          />
-                        }
-                        loadingComponent={
-                          <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
-                        }
-                      />
-                      <CustomerDetail
-                        classes={classesCustomerDetail}
-                        isBilling={false}
-                        shippingInfoHeader={
-                          <CustomerDetailHeader
-                            title={i18n.t("shipping.shipTo")}
-                            linkTo="place_order"
-                            withLogo
-                          />
-                        }
-                        loadingComponent={
-                          <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
-                        }
-                      />
-                      {data?.shippingMethod &&
-                        <>
-                          <CustomerDetailHeader
-                            title={i18n.t("account.shippingMethod")}
-                            linkTo="shipping_method"
-                          />
-                          <div className={styles.payment_shipping}>
-                            <h3 className={styles.payment_shippingTitle}>
-                              {data?.shippingMethod?.shippingProvider}&nbsp;{data?.shippingMethod?.shippingService}
-                            </h3>
-                            <h3 className={styles.payment_shippingCost}>
-                              {data?.shippingMethod?.shippingCost}
-                            </h3>
-                          </div>
-                        </>
-                      }
-                      <div className={styles.payment_list}>
-                        <h3 className={styles.payment_listTitle}>{i18n.t("payment.title")}</h3>
-                        <ListPaymentMethod
-                          classes={classesListPaymentMethod}
-                          onErrorMsg={(msg) => toast.error(msg)}
-                          onErrorMsgCoupon={(msg) => toast.error(msg)}
-                          popupLoader={
-                            <div className={styles.payment_popupProcessOverlay}>
-                              <div className={styles.payment_popupProcessContainer}>
-                                <div className={styles.payment_popupProcessInner}>
-                                  <span className="spinner-border spinner-border-sm mr-3" role="status"></span>
-                                  <span>{i18n.t("payment.prepayment")}</span>
-                                </div>
-                              </div>
-                            </div>
-                          }
-                          loaderElement={
-                            <div className="col-12 text-center mx-auto loader">
-                              <Loader color="text-dark" withText />
-                            </div>
-                          }
-                          emptyState={
-                            <EmptyComponent
-                              classes={classesEmptyComponent}
-                              title={i18n.t("payment.isEmpty")}
-                            />
-                          }
-                          loadingComponent={
-                            <Placeholder classes={classesPlaceholderPayment} withList listMany={3} />
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+        <Breadcrumb
+          bgBlack
+          title={i18n.t("placeOrder.checkOrder")}
+          links={linksBreadcrumb}
+          lng={lng}
+        />
+        <Stepper
+          isMobile={size?.width < 767}
+          i18n={i18n}
+          page="payment_method"
+        />
+        <section className={stylesCustomerDetail.section}>
+          <CustomerDetail
+            classes={classesCustomerDetail}
+            isBilling={false}
+            shippingInfoHeader={
+              <div className={stylesCustomerDetail.headerContainer}>
+                <h3>{i18n.t("shipping.shipTo")}</h3>
+                <Link href="/[lng]/place_order" as={`/${lng}/place_order`}>
+                  <a className={stylesCustomerDetail.change}>{i18n.t("shipping.change")}</a>
+                </Link>
+              </div>
+            }
+            loadingComponent={
+              <div className={`container ${styles.placeholderCustomerDetailContainer}`}>
+                <Placeholder
+                  classes={classesCustomerDetailPlaceholder}
+                  withList
+                  listMany={3}
+                />
+              </div>
+            }
+          />
+          <div className="container">
+            <div className={`${stylesCustomerDetail.customerDetaiBoxShipping}`}>
+              <div className={stylesCustomerDetail.headerContainer}>
+                <h3>{i18n.t("shipping.deliveryCourier")}</h3>
+                <Link href="/[lng]/shipping_method" as={`/${lng}/shipping_method`}>
+                  <a className={stylesCustomerDetail.change} >{i18n.t("shipping.change")}</a>
+                </Link>
+              </div>
+              <div className={stylesCustomerDetail.customerDetailShipping}>
+                <p className={styles.customer_infoPersonValueShipping}>
+                  {data?.shippingMethod?.shippingProvider}&nbsp;{data?.shippingMethod?.shippingService}
+                  {" - "}
+                  <span>
+                    {data?.shippingMethod?.shippingCost}
+                  </span>
+                </p>
               </div>
             </div>
           </div>
-        </div>
+
+          {notes?.buyerNotes?.buyerNotes &&
+            <div className="container">
+              <div className={`${stylesCustomerDetail.customerDetaiBoxShipping}`}>
+                <div className={stylesCustomerDetail.headerContainer}>
+                  <h3 className={stylesCustomerDetail.notesTitle}>{i18n.t("cart.noteToSeller")}</h3>
+                  <Link href="/[lng]/cart" as={`/${lng}/cart`}>
+                    <a className={stylesCustomerDetail.change} >{i18n.t("shipping.change")}</a>
+                  </Link>
+                </div>
+                <div className={stylesCustomerDetail.infoPersonValueaddressValue}>
+                  {notes?.buyerNotes?.buyerNotes}
+                </div>
+              </div>
+            </div>
+          }
+        </section>
+
+        <section className={`container ${styles.section}`}>
+          <div className={styles.paymentContainer}>
+            <h2 className={styles.title}>{i18n.t("payment.choosePayment")}</h2>
+            <ListPaymentMethod
+              classes={{
+                ...classesListPaymentMethod,
+                ...classesOrderSummary
+              }}
+              onErrorMsg={(msg) => toast.error(msg)}
+              onErrorMsgCoupon={(msg) => toast.error(msg)}
+              loadingComponent={
+                <Placeholder
+                  classes={placeholderClasses}
+                  withList
+                  listMany={5}
+                />
+              }
+              loaderElement={
+                <Placeholder
+                  classes={placeholderClasses}
+                  withList
+                  listMany={6}
+                />
+              }
+              popupLoader={
+                <div className="spinner_wrapper">
+                  <div className="spinner-border" />
+                </div>
+              }
+              emptyState={
+                <div className={styles.lookbookPlaceholder_wrapper}>
+                  <p>{i18n.t("lookbook.isEmpty")}</p>
+                </div>
+              }
+              {...icons}
+            />
+          </div>
+          <div className={styles.orderSummaryBoxContainer}>
+            <OrderSummaryBox
+              i18n={i18n}
+              lng={lng}
+              withCartDetails
+              withOrderSummary={false}
+              page="payment_method"
+            />
+          </div>
+        </section>
+
       </Layout>
     </PrivateRouteWrapper>
-  );
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const lngDict = locale(params.lng);
 
-  const brand = await useBrand(req);
+  const lngDict = locale(params.lng)
+  const brand = await useBrand(req)
 
   return {
     props: {
@@ -274,4 +260,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
   };
 }
 
-export default PaymentMethods;
+export default PaymentMethods
