@@ -22,22 +22,12 @@
   margin-bottom: 12px;;
 }
 
-.listPaymentDiv
-{
-  
-}
-
 .paymentItemEnabled
 {
   margin-bottom: 12px;
   padding: 16px 16px 10px 16px;
   border: 1px solid $color_placeholder;
   border-radius: 2px;
-}
-
-.paymentItemDisabled
-{
-  
 }
 
 .paymentType
@@ -128,7 +118,8 @@
 
 .paymentWarningText
 {
-
+  @include SmallSmall;
+  color: $color_red_other;
 }
 
 .paymentMethodDetails
@@ -162,11 +153,6 @@
   }
 }
 
-.paymentDetailsLabel
-{
-
-}
-
 .paymentDetailsValue
 {
   text-align: right;
@@ -181,6 +167,43 @@
 {
   @include fixedWidth(100%);
   order: 1;
+}
+
+.paymentItemDisabled
+{
+  @extend .paymentItemEnabled;
+  background: $color_elements_line_darker;
+  cursor: not-allowed;
+
+  [class*="paymentType"]
+  {
+    cursor: not-allowed;
+
+    &:hover
+    {
+      [class*="checkmark"]
+      {
+        background: $color_elements_line_darker !important;
+    
+        &::before
+        {
+          background: none;
+          border: none !important;
+        }
+      }
+    }
+  }
+
+  [class*="checkmark"]
+  {
+    background: $color_elements_line_darker !important;
+
+    &::before
+    {
+      background: none;
+      border: none !important;
+    }
+  }
 }
 
 .couponButton
@@ -229,8 +252,6 @@
   margin-right: 8px;
 }
 
-
-
 .buttonContainer
 {
   @include fixedWidth(100%);
@@ -272,7 +293,6 @@
   color: $color_text_secondary;
   text-decoration: line-through;
   font-size: 14px;
-  display: block;
   
   &:only-of-type
   {
@@ -287,25 +307,14 @@
   margin-left: 8px;
 }
 
-
 .paymentDetailsDeduction
 {
   color: $color_red_other;
 }
 
-.shippingPrice
-{
-
-}
-
-.shippingDiscount
-{
-
-}
-
 .placeholderList
 {
-  height: 60px;
+  height: 30px;
   width: 100%;
   margin-bottom: 12px;
 }
@@ -331,8 +340,6 @@
   }
 }
 
-
-
 @media screen and (max-width: #{$breakpoint_max_md}) 
 {
   .section
@@ -348,6 +355,11 @@
   }
 
   .basePrice
+  {
+    display: block;
+  }
+
+  .shippingPrice
   {
     display: block;
   }

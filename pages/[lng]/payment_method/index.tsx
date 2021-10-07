@@ -23,16 +23,14 @@ import Breadcrumb from "components/Breadcrumb/Breadcrumb"
 import Stepper from 'components/Stepper'
 import Icon from 'components/Icon/Icon'
 import OrderSummaryBox, { classesOrderSummary } from 'components/OrderSummaryBox'
-const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"))
-const Placeholder = dynamic(() => import("components/Placeholder"))
+const LoaderPages = dynamic(() => import('components/Loader/LoaderPages'))
+const Placeholder = dynamic(() => import('components/Placeholder'))
 
-// import Loader from "components/Loader/Loader"
 /* styles */
 import styles from "public/scss/pages/PaymentMethod.module.scss"
 import stylesCustomerDetail from 'public/scss/components/CustomerDetail.module.scss'
 
 const classesListPaymentMethod = {
-  listPaymentDivClassName: styles.listPaymentDiv,
   paymentItemEnabledClassName: styles.paymentItemEnabled,
   paymentItemDisabledClassName: styles.paymentItemDisabled,
   paymentTypeClassName: styles.paymentType,
@@ -43,7 +41,6 @@ const classesListPaymentMethod = {
   paymentMethodDetailBodyClassName: styles.paymentMethodDetailBody,
   selectedPaymentMethodClassName: styles.selectedPaymentMethod,
   paymentDetailsRowClassName: styles.paymentDetailsRow,
-  paymentDetailsLabelClassName: styles.paymentDetailsLabel,
   paymentDetailsValueClassName: styles.paymentDetailsValue,
   paymentMethodDetailFooterClassName: styles.paymentMethodDetailFooter,
   promotionButtonGroupClassName: styles.promotionButtonGroup,
@@ -76,6 +73,7 @@ const classesCustomerDetailPlaceholder = {
 const placeholderClasses = {
   placeholderList: styles.placeholderList,
 }
+
 
 type PrivateComponentPropsType = {
   children: any
@@ -192,7 +190,6 @@ const PaymentMethods: FC<any> = ({
             </div>
           }
         </section>
-
         <section className={`container ${styles.section}`}>
           <div className={styles.paymentContainer}>
             <h2 className={styles.title}>{i18n.t("payment.choosePayment")}</h2>
@@ -214,17 +211,13 @@ const PaymentMethods: FC<any> = ({
                 <Placeholder
                   classes={placeholderClasses}
                   withList
-                  listMany={6}
+                  listMany={5}
                 />
               }
-              popupLoader={
-                <div className="spinner_wrapper">
-                  <div className="spinner-border" />
-                </div>
-              }
+              popupLoader={LoaderPages}
               emptyState={
                 <div className={styles.lookbookPlaceholder_wrapper}>
-                  <p>{i18n.t("lookbook.isEmpty")}</p>
+                  <p>{i18n.t("payment.isEmpty")}</p>
                 </div>
               }
               {...icons}

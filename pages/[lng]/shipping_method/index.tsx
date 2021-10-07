@@ -24,12 +24,12 @@ import Icon from 'components/Icon/Icon'
 import OrderSummaryBox from 'components/OrderSummaryBox'
 import Stepper from 'components/Stepper'
 const Placeholder = dynamic(() => import("components/Placeholder"));
+const LoaderPages = dynamic(() => import('components/Loader/LoaderPages'))
 /* styles */
 import styles from 'public/scss/pages/ShippingMethod.module.scss'
 import stylesMap from 'public/scss/components/Map.module.scss'
 import stylesCustomerDetail from 'public/scss/components/CustomerDetail.module.scss'
 
-// const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
 
 const classesCustomerDetail = {
   customerDetailBoxClass: `container ${stylesCustomerDetail.customerDetaiBox}`,
@@ -82,7 +82,7 @@ type PrivateComponentPropsType = {
 const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
   <PrivateRoute
     page="shipping_method"
-    // loadingComponent={<LoaderPages />}
+    loadingComponent={<LoaderPages />}
     redirectCart="products"
   >
     {children}

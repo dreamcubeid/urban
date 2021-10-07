@@ -1,13 +1,11 @@
-import { useI18n } from "@sirclo/nexus"
-
 const LoaderPages = () => {
-  const i18n: any = useI18n();
-
   return (
-    <div className="loader-pages">
-      <div className="loader-pages__container">
-        <div className="loader-pages__container--spin"></div>
-        <p className="loader-pages__container--label">{i18n.t("home.loading")}</p>
+    <div className="loadePagePopup">
+      <div className="loaderPage">
+        <svg width="16px" height="12px">
+          <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+        </svg>
       </div>
     </div>
   )
