@@ -23,18 +23,17 @@ import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import Icon from 'components/Icon/Icon'
 import OrderSummaryBox from 'components/OrderSummaryBox'
 import Stepper from 'components/Stepper'
+import LoaderPages from 'components/Loader/LoaderPages'
 const Placeholder = dynamic(() => import("components/Placeholder"));
 /* styles */
 import styles from 'public/scss/pages/ShippingMethod.module.scss'
 import stylesMap from 'public/scss/components/Map.module.scss'
 import stylesCustomerDetail from 'public/scss/components/CustomerDetail.module.scss'
 
-// const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
 
 const classesCustomerDetail = {
   customerDetailBoxClass: `container ${stylesCustomerDetail.customerDetaiBox}`,
   addressContainerClassName: stylesCustomerDetail.infoaddressContainer,
-  addressDetailClassName: stylesCustomerDetail.infoPersonaddressDetail,
   addressValueClassName: stylesCustomerDetail.infoPersonValueaddressValue,
   changePinClassName: "d-none",
 }
@@ -83,7 +82,7 @@ type PrivateComponentPropsType = {
 const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
   <PrivateRoute
     page="shipping_method"
-    // loadingComponent={<LoaderPages />}
+    loadingComponent={<LoaderPages />}
     redirectCart="products"
   >
     {children}
@@ -104,7 +103,7 @@ const ShippingMethodPage: FC<any> = ({
 
   let withButtonProps = {}
   if (size?.width > 767) withButtonProps = {
-    withButton: () => router.push("/[lng]/shipping_method", `/${lng}/shipping_method`)
+    withButton: () => router.push("/[lng]/payment_method", `/${lng}/payment_method`)
   }
 
   return (
@@ -189,8 +188,8 @@ const ShippingMethodPage: FC<any> = ({
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
 
-  const lngDict = locale(params.lng);
-  const brand = await useBrand(req);
+  const lngDict = locale(params.lng)
+  const brand = await useBrand(req)
 
   return {
     props: {

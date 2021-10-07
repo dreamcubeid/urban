@@ -23,7 +23,8 @@ const locale = {
     "updatePinpoint": "Change Location Pin",
     "change": "Change",
     "submitButton": "Place Order",
-    "chooseCourier": "Choose Delivery Courier"
+    "chooseCourier": "Choose Delivery Courier",
+    "deliveryCourier": "Delivery Courier"
   }
 }
 

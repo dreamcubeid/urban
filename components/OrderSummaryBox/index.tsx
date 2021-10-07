@@ -20,7 +20,7 @@ import stylesPriceBreakdown from 'public/scss/components/PriceBreakdown.module.s
 import stylesPopup from 'public/scss/components/PopUpVoucherCoupon.module.scss'
 import stylesErrorAddToCart from 'public/scss/components/ErrorAddToCart.module.scss'
 
-const classesOrderSummary = {
+export const classesOrderSummary = {
   containerClassName: styles.container,
   headerClassName: styles.header,
   subTotalClassName: styles.subTotal,
@@ -113,12 +113,14 @@ type iProps = {
   | "shipping_method"
   | "payment_method"
   withCartDetails?: boolean
+  withOrderSummary?: boolean
 }
 const OrderSummaryBox: FC<iProps> = ({
   i18n,
   lng,
   page,
-  withCartDetails
+  withCartDetails,
+  withOrderSummary = true
 }) => {
 
   const size = useWindowSize()
@@ -188,28 +190,31 @@ const OrderSummaryBox: FC<iProps> = ({
           />
         </section>
       }
-      <OrderSummary
-        isAccordion
-        classes={{
-          ...classesOrderSummary,
-          footerClassName: page !== "cart" && size.width > 767
-            ? "d-none"
-            : classesOrderSummary.footerClassName
-        }}
-        currency="IDR"
-        submitButtonLabel={i18n.t("orderSummary.placeOrder")}
-        page={page}
-        onErrorMsg={() => toast.error(i18n.t("global.error"))}
-        onErrorMsgCoupon={(msg) => toast.error(msg)}
-        onAddressInvalid={(e) => toast.error(e)}
-        icons={icons}
-        couponLoadingComponent={
-          <p className="m-0 p-0">{i18n.t("global.loading")}</p>
-        }
-        pointsLoadingComponent={
-          <p className="m-0 p-0">{i18n.t("global.loading")}</p>
-        }
-      />
+
+      {withOrderSummary &&
+        <OrderSummary
+          isAccordion
+          classes={{
+            ...classesOrderSummary,
+            footerClassName: page !== "cart" && size.width > 767
+              ? "d-none"
+              : classesOrderSummary.footerClassName
+          }}
+          currency="IDR"
+          submitButtonLabel={i18n.t("orderSummary.placeOrder")}
+          page={page}
+          onErrorMsg={() => toast.error(i18n.t("global.error"))}
+          onErrorMsgCoupon={(msg) => toast.error(msg)}
+          onAddressInvalid={(e) => toast.error(e)}
+          icons={icons}
+          couponLoadingComponent={
+            <p className="m-0 p-0">{i18n.t("global.loading")}</p>
+          }
+          pointsLoadingComponent={
+            <p className="m-0 p-0">{i18n.t("global.loading")}</p>
+          }
+        />
+      }
       {showModalErrorAddToCart &&
         <Popup
           setPopup={toogleErrorAddToCart}
