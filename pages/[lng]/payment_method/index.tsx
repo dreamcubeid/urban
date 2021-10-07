@@ -95,7 +95,7 @@ const PaymentMethods: FC<any> = ({
   hasOtp,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log("🚀 ~ file: index.tsx ~ line 98 ~ hasOtp", hasOtp)
+
   const i18n: any = useI18n()
   const size = useWindowSize()
   const { data } = useShippingMethod()
