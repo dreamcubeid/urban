@@ -82,9 +82,7 @@
 
 .footer
 {
-  @include RegulerReguler;
-  margin: .5rem auto 0;
-  width: fit-content;
+  display: none;
 }
 
 .widgetLogin

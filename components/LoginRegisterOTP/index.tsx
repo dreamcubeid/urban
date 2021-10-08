@@ -150,7 +150,7 @@ const LoginRegisterOTP: FC<LoginRegisterOTPPropsType> = ({
         />
       }
 
-      {(step === steps.wa || type === "register") &&
+      {((step === steps.email || step === steps.wa) || type === "register") &&
         <div className={styles.footer}>
           {type === "register" ?
             i18n.t('register.haveAccount') :
