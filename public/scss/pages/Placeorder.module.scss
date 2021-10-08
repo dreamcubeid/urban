@@ -37,12 +37,14 @@
     @include position(absolute, 8px, auto, auto, 16px);
     @include SmallSmall;
     color: $color_text_secondary;
+    z-index: 2;
+
+    & > span
+    {
+      color: $color_red_other;
+    }
   }
 
-  span
-  {
-    color: $color_red_other;
-  }
 }
 
 .input
@@ -90,6 +92,13 @@
   @include fixedWidth(100%);
 }
 
+.passwordViewButton
+{
+  @include position(absolute, 20px, 10px);
+  @extend .btn_transparent;
+  padding: 0;
+  width: fit-content;
+}
 
 .placeholderList
 {

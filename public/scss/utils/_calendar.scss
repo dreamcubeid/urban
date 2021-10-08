@@ -1,29 +1,32 @@
-.react-calendar,
-.react-calendar *,
-.react-calendar *:before,
-.react-calendar *:after
-{
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
 .react-calendar
 {
-  $this: &;
-
   width: 350px;
   max-width: 100%;
   background: white;
-  border: 1px solid #a0a096;
+  border: 1px solid #E5E7EF;
+  border-radius: 6px;
+  overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
+  z-index: 100;
+
+  padding: 8px;
+
+  &,
+  & *,
+  & *:before,
+  & *:after
+  {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
 
   &--doubleView
   {
     width: 700px;
 
-    #{$this}__viewContainer
+    .react-calendar__viewContainer
     {
       display: flex;
       margin: -0.5em;
@@ -36,11 +39,24 @@
     }
   }
 
-  button
+  &--selectRange
+  {
+    .react-calendar__tile--hover
+    {
+      background-color: #e6e6e6 !important;
+    }
+  }
+
+  button 
   {
     margin: 0;
     border: 0;
     outline: none;
+
+    min-width: 44px;
+    background: none;
+    border-radius: 6px;
+    transform: none !important;
 
     &:enabled
     {
@@ -48,32 +64,39 @@
       {
         cursor: pointer;
       }
+
+      &:hover,
+      &:focus
+      {
+        background-color: #e6e6e6;
+      }
+    }
+
+    &[disabled]
+    {
+      background-color: #fff
     }
   }
 
   &__navigation
   {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    position: relative;
     height: 44px;
-    margin-bottom: 1em;
+    margin: 0;
 
-    button
+    &__arrow,
+    &__label
     {
-      min-width: 44px;
-      background: none;
-
-      &:enabled
-      {
-        &:hover,
-        &:focus
-        {
-          background-color: #e6e6e6;
-        }
-      }
-
-      &[disabled]
-      {
-        background-color: #f0f0f0;
-      }
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: none !important;
     }
   }
 
@@ -85,18 +108,18 @@
       text-transform: uppercase;
       font-weight: bold;
       font-size: 0.75em;
-    }
-
-    &__weekday
-    {
-      padding: 0.5em;
+  
+      &__weekday
+      {
+        padding: 0.5em;
+      }
     }
 
     &__weekNumbers
     {
       font-weight: bold;
-
-      #{$this}__tile
+      
+      .react-calendar__tile 
       {
         display: flex;
         align-items: center;
@@ -119,20 +142,35 @@
         {
           color: #757575;
         }
+
+        &[disabled]
+        {
+          opacity: 0.5;
+        }
       }
     }
   }
 
-  &__tile
+  &__year-view,
+  &__decade-view,
+  &__century-view
+  {
+    .react-calendar__tile
+    {
+      padding: 2em 0.5em;
+    }
+  }
+
+  &__tile 
   {
     max-width: 100%;
     text-align: center;
     padding: 0.75em 0.5em;
     background: none;
- 
+
     &:disabled
     {
-      background-color: #f0f0f0;
+      background-color: #fff
     }
 
     &:enabled
@@ -157,7 +195,7 @@
         }
       }
     }
- 
+
     &--hasActive
     {
       background: #76baff;
@@ -171,7 +209,7 @@
         }
       }
     }
- 
+
     &--active
     {
       background: #006edc !important;
@@ -185,21 +223,6 @@
           background: #1087ff;
         }
       }
-    }
-  }
-
-  &--selectRange #{$this}__tile--hover
-  {
-    background-color: #e6e6e6;
-  }
-
-  &__year-view,
-  &__decade-view,
-  &__century-view
-  {
-    #{$this}__tile
-    {
-      padding: 2em 0.5em;
     }
   }
 }

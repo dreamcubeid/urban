@@ -14,7 +14,7 @@ import {
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 const Placeholder = dynamic(() => import('components/Placeholder'))
 /* styles */
-import styles from 'public/scss/components/LoginRegisterOTP.module.scss'
+import styles from 'public/scss/components/whatsappOTP/LoginRegisterOTP.module.scss'
 
 type LoginRegisterOTPPropsType = {
   hasOtp: IncomingMessage

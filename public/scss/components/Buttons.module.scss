@@ -77,16 +77,16 @@
   {
     @include flex(row, center, center);
     color: $color_white;
-    background-color: $color_black;
-    border: 1px solid $color_black;
+    background-color: $color_black !important;
+    border: 1px solid $color_black !important;
     border-radius: 2px;
-    
+
     &:hover,
     &:focus,
     &:active
     {
       color: $color_white;
-      background-color: $color_black;
+      background-color: $color_black !important;
 
       &::after
       {

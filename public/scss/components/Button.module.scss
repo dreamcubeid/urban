@@ -16,13 +16,13 @@
 
   &_primary
   {
-    color: $color_white !important;
-    background-color: $color_blue !important;
+    color: $color_white;
+    background-color: $color_blue;
     transition: all .3s;
 
     &:hover{
-      color: $color_white !important;
-      background-color: $color_blue_dark !important;
+      color: $color_white;
+      background-color: $color_blue_dark;
     }
   }
 

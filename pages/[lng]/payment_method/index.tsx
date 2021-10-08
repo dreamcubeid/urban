@@ -30,6 +30,7 @@ const Placeholder = dynamic(() => import('components/Placeholder'))
 /* styles */
 import styles from 'public/scss/pages/PaymentMethod.module.scss'
 import stylesCustomerDetail from 'public/scss/components/CustomerDetail.module.scss'
+import stylePopupOpt from 'public/scss/components/whatsappOTP/PopupOpt.module.scss'
 
 const classesListPaymentMethod = {
   paymentItemEnabledClassName: styles.paymentItemEnabled,
@@ -58,6 +59,22 @@ const classesListPaymentMethod = {
   shippingDiscountClassName: styles.shippingDiscount,
   checkmarkClassName: styles.checkmark,
   paymentDetailsDeductionClassName: styles.paymentDetailsDeduction
+}
+
+const classessOptWa = {
+  optInContainer: stylePopupOpt.optInContainer,
+  popupOverlay: stylePopupOpt.popupOverlay,
+  optInTitle: stylePopupOpt.optInTitle,
+  optInDescription: stylePopupOpt.optInDescription,
+  optInInputContainer: stylePopupOpt.optInInputContainer,
+  optInInputPrefixContainer: stylePopupOpt.optInInputPrefixContainer,
+  optInInputPrefix: stylePopupOpt.optInInputPrefix,
+  optInOptions: stylePopupOpt.optInOptions,
+  optInOption: stylePopupOpt.optInOption,
+  optInInputNumber: stylePopupOpt.optInInputNumber,
+  optInCheckboxContainer: stylePopupOpt.optInCheckboxContainer,
+  optInCheckbox: stylePopupOpt.optInCheckbox,
+  optInBtn: stylePopupOpt.optInBtn,
 }
 
 const classesCustomerDetail = {
@@ -199,7 +216,8 @@ const PaymentMethods: FC<any> = ({
             <ListPaymentMethod
               classes={{
                 ...classesListPaymentMethod,
-                ...classesOrderSummary
+                ...classesOrderSummary,
+                ...classessOptWa
               }}
               onErrorMsg={(msg) => toast.error(msg)}
               withNotificationOptInModal={hasOtp}

@@ -5,6 +5,7 @@
 {
   width: 100%;
   position: relative;
+  margin-bottom: 2rem;
 }
 
 .main
@@ -40,7 +41,7 @@
   @extend .minimalicon;
   @extend .minimalicon_12_width;
   @extend .minimalicon_arrowLeft;
-  @include position(absolute, auto, auto, auto, 154px);
+  @include position(absolute, auto, auto, auto, 30px);
   cursor: pointer;
 }
 
@@ -49,7 +50,7 @@
   @extend .minimalicon;
   @extend .minimalicon_12_width;
   @extend .minimalicon_arrowRight;
-  @include position(absolute, auto, 154px, auto, auto);
+  @include position(absolute, auto, 30px, auto, auto);
   cursor: pointer;
 }
 
