@@ -105,7 +105,9 @@ const LoginPage: FC<any> = ({
           pos="login-image"
           loadingComponent={
             <Placeholder
-              classes={{}}
+              classes={{
+                placeholderImage: styles.widgetLogin
+              }}
               withImage
             />
           }
