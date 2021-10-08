@@ -35,8 +35,8 @@ const TestimonialSlider: FC<any> = () => {
           classes={classesTestimonials}
           arrowLeft={<div className={style.arrowLeft}></div>}
           arrowRight={<div className={style.arrowRight}></div>}
-          getPageInfo={(pageInfo: any) => setPageInfo(pageInfo)}
-          // autoPlay={4500}
+        autoPlay={4500}
+        getPageInfo={(pageInfo: any) => setPageInfo(pageInfo)}
           addArrowClickHandler={true}
           infinite
           loadingComponent={

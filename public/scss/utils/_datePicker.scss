@@ -9,6 +9,8 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  padding-top: 16px;
+  padding-left: 14px;
 
   min-width: 100%;
   max-width: 100%;
@@ -111,7 +113,8 @@
   {
     border: 0;
     background: transparent;
-    padding: 4px 6px;
+    padding: 0 6px;
+    margin-top: -10px !important;
 
     &:enabled 
     {
@@ -120,7 +123,7 @@
       &:hover .react-date-picker__button__icon,
       &:focus .react-date-picker__button__icon
       {
-        stroke: #0078d7;
+        stroke: #2222;
       }
     }
 

@@ -27,6 +27,7 @@ const Placeholder = dynamic(() => import('components/Placeholder'));
 import styles from 'public/scss/pages/Placeorder.module.scss'
 import stylesPasswordStrength from 'public/scss/components/PasswordStrength.module.scss'
 import stylesMap from 'public/scss/components/Map.module.scss'
+import stylesDatePicker from '../../../public/scss/components/DatePicker.module.scss'
 
 const placeOrderClasses = {
   placeOrderClassName: styles.placeOrder,
@@ -37,7 +38,10 @@ const placeOrderClasses = {
   submitButtonClassName: styles.submitButton,
   billingAddressContainerClassName: styles.billingAddressContainer,
   signupLabelClassName: styles.signupLabel,
-  shippingCheckboxLabelClassName: styles.shippingCheckboxLabel
+  shippingCheckboxLabelClassName: styles.shippingCheckboxLabel,
+  passwordViewButtonClassName: styles.passwordViewButton,
+  datePickerInputClassName: stylesDatePicker.datePicker__input,
+  datePickerCalendarClassName: stylesDatePicker.datePicker__calendar,
 }
 
 const passwordStrengthClasses = {
@@ -60,6 +64,36 @@ const mapClasses = {
   mapLabelAddressClassName: stylesMap.mapLabelAddress,
   mapCenterButtonClassName: stylesMap.mapCenterButton,
   mapButtonFooterClassName: stylesMap.mapButtonFooter,
+}
+
+const customStyles = {
+  control: () => ({
+    display: 'flex',
+    height: '60px',
+    padding: '10px auto auto 8px',
+    border: "1px solid #CFD4D9",
+    borderRadius: "2px"
+  }),
+  indicatorsContainer: () => ({
+    cursor: 'pointer',
+    marginTop: '12px'
+  }),
+  singleValue: () => ({
+    paddingLeft: '7px',
+    paddingTop: '2px'
+  }),
+  input: () => ({
+    paddingLeft: '7px'
+  }),
+  menu: () => ({
+    position: 'absolute',
+    minWidth: '100%',
+    zIndex: '3',
+    backgroundColor: '#fff',
+    border: "1px solid #CFD4D9",
+    marginTop: "4px",
+    borderRadius: "2px"
+  }),
 }
 
 const placeholderClasses = {
@@ -128,11 +162,13 @@ const PlaceOrderPage: FC<any> = ({
               ...passwordStrengthClasses,
               ...mapClasses,
             }}
+            logistixStyles={customStyles}
             onErrorMsg={(msg) => toast.error(msg)}
             passwordViewIcon={<Icon.setNewPassword.passwordViewIcon />}
             passwordHideIcon={<Icon.setNewPassword.passwordHideIcon />}
             passwordFulfilledCriteriaIcon={<Icon.setNewPassword.passwordCriteriaIcon color="#1DB954" size={16} />}
             passwordUnfulfilledCriteriaIcon={<Icon.setNewPassword.passwordCriteriaIcon color="#E5E7EF" size={16} />}
+            datePickerCalendarIcon={<Icon.register.datePickerCalendarIcon />}
             loadingComponent={
               <>
                 <div className={styles.placeOrder}>
@@ -166,13 +202,13 @@ const PlaceOrderPage: FC<any> = ({
         </section>
       </Layout>
     </PrivateRouteWrapper>
-  );
-};
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
 
-  const lngDict = locale(params.lng);
-  const brand = await useBrand(req);
+  const lngDict = locale(params.lng)
+  const brand = await useBrand(req)
 
   return {
     props: {

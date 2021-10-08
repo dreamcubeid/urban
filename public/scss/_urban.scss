@@ -5,6 +5,9 @@
 @import './utils/_variables.scss';
 @import './components/ProgressCircle.scss';
 @import './components/LoaderPage.scss';
+@import './utils/_datePicker.scss';
+@import './utils/_calendar.scss';
+
 body
 {
   color: $color_black;

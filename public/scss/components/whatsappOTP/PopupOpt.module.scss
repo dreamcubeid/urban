@@ -1,0 +1,136 @@
+@import '../../utils/_variables.scss';
+@import '../Buttons.module.scss';
+@import '../Popup.module.scss';
+
+.popupOverlay
+{
+  @extend .popup_overlay;
+}
+
+.optInContainer
+{
+  @extend .popup_container;
+  padding: 24px 16px;
+  border-top: 4px solid $color_blue;
+  width: 340px;
+  max-width: 100%;
+  border-radius: 2px,
+}
+
+.optInTitle
+{
+  @include flex(row, center, center);
+  @include LargeSemiBold;
+  color: $color_black;
+  margin-bottom: 12px;
+}
+
+.optInDescription
+{
+  @include SmallSmall;
+  color: $color_text_secondary;
+  background-color: $color_elements;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.optInInputContainer
+{
+  @include flex(row, center, center);
+  @include fixedHeight(24px);
+  background-color: $color_white;
+  border-radius: 4px;
+  margin-bottom: 22px;
+}
+
+.optInInputPrefixContainer
+{
+  @include flex(row, center, center);
+  height: 90%;
+  padding: 0 12px 0 0;
+  position: relative;
+}
+
+.optInInputPrefix
+{
+  @include flex(row, center, flex-start);
+  height: 100%;
+  
+  &::before
+  {
+    @include position(absolute, auto);
+    right: 11px;
+    display: block;
+    display: none;
+    cursor: pointer;
+    margin-top: 5px;
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='5' viewBox='0 0 10 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.625 0.8125L5 4.1875L8.375 0.8125' stroke='%23444444' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+  }
+}
+
+.optInOptions
+{
+  @include position(absolute, auto, auto, 0, auto);
+  background-color: $color_white;
+  bottom: -50px;
+  border-radius: 4px;
+  width: fit-content;
+  padding: .5rem;
+  border: 1px solid $color_black;
+}
+
+.optInOption
+{
+  @include flex(row, center, center);
+
+  img
+  {
+    margin-right: 8px;
+  }
+}
+
+.optInInputNumber
+{
+  @include typography_builder(400, 16, 24);
+  width: 120px;
+  pointer-events: none;
+  cursor: not-allowed;
+  background: transparent;
+  height: 100%;
+  border: none;
+  outline: none;
+  color: $color_black;
+}
+
+.optInCheckboxContainer
+{
+  @include flex(row, center, flex-start);
+  @include RegulerReguler;
+  margin-bottom: 24px;
+  color: $color_black;
+}
+
+.optInCheckbox
+{
+  cursor: pointer;
+  margin: 1px 8px 0 0;
+  width: 16px;
+  height: 16px;
+  
+  &:checked
+  {
+    background-color: $color_text_secondary;
+  }
+}
+
+.optInBtn
+{
+  @extend .btn_primary;
+  @include fixedWidth(100%);
+  @include fixedHeight(48px);
+}
