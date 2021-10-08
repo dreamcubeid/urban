@@ -1,26 +1,30 @@
-@import "../base/colors.scss";
-@import "../components/Button.module.scss";
-@import "../components/Form.module.scss";
+@import '../utils/_variables.scss';
+@import  '../components/Buttons.module.scss';
+@import '../components/Form.module.scss';
 
 .paymentNotif
 {
   &_container
   {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex(row, center, center);
   }
 
   &_inner
   {
-    width: 500px;
     align-content: center;
     display: flex;
     flex-direction: column;
+    width: 500px;
+    margin-top: 24px;
 
     @media screen and (max-width: 576px) {
       width: 100%;
-      padding: 0 1rem;
+    }
+
+    & > div:first-child
+    {
+      color: $color_text_secondary;
+      text-align: center;
     }
 
     &_title
@@ -28,18 +32,50 @@
       & > span
       {
         font-size: 14px;
-        color: $color_gray_semi_dark;
+        color: $color_elements_line_darker;
       }
     }
   }
 
   &_form
   {
-    margin-top: 3rem;
+    margin-top: 24px;
     order: 3;
   }
-  &_info {
-    color: $color_red_error;
+
+  &_inputContainer
+  {
+    position: relative;
+    margin-bottom: 12px;
+  
+    & > label
+    {
+      @include SmallSmall;
+      @include position(absolute, 5px, auto, auto, 16px);
+      color: $color_text_secondary;
+      z-index: 2;
+    }
+  }
+
+  &_select,
+  &_input
+  {
+    @extend .form_input;
+    @include fixedHeight(60px);
+    padding-left: 10px;
+    padding-top: 26px;
+  }
+  
+  &_input
+  {
+    padding-left: 120px !important;
+    padding-top: 30px !important;
+  }
+
+  &_info 
+  {
+    @include SmallSmall;
+    color: $color_text_secondary;
     text-align: center;
     padding: 0px 30px;
   }
@@ -47,117 +83,170 @@
 
 .paymentConfirmation
 {
-  &_buttonConfirm {
-    @extend 
-      .btn,
-      .btn_primary;
-
+  &_buttonConfirm 
+  {
+    @extend .btn_primary;
+    @include fixedHeight(52px);
     width: 100%;
     margin-top: 17px;
-    height: 40px;
-    
-    &:disabled{
-      background-color: $color_gray_semi_dark !important;
-    }
   }
 
-  &_label {
-    color: $color_gray_dark;
-    span {
+  &_label 
+  {
+    color: $color_elements_line;
+  
+    span 
+    {
       margin-left: 8px;
     }
   }
 
-  &_detailContainer {
+  &_detailContainer 
+  {
     background: rgba(251, 192, 45, 0.1);
     margin-top: 24px;
-    border-radius: 5px;
+    border-radius: 2px;
   }
-  &_detailHeader {
+
+  &_detailHeader 
+  {
+    background: $color_elements_line_darker;
     padding: 16px;
-    background:rgba(251, 192, 45, 0.5);
+    border-radius: 2px 2px 0 0;
     display: flex;
     justify-content: space-between;
   }
-  &_detailTitle {
-    span {
+
+  &_detailTitle 
+  {
+    @include SmallSmall;
+    color: $color_text_secondary;
+
+    span 
+    {
+      @include SmallSemiBold;
+      color: $color_black;
       display: flex;
       font-size: 15px;
     }
   }
-  &_detailStatus {
+
+  &_detailStatus 
+  {
+    @include ExtraSmallReguler;
     margin: auto 0px;
     height: auto;
     color: $color_white;
-    background: $color_orange_dark;
+    background: $color_elements_line_darker;
     padding: 5px 10px;
     border-radius: 20px;
-    font-weight: inherit;
   }
-  &_detailContent {
+
+  &_detailContent 
+  {
     padding: 16px;
-
-    section {
-      background: $color_white;
-      padding: 12px;
-      background: $color_white;
-      padding: 12px;
-      margin: 12px 0px 0px 0px;
-    }
+    background: $color_elements;
+    border-radius: 0 0 2px 2px;
   }
 
-  &_detailHeaderDropdown {
-    display: flex;
-    justify-content: space-between;
+  &_detailHeaderDropdown 
+  {
+    @include flex(row, center, space-between);
   }
 
-  &_detailTotalAmount {
-    span {
+  &_detailTotalAmount 
+  {
+    @include SmallSmall;
+    color: $color_text_secondary;
+
+    span 
+    {
+      @include RegulerSemiBold;
+      color: $color_black;
       display: flex;
-      color: $color_red_error;
-      font-size: 15px;
     }
   }
 
-  &_detailItemImg {
-    img {
+  &_detailItem
+  {
+    @include flex(row, center, flex-start);
+    display: flex;
+    margin-top: 12px;
+  }
+
+  &_detailItemImg 
+  {
+    img 
+    {
       width: 40px;
       height: 40px;
     }
   }
 
-  &_detailItemLabel {
+  &_detailItemLabel 
+  {
+    @include SmallSmall;
+    color: $color_black;
     width: 70%;
     padding-left: 12px;
-    font-size: 14px;
-    span {
+
+    span 
+    {
+      color: $color_text_secondary;
       display: flex;
-      font-size: 12px;
     }
   }
-  &_detailItemPrice {
+  &_detailItemPrice 
+  {
+    @include SmallSmall; 
     width: 30%;
     text-align: right;
   }
 
-  &_detailDropdown {
-    color: $color_orange_dark;
+  &_detailDropdown 
+  {
+    @include SmallSmall;
+    cursor: pointer;
+    color: $color_blue;
+
+    &:hover
+    {
+      opacity: .7;
+    }
+
+    svg
+    {
+      @include fixedSize(10px);
+      margin-left: 6px;
+    }
   }
 
-  &_detailPriceBreakdown, &_detailTotalField {
-    border-top: 1px solid $color_gray_semi_dark;
+  &_detailBodyDropdown
+  {
+    border-top: 1px solid $color_elements_line_darker;
+    margin-top: 12px;
+  }
+
+  &_detailPriceBreakdown, 
+  &_detailTotalField
+  {
+    border-top: 1px dashed $color_elements_line_darker;
     margin: 10px 0px 0px 0px;
     padding: 10px 0px 0px 0px;
     line-height: 26px;
   }
 
-  &_detailField, &_detailTotalField {
-    display: flex;
-    justify-content: space-between;
+  &_detailField,
+  &_detailTotalField 
+  {
+    @include SmallSmall;
+    @include flex(row, center, space-between);
+    margin-bottom: 8px;
   }
 
-  &_detailTotalField {
-    font-size: 15px;
+  &_detailTotalField
+  {
+    @include SmallSemiBold;
   }
 
   &_summaryTotalContainer
@@ -168,18 +257,14 @@
 
   &_summaryItemTitle
   {
+    @include SmallSmall;
     display: block;
-    color: $color_secondary;
-    font-family: "roboto-medium";
-    font-size: 11px;
-    line-height: 150%;
+    color: $color_text_secondary;
   }
-
+  
   &_summaryItemPrice
   {
-    font-family: "roboto-medium";
-    font-size: 14px;
-    line-height: 16px;
+    @include RegulerReguler;
     color: $color_error;
     margin-top: 6px;
   }

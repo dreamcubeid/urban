@@ -1,0 +1,83 @@
+@import "../utils/_variables.scss";
+@import "./Buttons.module.scss";
+
+.bank
+{
+  &_information
+  {
+    @include SmallSmall;
+    background: $color_elements;
+    border-radius: 3px;
+    padding: 10px;
+    text-align: left;
+    margin: 24px 0px 0 0px;
+  }
+
+  &_container
+  {
+    border: 1px solid $color_elements_line_darker;
+    margin-top: 12px;
+    border-radius: 3px;
+  }
+
+  &_header
+  {
+    @include RegulerReguler;
+    @include flex(row, center, space-between);
+    padding: 12px;
+    border-bottom: 1px solid $color_elements_line_darker;
+  }
+
+  &_logoBank 
+  {
+    width: 50px;
+    margin-right: 10px;
+  }
+
+  &_iconCollapse
+  {
+    border: none;
+    background: none;
+  }
+  &_body
+  {
+    background: $color_elements;
+    border-bottom: 1px solid $color_elements_line_darker;
+    border-top: 1px dashed $color_placeholder;
+    padding: 16px;
+  }
+  &_name 
+  {
+    @include SmallSemiBold;
+    color: $color_black;
+  }
+
+  &_infoAccount
+  {
+    @include flex(row, center, space-between);
+    padding-bottom: 12px;
+  }
+
+  &_numberSection
+  {
+    @include flex(row, center, space-between);
+    @include SmallSemiBold;
+    border: 1px solid $color_elements_placeholder;
+    border-radius: 2px;
+    padding: 14px 16px;
+    background: $color_white;
+  }
+
+  &_buttonIcon
+  {
+    border: none;
+    background: none;
+  }
+
+  &_bankAccountLabelAccountNumber,
+  [class*="bankAccountLabelAccountNumber"]
+  {
+    @include SmallSmall;
+    color: $color_text_secondary;
+  }
+}

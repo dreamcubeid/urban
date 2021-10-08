@@ -15,7 +15,7 @@ const locale = {
     "shippingMethod": "Methode Pengiriman",
     "shippingTitle": "Pengiriman",
     "summaryTitle": "Kamu belanja apa nih?",
-    "thanks": "Pesanan telah dibuat",
+    "thanks": "Pesanan berhasil dibuat!",
     "yourOrderID": "Nomor pesanan anda"
   }
 }
