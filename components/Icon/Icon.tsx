@@ -71,6 +71,13 @@ const Icon: any = {
     passwordViewIcon: RiEyeCloseLine,
     passwordHideIcon: RiEyeLine,
     passwordCriteriaIcon: RiCheckboxCircleFill
+  },
+  register: {
+    passwordViewIcon: RiEyeCloseLine,
+    passwordHideIcon: RiEyeLine,
+    passwordFulfilledCriteriaIcon: RiCheckboxCircleFill,
+    passwordUnfulfilledCriteriaIcon: RiCheckboxCircleFill,
+    datePickerCalendarIcon: RiCalendarLine,
   }
 }
 
