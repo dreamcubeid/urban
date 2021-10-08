@@ -1,60 +1,74 @@
-import { FC, useState } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import Router from "next/router";
-import { toast } from "react-toastify";
-import ReCAPTCHA from "react-google-recaptcha";
-import {
-  Eye,
-  EyeOff,
-  Calendar,
-  CheckCircle
-} from "react-feather";
+/* library package */
+import { FC, useState } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { toast } from 'react-toastify'
+import Router from 'next/router'
+import ReCAPTCHA from 'react-google-recaptcha'
+import dynamic from 'next/dynamic'
 import {
   Register,
   useI18n,
-  SingleSignOn
-} from "@sirclo/nexus";
-import { parseCookies } from "lib/parseCookies";
-import redirectIfAuthenticated from "lib/redirectIfAuthenticated";
-import { useBrand } from "lib/useBrand";
-import { useGoogleAuth } from "lib/useGoogleAuth";
-import { useFacebookAuth } from "lib/useFacebookAuth";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import Loader from "components/Loader/Loader";
-import LoaderPages from 'components/Loader/LoaderPages';
-import styles from "public/scss/pages/Login.module.scss";
+  Widget,
+  Logo
+} from '@sirclo/nexus'
 /* locales */
-import locale from "locales";
+import locale from 'locales'
+/* library template */
+import redirectIfAuthenticated from 'lib/redirectIfAuthenticated'
+import { parseCookies } from 'lib/parseCookies'
+import { useBrand } from 'lib/useBrand'
+import { useAuthMethod } from 'lib/client'
+import useWindowSize from 'lib/useWindowSize'
+/* component */
+import Layout from 'components/Layout/Layout'
+const Placeholder = dynamic(() => import('components/Placeholder'))
+
+import Icon from 'components/Icon/Icon'
+import LoginRegisterOTP from 'components/LoginRegisterOTP'
+/* styles */
+import styles from 'public/scss/pages/Register.module.scss'
+import stylesPasswordStrength from 'public/scss/components/PasswordStrength.module.scss'
 
 const classesRegister = {
-  containerClassName: `${styles.login_item} ${styles.login_item__form} order-3`,
-  basicInfoContainerClassName: "d-block m-0 p-0",
-  deliveryAddressContainerClassName: "col-12",
-  headerLabelClassName: `${styles.login_label__header} d-flex flex-row align-item-center justify-content-start`,
-  inputContainerClassName: `${styles.sirclo_form_row} sirclo_form__city`,
-  inputClassName: `form-control ${styles.sirclo_form_input}`,
-  datePickerInputClassName: "date-picker__input",
-  datePickerCalendarClassName: "date-picker__calendar",
-  passwordStrengthBarClassName: styles.passwordBar,
-  passwordStrengthBarContainerClassName: styles.passwordValidation,
-  passwordCriteriaListClassName: `${styles.formPassword} d-none`,
-  passwordCriteriaClassName: styles.formPasswordList,
-  labelRequiredClassName: `${styles.login_label__required} d-flex flex-row align-items-center justify-content-start mb-2`,
-  verificationContainerClassName: "d-block m-0 p-0",
-  buttonClassName: `btn ${styles.btn_primary} ${styles.btn_long} ${styles.btn_full_width} ${styles.btn_center} text-uppercase mt-4`,
-};
+  containerClassName: styles.container,
+  headerLabelClassName: styles.headerLabel,
+  inputClassName: styles.input,
+  inputContainerClassName: styles.inputContainer,
+  passwordInputClassName: styles.passwordInput,
+  buttonClassName: styles.button,
+  verificationContainerClassName: styles.verificationContainer,
+  passwordViewButtonClassName: styles.passwordViewButton,
+  labelRequiredClassName: styles.labelRequired,
+}
+
+const passwordStrengthClasses = {
+  passwordStrengthBarClassName: stylesPasswordStrength.passwordStrengthBar,
+  passwordCriteriaListClassName: stylesPasswordStrength.passwordCriteriaList,
+  passwordCriteriaClassName: stylesPasswordStrength.passwordCriteria,
+  passwordStrengthLabelClassName: stylesPasswordStrength.passwordStrengthLabel,
+}
 
 const RegisterPage: FC<any> = ({
   lng,
   lngDict,
   brand,
+  hasOtp,
   hasGoogleAuth,
   hasFacebookAuth
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
 
-  const [isVerified, setIsVerified] = useState<boolean>(false);
+  const i18n: any = useI18n()
+  const size = useWindowSize()
+
+  const [isVerified, setIsVerified] = useState<boolean>(false)
+
+  const icons = {
+    passwordViewIcon: <Icon.register.passwordViewIcon />,
+    passwordHideIcon: <Icon.register.passwordHideIcon />,
+    passwordFulfilledCriteriaIcon: <Icon.register.passwordFulfilledCriteriaIcon color="#1DB954" size={16} />,
+    passwordUnfulfilledCriteriaIcon: <Icon.register.passwordUnfulfilledCriteriaIcon color="#E5E7EF" size={16} />,
+    datePickerCalendarIcon: <Icon.register.datePickerCalendarIcon />,
+  }
 
   return (
     <Layout
@@ -62,63 +76,75 @@ const RegisterPage: FC<any> = ({
       lng={lng}
       lngDict={lngDict}
       brand={brand}
+      layoutClassName={styles.layout}
+      withHeader={false}
+      withFooter={false}
     >
-      <SEO title={i18n.t("register.register")} />
-
-      <section className={styles.login_wrapper}>
-        <div className="container">
-          <div className="row">
-            <div className="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 d-flex flex-column align-items-start justify-content-start flex-nowrap">
-
-              <div className={`${styles.login_item} ${styles.login_item__title} order-1`}>
-                <h3>{i18n.t("register.newAccount")}</h3>
-                <span>{i18n.t("register.promo")}</span>
-              </div>
-
-              <Register
-                classes={classesRegister}
-                withHeaderLabel={true}
-                onErrorMsg={(msg) => toast.error(msg)}
-                onSuccessMsg={(msg) => toast.success(msg)}
-                redirectPage={() => Router.push(`/[lng]/login`, `/${lng}/login`)}
-                passwordViewIcon={<Eye />}
-                passwordHideIcon={<EyeOff />}
-                passwordFulfilledCriteriaIcon={<CheckCircle color="green" size={16} />}
-                passwordUnfulfilledCriteriaIcon={<CheckCircle color="gray" size={16} />}
-                datePickerCalendarIcon={<Calendar />}
-                withVerification={true}
-                isVerified={isVerified}
-                loadingComponent={<Loader color="text-light" />}
-                verificationComponent={
-                  <ReCAPTCHA
-                    sitekey={process.env.NEXT_PUBLIC_SITEKEY_RECAPTCHA}
-                    onChange={() => setIsVerified(true)}
-                  />
-                }
-              />
-
-              {(hasGoogleAuth || hasFacebookAuth) &&
-                <div className={`${styles.login_item} ${styles.login_item__sso} order-2`}>
-                  <SingleSignOn
-                    className={styles.login_item__ssoButton}
-                    buttonText={`${i18n.t("login.register")} ${i18n.t("login.sso")}`}
-                    loadingComponent={
-                      <div className={`${styles.popup_overlay}`}>
-                        <LoaderPages />
-                      </div>
-                    }
-                  />
-                  <label className="d-flex flex-row align-items-center justify-content-center flex-nowrap w-100">
-                    <span className="d-flex flex-row align-items-center justify-content-start text-center">{i18n.t("testimonials.or")}</span>
-                  </label>
-                </div>
-              }
-            </div>
-          </div>
-        </div>
+      <section className={styles.sectionBrand}>
+        <Logo
+          imageClassName={styles.brandImage}
+          thumborSetting={{
+            width: size.width < 575 ? 200 : 400,
+            quality: 90
+          }}
+          lazyLoadedImage={false}
+        />
       </section>
+
+      <LoginRegisterOTP
+        type="register"
+        hasOtp={hasOtp}
+        brand={brand}
+        title={i18n.t("register.title")}
+        hasGoogleAuth={hasGoogleAuth}
+        hasFacebookAuth={hasFacebookAuth}
+        lng={lng}
+      >
+        <section className={styles.section}>
+          <Register
+            classes={{
+              ...classesRegister,
+              ...passwordStrengthClasses,
+            }}
+            withHeaderLabel={true}
+            onErrorMsg={(msg) => toast.error(msg)}
+            onSuccessMsg={(msg) => toast.success(msg)}
+            redirectPage={() => Router.push(`/[lng]/login`, `/${lng}/login`)}
+            withVerification={true}
+            isVerified={isVerified}
+            loadingComponent={
+              <Placeholder
+                classes={{
+                  placeholderList: styles.placeholderList,
+                }}
+                withList
+                listMany={8}
+              />
+            }
+            verificationComponent={
+              <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_SITEKEY_RECAPTCHA}
+                onChange={() => setIsVerified(true)}
+              />
+            }
+            {...icons}
+          />
+        </section>
+        <Widget
+          widgetClassName={styles.widgetLogin}
+          pos="login-image"
+          loadingComponent={
+            <Placeholder
+              classes={{
+                placeholderImage: styles.widgetLogin
+              }}
+              withImage
+            />
+          }
+        />
+      </LoginRegisterOTP>
     </Layout>
-  );
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({
@@ -126,14 +152,12 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   params
 }) => {
-  const lngDict = locale(params.lng);
 
-  const brand = await useBrand(req);
-
-  const cookies = parseCookies(req);
-  const hasGoogleAuth = await useGoogleAuth(req);
-  const hasFacebookAuth = await useFacebookAuth(req);
-  redirectIfAuthenticated(res, cookies, 'account');
+  const lngDict = locale(params.lng)
+  const brand = await useBrand(req)
+  const cookies = parseCookies(req)
+  const { hasGoogleAuth, hasFacebookAuth, hasOtp } = await useAuthMethod(req)
+  redirectIfAuthenticated(res, cookies, 'account')
 
   return {
     props: {
@@ -141,9 +165,10 @@ export const getServerSideProps: GetServerSideProps = async ({
       lngDict,
       hasGoogleAuth,
       hasFacebookAuth,
+      hasOtp,
       brand: brand || ""
     }
-  };
+  }
 }
 
-export default RegisterPage;
+export default RegisterPage

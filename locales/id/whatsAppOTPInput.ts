@@ -1,7 +1,7 @@
 const locale = {
   "whatsAppOTPInput": {
     "andConjunction": "serta",
-    "changeNumber": "Ubah nomor",
+    "changeNumber": "Ubah nomor saya",
     "chooseAccount": "Pilih akun",
     "chooseAnyAccount": "Pilih salah satu akun",
     "chooseAnyAccountToLogin": "Anda memiliki beberapa akun yang terdaftar, silakan pilih salah satu untuk masuk",

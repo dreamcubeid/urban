@@ -1,52 +1,116 @@
-@import "../components/Button.module.scss";
-@import "../components/Form.module.scss";
-@import "../components/Password.module.scss";
+@import '../utils/_variables.scss';
+@import '../components/Form.module.scss';
+@import '../components/Buttons.module.scss';
+@import './Login.module.scss';
 
-.register
+.layout
 {
-  &_container
+  padding-bottom: 142px;
+}
+
+.sectionBrand
+{
+  @include fixedWidth(50vw);
+  padding: 29px 99px 0;
+
+  img
   {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 3rem;
+    max-width: 120px;
+    height: auto;
+  }
+}
+
+.section
+{
+  @include fixedWidth(50vw);
+  padding: 0 99px;
+}
+
+.container
+{
+  @include fixedWidth(100%);
+  margin-top: 24px;
+}
+
+.passwordViewButton
+{
+  @extend .passwordViewButton;
+}
+
+.headerLabel
+{
+  display: none;
+}
+
+.inputContainer
+{
+  @extend .inputContainer;
+}
+
+.input
+{
+  @extend .form_input;
+  @include fixedHeight(60px);
+}
+
+.passwordInput
+{
+  @extend .form_input;
+  @include fixedHeight(60px);
+}
+
+.button
+{
+  @extend .btn_primary;
+  margin-bottom: 26px;
+}
+
+.verificationContainer
+{
+  margin-top: 24px;
+}
+
+.labelRequired
+{
+  display: none;
+}
+
+.placeholderList
+{
+  height: 60px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.widgetLogin
+{
+  @include position(fixed, 0, 0);
+  width: 50vw;
+  height: 100vh;
+  
+  img
+  {
+    width: 100% !important;
+  }
+}
+
+
+@media screen and (max-width: #{$breakpoint_max_md}) 
+{
+  .section,
+  {
+    @include fixedWidth(100%);
+    padding: 0 18px;
+  }
+  
+  .sectionBrand
+  {
+    @include fixedWidth(100%);
+    padding: 29px 18px 0;
   }
 
-  &_inner
+  .widgetLogin
   {
-    width: 500px;
-    align-content: center;
-
-    @media screen and (max-width: 576px) {
-      width: 100%;
-    }
-  }
-
-  &_heading
-  {
-    h4
-    {
-      font-size: 24px;
-      font-family: "roboto-medium";
-    }
-  }
-
-  &_formLabel
-  {
-    font-size: 18px;
-    font-family: "roboto-medium";
-    margin: 1rem 0;
-
-    small
-    {
-      font-size: 13px;
-      display: block;
-      margin-bottom: 1rem;
-    }
-  }
-
-  &_btnRegister
-  {
-    margin: 15px;
+    display: none;
   }
 }
