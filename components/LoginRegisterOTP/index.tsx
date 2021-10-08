@@ -114,11 +114,14 @@ const LoginRegisterOTP: FC<LoginRegisterOTPPropsType> = ({
   return (
     <>
       {((step === steps.email || step === steps.wa) && title) &&
+        <div className={styles.sectionBreadcumb}>
         <Breadcrumb
           title={title}
           links={linksBreadcrumb}
           lng={lng}
+          fluidContainer
         />
+      </div>
       }
 
       {step === steps.email || !hasOtp ?

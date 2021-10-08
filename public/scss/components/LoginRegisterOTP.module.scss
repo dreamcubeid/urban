@@ -2,6 +2,18 @@
 @import './Buttons.module.scss';
 @import './Form.module.scss';
 
+
+.sectionBreadcumb
+{
+  @include fixedWidth(50vw);
+  padding: 0 99px;
+
+  [class*="container-fluid"]
+  {
+    padding: 0;
+  }
+}
+
 .ssoContainer
 {
   @include fixedWidth(50vw);
@@ -348,7 +360,8 @@
   
   .confirmationContainer,
   .inputFormContainer,
-  .verificationContainer
+  .verificationContainer,
+  .sectionBreadcumb
   {
     @include fixedWidth(100%);
     padding: 0 18px 0;

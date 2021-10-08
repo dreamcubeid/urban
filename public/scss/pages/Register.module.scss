@@ -3,6 +3,11 @@
 @import '../components/Buttons.module.scss';
 @import './Login.module.scss';
 
+.layout
+{
+  padding-bottom: 142px;
+}
+
 .sectionBrand
 {
   @include fixedWidth(50vw);

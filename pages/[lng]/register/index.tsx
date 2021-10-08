@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic'
 import {
   Register,
   useI18n,
+  Widget,
   Logo
 } from '@sirclo/nexus'
 /* locales */
@@ -75,6 +76,7 @@ const RegisterPage: FC<any> = ({
       lng={lng}
       lngDict={lngDict}
       brand={brand}
+      layoutClassName={styles.layout}
       withHeader={false}
       withFooter={false}
     >
@@ -128,6 +130,16 @@ const RegisterPage: FC<any> = ({
             {...icons}
           />
         </section>
+        <Widget
+          widgetClassName={styles.widgetLogin}
+          pos="login-image"
+          loadingComponent={
+            <Placeholder
+              classes={{}}
+              withImage
+            />
+          }
+        />
       </LoginRegisterOTP>
     </Layout>
   )
