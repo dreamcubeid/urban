@@ -62,9 +62,8 @@ const classesListPaymentMethod = {
 }
 
 const classessOptWa = {
-  popupContainerClassName: stylePopupOpt.popupContainer,
-  popupBackgroundClassName: stylePopupOpt.popupBackground,
   optInContainer: stylePopupOpt.optInContainer,
+  popupOverlay: stylePopupOpt.popupOverlay,
   optInTitle: stylePopupOpt.optInTitle,
   optInDescription: stylePopupOpt.optInDescription,
   optInInputContainer: stylePopupOpt.optInInputContainer,
@@ -76,7 +75,6 @@ const classessOptWa = {
   optInCheckboxContainer: stylePopupOpt.optInCheckboxContainer,
   optInCheckbox: stylePopupOpt.optInCheckbox,
   optInBtn: stylePopupOpt.optInBtn,
-  popupOverlay: stylePopupOpt.popupOverlay
 }
 
 const classesCustomerDetail = {
