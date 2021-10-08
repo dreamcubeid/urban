@@ -23,7 +23,7 @@ type LoginRegisterOTPPropsType = {
   title?: string
   type: "login" | "register"
   brand: any
-  lng?: any
+  lng: string
 }
 
 const formClasses = {
@@ -104,13 +104,12 @@ const LoginRegisterOTP: FC<LoginRegisterOTPPropsType> = ({
 
   let customLocales = {}
   if (type === "register") customLocales = {
-    continue: i18n.t("whatsAppOTPInputRegis.title"),
+    continue: i18n.t("whatsAppOTPInputRegis.continue"),
     disclaimer: i18n.t("whatsAppOTPInputRegis.disclaimer"),
     inputWhatsApp: i18n.t("whatsAppOTPInputRegis.inputWhatsApp"),
     loginWithAnotherMethod: i18n.t("whatsAppOTPInputRegis.loginWithAnotherMethod"),
     chooseAnyAccountToLogin: i18n.t("whatsAppOTPInputRegis.chooseAnyAccountToLogin"),
   }
-
 
   return (
     <>
@@ -146,7 +145,7 @@ const LoginRegisterOTP: FC<LoginRegisterOTPPropsType> = ({
               listMany={3}
             />
           }
-          {...customLocales}
+          customLocales={customLocales}
         />
       }
 
