@@ -23,7 +23,6 @@ const classesSetNewPassword = {
   inputContainerClassName: styles.inputContainer,
   inputClassName: styles.input,
   passwordViewButtonClassName: styles.passwordViewButton,
-  passwordStrengthBarContainerClassName: stylesPasswordStrength.passwordStrengthBarContainer,
   passwordStrengthBarClassName: stylesPasswordStrength.passwordStrengthBar,
   passwordCriteriaListClassName: stylesPasswordStrength.passwordCriteriaList,
   passwordCriteriaClassName: stylesPasswordStrength.passwordCriteria,
