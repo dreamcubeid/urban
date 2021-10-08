@@ -98,8 +98,8 @@
     &:disabled
     {
       cursor: not-allowed;
-      background-color: $color_elements_line_darker;
-      border: none;
+      background-color: $color_elements_line_darker !important;
+      border: none !important;
 
       &::after
       {

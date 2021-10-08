@@ -58,7 +58,7 @@
 
   &_titleMiddle
   {
-    margin: 0 auto;
+    margin: 0 auto !important;
     width: fit-content;
   }
 
@@ -111,5 +111,10 @@
   {
     margin: 0 0 0;
     padding: 32px 0 0;
+
+    &_container
+    {
+      padding-top: 45px;
+    }
   }
 }

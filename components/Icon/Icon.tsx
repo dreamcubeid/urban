@@ -19,11 +19,18 @@ import {
   RiCheckboxCircleFill,
   RiEyeCloseLine,
   RiEyeLine,
-  RiQuestionFill
+  RiQuestionFill,
+  RiFileCopyLine
+
 } from 'react-icons/ri'
 
 import { GoPlus } from 'react-icons/go'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import {
+  FiChevronLeft,
+  FiChevronRight,
+  FiChevronUp,
+  FiChevronDown,
+} from 'react-icons/fi'
 import { BiCurrentLocation } from 'react-icons/bi'
 
 const Icon: any = {
@@ -31,6 +38,8 @@ const Icon: any = {
   arrowLeft: RiArrowLeftLine,
   chevronLeft: FiChevronLeft,
   chevronRight: FiChevronRight,
+  chevronUp: FiChevronUp,
+  chevronDown: FiChevronDown,
   RiCloseFill: RiCloseFill,
   coupon: RiCoupon3Fill,
   mapCenterIcon: BiCurrentLocation,
@@ -78,6 +87,9 @@ const Icon: any = {
     passwordFulfilledCriteriaIcon: RiCheckboxCircleFill,
     passwordUnfulfilledCriteriaIcon: RiCheckboxCircleFill,
     datePickerCalendarIcon: RiCalendarLine,
+  },
+  thankYou: {
+    copy: RiFileCopyLine
   }
 }
 

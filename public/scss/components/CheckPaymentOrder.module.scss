@@ -1,5 +1,7 @@
 @import "../base/colors.scss";
-@import "./Button.module.scss";
+@import "./Buttons.module.scss";
+@import "./Form.module.scss";
+@import "../utils/_variables.scss";
 
 .checkOrder {
   &_overlay {
@@ -67,12 +69,25 @@
   }
 
   &_inputContent {
+    position: relative;
     line-height: 32px;
     margin-top: 7px;
 
-    input {
+    & > [class*="_inputTitle"]
+    {
+      @include SmallSmall;
+      @include position(absolute, 5px, auto, auto, 16px);
+      color: $color_text_secondary;
+      z-index: 2;
+    }
+
+    input 
+    {
+      @extend .form_input;
+      @include fixedHeight(60px);
       width: 100%;
-      padding: 0px 2px 0px 10px;
+      padding: 20px 0 0 16px;
+      margin-top: 24px;
     }
   }
 
@@ -83,19 +98,14 @@
   }
 
   &_submitButton {
-    @extend 
-      .btn,
-      .btn_primary;
+    @extend .btn_primary;
 
     width: 100%;
-    margin-top: 17px;
-    height: 40px;
+    margin-top: 24px;
+    height: 52px;
+
     span {
       margin: 0px 6px;
-    }
-    
-    &:disabled{
-      background-color: $color_gray_semi_dark !important;
     }
   }
 }

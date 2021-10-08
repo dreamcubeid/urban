@@ -94,22 +94,22 @@
 
     &[type="file"]
     {
+      @include typographyBuilder(400, 14, 14);
       position: relative;
       display: flex;
       align-items: center;
-      @include typographyBuilder(400, 14, 14);
-      padding: calc((30px - 14px) / 2) 12px !important;
 
       &::-webkit-file-upload-button
       {
         position: absolute;
-        top: 50%;
-        left: 10px;
+        top: 65%;
+        left: 16px;
         transform: translate(0, -50%);
-        border-radius: 6px;
+        border-radius: 2px;
         border: none;
+        cursor: pointer;
         background: linear-gradient(180deg, $color_light 0%, $color_light_low  100%);
-        padding: 7px 12px;
+        padding: 2px 12px;
         @include typographyBuilder(400, 14, 18);
         color: $color_light_black;
 

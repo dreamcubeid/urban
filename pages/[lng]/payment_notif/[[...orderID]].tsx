@@ -1,37 +1,48 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { useRouter } from "next/router";
-import { PaymentConfirmation, useI18n } from "@sirclo/nexus";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import Loader from "components/Loader/Loader";
-import { useBrand } from "lib/useBrand";
-import { toast } from "react-toastify";
-import styles from "public/scss/pages/PaymentNotif.module.scss";
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 import {
-  ChevronUp,
-  ChevronDown,
-} from "react-feather";
+  PaymentConfirmation,
+  CheckPaymentOrder,
+  useI18n
+} from '@sirclo/nexus'
+/* library component */
+import useWindowSize from 'lib/useWindowSize'
+import { useBrand } from 'lib/useBrand'
+
+import SEO from 'components/SEO'
+import Layout from 'components/Layout/Layout'
+import Loader from 'components/Loader/Loader'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+import Icon from 'components/Icon/Icon'
+import BankAccount from 'components/BankAccount/BankAccount'
+import styles from 'public/scss/pages/PaymentNotif.module.scss'
+import stylesPopup from 'public/scss/components/CheckPaymentOrder.module.scss'
+import stylesBanks from 'public/scss/components/BanksAccount.module.scss'
 /* locales */
-import locale from "locales";
+import locale from 'locales'
 
-
-const classesPaymentConfirmation = {
+const classesPaymentNotif = {
   paymentConfirmationDivClassName: styles.paymentNotif_form,
   paymentInfoUploadClassName: styles.paymentNotif_info,
-  inputContainerClassName: `${styles.sirclo_form_row} ${styles.paymentConfirmation}`,
-  inputClassName: `form-control ${styles.sirclo_form_input}`,
-  selectClassName: `form-control ${styles.sirclo_form_input}`,
+  inputContainerClassName: styles.paymentNotif_inputContainer,
+  inputClassName: styles.paymentNotif_input,
+  selectClassName: styles.paymentNotif_select,
+}
 
+const classesPaymentConfirmation = {
   buttonConfirmClassName: styles.paymentConfirmation_buttonConfirm,
   detailContainerClassName: styles.paymentConfirmation_detailContainer,
   detailContentClassName: styles.paymentConfirmation_detailContent,
   detailHeaderClassName: styles.paymentConfirmation_detailHeader,
   detailTitleClassName: styles.paymentConfirmation_detailTitle,
   detailStatusClassName: styles.paymentConfirmation_detailStatus,
+  paymentStatusCancelledClassName: styles.paymentConfirmation_detailStatusCancelled,
+  paymentStatusReturnedClassName: styles.paymentConfirmation_detailStatusReturned,
   detailTotalAmountClassName: styles.paymentConfirmation_detailTotalAmount,
   detailDropdownClassName: styles.paymentConfirmation_detailDropdown,
-  detailItemClassName: `d-flex`,
+  detailItemClassName: styles.paymentConfirmation_detailItem,
   detailItemImgClassName: styles.paymentConfirmation_detailItemImg,
   detailItemLabelClassName: styles.paymentConfirmation_detailItemLabel,
   detailItemPriceClassName: styles.paymentConfirmation_detailItemPrice,
@@ -43,18 +54,49 @@ const classesPaymentConfirmation = {
   labelClassName: styles.paymentConfirmation_label,
 }
 
+const classesBanks = {
+  bankAccountInformationClassName: stylesBanks.bank_information,
+  bankAccountContainerClassName: stylesBanks.bank_container,
+  bankAccountHeaderClassName: stylesBanks.bank_header,
+  bankAccountSectionClassName: stylesBanks.bank_section,
+  bankAccountLogoClassName: stylesBanks.bank_logoBank,
+  bankAccountBodyClassName: stylesBanks.bank_body,
+  bankAccountInfoAccountClassName: stylesBanks.bank_infoAccount,
+  bankAccountNumberSectionClassname: stylesBanks.bank_numberSection,
+  bankAccountCopyButtonClassName: stylesBanks.bank_buttonIcon,
+  bankAccountIconCollapseClassName: stylesBanks.bank_buttonIcon,
+  bankAccountLabelAccountNameClassName: stylesBanks.bank_name,
+  bankAccountLabelAccountNumberClassName: stylesBanks.bank_bankAccountLabelAccountNumber
+}
+
+const classesCheckPaymentOrder = {
+  checkPaymentOrderHeaderClassName: `d-none`,
+  checkPaymentOrderTitleClassName: stylesPopup.checkOrder_title,
+  checkPaymentOrderDescriptionClassName: stylesPopup.checkOrder_description,
+  checkPaymentOrderContentClassName: stylesPopup.checkOrder_content,
+  checkPaymentOrderInputContentClassName: stylesPopup.checkOrder_inputContent,
+  checkPaymentOrderInputTitleClassName: stylesPopup.checkOrder_inputTitle,
+  checkPaymentOrderInputClassName: stylesPopup.checkOrder_input,
+  checkPaymentOrderCloseButtonClassName: stylesPopup.checkOrder_closeButton,
+  checkPaymentOrderSubmitButtonClassName: stylesPopup.checkOrder_submitButton
+}
+
+
 const PaymentConfirmationPage: FC<any> = ({
   lng,
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
-  const router = useRouter();
-  let orderID = "";
 
-  if (router.query.orderID) {
-    orderID = router.query.orderID.toString();
-  }
+  const i18n: any = useI18n()
+  const size = useWindowSize()
+  const router = useRouter()
+
+  let orderID = ""
+  if (router.query.orderID) orderID = router.query.orderID.toString();
+
+
+  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("paymentConfirm.heading")]
 
   return (
     <Layout
@@ -64,43 +106,64 @@ const PaymentConfirmationPage: FC<any> = ({
       brand={brand}
     >
       <SEO title={i18n.t("paymentConfirm.heading")} />
-      <section>
-        <div className="container">
-          <div className={styles.paymentNotif_container}>
-            <div className={styles.paymentNotif_inner}>
-              <div className={styles.paymentNotif_inner_title}>
-                <h3>{i18n.t("paymentConfirm.heading")}</h3>
-              </div>
+      <Breadcrumb
+        title={i18n.t("paymentConfirm.heading")}
+        links={linksBreadcrumb}
+        lng={lng}
+        titleMiddle={size.width > 767}
+      />
+      <section className="container">
+        <div className={styles.paymentNotif_container}>
+          <div className={styles.paymentNotif_inner}>
+            {orderID ?
               <PaymentConfirmation
                 orderIDProps={orderID}
-                classes={classesPaymentConfirmation}
+                classes={{
+                  ...classesPaymentNotif,
+                  ...classesPaymentConfirmation,
+                  ...classesBanks,
+                }}
                 orderDetailIcon={{
-                  chevronUp: <ChevronUp />,
-                  chevronDown: <ChevronDown />,
+                  chevronUp: <Icon.chevronUp />,
+                  chevronDown: <Icon.chevronDown />,
                 }}
                 onErrorMsg={(msg) => toast.error(msg)}
                 onSuccessMsg={(msg) => toast.success(msg)}
-                loadingComponent={<Loader color="text-light" />}
-                errorComponent={<div>{i18n.t("global.error")}</div>}
+                loadingComponent={
+                  <Loader color="text-light" />
+                }
                 withOrderDetails
+                children={<BankAccount />}
                 thumborSetting={{
                   width: 40,
                   format: "webp",
                   quality: 85
                 }}
               />
-            </div>
+              :
+              <>
+                <BankAccount />
+                <CheckPaymentOrder
+                  classes={classesCheckPaymentOrder}
+                  icon={{
+                    loading: <Loader color="text-light" />,
+                    close: <Icon.RiCloseFill />
+                  }}
+                  onErrorMsg={(msg) => toast.error(msg)}
+                />
+              </>
+            }
           </div>
         </div>
       </section>
     </Layout>
-  );
-};
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const lngDict = locale(params.lng);
 
-  const brand = await useBrand(req);
+  const brand = await useBrand(req)
+  const lngDict = locale(params.lng)
 
   return {
     props: {
@@ -111,4 +174,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
   };
 }
 
-export default PaymentConfirmationPage;
+export default PaymentConfirmationPage
