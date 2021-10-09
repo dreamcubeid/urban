@@ -1,17 +1,18 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { useRouter } from "next/router";
-import { useI18n, usePaymentLink } from "@sirclo/nexus";
-import Layout from "components/Layout/Layout";
-import { useBrand } from "lib/useBrand";
-import {
-  AlertCircle,
-  XCircle
-} from "react-feather";
-import styles from "public/scss/pages/PaymentStatus.module.scss";
+/* library package */
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { useRouter } from 'next/router'
+import { useI18n, usePaymentLink } from '@sirclo/nexus'
+/* library component */
+import { useBrand } from 'lib/useBrand'
+/* component */
+import Layout from 'components/Layout/Layout'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+/* styles */
+import styles from 'public/scss/pages/PaymentStatus.module.scss'
 
 /* locales */
-import locale from "locales";
+import locale from 'locales'
 
 type TypePaymentStatus = {
   title?: string,
@@ -25,9 +26,10 @@ const PaymentStatus: FC<any> = ({
   orderID,
   status
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
-  const router = useRouter();
-  const { data } = usePaymentLink(orderID);
+
+  const i18n: any = useI18n()
+  const router = useRouter()
+  const { data } = usePaymentLink(orderID)
 
   let paymentStatus: TypePaymentStatus;
 
@@ -52,65 +54,58 @@ const PaymentStatus: FC<any> = ({
       }
   }
 
+  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("orderHistory.lineItemDelivered")]
+
   return (
     <Layout
-      lngDict={lngDict}
       i18n={i18n}
       lng={lng}
+      lngDict={lngDict}
       brand={brand}
+      withHeader={false}
+      withFooter={false}
     >
-      <section>
-        <div className="container">
-          <div className={styles.paymentStatus}>
-            <div className={styles.paymentStatus_inner}>
-              <div className={styles.paymentStatus_heading}>
-                <h6 className={styles.paymentStatus_title}>
-                  {paymentStatus?.title}
-                </h6>
-                {status === 'failed' ?
-                  <XCircle className="ml-2" color="#F44444" /> :
-                  <AlertCircle className="ml-2" color="#FBC02D" />
-                }
+      <section className={styles.breadcumbSection}>
+        <Breadcrumb
+          bgBlack
+          title={paymentStatus?.title}
+          links={linksBreadcrumb}
+          lng={lng}
+        />
+      </section>
+      <section className="container">
+        <div className={styles.container}>
+          <div className={styles.inner}>
+            {!["orderNotFound", ""].includes(status) &&
+              <div className={styles.content}>
+                <p className={styles.contentDesc}>
+                  {paymentStatus?.contentDesc}
+                </p>
               </div>
-              {!["orderNotFound", ""].includes(status) &&
-                <div className={styles.paymentStatus_content}>
-                  <p className={styles.paymentStatus_contentDesc}>
-                    {paymentStatus?.contentDesc}
-                  </p>
+            }
+            <div className={styles.action}>
+              {status !== 'unfinish' &&
+                <div className={styles.actionButton}>
+                  <button
+                    className={styles.button}
+                    onClick={() => router.push("/[lng]/products", `/${lng}/products`)}
+                  >
+                    {i18n.t("paymentStatus.continueShopping")}
+                  </button>
                 </div>
               }
-              <div className={styles.paymentStatus_action}>
-                {status !== 'unfinish' &&
-                  <div className="paymentStatus_actionButton">
-                    <button
-                      className={`
-                        ${styles.btn} ${status !== 'orderNotFound' ? styles.btn_paymentNotif : styles.btn_primary} 
-                        ${styles.btn_long} ${styles.btn_full_width} 
-                        text-uppercase
-                      `}
-                      onClick={() => router.push("/[lng]/products", `/${lng}/products`)}
-                    >
-                      {i18n.t("paymentStatus.continueShopping")}
-                    </button>
-                  </div>
-                }
-                {status !== 'orderNotFound' &&
-                  <div className={styles.paymentStatus_actionButton}>
-                    <button
-                      className={`
-                        ${styles.btn} ${styles.btn_primary} 
-                        ${styles.btn_long} ${styles.btn_full_width} 
-                        text-uppercase
-                      `}
-                      onClick={() => {
-                        window.location.href = data.orders[0].paymentLinks[0];
-                      }}
-                    >
-                      {i18n.t("paymentStatus.tryAgain")}
-                    </button>
-                  </div>
-                }
-              </div>
+              {status !== 'orderNotFound' &&
+                <div className={styles.actionButton}>
+                  <button
+                    className={styles.button}
+                    onClick={() => {
+                      window.location.href = data.orders[0].paymentLinks[0];
+                    }}
+                  >
+                    {i18n.t("paymentStatus.tryAgain")}
+                  </button>
+                </div>
+              }
             </div>
           </div>
         </div>
@@ -120,10 +115,10 @@ const PaymentStatus: FC<any> = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const lngDict = locale(params.lng);
 
-  const brand = await useBrand(req);
-  const [orderID, status] = params?.orderID as string[];
+  const lngDict = locale(params.lng)
+  const brand = await useBrand(req)
+  const [orderID, status] = params?.orderID as string[]
 
   return {
     props: {
