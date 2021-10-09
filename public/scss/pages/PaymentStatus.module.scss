@@ -21,7 +21,7 @@
   &::after
   {
     content: "";
-    @include position(absolute, 69px, 186px);
+    @include position(absolute, 52px, 186px);
     @include fixedSize(42px);
     background-repeat: no-repeat;
   }
@@ -126,7 +126,7 @@
 
     &::after
     {
-      @include position(absolute, 65px, 17px);
+      @include position(absolute, 115px, 17px);
     }
   }
 }
