@@ -1,5 +1,5 @@
 /* library package */
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import { useI18n, usePaymentLink } from '@sirclo/nexus'
