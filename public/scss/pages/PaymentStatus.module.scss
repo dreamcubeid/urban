@@ -21,7 +21,7 @@
   &::after
   {
     content: "";
-    @include position(absolute, 52px, 186px);
+    @include position(absolute, 69px, 186px);
     @include fixedSize(42px);
     background-repeat: no-repeat;
   }
