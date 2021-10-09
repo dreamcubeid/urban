@@ -1,5 +1,5 @@
 /* library package */
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import { useI18n, usePaymentLink } from '@sirclo/nexus'
@@ -31,30 +31,27 @@ const PaymentStatus: FC<any> = ({
   const router = useRouter()
   const { data } = usePaymentLink(orderID)
 
-  let paymentStatus: TypePaymentStatus;
+  let paymentStatus: TypePaymentStatus
 
   if (data === undefined || status === null) status = "orderNotFound"
-
-  switch (status) {
-    case 'failed':
-      paymentStatus = {
-        title: i18n.t("paymentStatus.titleFailed"),
-        contentDesc: i18n.t("paymentStatus.failedDesc")
-      }
-      break
-    case 'unfinish':
-      paymentStatus = {
-        title: i18n.t("paymentStatus.titleUnfinish"),
-        contentDesc: i18n.t("paymentStatus.unfinishDesc")
-      }
-      break
-    default:
-      paymentStatus = {
-        title: i18n.t("paymentStatus.orderNotFound")
-      }
+  if (status === "failed") {
+    paymentStatus = {
+      title: i18n.t("paymentStatus.titleFailed"),
+      contentDesc: i18n.t("paymentStatus.failedDesc")
+    }
+  } else if (status === "unfinish") {
+    paymentStatus = {
+      title: i18n.t("paymentStatus.titleUnfinish"),
+      contentDesc: i18n.t("paymentStatus.unfinishDesc")
+    }
+  } else {
+    paymentStatus = {
+      title: i18n.t("paymentStatus.orderNotFound")
+    }
   }
 
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("orderHistory.lineItemDelivered")]
+
 
   return (
     <Layout
@@ -65,7 +62,7 @@ const PaymentStatus: FC<any> = ({
       withHeader={false}
       withFooter={false}
     >
-      <section className={styles.breadcumbSection}>
+      <section className={`${styles.breadcumbSection} ${status}`}>
         <Breadcrumb
           bgBlack
           title={paymentStatus?.title}

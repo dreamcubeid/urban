@@ -24,7 +24,6 @@
     @include position(absolute, 52px, 186px);
     @include fixedSize(42px);
     background-repeat: no-repeat;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='42' viewBox='0 0 42 42' fill='none'%3E%3Crect width='42' height='42' rx='2' fill='%23333333'/%3E%3Cpath d='M21 31C15.477 31 11 26.523 11 21C11 15.477 15.477 11 21 11C26.523 11 31 15.477 31 21C31 26.523 26.523 31 21 31ZM20.003 25L27.073 17.929L25.659 16.515L20.003 22.172L17.174 19.343L15.76 20.757L20.003 25Z' fill='%231DB954'/%3E%3C/svg%3E");
   }
 
   &[class$="unfinish"]
@@ -60,7 +59,7 @@
 .content
 {
   text-align: center;
-  margin: 24px 0;
+  margin-top: 24px;
 }
 
 .contentDesc
@@ -77,6 +76,8 @@
 
 .actionButton
 {
+  margin-top: 24px;
+
   &:nth-child(2)
   {
     margin-top: 1rem;
