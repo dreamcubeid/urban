@@ -1,13 +1,11 @@
-@import "../base/colors.scss";
+@import '../utils/_variables.scss';
 
 .track 
 {
   &_shipmentList 
   {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    @include flex(column, flex-start, center);
+
     position: relative;
     margin: 0;
     padding: 6px 16px 6px 32px;
@@ -15,12 +13,8 @@
     &::before,
     &::after {
       content: "";
+      @include position(absolute, 0, 0, 0, 0);
       display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      margin: 0;
-      padding: 0;
       transform: translateY(-50%);
 
     }
@@ -31,7 +25,7 @@
       height: 14px;
       border-radius: 100%;
 
-      background-color: $color_gray_semi_dark;
+      background-color: $color_elements;
       border: 2px solid $color_white;
 
       top: 50%;
@@ -44,7 +38,7 @@
       width: 2px;
       height: 100%;
 
-      background-color: $color_gray_semi_dark;
+      background-color: $color_elements;
 
       left: 6px;
       top: 100%;
@@ -52,7 +46,8 @@
 
     &:last-child 
     {
-      &::after {
+      &::after
+      {
         display: none;
       }
     }
@@ -61,14 +56,14 @@
     {
       font-size: 14px;
       line-height: 21px;
-      color: $color_gray_dark;
+      color: $color_elements_line_darker;
     }
 
     & > p:last-child 
     {
       font-size: 11.2px;
       line-height: 17px;
-      color: $color_gray_text;
+      color: $color_text_secondary;
     }
 
     p 
@@ -102,7 +97,7 @@
   {
     position: relative;
     padding: 20px 30px;
-    border-bottom: 1px solid $color_gray_semi_dark;
+    border-bottom: 1px solid $color_elements;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     font-size: 18px;
@@ -155,7 +150,7 @@
 
   &_shipmentNote
   {
-    background: $color_blue_light;
+    background: $color_blue;
     padding: 5px 7.5px;
     border-radius: 3px;
   }
@@ -202,7 +197,7 @@
     font-size: 16px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    background-color: $color_blue_dark_light !important;
+    background-color: $color_blue !important;
     border: none;
 
     &::after
@@ -226,7 +221,7 @@
 
     img
     {
-      background: $color_gray;
+      background: $color_elements;
       padding: 15px 18px;
       margin-right: 10px;
       border-radius: 38px;

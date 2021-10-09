@@ -1,4 +1,7 @@
 import { ShipmentTracker } from "@sirclo/nexus";
+/* locales */
+import locale from 'locales'
+/* styles */
 import styles from "public/scss/pages/Track.module.scss";
 
 const classesTrackerPage = {
@@ -16,6 +19,7 @@ const classesTrackerPage = {
 };
 
 const TrackerPage = ({ order_token }) => {
+  console.log("🚀 ~ file: [token].tsx ~ line 22 ~ TrackerPage ~ order_token", order_token)
   return (
     <ShipmentTracker
       token={order_token}
@@ -28,19 +32,20 @@ const TrackerPage = ({ order_token }) => {
       }
       classes={classesTrackerPage}
     />
-  );
-};
+  )
+}
 
 export async function getServerSideProps({ params }) {
-  const lng = params.lng == "en" ? "en" : "id";
 
-  const { default: lngDict = {} } = await import(
-    `locales/${lng}.json`
-  );
+  const lngDict = locale(params.lng)
 
   return {
-    props: { lng: lng, lngDict, order_token: params.token },
-  };
+    props: {
+      lng: params.lng,
+      lngDict,
+      order_token: params.token
+    }
+  }
 }
 
 export default TrackerPage;
