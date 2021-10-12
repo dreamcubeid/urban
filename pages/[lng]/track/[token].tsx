@@ -41,9 +41,7 @@ const TrackerPage = ({ order_token, lngDict, lng, brand }) => {
       <Breadcrumb title={i18n.t("shipping.track")} links={linksBreadcrumb} lng={lng} />
       <div className={styles.track_container}>
         <ShipmentTracker
-          // token={order_token}
-          awbNumber="IN-SB-2-C2VTGFMAA2XUME"
-          shippingProvider="GRAB"
+          token={order_token}
           iconTracker={
             <div className={styles.track_trackerIcon} />
           }
