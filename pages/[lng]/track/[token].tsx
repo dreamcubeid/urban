@@ -1,8 +1,13 @@
-import { ShipmentTracker } from "@sirclo/nexus";
+import { ShipmentTracker, useI18n } from '@sirclo/nexus'
 /* locales */
 import locale from 'locales'
+/* library template */
+import { useBrand } from 'lib/useBrand'
+/* component */
+import Layout from 'components/Layout/Layout'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 /* styles */
-import styles from "public/scss/pages/Track.module.scss";
+import styles from 'public/scss/pages/Track.module.scss'
 
 const classesTrackerPage = {
   shipmentHeaderClassName: `${styles.track_shipmentHeader} ${styles.track_shipmentHeaderGuest}`,
@@ -18,31 +23,47 @@ const classesTrackerPage = {
   shipmentTrackButtonClassName: `${styles.track_shipmentTrackButton} ${styles.track_shipmentTrackButtonGuest}`,
 };
 
-const TrackerPage = ({ order_token }) => {
-  console.log("🚀 ~ file: [token].tsx ~ line 22 ~ TrackerPage ~ order_token", order_token)
+const TrackerPage = ({ order_token, lngDict, lng, brand }) => {
+
+  const i18n: any = useI18n()
+  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("shipping.track")]
+
   return (
-    <ShipmentTracker
-      token={order_token}
-      iconTracker={
-        <img
-          className="mr-2"
-          src={"/images/motorcycle.svg"}
-          alt="motorcycle"
+    <Layout
+      lngDict={lngDict}
+      i18n={i18n}
+      lng={lng}
+      brand={brand}
+      logoHeader
+      withBack={false}
+      titleSeo={i18n.t("product.title")}
+    >
+      <Breadcrumb title={i18n.t("shipping.track")} links={linksBreadcrumb} lng={lng} />
+      <div className={styles.track_container}>
+        <ShipmentTracker
+          // token={order_token}
+          awbNumber="IN-SB-2-C2VTGFMAA2XUME"
+          shippingProvider="GRAB"
+          iconTracker={
+            <div className={styles.track_trackerIcon} />
+          }
+          classes={classesTrackerPage}
         />
-      }
-      classes={classesTrackerPage}
-    />
+      </div>
+    </Layout>
   )
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, req }) {
 
   const lngDict = locale(params.lng)
+  const brand = await useBrand(req)
 
   return {
     props: {
       lng: params.lng,
       lngDict,
+      brand: brand || "",
       order_token: params.token
     }
   }

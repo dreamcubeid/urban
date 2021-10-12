@@ -1,14 +1,35 @@
 @import '../utils/_variables.scss';
+@import '../components/Buttons.module.scss';
 
 .track 
 {
+  &_container
+  {
+    @include flex(row, center, center);
+    min-height: 80vh;
+    margin-top: 24px;
+
+    & > div 
+    {
+      @include fixedWidth(520px);
+      border: 1px solid $color_elements_line_darker;
+      padding: 0 16px;
+      border-radius: 2px;
+
+      @media screen and (max-width: 575px) 
+      {
+        @include fixedWidth(calc(100% - 36px));
+      }
+    }
+  }
+
   &_shipmentList 
   {
     @include flex(column, flex-start, center);
 
     position: relative;
     margin: 0;
-    padding: 6px 16px 6px 32px;
+    padding: 6px 16px 6px 24px;
 
     &::before,
     &::after {
@@ -68,7 +89,7 @@
 
     p 
     {
-      margin: 0;
+      margin-bottom: 6px;
       opacity: 0.6;
     }
 
@@ -76,18 +97,32 @@
     {
       p
       {
-        opacity: 1
+        opacity: 1;
+        margin-bottom: 6px;
+      }
+
+      p:first-child
+      {
+        @include RegulerSemiBold;
+        opacity: 1;
+        color: $color_black;
+      }
+
+      p:last-child
+      {
+        @include SmallSmall;
+        color: $color_text_grey;
       }
 
       &::before
       {
-        background-color: $color_blue !important;
+        background-color: $color_black !important;
         opacity: 1 !important;
       }
 
       &::after
       {
-        background-color: $color_blue !important;
+        background-color: $color_black !important;
         opacity: 1 !important;
       }
     }
@@ -96,8 +131,8 @@
   &_shipmentHeader 
   {
     position: relative;
-    padding: 20px 30px;
-    border-bottom: 1px solid $color_elements;
+    padding: 16px 0;
+    border-bottom: 1px solid $color_elements_line_darker;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     font-size: 18px;
@@ -105,7 +140,7 @@
 
   &_shipmentHeaderGuest
   {
-    text-align: center;
+    text-align: left;
   }
 
   &_shipmentBody 
@@ -117,6 +152,7 @@
     ul
     {
       width: 100%;
+      padding-left: 0;
     }
   }
 
@@ -136,21 +172,34 @@
 
   &_shipmentHeaderText 
   {
-    font-weight: 600;
-    font-size: 16px;
+    @include RegulerSemiBold;
     margin: 0;
   }
 
   &_shipmentText 
   {
-    font-size: 14px;
+    @include flex(row, center, flex-start);
+    @include SmallSmall;
     margin-bottom: 0;
-    color: $color_blue;
+    color: $color_text_secondary;
+
+    &::before
+    {
+      content: "";
+      display: inline-block;
+      width: .75rem;
+      height: .75rem;
+      margin-right: 6px;
+      background-repeat: no-repeat;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M7 1H3C2.73478 1 2.48043 1.10536 2.29289 1.29289C2.10536 1.48043 2 1.73478 2 2V10C2 10.2652 2.10536 10.5196 2.29289 10.7071C2.48043 10.8946 2.73478 11 3 11H9C9.26521 11 9.51957 10.8946 9.7071 10.7071C9.89464 10.5196 10 10.2652 10 10V4L7 1Z' stroke='%23666666' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7 1V4H10' stroke='%23666666' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 6.5H4' stroke='%23666666' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 8.5H4' stroke='%23666666' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5 4.5H4.5H4' stroke='%23666666' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
   }
 
   &_shipmentNote
   {
-    background: $color_blue;
+    @include SmallSmall;
+    color: $color_text_secondary;
+    background: $color_elements;
     padding: 5px 7.5px;
     border-radius: 3px;
   }
@@ -163,9 +212,7 @@
   &_shipmentFooter 
   {
     position: relative;
-    padding: 5px;
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    padding: 0 0 16px 0;
 
     button 
     {
@@ -186,6 +233,7 @@
 
   &_shipmentTrackButton 
   {
+    @extend .btn_transparent;
     position: fixed;
     bottom: 0;
     z-index: 1;
@@ -193,12 +241,8 @@
     align-items: center;
     text-align: left;
     width: 100%;
-    padding: 20px;
-    font-size: 16px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background-color: $color_blue !important;
-    border: none;
+    padding: 16px 0 0;
+    border-top: 1px solid $color_elements_line_darker;
 
     &::after
     {
@@ -219,18 +263,18 @@
       font-size: 14px;
     }
 
-    img
-    {
-      background: $color_elements;
-      padding: 15px 18px;
-      margin-right: 10px;
-      border-radius: 38px;
-    }
-
     &:hover 
     {
       color: $color_black !important;
     }
+  }
+
+  &_trackerIcon
+  {
+    width: 32px;
+    height: 32px;
+    margin-right: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' fill='none'%3E%3Crect width='32' height='32' rx='2' fill='%23E5E7EF'/%3E%3Cpath d='M17.75 13.4686C18.2822 13.7757 18.7242 14.2176 19.0314 14.7497C19.3386 15.2819 19.5002 15.8856 19.5 16.5001V20.5001H17.415C17.3117 20.7928 17.1201 21.0464 16.8667 21.2257C16.6133 21.405 16.3105 21.5013 16 21.5013C15.6895 21.5013 15.3867 21.405 15.1333 21.2257C14.8799 21.0464 14.6883 20.7928 14.585 20.5001H12.5V16.5001C12.4998 15.8856 12.6614 15.2819 12.9686 14.7497C13.2758 14.2176 13.7178 13.7757 14.25 13.4686C14.1678 13.321 14.1048 13.1636 14.0625 13.0001H12.5V12.0001H14.063C14.1742 11.571 14.4248 11.1909 14.7754 10.9196C15.126 10.6483 15.5567 10.5011 16 10.5011C16.4433 10.5011 16.874 10.6483 17.2246 10.9196C17.5752 11.1909 17.8258 11.571 17.937 12.0001H19.5V13.0001H17.937C17.8945 13.1651 17.831 13.3226 17.7505 13.4686H17.75ZM17.0235 14.2186C16.724 14.3976 16.374 14.5001 16 14.5001C15.6396 14.5006 15.2859 14.4033 14.9765 14.2186C14.5366 14.416 14.1632 14.7364 13.9013 15.1412C13.6393 15.546 13.4999 16.0179 13.5 16.5001V19.5001H14.5V17.5001C14.5 17.1022 14.658 16.7207 14.9393 16.4394C15.2206 16.1581 15.6022 16.0001 16 16.0001C16.3978 16.0001 16.7794 16.1581 17.0607 16.4394C17.342 16.7207 17.5 17.1022 17.5 17.5001V19.5001H18.5V16.5001C18.5001 16.0179 18.3607 15.546 18.0987 15.1412C17.8368 14.7364 17.4634 14.416 17.0235 14.2186ZM16 17.0001C15.8674 17.0001 15.7402 17.0527 15.6464 17.1465C15.5527 17.2403 15.5 17.3675 15.5 17.5001V20.0001C15.5 20.1327 15.5527 20.2599 15.6464 20.3536C15.7402 20.4474 15.8674 20.5001 16 20.5001C16.1326 20.5001 16.2598 20.4474 16.3536 20.3536C16.4473 20.2599 16.5 20.1327 16.5 20.0001V17.5001C16.5 17.3675 16.4473 17.2403 16.3536 17.1465C16.2598 17.0527 16.1326 17.0001 16 17.0001ZM16 13.5001C16.2652 13.5001 16.5196 13.3947 16.7071 13.2072C16.8946 13.0196 17 12.7653 17 12.5001C17 12.2349 16.8946 11.9805 16.7071 11.793C16.5196 11.6054 16.2652 11.5001 16 11.5001C15.7348 11.5001 15.4804 11.6054 15.2929 11.793C15.1054 11.9805 15 12.2349 15 12.5001C15 12.7653 15.1054 13.0196 15.2929 13.2072C15.4804 13.3947 15.7348 13.5001 16 13.5001Z' fill='%23222222'/%3E%3C/svg%3E");
   }
 
   &_shipmentTrackButtonGuest
