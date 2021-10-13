@@ -349,6 +349,54 @@
   margin-bottom: 12px;
 }
 
+.chooseAccountContainer
+{
+  @extend .verificationContainer;
+}
+
+.accountOptionsContainer
+{
+  margin-top: 24px;
+}
+
+.accountOption
+{
+  padding: 10px 16px;
+  border: 1px solid $color_elements_line_darker;
+  border-radius: 2px;
+  cursor: pointer;
+
+  &:not(:last-child)
+  {
+    margin-bottom: 12px;
+  }
+}
+
+.selectedAccount
+{
+  border: 1px solid $color_black;
+}
+
+.accountName
+{
+  @include RegulerSemiBold;
+  color: $color_black;
+  text-transform: capitalize;
+  margin: 0
+}
+
+.accountEmail
+{
+  @include SmallSmall;
+  color: $color_text_secondary;
+}
+
+.btnChooseAccount
+{
+  @extend .btnResendOTP;
+  margin-top: 24px;
+}
+
 @media screen and (max-width: #{$breakpoint_max_md}) 
 {
   .ssoContainer,

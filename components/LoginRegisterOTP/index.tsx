@@ -4,7 +4,6 @@ import { toast } from 'react-toastify'
 import { IncomingMessage } from 'http'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import {
   SingleSignOn,
   useI18n,
@@ -12,7 +11,6 @@ import {
 } from '@sirclo/nexus'
 /* component */
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
-const Placeholder = dynamic(() => import('components/Placeholder'))
 /* styles */
 import styles from 'public/scss/components/whatsappOTP/LoginRegisterOTP.module.scss'
 
@@ -60,6 +58,7 @@ const verificationClasses = {
 }
 
 const chooseAccountClasses = {
+  chooseAccountContainerClassName: styles.chooseAccountContainer,
   accountOptionsContainerClassName: styles.accountOptionsContainer,
   accountOptionClassName: styles.accountOption,
   accountNameClassName: styles.accountName,
@@ -139,15 +138,6 @@ const LoginRegisterOTP: FC<LoginRegisterOTPPropsType> = ({
           inputPlaceholder={i18n.t("whatsAppOTPInput.inputPlaceholder")}
           onErrorMsg={(msg) => toast.error(msg)}
           loginRedirectPath="account"
-          loadingComponent={
-            <Placeholder
-              classes={{
-                placeholderList: styles.placeholderList,
-              }}
-              withList
-              listMany={3}
-            />
-          }
           customLocales={customLocales}
         />
       }
@@ -176,7 +166,7 @@ const LoginRegisterOTP: FC<LoginRegisterOTPPropsType> = ({
 
       {(step === steps.email || step === steps.wa) &&
         <>
-        {(hasGoogleAuth || hasFacebookAuth) || hasOtp &&
+        {(hasGoogleAuth || hasFacebookAuth || hasOtp) &&
             <div className={styles.ssoContainer}>
               {(hasGoogleAuth || hasFacebookAuth || hasOtp) &&
                 <label className={styles.ssoOr}>
