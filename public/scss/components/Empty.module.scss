@@ -1,0 +1,121 @@
+@import '../utils/variables';
+
+.empty
+{
+    @include flex(column, center, center);
+    @include fixedWidth(100%);
+    @include fixedHeight(188px);
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+
+    &__flexibleHeight
+    {
+        @extend .empty;
+
+        min-height: 80vh;
+        height: auto;
+        max-height: none;
+    }
+
+    &_icon,
+    &_label
+    {
+        @include flex(row, center, center);
+        @include RegulerReguler;
+        position: relative;
+        margin: 0 auto;
+        padding: 0;
+        text-align: center;
+        color: $color_elements_placeholder;
+    }
+
+    &_icon
+    {
+        @include fixedSize(20px);
+        margin-bottom: 14px;
+
+        svg
+        {
+            @include fixedSize(100%);
+        }
+
+        @media (min-width: #{$breakpoint_min_md})
+        {
+            @include fixedSize(48px);
+        }
+    }
+
+    &_label
+    {
+        &Wrapper
+        {
+            @include flex(column, center, center);
+            @include fixedWidth(100%);
+            position: relative;
+            margin: 0;
+            padding: 0;
+
+            h1, h2, h3, h4, h5, h6, p
+            {
+                @include flex(row, center, center);
+                @include SmallSmall;
+                color: $color_elements_placeholder;
+            }
+
+            h1, h2, h3, h4, h5, h6
+            {
+                @include LargeSemiBold;
+            }
+
+            & + button
+            {
+                margin-top: 100px;
+                margin-bottom: 24px;
+            }
+        }
+    }
+
+    &_button
+    {
+        @include debug();
+        @include transition();
+        @include flex(row, center, center);
+        @include RegulerReguler;
+        @include fixedHeight(48px);
+        color: $color_text;
+
+        &,
+        &:hover,
+        &:focus,
+        &:active
+        {
+            outline: none;
+            border: none;
+            background-color: transparent;
+            box-shadow: 0 0 0 transparent;
+            text-decoration: none;
+        }
+
+        &:hover
+        {
+            text-decoration: underline;
+        }
+
+        &__cta
+        {
+            @extend .empty_button;
+            @include RegulerReguler;
+            @include debug();
+            @include buttonVariant($color_white, $color_black, $color_black);
+            margin: 88px auto 24px;
+            padding: 12px 15px;
+            min-width: 340px;
+            
+            &:hover
+            {
+                text-decoration: none;
+            }
+        }
+    }
+}
