@@ -13,6 +13,7 @@ import {
   Crosshair
 } from 'react-feather'
 
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'
 import { 
   RiLogoutBoxLine, 
   RiNotification2Line,
@@ -57,13 +58,13 @@ const classesAccount = {
   tabItemIconClassName: styles.account_tabIcon,
   tabPaneClassName: styles.account_tabPane,
 
-  /* My Account */
+  // My Account
   myAccountClassName: styles.myAccount,
   myAccountContentClassName: styles.myAccount_content,
   myAccountBodyClassName: styles.myAccount_body,
   myAccountFieldClassName: styles.myAccount_field,
 
-  /* Edit Account & Change Password */
+  // Edit Account & Change Password
   editAccountClassName: styles.form,
   changePasswordClassName: styles.form,
   inputContainerClassName: styles.form_inputContainer,
@@ -79,13 +80,59 @@ const classesAccount = {
   passwordStrengthLabelClassName: styles.form_passwordStrengthBarLabel,
   buttonClassName: `${styles.btn} ${styles.btn__long}`,
 
-  /* Order History */
-  orderHistoryContainerClassName: styles.table_orderhistory,
-  tableClassName: styles.table_history,
+  // Order History
+  orderHistoryContainerClassName: styles.orderHistory_container,
+  tableClassName: styles.orderHistory_table,
   orderedItemDetailNeedReviewClassName: styles.table_itemDetailNeedReview,
   orderedItemDetailDeliveredClassName: styles.table_orderedItemDetailDelivered,
+  orderItemClassName: styles.orderHistory_orderItem,
+  orderHeaderClassName: styles.orderHistory_orderHeader,
+  orderInnerHeaderClassName: styles.orderHistory_orderInnerHeader,
+  orderTitleClassName: styles.orderHistory_orderTitlte,
+  orderDateClassName: styles.orderHistory_orderDate,
+  orderBodyClassName: styles.orderHistory_orderBody,
+  orderControlClassName: styles.orderHistory_orderControl,
+  invoiceButtonClassName: styles.orderHistory_invoiceButton,
+  orderedItemsContainer: styles.orderHistory_orderedItems,
+  orderedItemsLabelClassName: styles.orderHistory_orderedItemsLabel,
+  orderedItemClassName: styles.orderHistory_orderedItem,
+  orderedItemImageClassName: styles.orderHistory_orderedItemImage,
+  orderedItemDetailClassName: styles.orderHistory_orderedItemDetail,
+  orderedItemDetailTitleClassName: styles.orderHistory_orderedItemDetailTitle,
+  orderedItemDetailPriceClassName: styles.orderHistory_orderedItemDetailPrice,
+  buyerNoteContainerClassName: styles.orderHistory_buyerNoteContainer,
+  buyerNoteLabelClassName: styles.orderHistory_buyerNoteLabel,
+  buyerNoteClassName: styles.orderHistory_buyerNote,
+  shippingContainerClassName: styles.orderHistory_shippingContainer,
+  shippingDetailsClassName: styles.orderHistory_shippingDetails,
+  shippingDetailsLabelClassName: styles.orderHistory_shippingDetailsLabel,
+  shippingDetailsValueClassName: styles.orderHistory_shippingDetailsValue,
+  shippingMethodContainerClassName: styles.orderHistory_shippingMethodContainer,
+  shippingMethodLabelClassName: styles.orderHistory_shippingMethodLabel,
+  shippingMethodValueClassName: styles.orderHistory_shippingMethodValue,
+  paymentMethodContainerClassName: styles.orderHistory_paymentMethodContainer,
+  paymentMethodLabelClassName: styles.orderHistory_paymentMethodLabel,
+  orderFooterClassName: styles.orderHistory_orderFooter,
+  totalCostClassName: styles.orderHistory_totalCost,
+  
+  // Payment Status
+  paymentStatusCancelledClassName: styles.orderHistory_paymentStatus,
+  paymentStatusUnpaidClassName: styles.orderHistory_paymentStatus,
+  paymentStatusPaidClassName: styles.orderHistory_paymentStatus,
+  paymentStatusReadyToShipClassName: styles.orderHistory_paymentStatus,
+  paymentStatusShippedClassName: styles.orderHistory_paymentStatus,
+  paymentStatusDeliveredClassName: styles.orderHistory_paymentStatus,
+  paymentStatusNeedReviewClassName: styles.orderHistory_paymentStatus,
+  paymentStatusCompletedClassName: styles.orderHistory_paymentStatus,
+  paymentStatusReturnedClassName: styles.orderHistory_paymentStatus,
 
-  /* Map */
+  // Order History Info
+  orderInfoContainerClassName: styles.orderInfo_container,
+  OrderInfoIconClassName: styles.orderInfo_icon,
+  orderInfoLabelClassName: styles.orderInfo_label,
+  OrderInfoSearchHereClassName: styles.orderInfo_searchHere,
+
+  // Map
   mapAreaClassName: styles.mapArea,
   mapSelectAreaClassName: styles.account_buttonLocation,
   mapPopupClassName: styles.account_mapPopup,
@@ -99,7 +146,7 @@ const classesAccount = {
   mapCenterButtonClassName: styles.account_mapPopupCenterButton,
   mapButtonFooterClassName: `btn ${styles.btn_primary} ${styles.btn_long} d-block mx-auto my-3`,
 
-  /* Shipment Tracking */
+  // Shipment Tracking
   shippingTrackerButton: `btn ${styles.btn_primary}`,
   shipmentTrackingClassName: `${styles.track_shipmentTracking} ${styles.account_shipmentTracking}`,
   shipmentHeaderClassName: `${styles.track_shipmentHeader} ${styles.account_shipmentContainer}`,
@@ -113,7 +160,7 @@ const classesAccount = {
   shipmentCloseIconClassName: styles.track_shipmentCloseIcon,
   shipmentTrackButtonClassName: styles.track_shipmentTrackButton,
 
-  /* Membership History */
+  // Membership Status
   membershipStatusClassName: styles.membershipStatus,
   accordionClassName: styles.membershipStatus_accordion,
   accordionToggleClassName: styles.membershipStatus_accordionToggle,
@@ -121,18 +168,21 @@ const classesAccount = {
   totalPointsClassName: styles.membershipStatus_totalPoints,
   membershipProgressClassName: styles.membershipStatus_progress,
   membershipPromptClassName: styles.membershipStatus_prompt,
-  linkContinueClassName: styles.membership_linkContinue,
-  membershipHistoryClassName: styles.membership_history,
-  pointHistoryItemClassName: styles.membership_historyItem,
-  orderIDClassName: styles.membership_orderId,
-  transactionTypeClassName: styles.membership_transactionType,
-  transactionDateClassName: styles.membership_transactionDate,
-  pointDeltaClassName: styles.membership_point,
-  membershipPaginationClassName: styles.membership_pagination,
-  itemPerPageClassName: styles.membership_itemPerPage,
-  itemPerPageLabelClassName: styles.membership_itemPerPageLabel,
-  itemPerPageOptionsClassName: styles.membership_itemPerPageOptions,
-  buttonContinueClassName: `btn ${styles.btn_primary} ${styles.btn_long}`,
+
+  // Membership History
+  linkContinueClassName: styles.membershipHistory_linkContinue,
+  membershipHistoryClassName: styles.membershipHistory,
+  pointHistoryItemClassName: styles.membershipHistory_pointHistoryItem,
+  orderIDClassName: styles.membershipHistory_orderID,
+  transactionTypeClassName: styles.membershipHistory_transactionType,
+  transactionDateClassName: styles.membershipHistory_transactionDate,
+  pointDeltaClassName: styles.membershipHistory_pointDelta,
+  membershipPaginationClassName: styles.membershipHistory_pagination, 
+
+  itemPerPageClassName: styles.itemPerPage,
+  itemPerPageLabelClassName: styles.itemPerPageLabel,
+  itemPerPageOptionsClassName: styles.itemPerPageOptions,
+  buttonContinueClassName: styles.buttonContinue,
 
   // Date Picker
   datePickerInputClassName: "date-picker__input",
@@ -147,12 +197,6 @@ const classesAccount = {
   popupConfirmationOrderWrapButtonClassName: stylesPopupConfirmationOrder.wrapButton,
   popupConfirmationOrderButtonConfirmClassName: stylesPopupConfirmationOrder.buttonNo,
   popupConfirmationOrderButtonNoClassName: stylesPopupConfirmationOrder.buttonConfirm,
-
-  // Order History Info
-  orderInfoContainerClassName: styles.membership_info_container,
-  OrderInfoIconClassName: styles.membership_info_icon,
-  orderInfoLabelClassName: styles.membership_info_label,
-  OrderInfoSearchHereClassName: styles.membership_info_button,
 
   // Popup Check Payment Order
   checkPaymentOrderContainerClassName: stylesPopupCheckPaymentOrder.checkOrder_overlay,
@@ -242,16 +286,19 @@ const AccountsPage: FC<any> = ({
 
               <Account
                 classes={classesAccount}
-                orderHistoryPaginationClasses={orderHistoryPaginationClasses}
                 membershipPaginationClasses={orderHistoryPaginationClasses}
+                membershipPaginationNextLabel={<FiChevronRight />}
+                membershipPaginationPrevLabel={<FiChevronLeft />}
+                orderHistoryPaginationClasses={orderHistoryPaginationClasses}
+                orderHistoryIsCallPagination={true}
+                orderHistoryType="list"
+                orderHistoryItemPerPage={5}
                 currency={ACTIVE_CURRENCY}
                 onFetchCompleted={onFetchCompleted}
                 onErrorMsg={onError}
                 onSuccessMsg={onSuccess}
                 onSuccessChPass={onSuccessChPass}
-                showSettingNotification={false}
-                orderHistoryIsCallPagination={true}
-                orderHistoryItemPerPage={10}
+                showSettingNotification={true}
                 paymentHrefPrefix="payment_notif"
                 passwordViewIcon={<RiEyeCloseLine />}
                 passwordHideIcon={<RiEyeLine />}
