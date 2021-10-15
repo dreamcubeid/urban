@@ -1,5 +1,6 @@
 @import '../utils/variables';
 @import '../components/Pagination.module.scss';
+@import '../components/Empty.module.scss';
 
 .wrapper
 {
@@ -262,44 +263,6 @@
     &:hover
     {
       text-decoration: underline;
-    }
-  }
-}
-
-.empty
-{
-  @include flex(column, center, center);
-  @include fixedWidth(100%);
-  @include fixedHeight(188px);
-  position: relative;
-  margin: 0 auto;
-  padding: 0;
-
-  &_icon,
-  &_label
-  {
-    @include flex(row, center, center);
-    @include typographyBuilder(400, 16, 28);
-    position: relative;
-    margin: 0 auto;
-    padding: 0;
-    text-align: center;
-    color: $color_elements_placeholder;
-  }
-
-  &_icon
-  {
-    @include fixedSize(20px);
-    margin-bottom: 14px;
-
-    svg
-    {
-      @include fixedSize(100%);
-    }
-
-    @media (min-width: #{$breakpoint_min_md})
-    {
-      @include fixedSize(48px);
     }
   }
 }
