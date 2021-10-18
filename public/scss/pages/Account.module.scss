@@ -1,100 +1,1384 @@
-@import "../base/colors.scss";
-@import "../components/Button.module.scss";
-@import "../components/Form.module.scss";
-@import "../components/Password.module.scss";
-@import "./Track.module.scss";
+@import '../utils/variables';
+@import '../components/Pagination.module.scss';
+@import '../components/Button.module.scss';
+@import '../components/Otp.module.scss';
 
-.table
+.wrapper
 {
-  &_orderhistory
-  {
-    padding-bottom: 1rem;
-    white-space: nowrap;
-    overflow-x: scroll;
-    
-    button {
-      background-color: transparent;
-      text-transform: uppercase;
+  position: relative;
+}
 
-      &:hover{
-        background-color: $color_black;
-        color: $color_white;
+.account
+{
+  @include fixedWidth(100%);
+  position: relative;
+  margin: 0;
+  padding: 0;
+
+  &_tab,
+  &_tabPane
+  {
+    position: relative;
+  }
+
+  &_tab
+  {
+    @include flex(column, flex-start, stretch);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    li,
+    &Item
+    {
+      @include flex(row, center, flex-start);
+      @include fixedWidth(100%);
+      position: relative;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      min-height: 50px;
+
+      border-bottom: solid 1px $color_elements_line;
+
+      &:last-child,
+      &:last-of-type
+      {
+        &:not(:only-child),
+        &:not(:only-of-type)
+        {
+          border-bottom: none;
+        }
+      }
+    }
+
+    &Link
+    {
+      @include transition();
+      @include flex(row, center, flex-start);
+      @include fixedWidth(100%);
+      position: relative;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
+
+      color: $color_text;
+      text-decoration: none;
+
+      &:hover,
+      &:focus,
+      &:active
+      {
+        color: $color_text;
+        text-decoration: none;
+      }
+
+      &:hover
+      {
+        text-decoration: underline;
+      }
+
+      &::after
+      {
+        content: "";
+
+        @include transition();
+        @include flex(row, center, center);
+        @include fixedWidth(16px);
+        @include fixedHeight(100%);
+        @include absolute(0, -34px, 0);
+
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-position: center center;
+        opacity: 0;
+      }
+
+      &__active
+      {
+        @extend .account_tabLink;
+
+        &::after
+        {
+          @include absolute(0, 0, 0);
+
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 24 24' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3e%3cg%3e%3cpath fill='none' d='M0 0h24v24H0z'%3e%3c/path%3e%3cpath d='M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z'%3e%3c/path%3e%3c/g%3e%3c/svg%3e");
+          opacity: 1;
+        }
+      }
+    }
+
+    &Item
+    {
+      &:last-child,
+      &:last-of-type
+      {
+        [class*="tabIcon"]
+        {
+          color: $color_state_red;
+        }
+      }
+    }
+
+    &Icon
+    {
+      @include flex(row, center, center);
+      @include fixedSize(32px);
+      position: relative;
+      margin: 0 18px 0 0;
+      padding: 0;
+    }
+  }
+
+  &_tabPane
+  {
+    border: solid 1px $color_elements_line_darker;
+    background-color: transparent;
+    padding: 16px;
+  }
+
+  &_hello
+  {
+    @include flex(row, center, flex-start);
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    h1, h2, h3, h4, h5, h6, p
+    {
+      @include flex(row, center, flex-start);
+      @include typographyBuilder(500, 20, 24);
+      margin: 0;
+      padding: 0;
+      color: $color_text;
+      text-transform: capitalize;
+
+      &:empty
+      {
+        display: none;
+      }
+    }
+  }
+}
+
+.membershipStatus
+{
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 16px;
+
+  background-color: $color_elements_line;
+  color: $color_text_secondary;
+
+  &_accordion
+  {
+    &Toggle
+    {
+      @include flex(row, center, flex-start);
+      @include typographyBuilder(400, 12, 16);
+      @include fixedWidth(100%);
+      @include fixedHeight(32px);
+      position: relative;
+      margin: 0;
+      padding: 0;
+      color: $color_text;
+      cursor: pointer;
+    }
+    
+    &Icon
+    {
+      @include flex(row, center, center);
+      @include fixedSize(32px);
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  &_totalPoints
+  {
+    @include flex(row, center, flex-end);
+    @include typographyBuilder(400, 12, 16);
+    @include absolute(16px, 16px);
+    @include fixedHeight(34px);
+    margin: 0;
+    padding: 0 0 0 16px;
+    color: $color_text_secondary;
+  }
+  
+  &_progress
+  {
+    @include styleProgressBar($color_elements_line_darker, $color_black);
+  }
+
+  &_prompt
+  {
+    @include flex(row, center, flex-start);
+    @include typographyBuilder(400, 12, 16);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    color: $color_text_secondary;
+  }
+}
+
+.membershipHistory
+{
+  &_linkContinue
+  {
+    @include debug();
+    @include flex(row, center, flex-start);
+    @include fixedWidth(100%);
+    @include SmallSmall;
+    position: relative;
+    margin: 0 0 25px;
+    padding: 8px 12px;
+
+    background: $color_elements_line;
+    border: solid 1px $color_elements_line_darker;
+    color: $color_text;
+
+    p,
+    a
+    {
+      @include flex(row, center, flex-start);
+      position: relative;
+      margin: 0;
+      padding: 0;
+      color: inherit;
+    }
+
+    p
+    {
+      padding-right: 4px;
+    }
+
+    a
+    {
+      @include transition();
+
+      &,
+      &:hover,
+      &:focus,
+      &:active
+      {
+        color: $color_blue;
+        text-decoration: none;
+      }
+
+      &:hover
+      {
+        color: $color_text;
+        text-decoration: underline;
       }
     }
   }
 
-  &_orderedItemDetailDelivered
+  &_pointHistoryItem
   {
-    @extend .btn;
-    @extend .btn_primary;
-    text-transform: capitalize !important;
-    padding: 5px 10px;
-    white-space: pre-wrap;
+    position: relative;
+    margin: 0 0 12px;
+    padding: 0;
+
+    border-radius: 2px;
+    border: solid 1px $color_elements_line_darker;
+    background-color: $color_white;
+
+    &::after
+    {
+      content: "";
+      @include flex(row, center, center);
+      @include fixedSize(12px);
+      @include absolute(50%, 15px);
+      transform: translateY(calc(-50% + 12px));
+      
+      background-color: transparent;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+      background-image: url("data:image/svg+xml,%3Csvg width='6' height='9' viewBox='0 0 6 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.65048 4.49999L0.17511 2.02549L1.41236 0.787369L5.12498 4.49999L1.41236 8.21262L0.17511 6.97449L2.65048 4.49999Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+    }
   }
 
-  &_itemDetailNeedReview
+  &_orderID
   {
-    background: transparent;
-    border: none;
+    @include flex(row, center, flex-start);
+    @include SmallSmall;
+    position: relative;
+    margin: 0 0 12px;
+    padding: 4px 12px;
+
+    background-color: $color_elements_line_darker;
+    color: $color_text;
+  }
+
+  &_transactionType,
+  &_transactionDate
+  {
+    @include flex(row, center, flex-start);
+    @include fixedWidth(calc(100% - 115px));
+    @include RegulerReguler;
+    position: relative;
+    margin: 0;
+    padding: 0 12px;
+    color: $color_text;
+  }
+
+  &_transactionType
+  {
+    &:empty
+    {
+      display: none;
+    }
+  }
+
+  &_transactionDate
+  {
+    @include SmallSmall;
+    color: $color_text_secondary;
+    margin: 12px 0;
+  }
+
+  &_pointDelta
+  {
+    @include flex(row, center, center);
+    @include absolute(50%, 45px);
+    @include typographyBuilder(400, 14, 21);
+    transform: translateY(calc(-50% + 12px));
+    margin: 0;
     padding: 0;
-    color: $color_red_dark;
-    text-decoration: underline;
-    
+
+    &[class*="positive"]
+    {
+      color: $color_green_other;
+    }
+
+    &[class*="negative"]
+    {
+      color: $color_red_other;
+    }
+  }
+
+  &_pagination
+  {
+    @include flex(column, center, center);
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &_buttonContinue
+  {
+    @include debug();
+  }
+}
+
+.itemPerPage
+{
+  @include debug();
+  @include flex(column, stretch, center);
+  @include fixedSize(25%);
+  align-self: flex-end;
+  position: relative;
+  margin: 4px 0 16px;
+  padding: 8px 12px;
+  border-radius: 2px;
+  border: solid 1px $color_elements_line_darker;
+  background-color: $color_white;
+
+  &Label,
+  &Options
+  {
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &Label
+  {
+    p
+    {
+      @include flex(row, center, flex-start);
+      @include SmallSmall;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      color: $color_text_secondary;
+    }
+  }
+
+  &Options
+  {
+    select
+    {
+      @include RegulerReguler;
+      @include fixedWidth(100%);
+      display: block;
+      position: relative;
+      padding: 0;
+      margin: 0;
+      background-color: transparent;
+
+      &,
+      &:hover,
+      &:focus,
+      &:active
+      {
+        outline: none;
+        box-shadow: 0 0 0 transparent;
+        border: none;
+      }
+    }
+  }
+}
+
+.orderInfo
+{
+  &_container
+  {
+    @include flex(row, center, flex-start);
+    @include fixedWidth(100%);
+    @include SmallSmall;
+    position: relative;
+    margin: 0 0 25px;
+    padding: 8px 12px;
+
+    background: $color_elements_line;
+    border: solid 1px $color_elements_line_darker;
+    color: $color_text;
+  }
+
+  &_icon
+  {
+    @include flex(row, center, center);
+    @include fixedSize(18px);
+    position: relative;
+
+    svg
+    {
+      @include fixedSize(100%);
+    }
+  }
+
+  &_label,
+  &_searchHere
+  {
+    @include flex(row, center, flex-start);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+  }
+
+  &_label
+  {
+    padding: 0 10px;
+  }
+
+  &_searchHere
+  {
+    @include transition();
+
+    &,
+    &:hover,
+    &:focus,
+    &:active
+    {
+      color: $color_blue;
+      text-decoration: none;
+      background-color: transparent;
+      box-shadow: 0 0 0 transparent;
+      border: none;
+    }
+
+    &:hover
+    {
+      color: $color_text;
+      text-decoration: underline;
+    }
+  }
+}
+
+.myAccount
+{
+  &,
+  &_content
+  {
+    position: relative;
+  }
+
+  &_content
+  {
+    padding: 16px;
+  }
+
+  &_body
+  {
+    @include flex(column, flex-start, stretch);
+    @include fixedWidth(100%);
+    margin: 0;
+    padding: 0;
+
+    & > li
+    {
+      list-style: none;
+    }
+  }
+
+  &_field
+  {
+    @include flex(column, flex-start, flex-start);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0 0 16px;
+    padding: 10px 16px;
+    border-radius: 2px;
+    border: solid 1px $color_elements_placeholder;
+    background-color: $color_white;;
+    overflow: hidden;
+
+    & > span
+    {
+      @include fixedWidth(100%);
+      position: relative;
+
+      &[class*="Label"]
+      {
+        @include typographyBuilder(400, 12, 16);
+        color: $color_text_secondary;
+      }
+
+      &[class*="Value"]
+      {
+        @include typographyBuilder(400, 16, 24);
+        color: $color_text;
+      }
+    }
+
+    &:last-child,
+    &:last-of-type
+    {
+      min-height: 150px;
+
+      & > span
+      {
+        &[class*="Value"]
+        {
+          margin: 4px 0 0;
+          min-height: 100px;
+          border-radius: 2px;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}
+
+.map
+{
+  &Area
+  {
+    @include fixedWidth(100%);
+    display: block;
+    position: relative;
+    margin: 0;
+    min-height: 100px;
+    border: none;
+
+    & > div
+    {
+      margin: 0;
+      @include fixedWidth(100%);
+    }
+  }
+}
+
+.form
+{
+  @include fixedWidth(100%);
+  position: relative;
+
+  & > button[type="submit"]
+  {
+    & + button[type="submit"]
+    {
+      @include buttonVariant($color_text, $color_white, $color_text, true);
+      margin-top: 16px;
+    }
+  }
+
+  &_input
+  {
+    @include transition();
+    @include flex(row, center, flex-start);
+    @include typographyBuilder(400, 16, 24);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 0 0 transparent;
+    color: $color_text;
+
+    &[type="number"]
+    {
+      @include removeArrowsFromInput();
+    }
+
+    &:hover,
     &:focus,
     &:active
     {
       outline: 0;
-      box-shadow: none;
+      border: none;
+      box-shadow: 0 0 0 transparent;
     }
-  }
-  
-  &_history
-  {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid $color_gray_semi_dark;
-    border-radius: 5px;
 
-    thead
+    &Container
     {
-      border: 1px solid $color_gray_semi_dark;
-      
-      tr
+      @include flex(column, flex-start, flex-start);
+      @include fixedWidth(100%);
+      position: relative;
+      margin: 0 0 16px;
+      padding: 10px 16px;
+      border-radius: 2px;
+      border: solid 1px $color_elements_placeholder;
+      background-color: $color_white;
+
+      span[data-identity="input-dateOfBirth"]
       {
-        padding: 1rem;
-  
-        th
+        @include flex(row, center, flex-start);
+        @include fixedWidth(100%);
+        position: relative;
+
+        [class*="react-date-picker"][class*="date-picker__input"][class*="react-date-picker--enabled"]
         {
-          padding: 1rem;
+          margin: 4px 0 0;
+          padding: 0;
+          border: none !important;
+          height: auto;
         }
       }
     }
 
-    tbody
+    &Label
     {
-      td
+      @include flex(row, center, flex-start);
+      @include typographyBuilder(400, 12, 16);
+      @include fixedWidth(100%);
+      position: relative;
+      margin: 0;
+      padding: 0;
+      color: $color_text_secondary;
+
+      & + [class*="mapArea"]
       {
-        padding: 1rem;
-        vertical-align: baseline;
+        margin-top: 4px;
+      }
+    }
 
-        ul
+    & > div
+    {
+      &[class$="-control"]
+      {
+        @include fixedWidth(100%);
+        @include fixedHeight(100%);
+        border-radius: 0 !important;
+        border-color: transparent;
+        box-shadow: 0 0 0 transparent !important;
+        position: relative;
+
+        & > div[class*="css-"]
         {
-          margin: 0;
-          padding: 0;
-
-          li
+          &:not([class*="IndicatorsContainer"])
           {
-            list-style: none;
-            margin-bottom: .5rem;
+            @include flex(row, flex-start, flex-start);
+            @include fixedHeight(38px);
+            padding-left: 0;
+            padding-right: 0;
+          }
+
+          &[class*="IndicatorsContainer"]
+          {
+            [class*="-indicatorSeparator"]
+            {
+              display: none;
+            }
           }
         }
+      }
+    }
 
-        span
+    [class*="css-"],
+    [class|=" css"],
+    [class^=" css-"]
+    {
+      [class*="-placeholder"]
+      {
+        @include flex(row, center, flex-start);
+        @include fixedSize(100%);
+        @include fixedHeight(100%);
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        word-break: keep-all;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      [class$="-Input"]
+      {
+        @include flex(row, center, flex-start);
+        @include fixedSize(100%);
+        position: relative;
+        margin: 0;
+        padding: 0;
+
+        & > div
         {
-          &:hover
+          @include flex(row, center, flex-start, false, true);
+          @include fixedSize(100%);
+          position: relative;
+        }
+      }
+
+      [class$="singleValue"]
+      {
+        padding: 0;
+      }
+    }
+  }
+
+  &_password
+  {
+    &Input
+    {
+      @include transition();
+      @include flex(row, center, flex-start);
+      @include typographyBuilder(400, 16, 24);
+      position: relative;
+      margin: 0;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      box-shadow: 0 0 0 transparent;
+      color: $color_text;
+      flex-grow: 1;
+
+      &:hover,
+      &:focus,
+      &:active
+      {
+        outline: 0;
+        border: none;
+        box-shadow: 0 0 0 transparent;
+      }
+
+      &[disabled]
+      {
+        background-color: $color_white;
+        opacity: 0.3;
+        pointer-events: none;
+      }
+    }
+
+    &Button
+    {
+      @include flex(row, center, center);
+      @include fixedSize(24px);
+      position: relative;
+      margin: 0;
+      padding: 0;
+
+      background-color: transparent;
+      box-shadow: 0 0 0 transparent;
+      border: none;
+
+      &:hover,
+      &:focus,
+      &:active
+      {
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 transparent;
+      }
+    }
+
+    &Container
+    {
+      @include flex(row, center, flex-start);
+      @include fixedWidth(100%);
+      position: relative;
+    }
+
+    &Criteria
+    {
+      list-style: none;
+      @include flex(row, center, flex-start);
+      @include typographyBuilder(400, 14, 24);
+      @include fixedWidth(100%);
+      position: relative;
+      margin: 0;
+      padding: 0;
+      
+      & > svg
+      {
+        @include flex(row, center, center);
+        @include fixedSize(16px);
+        margin: 0 8px 0 0;
+      }
+
+      &List
+      {
+        @include flex(column, flex-start, flex-start);
+        @include fixedWidth(100%);
+        position: relative;
+        margin: 0 0 16px;
+        padding: 0;
+      }
+    }
+
+    &StrengthBar
+    {
+      @include transition();
+      @include fixedHeight(6px);
+
+      display: block;
+      position: relative;
+      top: -6px;
+      z-index: 2;
+      min-width: 0%;
+      border-radius: 2px;
+      overflow: hidden;
+      background-color: $color_black;
+
+      &[class*="weak"]
+      {
+        width: 25%;
+      }
+
+      &[class*="medium"]
+      {
+        width: 50%;
+      }
+
+      &[class*="strong"]
+      {
+        width: 100%;
+      }
+
+      &Container
+      {
+        @include flex(column, flex-start, flex-start);
+        @include fixedWidth(100%);
+        position: relative;
+        margin: 0;
+        padding: 0;
+        border-radius: 2px;
+        overflow: hidden;
+
+        &::before
+        {
+          content: "";
+          display: block;
+          position: relative;
+          @include fixedWidth(100%);
+          @include fixedHeight(6px);
+          border-radius: 2px;
+          overflow: hidden;
+
+          background: $color_elements_line;
+        }
+      }
+      
+      &Label
+      {
+        @include flex(row, center, flex-start);
+        @include fixedWidth(100%);
+        @include typographyBuilder(400, 14, 24);
+        position: relative;
+        margin: 0 0 8px;
+      }
+    }
+  }
+}
+
+.orderHistory
+{
+  &_container
+  {
+    @include flex(column, flex-start, stretch);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &_orderItem
+  {
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0 0 12px;
+    padding: 0;
+
+    border: solid 1px $color_elements_line_darker;
+    background-color: $color_white;
+
+    &:last-child,
+    &:last-of-type
+    {
+      margin-bottom: 24px;
+    }
+  }
+
+  &_orderHeader,
+  &_orderInnerHeader
+  {
+    @include fixedWidth(100%);
+    position: relative;
+  }
+
+  &_orderHeader
+  {
+    padding: 16px;
+  }
+
+  &_orderInnerHeader
+  {
+    @include flex(column, stretch, center);
+  }
+
+  &_paymentStatus
+  {
+    @include flex(row, center, center);
+    @include fixedWidth(100%);
+    @include SmallSmall;
+    position: relative;
+    margin: 0 auto 12px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 35px;
+    text-align: center;
+    text-transform: capitalize;
+
+    order: 1;
+
+    &[class*="completed"],
+    &[class*="paid"],
+    &[class*="shipped"]
+    {
+      color: $color_white;
+    }
+
+    &[class*="cancelled"]
+    {
+      color: $color_text_grey;
+    }
+  }
+
+  &_orderTitle,
+  &_orderDate
+  {
+    @include flex(row, center, flex-start);
+    @include SmallSmall;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    color: $color_text;
+  }
+  
+  &_orderTitle
+  {
+    order: 2;
+  }
+
+  &_orderDate
+  {
+    margin: 4px 0;
+    color: $color_info;
+  }
+
+  &_orderBody
+  {
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &_orderControl
+  {
+    @include flex(row, center, flex-start);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0;
+    padding: 0 16px;
+  }
+
+  &_invoiceButton
+  {
+    @include transition();
+    @include flex(row, center, center);
+    @include buttonVariant($color_text, $color_white, $color_white);
+    @include typographyBuilder(400, 12, 16);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0 auto;
+    padding: 10px 16px;
+    cursor: pointer;
+    text-align: center;
+
+    &::before
+    {
+      content: "";
+      @include flex(row, center, center);
+      @include fixedSize(12px);
+      position: relative;
+      margin: 0 5px 0 0;
+      padding: 0;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      background-image: url("data:image/svg+xml,%3Csvg width='13' height='12' viewBox='0 0 13 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.5 9.50028H2C1.86739 9.50028 1.74021 9.4476 1.64645 9.35383C1.55268 9.26006 1.5 9.13288 1.5 9.00028V4.00028C1.5 3.86767 1.55268 3.74049 1.64645 3.64672C1.74021 3.55295 1.86739 3.50028 2 3.50028H3.5V1.50027C3.5 1.36767 3.55268 1.24049 3.64645 1.14672C3.74022 1.05295 3.86739 1.00027 4 1.00027H9C9.13261 1.00027 9.25979 1.05295 9.35355 1.14672C9.44732 1.24049 9.5 1.36767 9.5 1.50027V3.50028H11C11.1326 3.50028 11.2598 3.55295 11.3536 3.64672C11.4473 3.74049 11.5 3.86767 11.5 4.00028V9.00028C11.5 9.13288 11.4473 9.26006 11.3536 9.35383C11.2598 9.4476 11.1326 9.50028 11 9.50028H9.5V10.5003C9.5 10.6329 9.44732 10.7601 9.35355 10.8538C9.25979 10.9476 9.13261 11.0003 9 11.0003H4C3.86739 11.0003 3.74022 10.9476 3.64645 10.8538C3.55268 10.7601 3.5 10.6329 3.5 10.5003V9.50028ZM3.5 8.50028V8.00028C3.5 7.86767 3.55268 7.74049 3.64645 7.64672C3.74022 7.55295 3.86739 7.50028 4 7.50028H9C9.13261 7.50028 9.25979 7.55295 9.35355 7.64672C9.44732 7.74049 9.5 7.86767 9.5 8.00028V8.50028H10.5V4.50028H2.5V8.50028H3.5ZM4.5 2.00027V3.50028H8.5V2.00027H4.5ZM4.5 8.50028V10.0003H8.5V8.50028H4.5ZM3 5.00028H4.5V6.00028H3V5.00028Z' fill='%23444444'/%3E%3C/svg%3E%0A");
+    }
+
+    &,
+    &:hover,
+    &:focus,
+    &:active
+    {
+      outline: none;
+      text-decoration: none;
+      box-shadow: 0 0 0 transparent;
+      background: $color_white;
+      color: $color_text;
+    }
+
+    &:hover
+    {
+      text-decoration: underline;
+      background-color: $color_white;
+      border-color: $color_white;
+      color: $color_text;
+    }
+  }
+
+  &_orderedItems
+  {
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 24px 0 0;
+    padding: 28px 16px 16px;
+    border-top: solid 1px $color_elements_line_darker;
+  }
+
+  &_orderedItemsLabel
+  {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &_orderedItem
+  {
+    @include flex(row, center, flex-start);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    & + li
+    {
+      margin-top: 16px;
+    }
+  }
+
+  &_orderedItemImage
+  {
+    @include fixedSize(64px);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 3px;
+    object-fit: contain;
+  }
+
+  &_orderedItemDetail
+  {
+    @include flex(column, flex-start, center);
+    position: relative;
+    margin: 0;
+    padding: 6px;
+    flex-grow: 1;
+  }
+
+  &_orderedItemDetailNeedReview,
+  &_orderedItemDetailReviewed
+  {
+    @include transition();
+    @include flex(row, center, flex-start);
+    @include SmallSmall;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    color: $color_danger_light;
+    text-decoration: none;
+
+    &::before
+    {
+      content: "";
+      @include flex(row, center, center);
+      @include fixedSize(12px);
+      position: relative;
+      margin: 0 5px 0 0;
+      padding: 0;
+      background-position: center center;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      background-color: transparent;
+    }
+
+    &,
+    &:hover,
+    &:focus,
+    &:active
+    {
+      outline: none;
+      color: $color_danger_light;
+    }
+  }
+
+  &_orderedItemDetailNeedReview
+  {
+    &::before
+    {
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 10.0003C2.2385 10.0003 0 7.76181 0 5.00031C0 2.23881 2.2385 0.000305176 5 0.000305176C7.7615 0.000305176 10 2.23881 10 5.00031C10 7.76181 7.7615 10.0003 5 10.0003ZM5 9.00031C6.06087 9.00031 7.07828 8.57888 7.82843 7.82873C8.57857 7.07859 9 6.06117 9 5.00031C9 3.93944 8.57857 2.92202 7.82843 2.17188C7.07828 1.42173 6.06087 1.00031 5 1.00031C3.93913 1.00031 2.92172 1.42173 2.17157 2.17188C1.42143 2.92202 1 3.93944 1 5.00031C1 6.06117 1.42143 7.07859 2.17157 7.82873C2.92172 8.57888 3.93913 9.00031 5 9.00031ZM4.5 6.50031H5.5V7.50031H4.5V6.50031ZM4.5 2.50031H5.5V5.50031H4.5V2.50031Z' fill='%23EA715A'/%3E%3C/svg%3E%0A");
+    }
+  }
+
+  &_orderedItemDetailReviewed
+  {
+    &,
+    &:hover,
+    &:focus,
+    &:active
+    {
+      color: $color_green_other;
+    }
+
+    &::before
+    {
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M10.7503 6.00031C10.7503 8.61916 8.61886 10.75 6 10.75C3.38057 10.75 1.24971 8.61916 1.24971 5.99973C1.24971 3.38031 3.38114 1.24945 6 1.24945C8.61886 1.24945 10.7503 3.38088 10.7503 5.99973V6.00031ZM6 0.000305176C9.30857 0.000305176 12 2.69173 12 6.00031C12 9.30888 9.30857 11.9992 6 11.9992C2.69143 11.9992 0 9.30888 0 6.00031C0 2.69173 2.69143 0.000305176 6 0.000305176ZM8.12343 4.10031H8.12229C8.05459 4.10008 7.98753 4.11336 7.92503 4.13936C7.86253 4.16536 7.80585 4.20356 7.75829 4.25173L5.60114 6.42316C5.53984 6.48204 5.45814 6.51492 5.37314 6.51492C5.28815 6.51492 5.20644 6.48204 5.14514 6.42316L4.23943 5.51459C4.15981 5.43413 4.05567 5.38246 3.94343 5.36773L3.876 5.36316C3.77472 5.36363 3.67583 5.39396 3.59171 5.45035C3.50758 5.50674 3.44195 5.58669 3.40304 5.68019C3.36413 5.77369 3.35365 5.8766 3.37293 5.97602C3.39221 6.07545 3.44039 6.16698 3.51143 6.23916L5.00857 7.74773C5.10571 7.84602 5.23543 7.89916 5.37314 7.89916C5.44102 7.89948 5.50827 7.88624 5.57097 7.86024C5.63367 7.83424 5.69055 7.79599 5.73829 7.74773L8.48857 4.97745C8.58363 4.88083 8.63691 4.75071 8.63691 4.61516C8.63691 4.47962 8.58363 4.3495 8.48857 4.25288C8.4409 4.20446 8.38405 4.16604 8.32136 4.13984C8.25866 4.11365 8.19138 4.10021 8.12343 4.10031Z' fill='%231DB954'/%3E%3C/svg%3E%0A");
+    }
+
+    &::after
+    {
+      content: "";
+      @include fixedSize(12px);
+      @include position(relative, auto, 12px);
+      z-index: 2;
+      background-color: $color_white;
+    }
+  }
+
+  &_orderedItemDetailTitle,
+  &_orderedItemDetailPrice
+  {
+    @include flex(row, center, flex-start);
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &_orderedItemDetailTitle
+  {
+    @include RegulerReguler;
+    margin-bottom: 8px;
+  }
+
+  &_orderedItemDetailPrice
+  {
+    @include SmallSmall;
+  }
+
+  &_buyerNoteContainer,
+  &_shippingDetails,
+  &_shippingMethodContainer,
+  &_paymentMethodContainer
+  {
+    @include fixedWidth(100%);
+    @include SmallSmall;
+    position: relative;
+    margin: 0;
+    padding: 16px 16px 0;
+
+    border: none;
+    background: $color_elements_line;
+    color: $color_text;
+
+    &::after
+    {
+      content: "";
+      display: block;
+      position: relative;
+      margin: 16px auto 0;
+      @include fixedWidth(100%);
+      @include fixedHeight(1px);
+      background-color: $color_elements_line_darker;
+    }
+
+    span,
+    p
+    {
+      @include flex(row, center, flex-start);
+      @include fixedWidth(100%);
+      position: relative;
+      margin: 0;
+      padding: 0;
+      color: inherit;
+    }
+
+    span
+    {
+      @include SmallSemiBold;
+      color: $color_text_secondary;
+
+      & + p
+      {
+        margin-top: 6px;
+      }
+    }
+  }
+
+  &_paymentMethodContainer
+  {
+    padding-bottom: 16px;
+    &::after
+    {
+      content: none;
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  &_orderFooter
+  {
+    @include flex(row, center, space-between);
+    position: relative;
+    margin: 16px;
+    padding: 8px 10px;
+    background: $color_elements_line_darker;
+    border-radius: 3px;
+    border: none;
+
+    [class*="totalPoints"]
+    {
+      @include flex(row, center, flex-end);
+      @include position(relative, auto, auto);
+      @include typographyBuilder(500, 12, 16);
+      margin: 0;
+      padding: 0;
+      text-align: right;
+      color: $color_text;
+      min-height: initial;
+      height: auto;
+      max-height: none;
+
+      &::before
+      {
+        content: "";
+        @include flex(row, center, center);
+        @include fixedSize(12px);
+        margin: 0 4px 0 0;
+        padding: 0;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-position: center center;
+        background-size: auto 100%;
+        background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 11.0002C3.2385 11.0002 1 8.76174 1 6.00024C1 3.23874 3.2385 1.00024 6 1.00024C8.7615 1.00024 11 3.23874 11 6.00024C11 8.76174 8.7615 11.0002 6 11.0002ZM4.75 4.50024L3.5 5.75024L6 8.25025L8.5 5.75024L7.25 4.50024H4.75Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+      }
+    }
+  }
+
+  &_totalCost
+  {
+    @include flex(row, center, flex-start);
+    @include typographyBuilder(500, 12, 16);
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+}
+
+
+@media (max-width: #{$breakpoint_max_lg})
+{
+  .account
+  {
+    @include flex(column, stretch, flex-start);
+
+    &_tab
+    {
+      @include flex(row, center, flex-start);
+      margin: 20px 0 24px;
+      overflow: hidden;
+      overflow-y: hidden;
+      overflow-x: auto;
+      border-bottom: solid 1px $color_elements_line;
+
+      li,
+      &Item
+      {
+        @include fixedHeight(50px);
+        min-width: initial;
+        width: auto;
+        max-width: none;
+
+        margin-right: 24px;
+        border-bottom-color: transparent;
+      }
+
+      &Icon
+      {
+        display: none;
+      }
+
+      &Link
+      {
+        @include flex(row, center, center);
+        @include fixedHeight(100%);
+        white-space: nowrap;
+        word-break: keep-all;
+
+        &,
+        &:hover,
+        &:focus,
+        &:active
+        {
+          text-decoration: none;
+        }
+
+        &:hover,
+        &__active
+        {
+          border-bottom: solid 2px $color_black;
+        }
+
+        &__active
+        {
+          &::after
           {
-            cursor: pointer;
-            text-decoration: underline;
+            content: none;
+            display: none;
           }
         }
       }
@@ -102,95 +1386,37 @@
   }
 }
 
-.pagination
+@media (min-width: #{$breakpoint_min_lg})
 {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &_item
+  .account
   {
-    padding: .5rem;
-    margin: .25rem;
-    list-style: none;
-    cursor: pointer;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: 100px auto;
+    grid-column-gap: 24px;
+    grid-row-gap: 24px; 
+
+    &_tab
+    {
+      grid-area: 2 / 1 / 3 / 2;
+    }
+
+    &_tabPane
+    {
+      grid-area: 1 / 2 / 3 / 3;
+    }
   }
 
-  &_active
+  .membershipStatus
   {
-    color: $color_blue;
-    background: $color_blue_light;
-    border: 1px solid $color_blue;
-    border-radius: 4px;
+    grid-area: 1 / 1 / 2 / 2;
   }
 }
 
 .account
 {
-  margin-bottom: 2rem;
-  min-height: 70vh;
-
-  &_profile
+  &_shipmentTracking
   {
-    margin-top: 3rem;
-
-    &__logout
-    {
-      cursor: pointer;
-
-      svg
-      {
-        margin-bottom: 5px;
-      }
-    }
-
-    h2
-    {
-      font-size: 25px;
-      font-family: "roboto-black";
-
-      span
-      {
-        &:last-child
-        {
-          margin-left: 1rem;
-        }
-      }
-    }
-  }
-
-  &_profilePoints
-  {
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-    color: $color_blue;
-
-    span
-    {
-      &:first-child
-      {
-        margin-right: .5rem;
-      }
-    }
-
-    &__icon
-    {
-      color: $color_blue;
-      width: 1em;
-      height: 1em;
-    }
-
-    &__bold
-    {
-      margin-left: .35rem;
-      font-family: "roboto-black";
-    }
-  }
-
-  &_shipmentTracking{
     position: fixed;
     display: block;
     margin: auto;
@@ -204,530 +1430,15 @@
     padding-top: 3rem;
   }
 
-  &_shipmentContainer {
+  &_shipmentContainer
+  {
     width: 50%;
     margin: auto;
     background: white;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px)
+    {
       width: 95%;
-    }
-  }
-
-  &_tab
-  {
-    text-transform: uppercase;
-    margin: 10px 0;
-    padding: 20px 0;
-    white-space: nowrap;
-    overflow-x: auto;
-    border-bottom: 1px solid #ccc;
-
-    @media screen and (max-width: 575px) {
-      margin: 10px 0;
-    }
-
-    &__pane
-    {
-      width: 100%;
-      min-height: 50vh;
-      padding-top: 2rem;
-    }
-  }
-
-  &_tabNav
-  {
-    display: inline-block;
-    list-style: none;
-    margin-right: 3rem;
-    cursor: pointer;
-
-    &__link
-    {
-      color: $color_gray_semi_dark;
-      font-family: "roboto-black";
-      font-size: 12px;
-      
-      &:hover
-      {
-        color: $color_blue;
-        text-decoration: none;
-        transition: color 500ms;
-      }
-    }
-
-    &__linkActive
-    {
-      padding-bottom: 20px;
-      color: $color_blue;
-      border-bottom: 2px solid $color_blue;
-    }
-
-    &:last-child
-    {
-      display: none;
-    }
-  }
-
-  &_info
-  {
-    display: flex;
-    justify-content: space-between;
-
-    @media screen and (max-width: 575px) {
-      flex-direction: column-reverse;
-    }
-  }
-
-  &_myAccount
-  {
-    &_order 
-    {
-      margin: 0;
-      padding: 0;
-      line-height: 2rem;
-      text-align: left;
-      margin-bottom: 2rem;
-      
-      &__list
-      {
-        list-style: none;
-
-        span:first-child
-        {
-          width: 170px;
-          display: inline-block;
-
-          @media screen and (max-width: 575px) {
-            width: 150px;
-          }
-        }
-      }
-    }
-  }
-
-  &_edit
-  {
-    &__label
-    {
-      min-width: 200px;
-      margin-bottom: 0;
-
-      @media screen and (max-width: 767px) {
-        margin-bottom: 1rem;
-      }
-    }
-
-    & [data-identity="input-dateOfBirth"] {
-      width: 100% ;
-    }
-
-    & [class *="react-date-picker__wrapper"] {
-      & button {
-        margin-top: 0;
-        width: 40px;
-      }
-    }
-
-    & [class*="--disabled"] {
-      background-color: $color_gray_low;
-    }
-
-    & > button
-    {
-      margin-top: 1rem;
-    }
-  }
-
-  &_changePassword
-  {
-    & > button
-    {
-      margin-top: 1rem;
-    }
-  }
-
-  &_loyalty
-  {
-    display: none;
-    visibility: hidden;
-    opacity: 0;
-  }
-
-  &_buttonLocation
-  {
-    display: block;
-    width: 100%;
-    border-radius: .25rem;
-    border: 1px solid $color_gray_primary;
-    color: $color_gray_text;
-    background-color: $color_white;
-    padding: 50px;
-  }
-
-  &_mapArea
-  {
-    width: 100%;
-    height: 200px;
-    position: relative;
-  }
-
-  &_mapPopup
-  {
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &_mapCloseIcon
-  {
-    cursor: pointer;
-  }
-
-  &_mapPopupContainer
-  {
-    position: relative;
-    width: 50vw;
-    background: $color_white;
-    border-radius: 10px;
-
-    @media screen and (max-width: 991px) {
-      margin: 0 1rem;
-      width: 100%;
-      height: auto;
-    }
-  }
-
-  &_mapPopupHeader
-  {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-  }
-
-  &_mapPopupHeaderTitle
-  {
-    flex: 1;
-    font-size: 16px;
-    color: $color_black;
-    text-align: center;
-  }
-
-  &_mapPopupClose
-  {
-    border: none;
-    background-color: transparent;
-    font-family: "roboto-black";
-    font-size: 16px;
-    color: $color_black;
-    margin: 0 !important;
-
-    &:focus,
-    &:active
-    {
-      outline: 0;
-      border: none;
-      box-shadow: none;
-    }
-  }
-
-  &_mapPopupNote
-  {
-    font-size: 14px;
-    background: $color_blue_light;
-    color: $color_black;
-    padding: 15px;
-    text-align: center;
-  }
-
-  &_mapPopupMaps
-  {
-    position: relative;
-    background-color: $color_white;
-    z-index: 1;
-    width: 100%;
-    height: 320px;
-
-    input
-    {
-      font-size: 14px;
-      width: calc(100% - 75px);
-      padding: 10px 15px;
-      border: 1px;
-      background: $color_white;
-      z-index: 2;
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      left: 16px;
-      border-radius: 4px;
-      box-shadow: none;
-      outline: 0;
-    }
-  }
-
-  &_mapPopupCenterButton
-  {
-    position: absolute;
-    right: 10px;
-    background: #fff;
-    padding: 7.5px;
-    top: 12px;
-    border: none;
-    border-radius: 4px;
-    margin: 0 !important;
-  }
-
-  &_mapPopupLabelAddress
-  {
-    font-size: 14px;
-    background: $color_white;
-    color: $color_black;
-    padding: 15px;
-  }
-}
-
-.membership
-{
-  &_status
-  {
-    background: $color_blue_light;
-    padding: 18px;
-    border-radius: 2px;
-  }
-
-  &_accordion
-  {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    margin-bottom: 10px;
-  }
-
-  &_accordionToggle
-  {
-    grid-column: 1;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-bottom: 10px;
-
-    & > p
-    {
-      font-family: "roboto-medium";
-      font-size: 18px;
-      margin: 0;
-    }
-  }
-
-  &_accordionIcon
-  {
-    margin-left: 10px;
-  }
-
-  &_totalPoints
-  {
-    grid-row: 1;
-    grid-column: 2;
-    align-self: center;
-    text-align: right;
-    font-size: 14px;
-    margin-bottom: 10px !important;
-  }
-
-  &_progress
-  {
-    border-radius: 6px; 
-    width: 100%;
-    height: 10px;
-
-    &::-webkit-progress-bar
-    {
-      border-radius: 6px;
-      background-color: $color_gray_semi_dark;
-    }
-
-    &::-webkit-progress-value {
-      background-color: $color_blue;
-      border-radius: 6px;
-    }
-  }
-
-  &_prompt
-  {
-    margin: 0;
-    color: $color_gray_dark;
-  }
-
-  &_linkContinue
-  {
-    background: $color_blue_light;
-    padding: 1rem;
-    margin-bottom: 30px;
-    border-radius: 3px;
-    font-size: 16px;
-
-    & > p
-    {
-      margin: 0;
-    }
-
-    & > a
-    {
-      color: $color_blue;
-
-      &:hover
-      {
-        text-decoration: none;
-      }
-    }
-  }
-
-  &_history
-  {
-    & > h1
-    {
-      font-family: "roboto-medium";
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-  }
-
-  &_historyItem
-  {
-    display: grid;
-    grid-template-columns: 70% auto;
-    border-bottom: 1px solid $color_gray_semi_dark;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-
-    p
-    {
-      margin: 0;
-    }
-  }
-
-  &_orderId
-  {
-    grid-row: 1;
-    grid-column: 1;
-    width: fit-content;
-    background: $color_blue_light;
-    padding: 5px 10px;
-    margin-bottom: 5px;
-    border-radius: 2px;
-
-    & > p
-    {
-      font-style: italic;
-
-      & > span
-      {
-        font-family: "roboto-medium"; 
-      }
-    }
-  }
-
-  &_transactionType
-  {
-    grid-row: 2;
-    grid-column: 1;
-    font-family: "roboto-medium";
-    font-size: 18px;
-  }
-
-  &_transactionDate
-  {
-    grid-row: 3;
-    grid-column: 1;
-    font-size: 14px;
-    color: $color_gray_dark;
-  }
-
-  &_point
-  {
-    grid-row: 2;
-    grid-column: 2;
-    align-self: center;
-    text-align: right;
-    font-size: 18px;
-  }
-
-  &_pagination
-  {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &_itemPerPage
-  {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &_itemPerPageLabel
-  {
-    & > p
-    {
-      margin-right: 10px;
-      margin-bottom: 0;
-    }
-  }
-
-  &_itemPerPageOptions
-  {
-    & > select
-    {
-      padding: 7.5px 10px;
-    }
-  }
-  &_info {
-    &_container {
-      background: rgba(251, 192, 45, 0.5);
-      padding: 10px 12px;
-      width: 100%;
-      display: flex;
-      margin-bottom: 12px;
-      border-radius: 3px;
-    }
-    &_icon {
-      svg {
-        width: 20px;
-      }
-    }
-    &_label {
-      margin: 0px 6px;
-      padding: 3px;
-    }
-    &_button {
-      border: none;
-      background: none;
-      color: rgb(0, 145, 254);
-      font-size: 14px;
-    }
-  }
-}
-
-@media screen and (max-width: 575px) {
-  .membership
-  {
-    &_pagination
-    {
-      display: block;
-      margin-top: 2rem;
-    }
-
-    &_itemPerPage
-    {
-      margin-bottom: 20px;
     }
   }
 }
