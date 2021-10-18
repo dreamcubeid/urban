@@ -354,9 +354,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const lngDict = locale(params.lng)
   const brand = await useBrand(req)
-  const cookies = parseCookies(req)
   const { hasOtp } = await useAuthMethod(req)
-  redirectIfAuthenticated(res, cookies, 'account')
 
   if (res) {
     const cookies = parseCookies(req)
