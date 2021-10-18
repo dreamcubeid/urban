@@ -49,6 +49,7 @@ import locale from "locales"
 import styles from "public/scss/pages/Account.module.scss"
 import stylesPopupConfirmationOrder from "public/scss/components/popupConfirmationOrder.module.scss"
 import stylesPopupCheckPaymentOrder from "public/scss/components/CheckPaymentOrder.module.scss"
+import stylesMap from 'public/scss/components/Map.module.scss'
 
 const ACTIVE_CURRENCY = "IDR"
 
@@ -133,18 +134,19 @@ const classesAccount = {
   OrderInfoSearchHereClassName: styles.orderInfo_searchHere,
 
   // Map
+  mapNoteClassName: stylesMap.mapNote,
+  mapSelectAreaClassName: stylesMap.mapSelectArea,
   mapAreaClassName: styles.mapArea,
-  mapSelectAreaClassName: styles.account_buttonLocation,
-  mapPopupClassName: styles.account_mapPopup,
-  mapPopupBackgroundClassName: styles.account_mapPopupContainer,
-  mapClassName: styles.account_mapPopupMaps,
-  mapHeaderWrapperClassName: styles.account_mapPopupHeader,
-  mapHeaderTitleClassName: styles.account_mapPopupHeaderTitle,
-  mapHeaderCloseButtonClassName: styles.account_mapPopupClose,
-  mapHeaderNoteClassName: styles.account_mapPopupNote,
-  mapLabelAddressClassName: styles.account_mapPopupLabelAddress,
-  mapCenterButtonClassName: styles.account_mapPopupCenterButton,
-  mapButtonFooterClassName: `btn ${styles.btn_primary} ${styles.btn_long} d-block mx-auto my-3`,
+  mapPopupClassName: stylesMap.mapPopup,
+  mapPopupBackgroundClassName: stylesMap.mapPopupBackground,
+  mapClassName: stylesMap.map,
+  mapHeaderWrapperClassName: stylesMap.mapHeaderWrapper,
+  mapHeaderTitleClassName: stylesMap.mapHeaderTitle,
+  mapHeaderCloseButtonClassName: stylesMap.mapHeaderCloseButton,
+  mapHeaderNoteClassName: stylesMap.mapHeaderNote,
+  mapLabelAddressClassName: stylesMap.mapLabelAddress,
+  mapCenterButtonClassName: stylesMap.mapCenterButton,
+  mapButtonFooterClassName: stylesMap.mapButtonFooter,
 
   // Shipment Tracking
   shippingTrackerButton: `btn ${styles.btn_primary}`,
