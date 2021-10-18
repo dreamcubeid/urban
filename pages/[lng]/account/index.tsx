@@ -6,14 +6,15 @@ import {
   useI18n
 } from '@sirclo/nexus'
 import { toast } from 'react-toastify'
-import {
-  X as XIcon,
-  AlertCircle,
-  CheckCircle,
-  Crosshair
-} from 'react-feather'
-
-import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'
+import { CheckCircle } from 'react-feather'
+import { FaMapMarkedAlt, FaMapMarkerAlt } from 'react-icons/fa'
+import { 
+  FiAlertCircle,
+  FiCrosshair,
+  FiX,
+  FiChevronRight, 
+  FiChevronLeft 
+} from 'react-icons/fi'
 import { 
   RiLogoutBoxLine, 
   RiNotification2Line,
@@ -83,17 +84,19 @@ const classesAccount = {
   // Order History
   orderHistoryContainerClassName: styles.orderHistory_container,
   tableClassName: styles.orderHistory_table,
-  orderedItemDetailNeedReviewClassName: styles.table_itemDetailNeedReview,
+  orderedItemDetailNeedReviewClassName: styles.orderHistory_orderedItemDetailNeedReview,
+  orderedItemDetailReviewedClassName: styles.orderHistory_orderedItemDetailReviewed,
   orderedItemDetailDeliveredClassName: styles.table_orderedItemDetailDelivered,
   orderItemClassName: styles.orderHistory_orderItem,
   orderHeaderClassName: styles.orderHistory_orderHeader,
   orderInnerHeaderClassName: styles.orderHistory_orderInnerHeader,
-  orderTitleClassName: styles.orderHistory_orderTitlte,
+  orderTitleClassName: styles.orderHistory_orderTitle,
   orderDateClassName: styles.orderHistory_orderDate,
   orderBodyClassName: styles.orderHistory_orderBody,
   orderControlClassName: styles.orderHistory_orderControl,
   invoiceButtonClassName: styles.orderHistory_invoiceButton,
-  orderedItemsContainer: styles.orderHistory_orderedItems,
+  orderedItemsContainer: styles.orderHistory_orderedItemsContainer,
+  orderedItemsClassName: styles.orderHistory_orderedItems,
   orderedItemsLabelClassName: styles.orderHistory_orderedItemsLabel,
   orderedItemClassName: styles.orderHistory_orderedItem,
   orderedItemImageClassName: styles.orderHistory_orderedItemImage,
@@ -105,26 +108,21 @@ const classesAccount = {
   buyerNoteClassName: styles.orderHistory_buyerNote,
   shippingContainerClassName: styles.orderHistory_shippingContainer,
   shippingDetailsClassName: styles.orderHistory_shippingDetails,
-  shippingDetailsLabelClassName: styles.orderHistory_shippingDetailsLabel,
-  shippingDetailsValueClassName: styles.orderHistory_shippingDetailsValue,
   shippingMethodContainerClassName: styles.orderHistory_shippingMethodContainer,
-  shippingMethodLabelClassName: styles.orderHistory_shippingMethodLabel,
-  shippingMethodValueClassName: styles.orderHistory_shippingMethodValue,
   paymentMethodContainerClassName: styles.orderHistory_paymentMethodContainer,
-  paymentMethodLabelClassName: styles.orderHistory_paymentMethodLabel,
   orderFooterClassName: styles.orderHistory_orderFooter,
   totalCostClassName: styles.orderHistory_totalCost,
   
   // Payment Status
-  paymentStatusCancelledClassName: styles.orderHistory_paymentStatus,
-  paymentStatusUnpaidClassName: styles.orderHistory_paymentStatus,
-  paymentStatusPaidClassName: styles.orderHistory_paymentStatus,
-  paymentStatusReadyToShipClassName: styles.orderHistory_paymentStatus,
-  paymentStatusShippedClassName: styles.orderHistory_paymentStatus,
-  paymentStatusDeliveredClassName: styles.orderHistory_paymentStatus,
-  paymentStatusNeedReviewClassName: styles.orderHistory_paymentStatus,
-  paymentStatusCompletedClassName: styles.orderHistory_paymentStatus,
-  paymentStatusReturnedClassName: styles.orderHistory_paymentStatus,
+  paymentStatusCancelledClassName: `${styles.orderHistory_paymentStatus} cancelled`,
+  paymentStatusUnpaidClassName: `${styles.orderHistory_paymentStatus} unpaid`,
+  paymentStatusPaidClassName: `${styles.orderHistory_paymentStatus} paid`,
+  paymentStatusReadyToShipClassName: `${styles.orderHistory_paymentStatus} readyToShip`,
+  paymentStatusShippedClassName: `${styles.orderHistory_paymentStatus} shipped`,
+  paymentStatusDeliveredClassName: `${styles.orderHistory_paymentStatus} delivered`,
+  paymentStatusNeedReviewClassName: `${styles.orderHistory_paymentStatus} needReview`,
+  paymentStatusCompletedClassName: `${styles.orderHistory_paymentStatus} completed`,
+  paymentStatusReturnedClassName: `${styles.orderHistory_paymentStatus} returned`,
 
   // Order History Info
   orderInfoContainerClassName: styles.orderInfo_container,
@@ -231,7 +229,8 @@ const classesAccount = {
 const orderHistoryPaginationClasses = {
   pagingClassName: styles.pagination,
   activeClassName: styles.pagination_active,
-  itemClassName: styles.pagination_item
+  itemClassName: styles.pagination_item,
+  linkClassName: styles.pagination_link
 }
 
 const AccountsPage: FC<any> = ({
@@ -304,14 +303,14 @@ const AccountsPage: FC<any> = ({
                 passwordHideIcon={<RiEyeLine />}
                 passwordFulfilledCriteriaIcon={<CheckCircle color="green" size={16} />}
                 passwordUnfulfilledCriteriaIcon={<CheckCircle color="gray" size={16} />}
-                mapIcon={'map'}
-                mapButtonCloseIcon={<XIcon />}
-                mapCenterIcon={<Crosshair />}
+                mapIcon={<FaMapMarkedAlt />}
+                mapButtonCloseIcon={<FiX />}
+                mapCenterIcon={<FiCrosshair />}
                 icons={{
                   accordionIcon: <RiArrowDownSLine />,
-                  closeIcon: <XIcon />,
-                  infoIcon: <AlertCircle />,
-                  iconTracker: <img src="/images/motorcycle.svg" alt="motorcycle" />,
+                  closeIcon: <FiX />,
+                  infoIcon: <FiAlertCircle />,
+                  iconTracker: <FaMapMarkerAlt />,
                   myAccount: <RiUser3Line />,
                   orderHistory: <RiShoppingBag2Line />,
                   membershipHistory: <RiUserStarLine />,
@@ -324,6 +323,15 @@ const AccountsPage: FC<any> = ({
                   line: <RiLineFill />,
                   telegram: <RiTelegramFill />
                 }}
+                loadingComponent={
+                  <p>{i18n.t("global.loading")}</p>
+                }
+                errorComponent={
+                  <p>{i18n.t("global.error")}</p>
+                }
+                emptyStateComponent={
+                  <p>{i18n.t("global.empty")}</p>
+                }
               />
             </div>
           </div>
