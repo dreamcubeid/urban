@@ -34,6 +34,8 @@ import {
 /* Library Template */
 import { parseCookies } from 'lib/parseCookies'
 import { useBrand } from 'lib/useBrand'
+import { useAuthMethod } from 'lib/client'
+import redirectIfAuthenticated from 'lib/redirectIfAuthenticated'
 
 /* Components */
 import Layout from 'components/Layout/Layout'
@@ -236,6 +238,7 @@ const orderHistoryPaginationClasses = {
 const AccountsPage: FC<any> = ({
   lng,
   lngDict,
+  hasOtp,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
@@ -297,7 +300,7 @@ const AccountsPage: FC<any> = ({
                 onErrorMsg={onError}
                 onSuccessMsg={onSuccess}
                 onSuccessChPass={onSuccessChPass}
-                showSettingNotification={true}
+                showSettingNotification={hasOtp}
                 paymentHrefPrefix="payment_notif"
                 passwordViewIcon={<RiEyeCloseLine />}
                 passwordHideIcon={<RiEyeLine />}
@@ -346,8 +349,12 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   params
 }) => {
+
   const lngDict = locale(params.lng)
   const brand = await useBrand(req)
+  const cookies = parseCookies(req)
+  const { hasOtp } = await useAuthMethod(req)
+  redirectIfAuthenticated(res, cookies, 'account')
 
   if (res) {
     const cookies = parseCookies(req)
@@ -365,6 +372,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       lng: params.lng,
       lngDict,
+      hasOtp,
       brand: brand || ""
     }
   }
