@@ -35,7 +35,6 @@ import {
 import { parseCookies } from 'lib/parseCookies'
 import { useBrand } from 'lib/useBrand'
 import { useAuthMethod } from 'lib/client'
-import redirectIfAuthenticated from 'lib/redirectIfAuthenticated'
 
 /* Components */
 import Layout from 'components/Layout/Layout'
