@@ -148,7 +148,7 @@ const classesAccount = {
   mapButtonFooterClassName: stylesMap.mapButtonFooter,
 
   // Shipment Tracking
-  shippingTrackerButton: `btn ${styles.btn_primary}`,
+  shippingTrackerButton: styles.orderHistory_shippingTrackerButton,
   shipmentTrackingClassName: `${styles.track_shipmentTracking} ${styles.account_shipmentTracking}`,
   shipmentHeaderClassName: `${styles.track_shipmentHeader} ${styles.account_shipmentContainer}`,
   shipmentBodyClassName: `${styles.track_shipmentBody} ${styles.account_shipmentContainer} d-flex justify-content-center`,
