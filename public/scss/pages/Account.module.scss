@@ -663,6 +663,30 @@
           height: auto;
         }
       }
+
+      [class*="mapSelectArea"]
+      {
+        @include flex(row, center, center);
+        @include fixedHeight(60px);
+        margin-top: 4px;
+        background-color: $color_white;
+        color: $color_placeholder;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        &:hover,
+        &:focus,
+        &:active
+        {
+          background-color: $color_white;
+          color: $color_placeholder;
+        }
+
+        &:hover
+        {
+          color: $color_text;
+        }
+      }
     }
 
     &Label
