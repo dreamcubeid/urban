@@ -1,8 +1,788 @@
-@import "../base/colors.scss";
-@import "../components/Button.module.scss";
-@import "../components/Form.module.scss";
-@import "./Account.module.scss";
+@import '../utils/variables';
+@import '../components/Pagination.module.scss';
 
+.orderReview
+{
+  @include debug();
+
+  &_titleContainer,
+  &_title,
+  &_subTitle
+  {
+    display: none;
+  }
+
+  &_orderInfoContainer
+  {
+    position: relative;
+    margin: 24px 0;
+    padding: 16px;
+    background-color: $color_elements_line;
+    color: $color_text;
+
+    & > div
+    {
+      & + div
+      {
+        margin-top: 4px;
+      }
+    }
+  }
+
+  &_orderInfoLine
+  {
+    @include flex(row, center, flex-start);
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    & > p
+    {
+      @include SmallSemiBold;
+
+      &:not(:first-child):not(:last-child)
+      {
+        display: none;
+      }
+    }
+
+    &:last-child,
+    &:last-of-type
+    {
+      & > p
+      {
+        @include SmallSmall;
+        color: $color_text_secondary;
+
+        &:first-child
+        {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &_buyerInfoContainer
+  {
+    position: relative;
+    margin: 0 0 24px;
+  }
+
+  &_buyerNameContainer,
+  &_buyerHideNameContainer
+  {
+    position: relative;
+  }
+
+  &_buyerNameContainer
+  {
+    @include flex(column, stretch, center);
+    @include fixedWidth(100%);
+    margin: 0 0 16px;
+    padding: 10px 16px;
+
+    border-radius: 2px;
+    border: solid 1px $color_elements_placeholder;
+    background-color: $color_white;
+  }
+
+  &_buyerNameLabel
+  {
+    @include flex(row, center, flex-start);
+    @include SmallSmall;
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    color: $color_text_secondary;
+  }
+
+  &_buyerName
+  {
+    @include transition();
+    @include flex(row, center, flex-start);
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    &,
+    &:hover,
+    &:focus,
+    &:active
+    {
+      outline: none;
+      background-color: transparent;
+      box-shadow: 0 0 0 transparent;
+      border: none;
+    }
+  }
+
+  &_buyerHideNameContainer
+  {
+    @include flex(row, center, flex-start);
+  }
+
+  &_buyerHideNameLabel
+  {
+    @include flex(row, center, flex-start);
+    @include RegulerReguler;
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 12px;
+    flex-grow: 1;
+    order: 2;
+  }
+
+  &_buyerHideNameSwitch
+  {
+    @include debug();
+    order: 1;
+  }
+
+  &_reviewTabContainer
+  {
+    @include flex(row, center, space-between);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 24px 0;
+    padding: 24px 0 0;
+
+    border-top: solid 1px $color_elements_line_darker;
+
+    & ~ div:not([class])
+    {
+      @include debug();
+      @include fixedWidth(100%);
+      position: relative;
+      margin: 0 auto 24px;
+      padding: 0;
+      border: solid 1px $color_elements_line;
+      background-color: $color_white;
+    }
+  }
+
+  &_activeTab
+  {
+    border-bottom: solid 2px $color_text !important;
+  }
+
+  &_needsReviewTabContainer,
+  &_reviewedTabContainer
+  {
+    @include transition();
+    @include flex(row, center, center);
+    position: relative;
+    margin: 0;
+    padding: 0 0 12px;
+    flex-grow: 1;
+    cursor: pointer;
+    border-bottom: solid 1px $color_elements_line;
+  }
+
+  &_needsReviewTabLabel,
+  &_reviewedTabLabel
+  {
+    @include flex(row, center, center);
+    @include fixedWidth(100%);
+    @include RegulerSemiBold;
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  &_productInfoContainer
+  {
+    @include flex(row, center, flex-start);
+    position: relative;
+    margin: 0;
+    padding: 16px;
+  }
+
+  &_productImage
+  {
+    @include fixedSize(60px);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+    object-fit: contain;
+  }
+
+  &_productDetailContainer,
+  &_productName,
+  &_yourRatingText
+  {
+    @include flex(row, center, flex-start);
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &_productDetailContainer
+  {
+    @include flex(column, stretch, center);
+    padding: 0 12px;
+    flex-grow: 1;
+  }
+
+  &_productName
+  {
+    @include RegulerReguler;
+    color: $color_text;
+  }
+
+  &_yourRatingText
+  {
+    @include SmallSmall;
+    color: $color_text_secondary;
+  }
+
+  &_productReviewButtonContainer
+  {
+    @include flex(row, center, center);
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &_writeReviewButton,
+  &_openReviewButton
+  {
+    @include transition();
+    @include flex(row, center, center);
+    @include fixedSize(36px);
+    position: relative;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    justify-self: flex-end;
+
+    font-size: 0;
+    text-align: center;
+    white-space: nowrap;
+    word-break: keep-all;
+    color: transparent;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 12px auto;
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.99999 5.17205L11.95 0.222046L13.364 1.63605L6.99999 8.00005L0.635986 1.63605L2.04999 0.222046L6.99999 5.17205Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+
+    &,
+    &:hover,
+    &:focus,
+    &:active
+    {
+      outline: none;
+      border: none;
+      background-color: $color_elements_line;
+      box-shadow: 0 0 0 transparent;
+    }
+
+    &:hover
+    {
+      background-color: darken($color_elements_line, 5%);
+    }
+  }
+
+  &_formContainer,
+  &_reviewCardContainer
+  {
+    position: relative;
+    margin: 0 16px;
+    padding: 16px 0;
+
+    border-top: solid 1px $color_elements_line;
+
+    & > button
+    {
+      @include transition();
+      @include buttonVariant($color_white, $color_black, $color_black);
+      @include flex(row, center, center);
+      @include fixedWidth(100%);
+      @include fixedHeight(52px);
+      @include typographyBuilder(400, 16, 24);
+      border-radius: 2px;
+      margin: 16px auto 0;
+      padding: 0 15px;
+      cursor: pointer;
+  
+      &,
+      &:hover,
+      &:focus,
+      &:active
+      {
+        outline: none;
+        box-shadow: 0 0 0 transparent;
+      }
+    }
+  }
+
+  &_formGroup
+  {
+    position: relative;
+    margin: 0 0 16px;
+    padding: 0;
+
+    textarea
+    {
+      @include transition();
+      @include flex(row, center, flex-start);
+      @include fixedWidth(100%);
+      position: relative;
+      margin: 0;
+      padding: 12px 16px;
+      border-radius: 2px;
+  
+      &,
+      &:hover,
+      &:focus,
+      &:active
+      {
+        outline: none;
+        box-shadow: 0 0 0 transparent;
+        background-color: $color_white;
+        border: solid 1px $color_placeholder;
+      }
+
+      & + label
+      {
+        @include flex(row, center, flex-end);
+        @include SmallSmall;
+        position: relative;
+        margin: 4px 0 0;
+        padding: 0;
+        color: $color_text_secondary;
+      }
+    }
+  }
+
+  &_formLabel,
+  &_tileRating,
+  &_titleDescription,
+  &_titleImage
+  {
+    @include flex(row, center, flex-start);
+    @include SmallSmall;
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0 0 4px;
+    padding: 0;
+
+    color: $color_text_secondary;
+  }
+
+  &_star
+  {
+    @include transition();
+    @include flex(row, center, center);
+    @include fixedSize(36px);
+    position: relative;
+    margin: 0 6px;
+    padding: 0;
+    cursor: pointer;
+
+    &,
+    &:hover,
+    &:focus,
+    &:active
+    {
+      outline: none;
+      background-color: transparent;
+      box-shadow: 0 0 0 transparent;
+      border: none;
+    }
+
+    & > span
+    {
+      @include transition;
+      @include flex(row, center, center);
+      @include fixedSize(100%);
+      position: relative;
+      margin: 0;
+      padding: 0;
+      color: $color_placeholder;
+
+      & > svg
+      {
+        @include transition();
+        @include fixedSize(28px);
+      }
+
+      &[class="filled"]
+      {
+        color: $color_orange;
+      }
+
+      &[class="unfilled"]
+      {
+        &:hover
+        {
+          color: $color_orange;
+        }
+      }
+    }
+  }
+
+  &_starContainer
+  {
+    @include debug();
+    @include flex(row, center, center);
+    position: relative;
+    margin: 0;
+    padding: 12px 16px;
+    border-radius: 2px;
+    border: solid 1px $color_placeholder;
+    background-color: $color_white;
+
+    & + label
+    {
+      display: none;
+    }
+  }
+
+  &_container
+  {
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &_imagesContainer,
+  &_imageContent
+  {
+    @include flex(row, flex-start, flex-start, true);
+    position: relative;
+    margin: 0 -6px;
+    padding: 0;
+  }
+
+  &_mediaContainer,
+  &_imageList
+  {
+    @include transition();
+    @include flex(row, center, center);
+    @include fixedSize(72px);
+    position: relative;
+    margin: 0 6px 12px;
+    padding: 0;
+
+    background-color: $color_white;
+    border: solid 1px $color_placeholder;
+    border-radius: 2px;
+
+    &:hover,
+    &:focus
+    {
+      border-color: darken($color_placeholder, 10%);
+    }
+
+    img,
+    video
+    {
+      @include fixedSize(100%);
+      @include flex(row, center, center);
+      position: relative;
+      margin: 0;
+      padding: 0;
+      object-fit: contain;
+      border-radius: 2px;
+    }
+  }
+
+  &_img
+  {
+    @include fixedSize(100%);
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    object-fit: contain;
+    border-radius: 2px;
+  }
+
+  &_imgUploadContainer
+  {
+    position: relative;
+  }
+
+  &_uploadIcon
+  {
+    @include flex(row, center, center);
+    @include fixedSize(100%);
+    @include absolute(0, 0, 0, 0);
+    z-index: 2;
+    pointer-events: none;
+
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center center;
+    background-image: url("data:image/svg+xml,%3Csvg stroke='%23CFD4D9' fill='none' stroke-width='2' viewBox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='16'%3E%3C/line%3E%3Cline x1='8' y1='12' x2='16' y2='12'%3E%3C/line%3E%3C/svg%3E");
+  }
+
+  &_imgUpload
+  {
+    &:not([type="file"])
+    {
+      @include debug();
+      @include flex(row, center, center);
+      @include fixedSize(72px);
+      position: relative;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+  
+      background-color: $color_white;
+      border: solid 1px $color_placeholder;
+      border-radius: 2px;
+      font-size: 0;
+    }
+
+    input[type="file"]
+    {
+      @include fixedSize(100%);
+      cursor: pointer;
+      opacity: 0;
+    }
+  }
+
+  &_mediaRemover
+  {
+    @include transition();
+    @include flex(row, center, center);
+    @include position(absolute, 0, 0);
+    @include fixedSize(36px);
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    font-size: 0;
+    z-index: 2;
+    color: $color_white;
+
+    &::after,
+    &::before
+    {
+      content: "";
+      @include transition();
+      @include flex(row, center, center);
+      @include fixedSize(20px);
+      @include absolute(4px, 4px);
+      background-color: $color_red_other;
+      border-radius: 100%;
+    }
+
+    &::after
+    {
+      background-color: transparent;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 70% auto;
+      background-image: url("data:image/svg+xml,%3Csvg stroke='white' fill='white' stroke-width='0' viewBox='0 0 24 24' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Cpath fill='none' d='M0 0h24v24H0z'%3E%3C/path%3E%3Cpath d='M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    &:hover
+    {
+      &::before
+      {
+        background-color: darken($color_red_other, 5%);
+      }
+    }
+  }
+
+  &_tileRating
+  {
+    & + div
+    {
+      @include flex(column, stretch, center);
+      @include fixedWidth(100%);
+      position: relative;
+      margin: 0 0 24px;
+    }
+  }
+
+  &_ratingContent
+  {
+    @include flex(row, center, center);
+
+    & > div
+    {
+      @include flex(row, center, center);
+      @include fontSize(26);
+    }
+  }
+
+  &_ratingDescription
+  {
+    @include flex(row, center, center);
+    @include SmallSmall;
+    margin: 8px auto 0;
+    color: $color_text_secondary;
+  }
+
+  &_descriptionContent
+  {
+    @include flex(row, center, flex-start);
+    @include fixedWidth(100%);
+    @include RegulerReguler;
+    position: relative;
+    margin: 0 0 24px;
+    padding: 0;
+  }
+
+  &_imageContent
+  {
+    &:empty
+    {
+      display: none;
+    }
+  }
+
+  &_imageList
+  {
+  }
+
+  &_paging
+  {
+  }
+
+  &_active
+  {
+  }
+
+  &_item
+  {
+  }
+
+  &_link
+  {
+  }
+
+  &_reviewPopupContent
+  {
+  }
+
+  &_reviewPopupContainer
+  {
+  }
+
+  &_reviewPopupImagePopup
+  {
+  }
+
+  &_reviewPopupLeftButton
+  {
+  }
+
+  &_reviewPopupRightButton
+  {
+  }
+
+  &_reviewPopupButtonClose
+  {
+  }
+
+  &_reviewPopupPreview
+  {
+  }
+
+  &_reviewPopupImagePreview
+  {
+  }
+
+  &_popupConfirmationSubmitContainer
+  {
+    @include flex(row, center, center);
+    @include fixed(0, 0, 0, 0);
+    z-index: 1070;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  &_popupConfirmationSubmitContent
+  {
+    position: relative;
+    margin: 0;
+    padding: 24px 16px;
+    background-color: $color_white;
+    max-width: calc(100vw - (18px * 2));
+    max-height: calc(100vh - (18px * 2));
+  }
+
+  &_popupConfirmationSubmitTitle,
+  &_popupConfirmationSubmitDescription,
+  &_popupConfirmationSubmitWrapButton
+  {
+    @include flex(row, center, center);
+    @include fixedWidth(100%);
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &_popupConfirmationSubmitTitle
+  {
+    @include LargeSemiBold;
+  }
+
+  &_popupConfirmationSubmitDescription
+  {
+    @include SmallSmall;
+    margin: 24px 0;
+    padding: 10px;
+    background-color: $color_elements_line;
+    border: none;
+  }
+
+  &_popupConfirmationSubmitWrapButton
+  {
+    @include flex(column, center, center);
+  }
+
+  &_popupConfirmationSubmitButtonConfirm,
+  &_popupConfirmationSubmitButtonNo
+  {
+    @include transition();
+    @include flex(row, center, center);
+    @include fixedWidth(100%);
+    @include RegulerReguler;
+    margin: 0;
+    padding: 14px 16px;
+    min-height: 52px;
+
+    & + button
+    {
+      margin-top: 8px;
+    }
+  }
+
+  &_popupConfirmationSubmitButtonConfirm
+  {
+    @include buttonVariant($color_black, $color_white, $color_white);
+    order: 2;
+
+    &:hover,
+    &:focus,
+    &:active
+    {
+      border-color: $color_white;
+      background-color: $color_white;
+      color: $color_black;
+    }
+
+    &:hover
+    {
+      text-decoration: underline;
+    }
+  }
+
+  &_popupConfirmationSubmitButtonNo
+  {
+    @include buttonVariant($color_white, $color_black, $color_black);
+    order: 1;
+  }
+}
+
+/*
 .orderReview
 {
   margin: 4rem 0;
@@ -461,3 +1241,4 @@
     }
   }
 }
+*/
