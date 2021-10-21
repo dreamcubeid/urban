@@ -379,7 +379,6 @@
 
 .itemPerPage
 {
-  @include debug();
   @include flex(column, stretch, center);
   @include fixedSize(25%);
   align-self: flex-end;
@@ -662,6 +661,30 @@
           padding: 0;
           border: none !important;
           height: auto;
+        }
+      }
+
+      [class*="mapSelectArea"]
+      {
+        @include flex(row, center, center);
+        @include fixedHeight(60px);
+        margin-top: 4px;
+        background-color: $color_white;
+        color: $color_placeholder;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        &:hover,
+        &:focus,
+        &:active
+        {
+          background-color: $color_white;
+          color: $color_placeholder;
+        }
+
+        &:hover
+        {
+          color: $color_text;
         }
       }
     }
@@ -1021,18 +1044,19 @@
     padding: 0 16px;
   }
 
-  &_invoiceButton
+  &_invoiceButton,
+  &_shippingTrackerButton
   {
     @include transition();
     @include flex(row, center, center);
     @include buttonVariant($color_text, $color_white, $color_white);
     @include typographyBuilder(400, 12, 16);
-    @include fixedWidth(100%);
     position: relative;
     margin: 0 auto;
     padding: 10px 16px;
     cursor: pointer;
     text-align: center;
+    flex-grow: 1;
 
     &::before
     {
@@ -1066,6 +1090,14 @@
       background-color: $color_white;
       border-color: $color_white;
       color: $color_text;
+    }
+  }
+
+  &_shippingTrackerButton
+  {
+    &::before
+    {
+      display: none;
     }
   }
 

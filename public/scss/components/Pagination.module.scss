@@ -50,3 +50,61 @@
         }
     }
 }
+
+.itemPerPage
+{
+  @include flex(column, stretch, center);
+  @include fixedSize(25%);
+  align-self: flex-end;
+  position: relative;
+  margin: 4px 0 16px;
+  padding: 8px 12px;
+  border-radius: 2px;
+  border: solid 1px $color_elements_line_darker;
+  background-color: $color_white;
+
+  &Label,
+  &Options
+  {
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &Label
+  {
+    p
+    {
+      @include flex(row, center, flex-start);
+      @include SmallSmall;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      color: $color_text_secondary;
+    }
+  }
+
+  &Options
+  {
+    select
+    {
+      @include RegulerReguler;
+      @include fixedWidth(100%);
+      display: block;
+      position: relative;
+      padding: 0;
+      margin: 0;
+      background-color: transparent;
+
+      &,
+      &:hover,
+      &:focus,
+      &:active
+      {
+        outline: none;
+        box-shadow: 0 0 0 transparent;
+        border: none;
+      }
+    }
+  }
+}
