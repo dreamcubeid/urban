@@ -98,20 +98,7 @@ const classesOrderReview = {
   itemPerPageClassName: styles.itemPerPage,
   itemPerPageOptionsClassName: styles.itemPerPageOptions,
   itemPerPageOptionClassName: styles.itemPerPageOption,
-  itemPerPageActiveClassName: styles.itemPerPageActive,
-
-  /*
-  openReviewButtonClassName: `btn ${styles.btn_outerBlack}`,
-  reviewCardContainerClassName: styles.orderReview_reviewCard,
-  tileRatingClassName: styles.orderReview_reviewCardtitleRating,
-  ratingContentClassName: styles.orderReview_ratingContent,
-  ratingDescriptionClassName: styles.orderReview_ratingDesc,
-  titleDescriptionClassName: styles.orderReview_titleDesc,
-  descriptionContentClassName: styles.orderReview_descContent,
-  titleImageClassName: styles.orderReview_titleImages,
-  imageContentClassName: styles.orderReview_imageContent,
-  imageListClassName: styles.orderReview_imageList
-  */
+  itemPerPageActiveClassName: styles.itemPerPageActive
 }
 
 const paginationClasses = {
@@ -162,7 +149,7 @@ const ReviewPage: FC<any> = ({
               <OrderReview
                 classes={newClassesOrderReview}
                 orderID={id as string}
-                itemPerPageOptions={[1, 5, 10, 15]}
+                itemPerPageOptions={[5, 10, 15]}
                 onSuccessMsg={(msg: string) => toast.success(msg)}
                 onErrorMsg={(msg: string) => toast.error(msg)}
                 arrowIconDown={<FiChevronDown />}
