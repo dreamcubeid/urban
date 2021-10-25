@@ -30,3 +30,12 @@
     height: 100vh;
   }
 }
+
+
+@media (max-width: #{$breakpoint_min_sm}) 
+{
+  .container
+  {
+    margin-top: 70px;
+  }
+}
