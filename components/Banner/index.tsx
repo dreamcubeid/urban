@@ -23,7 +23,7 @@ const placeholder = {
   placeholderImage: styleBanner.bannerCarousel_placeholder,
 }
 
-const BannerComponent: FC<any> = ({ i18n, dataBanners }) => {
+const BannerComponent: FC<any> = ({ dataBanners }) => {
   const size = useWindowSize();
   const [isReady, setIsReady] = useState<boolean>(false)
 
