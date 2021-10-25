@@ -48,12 +48,6 @@ const BannerComponent: FC<any> = ({ i18n, dataBanners }) => {
           <Placeholder classes={placeholder} withImage />
         }
       />
-      <a href="#featuredProduct">
-        <div className={styleBanner.seeMore}>
-          <div className={styleBanner.chevronDownCircle}></div>
-          {i18n.t("home.showMore")}
-        </div>
-      </a>
     </div>
   )
 }
