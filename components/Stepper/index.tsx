@@ -54,7 +54,6 @@ const stepper: FC<IProps> = ({
                     <span className="progress-circle-bar"></span>
                   </span>
                 </div>
-
                 <p className={styles.stepsNumberMobile}>
                   {stepsNumber[page]}
                 </p>
@@ -63,15 +62,15 @@ const stepper: FC<IProps> = ({
             :
             <>
               <div className={`${styles.stepItem} ${getActive(page, "place_order")}`}>
-                <div className={styles.stepNumber}>{stepsNumber[page]}</div>
+                <div className={styles.stepNumber}>{stepsNumber["place_order"]}</div>
                 <p>{steps["place_order"]}</p>
               </div>
               <div className={`${styles.stepItem} ${getActive(page, "shipping_method")}`}>
-                <div className={styles.stepNumber}>{stepsNumber[page]}</div>
+                <div className={styles.stepNumber}>{stepsNumber["shipping_method"]}</div>
                 <p>{steps["shipping_method"]}</p>
               </div>
               <div className={`${styles.stepItem} ${getActive(page, "payment_method")}`}>
-                <div className={styles.stepNumber}>{stepsNumber[page]}</div>
+                <div className={styles.stepNumber}>{stepsNumber["payment_method"]}</div>
                 <p>{steps["payment_method"]}</p>
               </div>
             </>

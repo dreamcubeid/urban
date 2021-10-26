@@ -23,7 +23,7 @@ const placeholder = {
   placeholderImage: styleBanner.bannerCarousel_placeholder,
 }
 
-const BannerComponent: FC<any> = ({ i18n, dataBanners }) => {
+const BannerComponent: FC<any> = ({ dataBanners }) => {
   const size = useWindowSize();
   const [isReady, setIsReady] = useState<boolean>(false)
 
@@ -48,12 +48,6 @@ const BannerComponent: FC<any> = ({ i18n, dataBanners }) => {
           <Placeholder classes={placeholder} withImage />
         }
       />
-      <a href="#featuredProduct">
-        <div className={styleBanner.seeMore}>
-          <div className={styleBanner.chevronDownCircle}></div>
-          {i18n.t("home.showMore")}
-        </div>
-      </a>
     </div>
   )
 }

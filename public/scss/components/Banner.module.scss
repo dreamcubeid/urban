@@ -16,12 +16,12 @@
   &_link {
     display: block;
     width: 100%;
-    height: 100vh;
+    height: auto;
   }
 
   &_image {
     width: 100%;
-    height: 100vh;
+    height: auto;
     object-fit: cover;
   }
 
@@ -32,36 +32,10 @@
 }
 
 
-
-.seeMore
+@media (max-width: #{$breakpoint_min_sm}) 
 {
-  @include position(absolute, auto, 0, 0, 0);
-  @include flex(column, center, flex-start);
-  padding-top: 30px;
-  content: "";
-  width: 100%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-  opacity: 0.5;
-  z-index: 2;
-  height: 128px;
-  cursor: pointer;
-  color: $color_white;
-  
-  &:hover
+  .container
   {
-    opacity: .7;
+    margin-top: 70px;
   }
-
-  p
-  {
-    @include typography_builder(400, 16, 24);
-  }
-}
-
-.chevronDownCircle
-{
-  width: 36px;
-  height: 36px;
-  background-image: url("data:image/svg+xml,%3Csvg width='37' height='36' viewBox='0 0 37 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='18.5' cy='18' r='17.5' stroke='white'/%3E%3Cpath d='M18.5002 19.172L23.4502 14.222L24.8642 15.636L18.5002 22L12.1362 15.636L13.5502 14.222L18.5002 19.172Z' fill='white'/%3E%3C/svg%3E%0A");
-  margin-bottom: 8px;
 }
