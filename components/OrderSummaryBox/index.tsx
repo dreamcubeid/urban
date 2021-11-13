@@ -155,11 +155,11 @@ const OrderSummaryBox: FC<iProps> = ({
             <h2 className={stylesCartDetails.title}>
               {i18n.t("cart.title")}
             </h2>
-            <Link href="lng/cart" as={`${lng}/cart`}>
+          <Link href="/lng/cart" as={`/${lng}/cart`}>
               <p className={stylesCartDetails.changeCart}>
                 {i18n.t("orderSummary.changeCart")}
               </p>
-            </Link>
+          </Link>
           </div>
           <CartDetails
             currency="IDR"
