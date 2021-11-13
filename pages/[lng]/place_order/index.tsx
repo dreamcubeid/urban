@@ -69,7 +69,7 @@ const mapClasses = {
 const customStyles = {
   control: () => ({
     display: 'flex',
-    height: '60px',
+    height: '50px',
     padding: '10px auto auto 8px',
     border: "1px solid #CFD4D9",
     borderRadius: "2px"
@@ -80,10 +80,20 @@ const customStyles = {
   }),
   singleValue: () => ({
     paddingLeft: '7px',
-    paddingTop: '2px'
+    paddingTop: '12px'
   }),
   input: () => ({
-    paddingLeft: '7px'
+    paddingLeft: '7px',
+    paddingTop: '12px'
+  }),
+  placeholder: () => ({
+    color: 'hsl(0,0%,50%)',
+    marginTop: '7px',
+    marginLeft: '6px',
+    marginRight: '2px',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)'
   }),
   menu: () => ({
     position: 'absolute',
@@ -94,6 +104,9 @@ const customStyles = {
     marginTop: "4px",
     borderRadius: "2px"
   }),
+  indicatorContainer: () => ({
+    marginTop: '-5px'
+  })
 }
 
 const placeholderClasses = {
