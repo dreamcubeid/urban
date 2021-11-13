@@ -1,5 +1,5 @@
 /* library package */
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { InstagramFeed } from '@sirclo/nexus'
 import Carousel from '@brainhubeu/react-carousel'
 
@@ -7,8 +7,10 @@ import Carousel from '@brainhubeu/react-carousel'
 import useWindowSize from 'lib/useWindowSize'
 
 /* component */
-import styles from 'public/scss/components/InstaFeed.module.scss'
 import Placeholder from 'components/Placeholder'
+
+/* styles */
+import styles from 'public/scss/components/InstaFeed.module.scss'
 
 const classesInstagramFeed = {
   containerClassName: styles.instagramFeed,
@@ -37,13 +39,14 @@ const Instafeed: FC<InstafeedType> = ({
   withFollowButton = false,
   followButtonText = i18n.t("instagram.cta")
 }) => {
-  const size: any = useWindowSize()
 
+  const size: any = useWindowSize()
+  const [totalPost, setTotalPost] = useState(null)
   const handleFollowButton = () => window.open(brand?.socmedSetting?.socmedLink?.instagram);
 
   return (
     <>
-      {title &&
+      {title && totalPost &&
         <div className={styles.instagramFeed_titleContainer}>
           <h2 className={styles.instagramFeed_title}>
             @{title}
@@ -62,6 +65,7 @@ const Instafeed: FC<InstafeedType> = ({
         postLimit={6}
         classes={classesInstagramFeed}
         Carousel={size.width <= 765 && Carousel}
+        getReturnedMediaCount={(mediaCount: number) => setTotalPost(mediaCount)}
         loadingComponent={
           <div className={styles.instagramFeed_placeholderWrapper}>
             <Placeholder

@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { Testimonials } from '@sirclo/nexus'
+import { Testimonials, isTestimonialAllowed } from '@sirclo/nexus'
 import Carousel from '@brainhubeu/react-carousel'
 import Placeholder from 'components/Placeholder'
 
@@ -21,6 +21,8 @@ const classesPlaceholderReview = {
 }
 
 const TestimonialSlider: FC<any> = () => {
+
+  const testimonialAllowed = isTestimonialAllowed()
   const [pageInfo, setPageInfo] = useState({
     totalItems: null,
   })
@@ -30,6 +32,7 @@ const TestimonialSlider: FC<any> = () => {
   return (
     <div className={style.container}>
       {(pageInfo.totalItems === null || pageInfo.totalItems > 0) &&
+        testimonialAllowed &&
         <Testimonials
           Carousel={Carousel}
           classes={classesTestimonials}
