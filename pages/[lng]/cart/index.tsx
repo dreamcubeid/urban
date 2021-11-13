@@ -153,13 +153,16 @@ const Cart: FC<any> = ({
                 }
               />
             </div>
-            <div className={styles.orderSummaryContainer}>
-              <OrderSummaryBox
-                lng={lng}
-                i18n={i18n}
-                page="cart"
-              />
-            </div>
+            {console.log(SKUs?.length)}
+            {SKUs?.length > 0 &&
+              <div className={styles.orderSummaryContainer}>
+                <OrderSummaryBox
+                  lng={lng}
+                  i18n={i18n}
+                  page="cart"
+                />
+              </div>
+            }
           </div>
         </section>
       </LazyLoadComponent>
