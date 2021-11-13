@@ -75,7 +75,7 @@ const ArticleDetail: FC<any> = ({
                     />
                   }
                   errorComponent={
-                    <p>error</p>
+                    <p>{i18n.t("global.error")}</p>
                   }
                 />
               </div>
