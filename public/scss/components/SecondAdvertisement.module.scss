@@ -18,11 +18,17 @@
     {
         width: 100% !important;
 
-        img, iframe
+        img
         {
             cursor: pointer;
             width: 100% !important;
-            height: 355px;
+            height: auto;
+        }
+        
+        iframe
+        {
+            width: 100% !important;
+            height: 335px;
         }
     }
 

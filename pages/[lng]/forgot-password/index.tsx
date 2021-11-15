@@ -51,7 +51,8 @@ const ForgotPassword: FC<any> = ({
           <p>{i18n.t("resetPassword.enterEmailBody")}</p>
           <ResetPassword
             classes={classesResetPassword}
-            onErrorMsg={(msg) => toast.error(msg)}
+            onErrorMsg={(msg: string) => toast.error(msg)}
+            onSuccessMsg={(msg: string) => toast.success(msg)}
             loadingComponent={<Loader color="text-light" />}
           />
         </div>

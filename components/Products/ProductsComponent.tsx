@@ -21,6 +21,7 @@ const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComp
 /* styles */
 import styles from 'public/scss/components/ProductsComponent.module.scss'
 import stylesSort from 'public/scss/components/ProductSort.module.scss'
+import router from 'next/router'
 
 export const placeholder = {
   placeholderImage: styles.products_placeholder,
@@ -204,9 +205,11 @@ const ProductsComponent: FC<iProps> = ({
                   {" "}{pageInfo.totalItems}{" "}
                   {i18n.t("product.result")}
                 </p>
+              {Object.keys(router.query).length > 1 &&
                 <button className={`${styles.productsComponent_reset}`} onClick={resetFilter}>
                   {i18n.t("product.reset")}
                 </button>
+              }
               </div>
             </>
           }

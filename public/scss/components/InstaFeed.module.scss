@@ -114,7 +114,7 @@
 
     &_titleContainer
     {
-      @include flex(column, flex-start, center);
+      @include flex(row, center, space-between);
     }
 
     &_title

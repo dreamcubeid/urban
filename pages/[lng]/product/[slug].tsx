@@ -48,17 +48,20 @@ const Product: FC<any> = ({
         />
       )}
 
-      <LazyLoadComponent>
-        <Breadcrumb
-          title={slug?.replaceAll("-", " ")}
-          links={linksBreadcrumb}
-          lng={lng}
-        />
-      </LazyLoadComponent>
+      {(data?.published || data) && (
+        <LazyLoadComponent>
+          <Breadcrumb
+            title={slug?.replaceAll("-", " ")}
+            links={linksBreadcrumb}
+            lng={lng}
+          />
+        </LazyLoadComponent>
+      )}
 
       <LazyLoadComponent>
         <ProductDetail
           lng={lng}
+          data={data}
           i18n={i18n}
           slug={slug}
           urlSite={urlSite}
@@ -68,6 +71,7 @@ const Product: FC<any> = ({
       <LazyLoadComponent>
         <ProductRecomendation
           type="upsell"
+          data={data}
           slug={slug}
           title={i18n.t("product.recomendation")}
         />
