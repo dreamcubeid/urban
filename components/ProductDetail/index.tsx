@@ -1,5 +1,6 @@
 /* library package */
 import { FC, useState } from 'react'
+import { useRouter } from 'next/router'
 import { ProductDetail, ProductReviews } from '@sirclo/nexus'
 
 /* library component */
@@ -9,6 +10,7 @@ import useProductDetail from './hooks/useProductDetail'
 import Placeholder from 'components/Placeholder'
 import Icon from 'components/Icon/Icon'
 import SocialShare from 'components/SocialShare'
+import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 
 /* styles */
 import styles from 'public/scss/pages/ProductDetail.module.scss'
@@ -146,6 +148,7 @@ const classesReviewPlaceholder = {
 type IProps = {
   lng: string,
   i18n: any,
+  data: any,
   slug: string
   urlSite?: string
 }
@@ -154,9 +157,11 @@ const ProductDetailComponent: FC<IProps> = ({
   lng,
   i18n,
   slug,
+  data,
   urlSite
 }) => {
 
+  const router = useRouter()
   const [showReview, setShowReview] = useState<boolean>(true)
 
   const {
@@ -188,6 +193,23 @@ const ProductDetailComponent: FC<IProps> = ({
   }
 
   const toogleShowReview = () => setShowReview(!showReview)
+
+  // if (!data?.published || !data) return <EmptyComponent title={i18n.t("product.isEmpty")} />
+  if (!data?.published || !data) return (
+    <EmptyComponent
+      logo={<div className={styles.iconEmpty} />}
+      classes={{ emptyContainer: styles.emptyContainer }}
+      desc={i18n.t("product.isEmpty")}
+      button={
+        <button
+          className={styles.btnBackToHome}
+          onClick={() => router.push("/[lng]/products", `/${lng}/products`)}
+        >
+          {i18n.t("product.backToHome")}
+        </button>
+      }
+    />
+  )
 
   return (
     <section className="container">

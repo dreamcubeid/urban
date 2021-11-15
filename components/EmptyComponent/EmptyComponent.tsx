@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 export type EmptyComponentPropsType = {
-  classes: {
+  classes?: {
     emptyContainer?: string;
     emptyTitle?: string;
     emptyDesc?: string;

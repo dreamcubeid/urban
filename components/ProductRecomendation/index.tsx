@@ -19,6 +19,7 @@ const classesPaggination = {
 
 export type Iprops = {
   type: "upsell" | "crossSell"
+  data?: any
   slug?: string
   SKUs?: string | Array<string>
   title: string
@@ -26,6 +27,7 @@ export type Iprops = {
 
 const ProductRecomendation: FC<Iprops> = ({
   type,
+  data,
   slug = null,
   SKUs = null,
   title
@@ -38,6 +40,7 @@ const ProductRecomendation: FC<Iprops> = ({
   if (!allowedProductRecommendation) return <></>
   if (totalItems === 0) return <></>
   if (!slug && !SKUs) return <></>
+  if (!data?.published || !data) return <></>
 
   let productsProps: any = type === "crossSell"
     ? { SKUs, getCrossSellPageInfo: (pageInfo: any) => setTotalItems(pageInfo.totalItems) }
