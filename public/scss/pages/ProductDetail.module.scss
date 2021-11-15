@@ -425,7 +425,7 @@
   @include fixedWidth(340px);
   @extend .btn;
   @extend .btn_primary;
-  margin: 44px 0 190px;
+  margin: 88px 0 190px;
 }
 
 @media screen and (max-width: #{$breakpoint_max_md}) 
