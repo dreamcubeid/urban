@@ -39,7 +39,8 @@ const classesBlogs = {
   descriptionInnerFooterClassName: styles.blog_itemFooter,
   dateClassName: styles.blog_itemDate,
   contentContainerClassName: styles.blog_itemContent,
-  authorPicClassName: "d-none"
+  authorPicClassName: "d-none",
+  buttonClassName: styles.blog_itemReadmore
 }
 
 const classesBlogCategories = {
@@ -93,7 +94,7 @@ const Blog: FC<any> = ({
             <div className="col-12 col-md-8">
 
               <div className={`row ${styles.header}`}>
-                <div className={`col-12 col-md-8 ${styles.header_image}`}>
+                <div className={`col-12 ${styles.header_image}`}>
                   <img src={headerImage} alt={i18n.t("blog.title")} title={i18n.t("blog.title")} />
                 </div>
               </div>
@@ -107,6 +108,7 @@ const Blog: FC<any> = ({
                 paginationNextLabel={<FiChevronRight />}
                 paginationPrevLabel={<FiChevronLeft />}
                 itemPerPage={5}
+                withReadMoreButton={true}
                 thumborSetting={{
                   width: size.width < 768 ? 375 : 512,
                   format: "webp",

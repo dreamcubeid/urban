@@ -6,6 +6,7 @@ const locale = {
     "isEmpty": "Blog kosong",
     "leaveReply": "Tinggalkan Balasan",
     "postComment": "Kirimkan Komentar",
+    "readMore": "Baca Selengkapnya",
     "recentPost": "Postingan Terbaru",
     "share": "Bagikan Artikel",
     "title": "Blog"
