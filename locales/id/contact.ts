@@ -6,10 +6,15 @@ const locale = {
     "namePlaceholder": "Nama anda",
     "sendMessage": "Kirimkan kami pesan",
     "subject": "Judul",
-    "submit": "Kirimkan",
+    "submit": "Kirim Pesan",
     "submitError": "Gagal mengirim pesan",
     "submitSuccess": "Berhasil mengirim pesan",
-    "title": "Kontak"
+    "title": "Kontak",
+    "placeholderName": "Nama Lengkap",
+    "placeholderSubject": "Subjek",
+    "placeholderPhone": "Nomor Ponsel",
+    "placeholderEmail": "Email",
+    "placeholderMessage": "Pesan Anda"
   }
 }
 

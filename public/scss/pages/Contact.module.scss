@@ -40,6 +40,11 @@
 .input
 {
     @extend .form_input;
+
+    &[data-identity="input-message"]
+    {
+        padding-top: 14px;
+    }
 }
 
 .label
