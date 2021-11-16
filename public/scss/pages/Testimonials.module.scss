@@ -282,3 +282,17 @@
     display: none;
   }
 }
+
+@media (max-width: #{$breakpoint_max_sm})
+{
+  .testimonialForm
+  {
+    &_verificationContainer
+    {
+      iframe
+      {
+        transform: scale(0.75);
+      }
+    }
+  }
+}
