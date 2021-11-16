@@ -124,6 +124,13 @@
   color: $color_black;
   border: none;
 
+  &:hover
+  {
+    background: $color_white;
+    color: $color_black;
+    border: none;
+  }
+
   svg
   {
     margin: 0;
@@ -152,6 +159,13 @@
   background: $color_white;
   color: $color_black;
   border: none;
+
+  &:hover
+  {
+    background: $color_white;
+    color: $color_black;
+    border: none;
+  }
 
   svg
   {
