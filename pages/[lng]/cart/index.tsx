@@ -2,6 +2,7 @@
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
+import { toast } from 'react-toastify'
 import Link from 'next/link'
 // import Router from 'next/router'
 import dynamic from 'next/dynamic'
@@ -113,7 +114,7 @@ const Cart: FC<any> = ({
                 itemRedirectPathPrefix="product"
                 isEditable={true}
                 removeIcon={<Icon.CartDetails.removeIcon />}
-                onErrorMsg={() => { }}
+                onErrorMsg={(msg) => toast.error(msg)}
                 onInvalidMsg={(msg) => setInvalidMsg(msg)}
                 thumborSetting={{
                   width: size.width < 768 ? 200 : 400,

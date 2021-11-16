@@ -53,7 +53,6 @@ const GiftCardPage: FC<any> = ({
         <div className="container">
           <div className="row">
             <div className="col-12 col-md-6 offset-md-3">
-
               <div className={styles.header}>
                 <h1 className={styles.header_title}>
                   {i18n.t("giftCard.title")}
@@ -62,7 +61,6 @@ const GiftCardPage: FC<any> = ({
                   {i18n.t("giftCard.desc")}
                 </p>
               </div>
-
               <GiftCard
                 classes={classesGiftCard}
               />
@@ -70,7 +68,6 @@ const GiftCardPage: FC<any> = ({
           </div>
         </div>
       </div>
-
     </Layout>
   )
 }

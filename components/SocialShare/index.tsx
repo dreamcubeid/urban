@@ -59,12 +59,12 @@ const SocialShare: FC<TypeSocialShare> = ({
         <LinkedinShareButton url={urlSite}>
           <Icon.socialShare.LinkedinIcon {...props} />
         </LinkedinShareButton>
-        <EmailShareButton url={urlSite}>
-          <Icon.socialShare.WhatsappIcon {...props} />
-        </EmailShareButton>
         <WhatsappShareButton url={urlSite}>
-          <Icon.socialShare.EmailIcon {...props} />
+          <Icon.socialShare.WhatsappIcon {...props} />
         </WhatsappShareButton>
+        <EmailShareButton url={urlSite}>
+          <Icon.socialShare.EmailIcon {...props} />
+        </EmailShareButton>
         <TelegramShareButton url={urlSite}>
           <Icon.socialShare.TelegramIcon {...props} />
         </TelegramShareButton>
