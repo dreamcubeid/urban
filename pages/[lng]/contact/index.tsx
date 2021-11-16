@@ -32,7 +32,8 @@ const classesContact = {
   labelClassName: styles.label,
   buttonContainerClassName: styles.buttonContainer,
   buttonClassName: styles.button,
-  widgetClassName: styles.widget
+  widgetClassName: styles.widget,
+  mapAddressDetail: styles.mapAddressDetail
 }
 
 const ContactPage: FC<any> = ({
@@ -72,7 +73,7 @@ const ContactPage: FC<any> = ({
 
       <div className="container">
         <Contact
-          isAddressDetail={false}
+          isAddressDetail={true}
           classes={classesContact}
           placeholder={contactPlaceholder}
           onCompleted={() => toast.success(i18n.t("contact.submitSuccess"))}
