@@ -227,6 +227,9 @@
         overflow-x: hidden;
         overflow-y: hidden;
 
+        // Fix Safari issue
+        transform: translate3d(0, 0, 0);
+
         & ~ main,
         & ~ footer
         {
