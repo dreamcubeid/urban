@@ -120,6 +120,9 @@
   @extend .btn_transparent;
   width: fit-content;
   padding: 0 !important;
+  background: $color_white;
+  color: $color_black;
+  border: none;
 
   svg
   {
@@ -146,6 +149,9 @@
   width: fit-content;
   z-index: 2;
   padding: 0 !important;
+  background: $color_white;
+  color: $color_black;
+  border: none;
 
   svg
   {
