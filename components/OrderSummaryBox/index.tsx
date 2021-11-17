@@ -12,6 +12,7 @@ import useWindowSize from 'lib/useWindowSize'
 import Placeholder from 'components/Placeholder'
 import Icon from '../Icon/Icon'
 const Popup = dynamic(() => import('components/Popup/Popup'))
+const PrivateComponent = dynamic(() => import("@sirclo/nexus").then((mod) => mod.PrivateComponent))
 
 /* styles */
 import styles from 'public/scss/components/OrderSummary.module.scss'
@@ -192,13 +193,15 @@ const OrderSummaryBox: FC<iProps> = ({
       }
 
       {withOrderSummary &&
+        <>
         <OrderSummary
           isAccordion
           classes={{
             ...classesOrderSummary,
             footerClassName: page !== "cart" && size.width > 767
               ? "d-none"
-              : classesOrderSummary.footerClassName
+              : classesOrderSummary.footerClassName,
+            containerClassName: page === "cart" ? styles.containerRelative : styles.container
           }}
           currency="IDR"
           submitButtonLabel={i18n.t("orderSummary.placeOrder")}
@@ -214,6 +217,19 @@ const OrderSummaryBox: FC<iProps> = ({
             <p className="m-0 p-0">{i18n.t("global.loading")}</p>
           }
         />
+        {page === "cart" &&
+          <PrivateComponent
+            Auth={<></>}
+            NoAuth={
+              <Link href="/[lng]/login" as={`/${lng}/login`}>
+                <p className={styles.registerNow}>
+                  {i18n.t("cart.registerNow")}
+                </p>
+              </Link>
+            }
+          />
+        }
+      </>
       }
       {showModalErrorAddToCart &&
         <Popup

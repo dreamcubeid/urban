@@ -7,6 +7,11 @@
   margin-bottom: 42px;
 }
 
+.containerRelative
+{
+  @include position(relative);
+}
+
 .header
 {
   @include flex(column, center, center);
@@ -158,6 +163,20 @@
   &::after
   {
     content: "Poin"
+  }
+}
+
+.registerNow
+{
+  @include SmallSemiBold;
+  color: $color_blue;
+  text-align: right;
+  margin-top: 24px;
+  cursor: pointer;
+
+  &:hover
+  {
+    opacity: .7;
   }
 }
 
