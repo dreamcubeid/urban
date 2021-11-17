@@ -80,7 +80,6 @@ const Cart: FC<any> = ({
       brand={brand}
       titleHeader={i18n.t("cart.title")}
       withCart={false}
-      withFooter={false}
       customClassName={`${styles.cart_layout} ${styles.main__noNavbar}`}
     >
       <section className={styles.products_breadcumb}>
@@ -144,7 +143,7 @@ const Cart: FC<any> = ({
                       classes={{ emptyContainer: styles.emptyContainer }}
                       desc={i18n.t("product.isEmpty")}
                     />
-                    <Link href="lng/products" as={`${lng}/products`}>
+                    <Link href="/lng/products" as={`/${lng}/products`}>
                       <button
                         type="submit" className={styles.continueShoppingBtn}
                         data-identity="cart-continueShoppingBtn"
