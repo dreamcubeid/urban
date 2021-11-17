@@ -89,20 +89,22 @@ const Cart: FC<any> = ({
 
       <LazyLoadComponent>
         <section className="container">
-          <div className={styles.container}>
+          <div className={SKUs?.length > 0 ? styles.container : styles.containerOneGrid}>
             <div className={styles.cardDetailContainer}>
-              <div className={styles.cardDetailHeader}>
-                <p>
-                  {i18n.t("cart.youHave")}{" "}
-                  {SKUs?.length || 0}{" "}
-                  {i18n.t("cart.item")}
-                </p>
-                <Link href="lng/products" as={`${lng}/products`}>
+              {SKUs?.length > 0 &&
+                <div className={styles.cardDetailHeader}>
                   <p>
-                    {i18n.t("cart.shoppingAgain")}
+                    {i18n.t("cart.youHave")}{" "}
+                    {SKUs?.length || 0}{" "}
+                    {i18n.t("cart.item")}
                   </p>
-                </Link>
-              </div>
+                  <Link href="lng/products" as={`${lng}/products`}>
+                    <p>
+                      {i18n.t("cart.shoppingAgain")}
+                    </p>
+                  </Link>
+                </div>
+              }
               {invalidMsg !== "" &&
                 <div className={styles.cartError}>
                   {invalidMsg}
@@ -154,7 +156,6 @@ const Cart: FC<any> = ({
                 }
               />
             </div>
-            {console.log(SKUs?.length)}
             {SKUs?.length > 0 &&
               <div className={styles.orderSummaryContainer}>
                 <OrderSummaryBox
