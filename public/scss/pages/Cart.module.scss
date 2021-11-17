@@ -212,8 +212,8 @@
 .changeQtyButton
 {
   @extend .btn_transparent;
-  border: none;
-  outline: none;
+  border: none !important;
+  outline: none !important;
   padding: 0;
   width: 10px;
 
@@ -221,7 +221,7 @@
   {
     @include position(absolute, auto, 10px, 8px);
     font-size: 0;
-    width: 8;
+    @include fixedSize(12px, true);
     background-repeat: no-repeat;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M4.99984 5.99977L0.756836 1.75677L2.17184 0.342773L4.99984 3.17177L7.82784 0.342773L9.24284 1.75677L4.99984 5.99977Z' fill='%23222222'/%3E%3C/svg%3E");
   }
@@ -230,7 +230,7 @@
   {
     @include position(absolute, 13px, 10px);
     font-size: 0;
-    width: 8;
+    @include fixedSize(12px, true);
     background-repeat: no-repeat;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M4.99984 2.828L2.17184 5.657L0.756836 4.243L4.99984 0L9.24284 4.243L7.82784 5.657L4.99984 2.828Z' fill='%23222222'/%3E%3C/svg%3E");
   }
