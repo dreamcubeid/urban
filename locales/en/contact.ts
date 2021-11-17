@@ -9,7 +9,12 @@ const locale = {
     "submit": "Submit",
     "submitError": "Failed send a message",
     "submitSuccess": "Success send a message",
-    "title": "Contact"
+    "title": "Contact",
+    "placeholderName": "Name",
+    "placeholderSubject": "Subject",
+    "placeholderPhone": "Phone Number",
+    "placeholderEmail": "Email",
+    "placeholderMessage": "Your Message"
   }
 }
 
