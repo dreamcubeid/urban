@@ -37,8 +37,7 @@
   @include flex(column, center, flex-start);
   padding: 24px 16px;
   border-top: 4px solid $color_red_other;
-  width: 340px;
-  max-width: 100%;
+  @include fixedWidth(100%);
   border-radius: 2px 2px 0 0,
 }
 
@@ -47,8 +46,7 @@
   @include flex(column, center, flex-start);
   padding: 24px 16px;
   border-top: 4px solid $color_green_other;
-  width: 340px;
-  max-width: 100%;
+  @include fixedWidth(100%);
   border-radius: 2px 2px 0 0,
 }
 
