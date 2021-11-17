@@ -4,11 +4,9 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { toast } from 'react-toastify'
 import Router from 'next/router'
 import ReCAPTCHA from 'react-google-recaptcha'
-import dynamic from 'next/dynamic'
 import {
   Register,
   useI18n,
-  Widget,
   Logo
 } from '@sirclo/nexus'
 /* locales */
@@ -21,7 +19,6 @@ import { useAuthMethod } from 'lib/client'
 import useWindowSize from 'lib/useWindowSize'
 /* component */
 import Layout from 'components/Layout/Layout'
-const Placeholder = dynamic(() => import('components/Placeholder'))
 
 import Icon from 'components/Icon/Icon'
 import LoginRegisterOTP from 'components/LoginRegisterOTP'
@@ -113,13 +110,9 @@ const RegisterPage: FC<any> = ({
             withVerification={true}
             isVerified={isVerified}
             loadingComponent={
-              <Placeholder
-                classes={{
-                  placeholderList: styles.placeholderList,
-                }}
-                withList
-                listMany={8}
-              />
+              <div className="text-center  d-flex">
+                <span className="spinner-border text-dark" role="status" />
+              </div>
             }
             verificationComponent={
               <ReCAPTCHA
@@ -130,18 +123,6 @@ const RegisterPage: FC<any> = ({
             {...icons}
           />
         </section>
-        <Widget
-          widgetClassName={styles.widgetLogin}
-          pos="login-image"
-          loadingComponent={
-            <Placeholder
-              classes={{
-                placeholderImage: styles.widgetLogin
-              }}
-              withImage
-            />
-          }
-        />
       </LoginRegisterOTP>
     </Layout>
   )

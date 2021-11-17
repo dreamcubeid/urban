@@ -85,18 +85,6 @@
   display: none;
 }
 
-.widgetLogin
-{
-  @include position(fixed, 0, 0);
-  width: 50vw;
-  height: 100vh;
-  
-  img
-  {
-    width: 100% !important;
-  }
-}
-
 .placeholderList
 {
   height: 60px;
