@@ -263,7 +263,10 @@ const ProductDetailComponent: FC<IProps> = ({
             <div className={`${stylesReview.reviewRatingContainer}`}>
               <div onClick={toogleShowReview}  className={`${stylesReview.reviewRatingHeader}`}>
                 <p>{i18n.t("product.review")}</p>
-                <Icon.productDetail.accordionIcon size=".8em" />
+                {showReview
+                  ? <Icon.RiCloseFill size=".8em" />
+                  : <Icon.productDetail.accordionIcon size=".8em" />
+                }
               </div>
               {showReview &&
                 <ProductReviews
