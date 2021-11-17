@@ -6,6 +6,7 @@ const locale = {
     "isEmpty": "Blog is empty",
     "leaveReply": "Leave a reply",
     "postComment": "Post a comment",
+    "readMore": "Read More",
     "recentPost": "Recent Post",
     "share": "Share this article",
     "title": "Blog"
