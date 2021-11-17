@@ -3,14 +3,17 @@ import { FC, useState } from 'react'
 import { toast } from 'react-toastify'
 import { IncomingMessage } from 'http'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import {
   SingleSignOn,
+  Widget,
   useI18n,
   WhatsAppOTPInput
 } from '@sirclo/nexus'
 /* component */
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+const Placeholder = dynamic(() => import('components/Placeholder'))
 /* styles */
 import styles from 'public/scss/components/whatsappOTP/LoginRegisterOTP.module.scss'
 
@@ -141,6 +144,19 @@ const LoginRegisterOTP: FC<LoginRegisterOTPPropsType> = ({
           customLocales={customLocales}
         />
       }
+
+      <Widget
+        widgetClassName={styles.widgetLogin}
+        pos="login-image"
+        loadingComponent={
+          <Placeholder
+            classes={{
+              placeholderImage: styles.widgetLogin
+            }}
+            withImage
+          />
+        }
+      />
 
       {((step === steps.email || step === steps.wa) || type === "register") &&
         <div className={styles.footer}>
