@@ -77,16 +77,24 @@
     {
       font-size: 14px;
       line-height: 21px;
-      color: $color_elements_line_darker;
+      color: $color_black;
     }
 
     & > p:last-child 
     {
       font-size: 11.2px;
       line-height: 17px;
-      color: $color_text_secondary;
-    }
+      color: $color_text_grey;
 
+      &::before
+      {
+        content: "";
+        display: block;
+        background-repeat: no-repeat;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M5.00016 9.16671C7.30135 9.16671 9.16683 7.30123 9.16683 5.00004C9.16683 2.69885 7.30135 0.833374 5.00016 0.833374C2.69898 0.833374 0.833496 2.69885 0.833496 5.00004C0.833496 7.30123 2.69898 9.16671 5.00016 9.16671Z' stroke='%23898989' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5 2.5V5L6.66667 5.83333' stroke='%23898989' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      }
+    }
+    
     p 
     {
       margin-bottom: 6px;
