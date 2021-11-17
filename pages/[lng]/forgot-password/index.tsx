@@ -1,5 +1,5 @@
 /*library package */
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { ResetPassword, useI18n } from '@sirclo/nexus'
 import { toast } from 'react-toastify'
@@ -30,6 +30,7 @@ const ForgotPassword: FC<any> = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const i18n: any = useI18n()
   const size = useWindowSize()
+  const [page, setPage] = useState<string>("forgotPassword")
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("resetPassword.title")]
 
   return (
@@ -41,20 +42,26 @@ const ForgotPassword: FC<any> = ({
     >
       <SEO title={i18n.t("resetPassword.title")} />
       <Breadcrumb
-        title={i18n.t("resetPassword.title")}
+        title={page === "forgotPassword" ? i18n.t("resetPassword.setNew") : i18n.t("resetPassword.checkYourEmail")}
         links={linksBreadcrumb}
         lng={lng}
         titleMiddle={size.width > 767}
       />
       <section className={`container ${styles.section}`}>
         <div className={styles.inner}>
-          <p>{i18n.t("resetPassword.enterEmailBody")}</p>
-          <ResetPassword
-            classes={classesResetPassword}
-            onErrorMsg={(msg: string) => toast.error(msg)}
-            onSuccessMsg={(msg: string) => toast.success(msg)}
-            loadingComponent={<Loader color="text-light" />}
-          />
+          {page === "forgotPassword" ?
+            <>
+              <p>{i18n.t("resetPassword.enterEmailBody")}</p>
+              <ResetPassword
+                classes={classesResetPassword}
+                onErrorMsg={(msg: string) => toast.error(msg)}
+                onSuccessMsg={() => setPage("checkEmail")}
+                loadingComponent={<Loader color="text-light" />}
+              />
+            </>
+            :
+            <p>{i18n.t("resetPassword.checkYourEmailDesc")}</p>
+          }
         </div>
       </section>
     </Layout>

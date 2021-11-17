@@ -5,7 +5,9 @@ const locale = {
     "inputPass": "Input new password",
     "reset": "Reset",
     "setNew": "Reset Password",
-    "title": "Forgot Password"
+    "title": "Forgot Password",
+    "checkYourEmail": "Check your email",
+    "checkYourEmailDesc": "We have sent instructions to your email to update your password."
   }
 }
 
