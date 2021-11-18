@@ -1384,6 +1384,12 @@
         display: none;
       }
 
+      &Pane
+      {
+        border: none;
+        padding: 0;
+      }
+
       &Link
       {
         @include flex(row, center, center);
