@@ -163,6 +163,7 @@ const ProductDetailComponent: FC<IProps> = ({
 
   const router = useRouter()
   const [showReview, setShowReview] = useState<boolean>(true)
+  const [totalReviews, setTotalReviews] = useState<number>(0)
 
   const {
     successAddToCart,
@@ -268,6 +269,10 @@ const ProductDetailComponent: FC<IProps> = ({
                   : <Icon.productDetail.accordionIcon size=".8em" />
                 }
               </div>
+              <div className={stylesReview.totalAllReview}>
+                <p>{totalReviews}{" "}{i18n.t("product.review")}</p>
+                <div className={stylesReview.iconStarReview}></div>
+              </div>
               {showReview &&
                 <ProductReviews
                   productID={productId}
@@ -280,6 +285,7 @@ const ProductDetailComponent: FC<IProps> = ({
                   iconRight={<Icon.chevronRight />}
                   reviewsNextLabel={<Icon.arrowRight />}
                   reviewsPrevLabel={<Icon.arrowLeft />}
+                getTotalAllReviews={(total: number) => setTotalReviews(total)}
                   loadingComponent={
                     <div className={stylesReview.placeholderContainer}>
                       <Placeholder
