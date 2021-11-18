@@ -79,9 +79,14 @@
   {
     &_popupContainer 
     {
-      @include position(fixed, auto, 17px, -600px, 18px);
-      width: calc(100% - 35px);
+      @include position(fixed, auto, 16px, -600px, 16px);
+      width: calc(100vw - 32px);
       animation: animateUp 2s ease forwards;
+    }
+    
+    &_popupInner
+    {
+      max-width: calc(100vw - 32px);
     }
   }
 }
