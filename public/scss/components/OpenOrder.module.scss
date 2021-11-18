@@ -15,8 +15,8 @@
 .openOrderContainer
 {
   @extend .grid;
-  @include grid-(2);
   @include gap-x-(8px);
+  grid-template-columns: 159px auto;
   margin-top: 8px;
   width: 100%;
 }
@@ -30,14 +30,19 @@
   padding: 0 12px;
   background: $color_elements;
   border-radius: 2px;
-  width: fit-content;
-
+  width: 100%;
+  
   svg
   {
     color: $color_blue;
     margin-top: 2px;
     margin-right: 11px;
   }
+}
+
+.openOrderTime
+{
+  @include fixedWidth(104px);
 }
 
 .openOrderTimeout
@@ -61,14 +66,16 @@
 {
   @extend .btn_secondary;
   @include RegulerReguler;
+  @include fixedWidth(100%);
+  @include fixedHeight(52px);
   max-width: 340px;
-  height: 52px;
   margin: 24px 0;
 }
 
 .countDownContainer
 {
   @include flex(row, center, flex-start);
+  max-width: fit-content;
   height: 48px;
   padding: 0 12px;
   background: $color_elements;
