@@ -49,6 +49,7 @@ import styles from "public/scss/pages/Account.module.scss"
 import stylesPopupConfirmationOrder from "public/scss/components/popupConfirmationOrder.module.scss"
 import stylesPopupCheckPaymentOrder from "public/scss/components/CheckPaymentOrder.module.scss"
 import stylesMap from 'public/scss/components/Map.module.scss'
+import stylesPasswordStrength from 'public/scss/components/PasswordStrength.module.scss'
 
 const ACTIVE_CURRENCY = "IDR"
 
@@ -76,11 +77,6 @@ const classesAccount = {
   passwordContainerClassName: styles.form_passwordContainer,
   passwordInputClassName: styles.form_passwordInput,
   passwordViewButtonClassName: styles.form_passwordButton,
-  passwordCriteriaListClassName: styles.form_passwordCriteriaList,
-  passwordCriteriaClassName: styles.form_passwordCriteria,
-  passwordStrengthBarContainerClassName: styles.form_passwordStrengthBarContainer,
-  passwordStrengthBarClassName: styles.form_passwordStrengthBar,
-  passwordStrengthLabelClassName: styles.form_passwordStrengthBarLabel,
   buttonClassName: `${styles.btn} ${styles.btn__long}`,
 
   // Order History
@@ -229,6 +225,13 @@ const classesAccount = {
   mediaDetailCheckboxContainer: styles.otpSetting_checkbox
 }
 
+const passwordStrengthClasses = {
+  passwordStrengthBarClassName: stylesPasswordStrength.passwordStrengthBar,
+  passwordCriteriaListClassName: stylesPasswordStrength.passwordCriteriaList,
+  passwordCriteriaClassName: stylesPasswordStrength.passwordCriteria,
+  passwordStrengthLabelClassName: stylesPasswordStrength.passwordStrengthLabel,
+}
+
 const orderHistoryPaginationClasses = {
   pagingClassName: styles.pagination,
   activeClassName: styles.pagination_active,
@@ -288,7 +291,10 @@ const AccountsPage: FC<any> = ({
               </div>
 
               <Account
-                classes={classesAccount}
+                classes={{
+                  ...classesAccount,
+                  ...passwordStrengthClasses
+                }}
                 membershipPaginationClasses={orderHistoryPaginationClasses}
                 membershipPaginationNextLabel={<FiChevronRight />}
                 membershipPaginationPrevLabel={<FiChevronLeft />}
