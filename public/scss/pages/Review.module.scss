@@ -3,8 +3,6 @@
 
 .orderReview
 {
-  @include debug();
-
   &_titleContainer,
   &_title,
   &_subTitle
@@ -135,7 +133,6 @@
 
   &_buyerHideNameSwitch
   {
-    @include debug();
     order: 1;
   }
 
@@ -151,13 +148,34 @@
 
     & ~ div:not([class])
     {
-      @include debug();
       @include fixedWidth(100%);
       position: relative;
       margin: 0 auto 24px;
       padding: 0;
       border: solid 1px $color_elements_line;
       background-color: $color_white;
+    
+      & > div
+      {
+        &:first-child,
+        &:first-of-type
+        {
+          [class*="writeReviewButton"]
+          {
+            background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.99999 2.82795L11.95 7.77795L13.364 6.36395L6.99999 -4.57764e-05L0.635986 6.36395L2.04999 7.77795L6.99999 2.82795Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+          }
+
+          &:only-child,
+          &:only-of-type
+          {
+            [class*="writeReviewButton"]
+            {
+              background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.99999 5.17205L11.95 0.222046L13.364 1.63605L6.99999 8.00005L0.635986 1.63605L2.04999 0.222046L6.99999 5.17205Z' fill='%23222222'/%3E%3C/svg%3E%0A");
+            }
+          }
+        }
+      }
+
     }
   }
 
@@ -426,7 +444,6 @@
 
   &_starContainer
   {
-    @include debug();
     @include flex(row, center, center);
     position: relative;
     margin: 0;
@@ -525,7 +542,6 @@
   {
     &:not([type="file"])
     {
-      @include debug();
       @include flex(row, center, center);
       @include fixedSize(72px);
       position: relative;
