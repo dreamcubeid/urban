@@ -33,8 +33,15 @@ const classes = {
   filterActiveClassName: stylesProductFilter.filterActive,
   filterColorActiveClassName: stylesProductFilter.filterActive,
   filterTagActiveClassName: stylesProductFilter.filterActive,
+
+  /* slider */
+  filterSliderHandlesClassName: stylesProductFilter.filterSliderHandles,
   filterSliderHandleClassName: stylesProductFilter.filterSliderHandle,
   filterSliderTrackClassName: stylesProductFilter.filterSliderTrack,
+  filterSliderTooltipClassName: stylesProductFilter.filterSliderTooltip,
+  filterSliderTooltipContainerClassName: stylesProductFilter.filterSliderTooltipContainer,
+  filterSliderTooltipTextClassName: stylesProductFilter.filterSliderTooltipText,
+  filterTagClassName: stylesProductFilter.filterTag,
 }
 
 const placeholder = {
