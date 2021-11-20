@@ -67,6 +67,7 @@ const classesAccount = {
   myAccountContentClassName: styles.myAccount_content,
   myAccountBodyClassName: styles.myAccount_body,
   myAccountFieldClassName: styles.myAccount_field,
+  myAccountSeparatorClassName: "d-none",
 
   // Edit Account & Change Password
   editAccountClassName: styles.form,
@@ -101,6 +102,7 @@ const classesAccount = {
   orderedItemDetailClassName: styles.orderHistory_orderedItemDetail,
   orderedItemDetailTitleClassName: styles.orderHistory_orderedItemDetailTitle,
   orderedItemDetailPriceClassName: styles.orderHistory_orderedItemDetailPrice,
+  orderedItemDetailUploadReceiptClassName: styles.orderHistory_orderedItemDetailUploadReceipt,
   buyerNoteContainerClassName: styles.orderHistory_buyerNoteContainer,
   buyerNoteLabelClassName: styles.orderHistory_buyerNoteLabel,
   buyerNoteClassName: styles.orderHistory_buyerNote,
