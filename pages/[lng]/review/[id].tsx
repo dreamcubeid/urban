@@ -95,7 +95,7 @@ const classesOrderReview = {
   popupConfirmationSubmitButtonConfirmClassName: styles.orderReview_popupConfirmationSubmitButtonConfirm,
   popupConfirmationSubmitButtonNoClassName: styles.orderReview_popupConfirmationSubmitButtonNo,
 
-  itemPerPageClassName: styles.itemPerPage,
+  itemPerPageClassName: `${styles.itemPerPage} ml-auto`,
   itemPerPageOptionsClassName: styles.itemPerPageOptions,
   itemPerPageOptionClassName: styles.itemPerPageOption,
   itemPerPageActiveClassName: styles.itemPerPageActive
