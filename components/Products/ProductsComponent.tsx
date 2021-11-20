@@ -109,6 +109,7 @@ const ProductsComponent: FC<iProps> = ({
     showFilter,
     handleFilter,
     showSort,
+    scrollToTop,
     currPage
   } = useProducts({ lng, tagname })
 
@@ -245,6 +246,10 @@ const ProductsComponent: FC<iProps> = ({
                 />
               ))
               }
+
+              <button onClick={scrollToTop} className={styles.productsComponent_goToTop}>
+                <div className={styles.productsComponent_arrowUp}></div>
+              </button>
             </div>
             :
             <>

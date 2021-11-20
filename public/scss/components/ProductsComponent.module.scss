@@ -192,6 +192,29 @@
     }
   }
 
+  &_goToTop
+  {
+    @include position(fixed, auto, 16px, 80px, auto);
+    @include fixedWidth(56px);
+    @include fixedHeight(58px);
+    @include flex(row, center, center);
+    @extend .btn_primary;
+    z-index: 2;
+
+    &:after
+    {
+      display: none !important;
+    }
+  }
+
+  &_arrowUp
+  {
+    display: block;
+    @include fixedSize(14px);
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M7.83334 3.52333V13.6667H6.16667V3.52333L1.69667 7.99333L0.518341 6.81499L7.00001 0.333328L13.4817 6.81499L12.3033 7.99333L7.83334 3.52333Z' fill='white'/%3E%3C/svg%3E");
+  }
+
   @media (max-width: #{$breakpoint_min_sm}) 
   {
     &_grid

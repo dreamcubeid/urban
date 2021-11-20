@@ -187,7 +187,6 @@ const TestimonialsPage: FC<any> = ({
                   toast.success(i18n.t('testimonial.createSuccess'))
                 }}
                 onCreateTestimonialError={(e) => {
-                  console.log('testimonialError', e)
                   toast.error(i18n.t('testimonial.createError'))
                 }}
                 withVerification={true}
