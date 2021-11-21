@@ -24,6 +24,8 @@ const locale = {
     "confirming": "Waiting confirmation",
     "delivered": "Delivered",
     "editAccount": "Edit Account",
+    "editErrorMsg": "Failed to edit profile data",
+    "editSuccessMsg": "success to edit profile data",
     "email": "Email",
     "emailPlaceholder": "Email",
     "female": "Female",
