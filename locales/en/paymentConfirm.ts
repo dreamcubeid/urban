@@ -12,7 +12,7 @@ const locale = {
     "emailNotMatch": "Email does not match the order number",
     "failed": "Payment confirmation failed! Please check your Order ID.",
     "file": "Receipt file",
-    "heading": "Payment Confirmation",
+    "heading": "Check Order Number",
     "infoUpload": "Proof of payment that has been sent cannot be reupload, please make sure the data you are about to send is correct!",
     "invalidFileType": "File Type not supported",
     "optional": "Optional",

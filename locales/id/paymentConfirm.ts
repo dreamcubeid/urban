@@ -12,7 +12,7 @@ const locale = {
     "emailNotMatch": "Email tidak sesuai dengan nomor pesanan",
     "failed": "Gagal konfirmasi pesanan, silahkan cek nomor pesanan anda.",
     "file": "Bukti transfer",
-    "heading": "Konfirmasi Pembayaran",
+    "heading": "Periksa Nomor Pesanan",
     "infoUpload": "Bukti pembayaran yang sudah dikirim tidak dapat diperbaiki, pastikan data yang akan Anda kirim sudah benar!",
     "invalidFileType": "Tipe File tidak didukung",
     "optional": "Optional",
