@@ -246,7 +246,6 @@
 {
   &_linkContinue
   {
-    @include debug();
     @include flex(row, center, flex-start);
     @include fixedWidth(100%);
     @include SmallSmall;
@@ -389,7 +388,7 @@
 
   &_buttonContinue
   {
-    @include debug();
+    cursor: pointer;
   }
 }
 
@@ -694,7 +693,6 @@
 
         & > [class*="react-date-picker--disabled"]
         {
-          @include debug();
           background-color: transparent;
         }
 
