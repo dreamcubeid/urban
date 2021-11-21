@@ -8,6 +8,22 @@
   position: relative;
 }
 
+.hello
+{
+  @include flex(row, center, flex-start);
+  @include fixedWidth(100%);
+  position: relative;
+
+  h1, h2, h3, h4, h5, h6, p
+  {
+    @include flex(row, center, flex-start);
+    @include fixedWidth(100%);
+    @include LargeSemiBold;
+    margin: 0 0 12px;
+    padding: 0;
+  }
+}
+
 .account
 {
   @include fixedWidth(100%);
@@ -230,7 +246,6 @@
 {
   &_linkContinue
   {
-    @include debug();
     @include flex(row, center, flex-start);
     @include fixedWidth(100%);
     @include SmallSmall;
@@ -373,7 +388,7 @@
 
   &_buttonContinue
   {
-    @include debug();
+    cursor: pointer;
   }
 }
 
@@ -512,7 +527,7 @@
 
   &_content
   {
-    padding: 16px;
+    padding: 0;
   }
 
   &_body
@@ -622,6 +637,7 @@
     border: none;
     border-radius: 0;
     box-shadow: 0 0 0 transparent;
+    background-color: $color_white;
     color: $color_text;
 
     &[type="number"]
@@ -631,6 +647,7 @@
 
     &:hover,
     &:focus,
+    &:focus-visible,
     &:active
     {
       outline: 0;
@@ -662,6 +679,39 @@
           border: none !important;
           height: auto;
         }
+
+        & > [class*="react-date-picker"]
+        {
+          padding-left: 0;
+          padding-right: 0;
+          padding-top: 0;
+          height: 32px;
+          margin-bottom: -4px;
+
+          border: none;
+        }
+
+        & > [class*="react-date-picker--disabled"]
+        {
+          background-color: transparent;
+        }
+
+        [class*="react-date-picker__wrapper"]
+        {
+          & > button
+          {
+            @include flex(row, center, center);
+            @include fixedSize(32px);
+            margin-top: 0 !important;
+            padding: 0;
+          }
+
+          & > div[class="react-date-picker__inputGroup"]
+          {
+            @include flex(row, center, flex-start);
+            @include fixedHeight(32px);
+          }
+        }
       }
 
       [class*="mapSelectArea"]
@@ -676,6 +726,7 @@
 
         &:hover,
         &:focus,
+        &:focus-visible,
         &:active
         {
           background-color: $color_white;
@@ -685,6 +736,27 @@
         &:hover
         {
           color: $color_text;
+        }
+
+        &::before
+        {
+          content: "";
+          @include fixedSize(18px);
+          @include flex(row, center, center);
+
+          position: relative;
+          margin: 0 10px 0 0;
+
+          background-color: transparent;
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: auto 100%;
+          background-image: url("data:image/svg+xml,%3Csvg width='14' height='17' viewBox='0 0 14 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 14.675L10.7125 10.9625C11.4467 10.2282 11.9466 9.29279 12.1492 8.2744C12.3517 7.25601 12.2477 6.20044 11.8503 5.24116C11.4529 4.28188 10.78 3.46197 9.91669 2.88512C9.05334 2.30827 8.03833 2.00037 7 2.00037C5.96167 2.00037 4.94666 2.30827 4.08332 2.88512C3.21997 3.46197 2.54706 4.28188 2.14969 5.24116C1.75231 6.20044 1.64831 7.25601 1.85084 8.2744C2.05337 9.29279 2.55333 10.2282 3.2875 10.9625L7 14.675ZM7 16.796L2.227 12.023C1.28301 11.079 0.64014 9.87625 0.379696 8.56688C0.119253 7.25751 0.25293 5.90032 0.763824 4.66692C1.27472 3.43352 2.13988 2.37932 3.24991 1.63763C4.35994 0.895932 5.66498 0.500053 7 0.500053C8.33502 0.500053 9.64006 0.895932 10.7501 1.63763C11.8601 2.37932 12.7253 3.43352 13.2362 4.66692C13.7471 5.90032 13.8808 7.25751 13.6203 8.56688C13.3599 9.87625 12.717 11.079 11.773 12.023L7 16.796ZM6.25 6.49999V4.24999H7.75V6.49999H10V7.99999H7.75V10.25H6.25V7.99999H4V6.49999H6.25Z' fill='%23D0D0D0'/%3E%3C/svg%3E%0A");
+        }
+
+        svg
+        {
+          display: none;
         }
       }
     }
@@ -709,8 +781,7 @@
     {
       &[class$="-control"]
       {
-        @include fixedWidth(100%);
-        @include fixedHeight(100%);
+        @include fixedSize(100%);
         border-radius: 0 !important;
         border-color: transparent;
         box-shadow: 0 0 0 transparent !important;
@@ -721,9 +792,8 @@
           &:not([class*="IndicatorsContainer"])
           {
             @include flex(row, flex-start, flex-start);
-            @include fixedHeight(38px);
-            padding-left: 0;
-            padding-right: 0;
+            @include fixedHeight(32px);
+            padding: 0;
           }
 
           &[class*="IndicatorsContainer"]
@@ -731,6 +801,14 @@
             [class*="-indicatorSeparator"]
             {
               display: none;
+            }
+
+            [class$="-indicatorContainer"]
+            {
+              svg
+              {
+                fill: $color_text;
+              }
             }
           }
         }
@@ -745,7 +823,6 @@
       {
         @include flex(row, center, flex-start);
         @include fixedSize(100%);
-        @include fixedHeight(100%);
         font-size: 1rem;
         margin: 0;
         padding: 0;
@@ -958,6 +1035,38 @@
     {
       margin-bottom: 24px;
     }
+
+    & > div
+    {
+      &:first-child
+      {
+        &::after
+        {
+          content: "";
+          @include transition();
+          @include flex(row, center, center);
+          @include absolute(16px, 16px);
+          @include fixedSize(32px);
+    
+          background-color: $color_elements_line_darker;
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: auto;
+          background-image: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 24 24' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 15h14l-7-8z'%3E%3C/path%3E%3C/svg%3E");
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        &:only-child
+        {
+          &::after
+          {
+            background-image: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 24 24' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m11.998 17 7-8h-14z'%3E%3C/path%3E%3C/svg%3E");
+          }
+        }
+      }
+    }
   }
 
   &_orderHeader,
@@ -974,7 +1083,18 @@
 
   &_orderInnerHeader
   {
-    @include flex(column, stretch, center);
+    @include flex(column, stretch, flex-start);
+
+    [class*="orderTitle"],
+    [class*="paymentStatus"]
+    {
+      @include fixedWidth(calc(100% - (16px * 4)));
+    }
+
+    [class*="paymentStatus"]
+    {
+      margin-left: 0;
+    }
   }
 
   &_paymentStatus
@@ -994,9 +1114,10 @@
 
     &[class*="completed"],
     &[class*="paid"],
-    &[class*="shipped"]
+    &[class*="shipped"],
+    &[class*="readyToShip"]
     {
-      color: $color_white;
+      color: $color_white !important;
     }
 
     &[class*="cancelled"]
@@ -1239,6 +1360,41 @@
   {
     @include SmallSmall;
   }
+  
+  &_orderedItemDetailUploadReceipt
+  {
+    @include flex(row, center, center);
+    max-width: 50%;
+    position: relative;
+    cursor: pointer;
+
+    input[type="file"]
+    {
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    & > label
+    {
+      @include flex(row, center, center);
+      @include fixedSize(100%);
+      @include absolute(0, 0, 0, 0);
+      @include SmallSmall;
+      z-index: 2;
+      margin: 0;
+      padding: 0;
+      pointer-events: none;
+    }
+
+    &:hover,
+    &:focus-visible
+    {
+      & > label
+      {
+        text-decoration: underline;
+      }
+    }
+  }
 
   &_buyerNoteContainer,
   &_shippingDetails,
@@ -1252,7 +1408,7 @@
     padding: 16px 16px 0;
 
     border: none;
-    background: $color_elements_line;
+    background: $color_elements;
     color: $color_text;
 
     &::after
@@ -1348,7 +1504,6 @@
     margin: 0;
     padding: 0;
   }
-
 }
 
 
@@ -1453,30 +1608,272 @@
 
 .account
 {
-  &_shipmentTracking
+  &_shipmentHeader,
+  &_shipmentBody,
+  &_shipmentFooter
   {
-    position: fixed;
-    display: block;
-    margin: auto;
-    z-index: 10;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding-top: 3rem;
+    @include fixedWidth(320px);
+    position: relative;
+    margin: 0 auto;
+    background-color: $color_white;
+    max-height: calc(100vh - 60px);
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @media (max-width: #{$breakpoint_max_sm})
+    {
+      @include fixedWidth(calc(100% - 30px));
+    }
   }
 
-  &_shipmentContainer
+  &_shipmentHeader
   {
-    width: 50%;
-    margin: auto;
-    background: white;
+    padding: 16px;
+  }
 
-    @media screen and (max-width: 767px)
+  &_shipmentFooter
+  {
+    padding: 16px;
+
+    button
     {
-      width: 95%;
+      @include transition();
+      @include flex(row, center, space-between);
+      @include fixedWidth(100%);
+      @include RegulerReguler;
+      min-height: 32px;
+      cursor: pointer;
+
+      &::before,
+      &::after
+      {
+        content: "";
+        @include flex(row, center, center);
+        @include fixedSize(32px);
+        position: relative;
+        margin: 0 16px 0 0;
+        padding: 0;
+        background-color: $color_elements_line_darker;
+        background-position: center center;
+        background-size: auto 16px;
+        background-repeat: no-repeat;
+        border-radius: 2px;
+      }
+
+      &::before
+      {
+        background-image: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 24 24' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Cpath fill='none' d='M0 0h24v24H0z'%3E%3C/path%3E%3Cpath d='M15.5 6.937A6.997 6.997 0 0 1 19 13v8h-4.17a3.001 3.001 0 0 1-5.66 0H5v-8a6.997 6.997 0 0 1 3.5-6.063A3.974 3.974 0 0 1 8.125 6H5V4h3.126a4.002 4.002 0 0 1 7.748 0H19v2h-3.126c-.085.33-.212.645-.373.937zm-1.453 1.5C13.448 8.795 12.748 9 12 9a3.981 3.981 0 0 1-2.047-.563A5.001 5.001 0 0 0 7 13v6h2v-4a3 3 0 0 1 6 0v4h2v-6a5.001 5.001 0 0 0-2.953-4.563zM12 14a1 1 0 0 0-1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0-1-1zm0-7a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      &::after
+      {
+        justify-content: flex-end;
+        margin: 0 0 0 16px;
+        background-color: transparent;
+        background-position: center right;
+        background-image: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='none' stroke-width='2' viewBox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
+      }
+
+      svg
+      {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      &,
+      &:hover,
+      &:focus,
+      &:focus-visible,
+      &:active,
+      &:visited
+      {
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 transparent;
+        background: $color_white;
+        color: $color_text;
+      }
+
+      &:hover,
+      &:focus-visible
+      {
+        color: rgba($color_text, 0.8);
+      }
     }
+  }
+
+  &_shipmentBody
+  {
+    padding: 0 16px;
+
+    &::before,
+    &::after
+    {
+      content: "";
+      @include fixedWidth(100%);
+      display: block;
+      margin: 0 auto;
+      padding: 0;
+      height: 1px;
+      background-color: $color_elements_line_darker;
+    }
+  }
+
+  &_shipmentTracking
+  {
+    @include flex(column, center, center);
+  }
+
+  &_shipmentHeaderText,
+  &_shipmentText
+  {
+    @include flex(row, center, flex-start);
+    @include fixedWidth(calc(100% - 48px));
+    @include RegulerSemiBold;
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &_shipmentHeaderText
+  {
+    @include h2;
+  }
+
+  &_shipmentStatus,
+  &_shipmentNote,
+  &_shipmentDate
+  {
+    @include RegulerSemiBold;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    color: $color_text;
+  }
+
+  &_shipmentNote
+  {
+    @include flex(row, center, flex-start);
+    @include SmallSmall;
+    background: $color_elements;
+    border-radius: 3px;
+    color: $color_text_secondary;
+    padding: 8px 10px;
+    margin: 6px 0;
+  }
+
+  &_shipmentDate
+  {
+    @include flex(row, center, flex-start);
+    @include SmallSmall;
+    color: $color_text_grey;
+
+    &::before
+    {
+      content: "";
+      @include flex(row, center, center);
+      @include fixedSize(16px);
+
+      background-position: left center;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-size: 10px auto;
+      background-image: url("data:image/svg+xml,%3Csvg stroke='%23898989' fill='none' stroke-width='2' viewBox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cpolyline points='12 6 12 12 16 14'%3E%3C/polyline%3E%3C/svg%3E");
+    }
+  }
+
+  &_shipmentList
+  {
+    position: relative;
+    margin: 0;
+    padding: 0 0 16px 0;
+    list-style: none;
+    opacity: 0.4;
+
+    &::before,
+    &::after
+    {
+      content: "";
+    }
+
+    &::before
+    {
+      @include flex(row, center, center);
+      @include fixedSize(18px);
+      @include absolute(4px, auto, auto, 0);
+      background-color: $color_black;
+      border-radius: 100%;
+      border: solid 2px $color_white;
+    }
+
+    &::after
+    {
+      @include absolute(calc(16px + 6px), auto, auto, 7px);
+      @include fixedHeight(calc(100% - 16px));
+      @include fixedWidth(3px);
+      background-color: rgba($color_text_grey, 0.2);
+    }
+
+    &:last-child,
+    &:last-of-type,
+    &:only-child,
+    &:only-of-type
+    {
+      &::after
+      {
+        content: none;
+      }
+    }
+
+    &:first-child,
+    &:first-of-type,
+    &:only-child,
+    &:only-of-type
+    {
+      opacity: 1;
+    }
+
+    & > p
+    {
+      @include fixedWidth(calc(100% - (16px + 10px)));
+      margin-left: auto !important;
+      margin-right: 0 !important;
+
+      &:nth-child(2)
+      {
+        // @extend .account_shipmentNote;
+      }
+    }
+  }
+
+  &_shipmentListWrapper
+  {
+    @include fixedWidth(100%);
+    margin: 16px auto;
+    padding: 0;
+  }
+
+  &_shipmentCloseIcon
+  {
+    @include transition();
+    @include flex(row, center, center);
+    @include fixedSize(48px);
+    @include absolute(0, 0);
+    cursor: pointer;
+    z-index: 2;
+    color: $color_text;
+
+    &:hover,
+    &:focus-visible
+    {
+      opacity: 0.8;
+    }
+  }
+
+  &_shipmentTrackButton
+  {
+    position: relative;
   }
 }

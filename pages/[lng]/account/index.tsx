@@ -39,15 +39,16 @@ import { useAuthMethod } from 'lib/client'
 /* Components */
 import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
-import SEO from "components/SEO"
+import SEO from 'components/SEO'
 
 /* Locales */
-import locale from "locales"
+import locale from 'locales'
 
 /* Styles */
-import styles from "public/scss/pages/Account.module.scss"
-import stylesPopupConfirmationOrder from "public/scss/components/popupConfirmationOrder.module.scss"
-import stylesPopupCheckPaymentOrder from "public/scss/components/CheckPaymentOrder.module.scss"
+import styles from 'public/scss/pages/Account.module.scss'
+import stylesPopupConfirmationOrder from 'public/scss/components/popupConfirmationOrder.module.scss'
+import stylesPopupCheckPaymentOrder from 'public/scss/components/CheckPaymentOrder.module.scss'
+import stylesPopup from 'public/scss/components/Popup.module.scss'
 import stylesMap from 'public/scss/components/Map.module.scss'
 import stylesPasswordStrength from 'public/scss/components/PasswordStrength.module.scss'
 
@@ -67,6 +68,7 @@ const classesAccount = {
   myAccountContentClassName: styles.myAccount_content,
   myAccountBodyClassName: styles.myAccount_body,
   myAccountFieldClassName: styles.myAccount_field,
+  myAccountSeparatorClassName: "d-none",
 
   // Edit Account & Change Password
   editAccountClassName: styles.form,
@@ -101,6 +103,7 @@ const classesAccount = {
   orderedItemDetailClassName: styles.orderHistory_orderedItemDetail,
   orderedItemDetailTitleClassName: styles.orderHistory_orderedItemDetailTitle,
   orderedItemDetailPriceClassName: styles.orderHistory_orderedItemDetailPrice,
+  orderedItemDetailUploadReceiptClassName: styles.orderHistory_orderedItemDetailUploadReceipt,
   buyerNoteContainerClassName: styles.orderHistory_buyerNoteContainer,
   buyerNoteLabelClassName: styles.orderHistory_buyerNoteLabel,
   buyerNoteClassName: styles.orderHistory_buyerNote,
@@ -144,18 +147,20 @@ const classesAccount = {
   mapButtonFooterClassName: stylesMap.mapButtonFooter,
 
   // Shipment Tracking
+  shipmentHeaderClassName: styles.account_shipmentHeader,
+  shipmentBodyClassName: styles.account_shipmentBody,
+  shipmentFooterClassName: styles.account_shipmentFooter,
+  shipmentTrackingClassName: `${stylesPopup.popup_overlay} ${styles.account_shipmentTracking}`,
+  shipmentHeaderTextClassName: styles.account_shipmentHeaderText,
+  shipmentTextClassName: styles.account_shipmentText,
+  shipmentStatusClassName: styles.account_shipmentStatus,
+  shipmentNoteClassName: styles.account_shipmentNote,
+  shipmentDateClassName: styles.account_shipmentDate,
+  shipmentListClassName: styles.account_shipmentList,
+  shipmentListWrapperClassName: styles.account_shipmentListWrapper,
+  shipmentCloseIconClassName: styles.account_shipmentCloseIcon,
+  shipmentTrackButtonClassName: styles.account_shipmentTrackButton,
   shippingTrackerButton: styles.orderHistory_shippingTrackerButton,
-  shipmentTrackingClassName: `${styles.track_shipmentTracking} ${styles.account_shipmentTracking}`,
-  shipmentHeaderClassName: `${styles.track_shipmentHeader} ${styles.account_shipmentContainer}`,
-  shipmentBodyClassName: `${styles.track_shipmentBody} ${styles.account_shipmentContainer} d-flex justify-content-center`,
-  shipmentFooterClassName: `${styles.track_shipmentFooter} ${styles.account_shipmentContainer} d-flex justify-content-center text-center`,
-  shipmentHeaderTextClassName: styles.track_shipmentHeaderText,
-  shipmentTextClassName: styles.track_shipmentText,
-  shipmentNoteClassName: styles.track_shipmentNote,
-  shipmentListClassName: styles.track_shipmentList,
-  shipmentListWrapperClassName: styles.track_shipmentListWrapper,
-  shipmentCloseIconClassName: styles.track_shipmentCloseIcon,
-  shipmentTrackButtonClassName: styles.track_shipmentTrackButton,
 
   // Membership Status
   membershipStatusClassName: styles.membershipStatus,
