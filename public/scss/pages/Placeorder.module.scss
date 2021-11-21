@@ -45,12 +45,29 @@
     }
   }
 
+  [class^=" css-"]
+  {
+    &[class$="-placeholder"],
+    &[class$="-Placeholder"],
+    &[class$="-6us33n"]
+    {
+      @include SmallSmall;
+      white-space: nowrap;
+      word-break: keep-all;
+    }
+  }
+
 }
 
 .input
 {
   @extend .form_input;
   padding: 18px 0 0 16px;
+
+  &[type="number"]
+  {
+    @include removeArrowsFromInput();
+  }
 }
 
 .billingAddressContainer
@@ -76,6 +93,7 @@
   span
   {
     margin-left: 4px;
+    color: $color_blue !important;
   }
 }
 

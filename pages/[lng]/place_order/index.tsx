@@ -27,7 +27,7 @@ const Placeholder = dynamic(() => import('components/Placeholder'));
 import styles from 'public/scss/pages/Placeorder.module.scss'
 import stylesPasswordStrength from 'public/scss/components/PasswordStrength.module.scss'
 import stylesMap from 'public/scss/components/Map.module.scss'
-import stylesDatePicker from '../../../public/scss/components/DatePicker.module.scss'
+import stylesDatePicker from 'public/scss/components/DatePicker.module.scss'
 
 const placeOrderClasses = {
   placeOrderClassName: styles.placeOrder,
