@@ -12,7 +12,7 @@ const locale = {
     "total": "Total",
     "usePoints": "Gunakan poin",
     "useVoucher": "Gunakan voucher",
-    "viewCart": "Liat Keranjang",
+    "viewCart": "Lihat Keranjang",
     "voucherApplied": "Voucher digunakan",
     "changeCart": "Ubah Keranjang"
   }
