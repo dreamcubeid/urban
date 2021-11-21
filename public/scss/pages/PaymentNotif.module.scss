@@ -55,6 +55,27 @@
       color: $color_text_secondary;
       z-index: 2;
     }
+
+    &:first-child
+    {
+      &::after
+      {
+        content: "";
+        display: block;
+        @include position(absolute, 27px, 5px, auto, auto);
+        @include fixedSize(25px);
+        background: $color_white;
+        background-repeat: no-repeat;
+        pointer-events: none;
+        cursor: pointer;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M5.00001 3.879L8.71251 0.166504L9.77301 1.227L5.00001 6L0.227005 1.227L1.28751 0.166504L5.00001 3.879Z' fill='black'/%3E%3C/svg%3E");
+      
+        &:hover
+        {
+          opacity: .7;
+        }
+      }
+    }
   }
 
   &_select,
@@ -63,9 +84,10 @@
     @extend .form_input;
     @include fixedHeight(60px);
     padding-left: 10px;
-    padding-top: 26px;
+    padding-top: 10px;
+    position: relative;
   }
-  
+
   &_input
   {
     padding-left: 120px !important;

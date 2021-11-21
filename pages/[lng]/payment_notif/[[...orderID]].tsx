@@ -142,7 +142,6 @@ const PaymentConfirmationPage: FC<any> = ({
               />
               :
               <>
-                <BankAccount />
                 <CheckPaymentOrder
                   classes={classesCheckPaymentOrder}
                   icon={{
@@ -151,6 +150,7 @@ const PaymentConfirmationPage: FC<any> = ({
                   }}
                   onErrorMsg={(msg) => toast.error(msg)}
                 />
+                <BankAccount />
               </>
             }
           </div>
