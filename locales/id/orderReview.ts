@@ -1,12 +1,12 @@
 const locale = {
   "orderReview": {
     "agree": "Setuju",
-    "confirmationDescriptionTitle": "Ulasan Anda tidak dapat diubah nanti",
-    "confirmationSubmitTitle": "Apakah Anda setuju untuk mengirimkan ulasan Anda ?",
+    "confirmationDescriptionTitle": "Apakah Anda setuju untuk mengirimkan ulasan? Ulasan Anda tidak dapat diubah setelah dikirim.",
+    "confirmationSubmitTitle": "Setuju Kirim Ulasan?",
     "hideMyNameLabel": "Sembunyikan nama saya (sebagai anonim)",
     "imageVideo": "Ulasan Gambar / Video",
     "media": "Ulasan Gambar / Video",
-    "no": "Tidak",
+    "no": "Tidak Setuju",
     "rating": "Peringkat",
     "ratingHelper": "Pilih peringkat bintang",
     "review": "Ulasan",
