@@ -86,7 +86,7 @@ const classesAccount = {
   tableClassName: styles.orderHistory_table,
   orderedItemDetailNeedReviewClassName: styles.orderHistory_orderedItemDetailNeedReview,
   orderedItemDetailReviewedClassName: styles.orderHistory_orderedItemDetailReviewed,
-  orderedItemDetailDeliveredClassName: styles.table_orderedItemDetailDelivered,
+  orderedItemDetailDeliveredClassName: styles.orderHistory_shippingTrackerButton,
   orderItemClassName: styles.orderHistory_orderItem,
   orderHeaderClassName: styles.orderHistory_orderHeader,
   orderInnerHeaderClassName: styles.orderHistory_orderInnerHeader,

@@ -1115,7 +1115,8 @@
     &[class*="completed"],
     &[class*="paid"],
     &[class*="shipped"],
-    &[class*="readyToShip"]
+    &[class*="readyToShip"],
+    &[class*="delivered"]
     {
       color: $color_white !important;
     }
