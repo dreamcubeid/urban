@@ -21,6 +21,7 @@ const locale = {
     "placeholderEmail": "user@gmail.com",
     "placeholderOrderId": "Order ID",
     "pleaseLogin": "Your order ID not found. Please login with your account.",
+    "title": "Payment Confirmation",
     "titleCheckYoutOrder": "Check Order ID",
     "to": "Payment to",
     "totalAmount": "Total amount payable for this order is:",

@@ -68,18 +68,19 @@ const Blog: FC<any> = ({
 
   const size = useWindowSize()
   const BlogAllowed = isBlogAllowed()
+  const layoutProps = {
+    lngDict, 
+    i18n, 
+    lng,
+    brand,
+    SEO: { title: `Blog` },
+    withAllowed: { BlogAllowed }
+  }
 
   const [totalCategories, setTotalCategories] = useState(null)
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      withAllowed={BlogAllowed}
-    >
-
+    <Layout {...layoutProps}>
       <Breadcrumb 
         lng={lng}
         title={i18n.t("blog.title")} 

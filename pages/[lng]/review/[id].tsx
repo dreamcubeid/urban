@@ -120,6 +120,15 @@ const ReviewPage: FC<any> = ({
   const { id } = router.query
 
   const linksBreadcrumb = [i18n.t("header.home"), i18n.t("orderReview.title")]
+  const layoutProps = {
+    i18n,
+    lng,
+    lngDict,
+    brand,
+    SEO: {
+      title: i18n.t("orderReview.title")
+    }
+  }
 
   const newClassesOrderReview = {
     ...classesOrderReview,
@@ -127,14 +136,7 @@ const ReviewPage: FC<any> = ({
   }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      titleHeader={i18n.t("orderReview.title")}
-    >
-
+    <Layout {...layoutProps}>
       <Breadcrumb 
         lng={lng}
         title={i18n.t("orderReview.title")} 

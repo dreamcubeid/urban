@@ -11,7 +11,6 @@ import {
 import useWindowSize from 'lib/useWindowSize'
 import { useBrand } from 'lib/useBrand'
 
-import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import Loader from 'components/Loader/Loader'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
@@ -97,15 +96,13 @@ const PaymentConfirmationPage: FC<any> = ({
 
 
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("paymentConfirm.heading")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: i18n.t("paymentConfirm.title") }
+  }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-    >
-      <SEO title={i18n.t("paymentConfirm.heading")} />
+    <Layout {...layoutProps}>
       <Breadcrumb
         title={i18n.t("paymentConfirm.heading")}
         links={linksBreadcrumb}

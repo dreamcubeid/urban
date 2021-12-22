@@ -49,26 +49,23 @@ const LookbookCategory: FC<any> = ({
   const LookbookAllowed = isLookbookAllowed()
 
   const linksBreadcrumb = [i18n.t("header.home"), i18n.t("lookbook.title")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: `lookbook` },
+    withAllowed: LookbookAllowed
+  }
 
   const handleBackButton = () => {
     router.push("/[lng]", `/${lng}`)
   }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      withAllowed={LookbookAllowed}
-    >
-
+    <Layout {...layoutProps}>
       <Breadcrumb 
         lng={lng}
         title={i18n.t("lookbook.title")} 
         links={linksBreadcrumb} 
       />
-
       <div className={styles.wrapper}>
         <div className="container">
           <div className="row">

@@ -5,11 +5,13 @@ const locale = {
     "continueShopping": "Lanjutkan Berbelanja",
     "day": "hari",
     "days": "hari",
+    "empty": "Tidak ada data untuk ditampilkan",
     "error": "Terjadi kesalahan",
     "hours": "jam",
     "loading": "Memuat",
     "notImplemented": "Belum tersedia",
-    "pageNotFound": "Halaman Tidak Ditemukan"
+    "pageNotFound": "Halaman Tidak Ditemukan",
+    "tautanTitle": "Tautan"
   }
 }
 

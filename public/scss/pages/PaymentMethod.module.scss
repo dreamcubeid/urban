@@ -244,7 +244,8 @@
   @include fixedWidth(100%);
   text-align: center;
   color: $color_text_secondary;
-  order: 3;
+  margin: 10px 0 20px;
+  order: 2;
 }
 
 .agreementCheckbox
@@ -256,7 +257,7 @@
 .buttonContainer
 {
   @include fixedWidth(100%);
-  order: 2;
+  order: 3;
 }
 
 .button

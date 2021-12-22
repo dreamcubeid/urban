@@ -30,15 +30,19 @@ const Product: FC<any> = ({
 }) => {
 
   const i18n: any = useI18n()
-  const linksBreadcrumb = [`${i18n.t("header.home")}`, slug?.replaceAll("-", " ")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: {
+      title: data?.details[0]?.name,
+      description: data?.SEOs[0]?.description,
+      keywords: data?.SEOs[0]?.keywords,
+      image: data?.imageURLs[0],
+    }
+  }
+  const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("product.shop"), data && data?.details[0]?.name]
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-    >
+    <Layout {...layoutProps}>
       {data && (
         <SEO
           title={data?.details[0]?.name || ""}
@@ -51,7 +55,6 @@ const Product: FC<any> = ({
       {(data?.published || data) && (
         <LazyLoadComponent>
           <Breadcrumb
-            title={slug?.replaceAll("-", " ")}
             links={linksBreadcrumb}
             lng={lng}
           />

@@ -638,7 +638,7 @@
     border-radius: 0;
     box-shadow: 0 0 0 transparent;
     background-color: $color_white;
-    color: $color_text;
+    color: #000000;
 
     &[type="number"]
     {
@@ -883,7 +883,6 @@
       &[disabled]
       {
         background-color: $color_white;
-        opacity: 0.3;
         pointer-events: none;
       }
     }

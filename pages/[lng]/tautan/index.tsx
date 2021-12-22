@@ -31,18 +31,17 @@ const TautanPage: FC<any> = ({
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
+  const i18n: any = useI18n()
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    withHeader: false,
+    withFooter: false,
+    SEO: { title: `${i18n.t("global.tautanTitle")}` },
+    sectionClassName: styles.tautan_container
+  }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      sectionClassName={styles.tautan_container}
-      withHeader={false}
-      withFooter={false}
-    >
+    <Layout {...layoutProps}>
         <Links classes={classesLinks} />
     </Layout>
   )

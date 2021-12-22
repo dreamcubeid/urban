@@ -20,7 +20,7 @@
 
 .detail
 {
-  @include flex();
+  @include flex(row, center, left);
   width: 100%;
   padding: 10px;
   background-color: $color_elements;

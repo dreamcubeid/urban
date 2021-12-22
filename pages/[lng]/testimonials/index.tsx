@@ -82,19 +82,17 @@ const TestimonialsPage: FC<any> = ({
   const [isVerified, setIsVerified] = useState<boolean>(false)
 
   const linksBreadcrumb = [i18n.t("header.home"), i18n.t("testimonial.title")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: i18n.t("testimonial.title") },
+    withAllowed: testimonialAllowed
+  }
 
   const toogleShowAdd = () => setShowAdd(!showAdd)
   const handleBackButton = () => router.push("/[lng]", `/${lng}`)
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      withAllowed={testimonialAllowed}
-    >
-
+    <Layout {...layoutProps}>
       <Breadcrumb 
         lng={lng}
         title={i18n.t("testimonial.title")} 

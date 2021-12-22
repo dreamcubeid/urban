@@ -25,7 +25,7 @@
     {
         @include transition();
         @include fixedWidth(calc(100vw - 300px));
-        margin-left: 300px;
+        margin-left: 280px;
     }
 }
 

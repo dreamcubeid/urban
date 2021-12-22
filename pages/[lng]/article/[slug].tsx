@@ -40,17 +40,15 @@ const ArticleDetail: FC<any> = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
 	const i18n: any = useI18n()
-	const [title, setTitle] = useState<string>("")
+  const [title, setTitle] = useState<string>("")
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title }
+  }
   const linksBreadcrumb = [i18n.t("header.home"), title]
 
 	return (
-		<Layout
-			i18n={i18n}
-			lng={lng}
-			lngDict={lngDict}
-			brand={brand}
-		>
-
+    <Layout {...layoutProps}>
       <Breadcrumb 
         lng={lng}
         title={title} 

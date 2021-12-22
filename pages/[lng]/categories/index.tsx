@@ -17,15 +17,19 @@ const CategoriesPage: FC<any> = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
   const i18n: any = useI18n()
+  const layoutProps = {
+    lngDict, 
+    i18n, 
+    lng,
+    brand,
+    SEO: { 
+      title: i18n.t("product.categories")
+    },
+    titleHeader: i18n.t("product.categories")
+  }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      titleHeader={i18n.t("product.categories")}
-    >
+    <Layout {...layoutProps}>
       <section>
         <ProductCategoryComponent
           i18n={i18n}

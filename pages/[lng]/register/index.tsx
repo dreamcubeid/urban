@@ -67,16 +67,21 @@ const RegisterPage: FC<any> = ({
     datePickerCalendarIcon: <Icon.register.datePickerCalendarIcon />,
   }
 
+  const layoutProps = {
+    lngDict, 
+    i18n, 
+    lng, 
+    brand,
+    layoutClassName: styles.layout,
+    SEO: { 
+      title: i18n.t("register.title") 
+    },
+    withHeader: false,
+    withFooter: false
+  }
+
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      layoutClassName={styles.layout}
-      withHeader={false}
-      withFooter={false}
-    >
+    <Layout {...layoutProps}>
       <section className={styles.sectionBrand}>
         <Logo
           imageClassName={styles.brandImage}

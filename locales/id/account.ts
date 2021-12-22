@@ -24,6 +24,8 @@ const locale = {
     "confirming": "Menunggu konfirmasi",
     "delivered": "Pesanan Tiba",
     "editAccount": "Sunting Akun",
+    "editErrorMsg": "Gagal mengubah data akun",
+    "editSuccessMsg": "Berhasil mengubah data akun",
     "email": "Email",
     "emailPlaceholder": "Email",
     "female": "Perempuan",

@@ -8,7 +8,6 @@ import Icon from 'components/Icon/Icon'
 import { useBrand } from 'lib/useBrand'
 import useWindowSize from 'lib/useWindowSize'
 /* library component */
-import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import Loader from 'components/Loader/Loader'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
@@ -40,15 +39,13 @@ const ResetPasswordPage: FC<any> = ({
   const i18n: any = useI18n()
   const size = useWindowSize()
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("resetPassword.setNew")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: i18n.t("resetPassword.setNew") }
+  }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-    >
-      <SEO title={i18n.t("resetPassword.setNew")} />
+    <Layout {...layoutProps}>
       <Breadcrumb
         title={i18n.t("resetPassword.setNew")}
         links={linksBreadcrumb}

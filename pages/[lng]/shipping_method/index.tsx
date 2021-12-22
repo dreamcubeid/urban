@@ -17,7 +17,6 @@ import locale from 'locales'
 import { useBrand } from 'lib/useBrand'
 import useWindowSize from 'lib/useWindowSize'
 /* copmonents */
-import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import Icon from 'components/Icon/Icon'
@@ -100,6 +99,13 @@ const ShippingMethodPage: FC<any> = ({
   const router = useRouter()
 
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("placeOrder.checkOrder")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    layoutClassName: styles.placeOrder_layout,
+    withFooter: false,
+    withHeader: false,
+    SEO: { title: `${i18n.t("shipping.title")}` }
+  }
 
   let withButtonProps = {}
   if (size?.width > 767) withButtonProps = {
@@ -108,15 +114,7 @@ const ShippingMethodPage: FC<any> = ({
 
   return (
     <PrivateRouteWrapper>
-      <Layout
-        i18n={i18n}
-        lng={lng}
-        lngDict={lngDict}
-        brand={brand}
-        withHeader={false}
-        withFooter={false}
-      >
-        <SEO title="Shipping Method" />
+      <Layout {...layoutProps} >
         <Breadcrumb
           bgBlack
           title={i18n.t("placeOrder.checkOrder")}

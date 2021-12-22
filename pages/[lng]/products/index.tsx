@@ -23,17 +23,15 @@ const ProductsPage: FC<any> = ({
 }) => {
   const i18n: any = useI18n()
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("product.products")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: i18n.t("product.title") },
+    withBack: false,
+    titleSeo: i18n.t("product.title")
+  }
 
   return (
-    <Layout
-      lngDict={lngDict}
-      i18n={i18n}
-      lng={lng}
-      brand={brand}
-      logoHeader
-      withBack={false}
-      titleSeo={i18n.t("product.title")}
-    >
+    <Layout {...layoutProps}>
       <section className={styleProducts.products_breadcumb}>
         <Breadcrumb title={i18n.t("product.title")} links={linksBreadcrumb} lng={lng} />
       </section>

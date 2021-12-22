@@ -45,10 +45,10 @@ const Layout: FC<LayoutPropType> = ({
 
   const SEOprops = {
     hideFromSearchEngine: brand?.settings?.hideFromSearchEngine,
-    title: SEO?.title || brand?.settings?.websiteTitle,
+    title: `${brand?.settings?.websiteTitle}${SEO?.title && ' - ' + SEO?.title}` || "",
     description: SEO?.desc || brand?.settings?.websiteDescription,
     image: SEO?.image || brand?.logoURL,
-    keywords: SEO?.keywords || ""
+    keywords: SEO?.keywords || ''
   }
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const Layout: FC<LayoutPropType> = ({
   return (
     <>
       <SEOHead {...SEOprops}>
-
+        <title>{brand?.settings?.websiteTitle} {SEO?.title && "-"} {SEO?.title}</title>
         {brand?.settings?.hideFromSearchEngine && (
           <meta name="robots" content="noindex, nofollow" />
         )}

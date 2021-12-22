@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic'
 /* library component */
 import { useBrand } from 'lib/useBrand'
 /* component */
-import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import Icon from 'components/Icon/Icon'
@@ -72,18 +71,15 @@ const ThankYouPage: FC<any> = ({
 
   const i18n: any = useI18n()
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("placeOrder.checkOrder")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: i18n.t("thankYou.thanks") },
+    withHeader: false,
+    withFooter: false
+  }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      withHeader={false}
-      withFooter={false}
-    >
-      <SEO title={i18n.t("thankYou.thanks")} />
-
+    <Layout {...layoutProps}>
       <div className={styles.thankyou_breadcumbSection}>
         <Breadcrumb
           bgBlack

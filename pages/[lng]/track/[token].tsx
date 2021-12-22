@@ -27,17 +27,14 @@ const TrackerPage = ({ order_token, lngDict, lng, brand }) => {
 
   const i18n: any = useI18n()
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("shipping.track")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: i18n.t("shipping.track") },
+    withBack: false
+  }
 
   return (
-    <Layout
-      lngDict={lngDict}
-      i18n={i18n}
-      lng={lng}
-      brand={brand}
-      logoHeader
-      withBack={false}
-      titleSeo={i18n.t("product.title")}
-    >
+    <Layout {...layoutProps}>
       <Breadcrumb title={i18n.t("shipping.track")} links={linksBreadcrumb} lng={lng} />
       <div className={styles.track_container}>
         <ShipmentTracker

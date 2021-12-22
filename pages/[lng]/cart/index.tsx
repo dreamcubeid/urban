@@ -9,7 +9,8 @@ import dynamic from 'next/dynamic'
 import Icon from 'components/Icon/Icon'
 import {
   CartDetails,
-  useI18n
+  useI18n,
+  useCart
 } from '@sirclo/nexus'
 
 /* locales */
@@ -66,37 +67,39 @@ const Cart: FC<any> = ({
 
   const i18n: any = useI18n()
   const size: any = useWindowSize()
+  const { data: dataCart } = useCart()
 
   const [SKUs, setSKUs] = useState<Array<string>>(null)
   const [invalidMsg, setInvalidMsg] = useState<string>('')
 
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("cart.cart")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: `${i18n.t("cart.title")}` },
+    titleHeader: i18n.t("cart.title"),
+    withCart: false,
+    customClassName: `${styles.cart_layout} ${styles.main__noNavbar}`
+  };
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      titleHeader={i18n.t("cart.title")}
-      withCart={false}
-      customClassName={`${styles.cart_layout} ${styles.main__noNavbar}`}
-    >
+    <Layout {...layoutProps}>
       <section className={styles.products_breadcumb}>
         <Breadcrumb title={i18n.t("cart.title")} links={linksBreadcrumb} lng={lng} />
       </section>
 
       <LazyLoadComponent>
         <section className="container">
-          <div className={SKUs?.length > 0 ? styles.container : styles.containerOneGrid}>
+          <div className={dataCart?.totalItem > 0 ? styles.container : styles.containerOneGrid}>
             <div className={styles.cardDetailContainer}>
               {SKUs?.length > 0 &&
                 <div className={styles.cardDetailHeader}>
-                  <p>
-                    {i18n.t("cart.youHave")}{" "}
-                    {SKUs?.length || 0}{" "}
-                    {i18n.t("cart.item")}
-                  </p>
+                  {dataCart?.totalItem > 0 &&
+                    <p>
+                      {i18n.t("cart.youHave")}{" "}
+                      {SKUs?.length || 0}{" "}
+                      {i18n.t("cart.item")}
+                    </p>
+                  }
                   <Link href="lng/products" as={`${lng}/products`}>
                     <p>
                       {i18n.t("cart.shoppingAgain")}
@@ -155,7 +158,7 @@ const Cart: FC<any> = ({
                 }
               />
             </div>
-            {SKUs?.length > 0 &&
+            {dataCart?.totalItem > 0 &&
               <div className={styles.orderSummaryContainer}>
                 <OrderSummaryBox
                   lng={lng}

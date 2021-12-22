@@ -62,20 +62,18 @@ const LookbookSinglePage: FC<any> = ({
     i18n.t("lookbook.title"),
     title
   ]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title },
+    withAllowed: LookbookAllowed
+  }
 
   const handleBackButton = () => {
     router.back()
   }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      withAllowed={LookbookAllowed}
-    >
-
+    <Layout {...layoutProps}>
       <Breadcrumb 
         lng={lng}
         title={title} 

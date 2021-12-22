@@ -21,6 +21,7 @@ const locale = {
     "placeholderEmail": "user@gmail.com",
     "placeholderOrderId": "Nomor Pesanan",
     "pleaseLogin": "Nomor pesanan anda tidak ditemukan. Silahkan login terlebih dahulu",
+    "title": "Konfirmasi Pembayaran",
     "titleCheckYoutOrder": "Periksa Nomor Pesanan",
     "to": "Pembayaran ke",
     "totalAmount": "Jumlah tagihan yang harus anda bayar untuk pesanan ini adalah :",

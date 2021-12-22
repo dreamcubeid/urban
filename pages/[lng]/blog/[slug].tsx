@@ -74,6 +74,13 @@ const BlogSlug: FC<any> = ({
   const [title, setTitle] = useState<string>("")
   const [totalCategories, setTotalCategories] = useState(null)
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("blog.title"), title]
+  const layoutProps = {
+    lngDict, 
+    i18n, 
+    lng, 
+    brand,
+    SEO: { title }
+  }
 
   const router = useRouter()
   
@@ -92,13 +99,7 @@ const BlogSlug: FC<any> = ({
 
   return (
 
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-    >
-
+    <Layout {...layoutProps}>
       <Breadcrumb 
         lng={lng}
         title={title} 

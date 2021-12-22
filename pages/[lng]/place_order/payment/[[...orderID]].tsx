@@ -51,17 +51,15 @@ const PaymentStatus: FC<any> = ({
   }
 
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("orderHistory.lineItemDelivered")]
-
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: `${i18n.t("orderSummary.placeOrder")}` },
+    withHeader: false,
+    withFooter: false
+  }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      withHeader={false}
-      withFooter={false}
-    >
+    <Layout {...layoutProps}>
       <section className={`${styles.breadcumbSection} ${status}`}>
         <Breadcrumb
           bgBlack

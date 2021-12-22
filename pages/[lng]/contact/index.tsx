@@ -44,6 +44,11 @@ const ContactPage: FC<any> = ({
 
   const i18n: any = useI18n()
   const allowedEnquiry = isEnquiryAllowed()
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: i18n.t("contact.title") },
+    withAllowed: allowedEnquiry
+  }
 
   const linksBreadcrumb = [i18n.t("header.home"), i18n.t("contact.title")]
 
@@ -56,13 +61,7 @@ const ContactPage: FC<any> = ({
   }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      withAllowed={allowedEnquiry}
-    >
+    <Layout {...layoutProps}>
       <LazyLoadComponent>
         <Breadcrumb 
           title={i18n.t("contact.title")} 

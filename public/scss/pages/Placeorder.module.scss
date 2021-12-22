@@ -25,6 +25,7 @@
 .form
 {
   @include fixedWidth(100%);
+  order: 2;
 }
 
 .formGroup
@@ -73,14 +74,11 @@
 .billingAddressContainer
 {
   @include flex(column-reverse, flex-start, flex-start);
-  padding-top: 44px;
   position: relative;
 }
 
-
 .loginLabel
 {
-  @include position(absolute, 0, 0, 32, 0);
   @include fixedWidth(100%);
   @include SmallSemiBold;
   height: 32px;
@@ -89,12 +87,24 @@
   background: $color_elements;
   border: 1px solid $color_elements_line_darker;
   border-radius: 2px;
+  margin-bottom: 15px;
 
   span
   {
     margin-left: 4px;
     color: $color_blue !important;
   }
+}
+
+.billingAddressHeader
+{
+  order: 3;
+  width: 100%;
+}
+
+.billingAddressFooter
+{
+  order: 1;
 }
 
 .submitButton

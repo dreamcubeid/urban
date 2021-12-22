@@ -18,7 +18,6 @@ import { useBrand } from 'lib/useBrand'
 import { useWhatsAppOTPSetting } from 'lib/client'
 import useWindowSize from 'lib/useWindowSize'
 /* copmonents */
-import SEO from 'components/SEO'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import Layout from 'components/Layout/Layout'
 import Stepper from 'components/Stepper'
@@ -130,17 +129,21 @@ const PaymentMethods: FC<any> = ({
     pointAppliedIcon: <Icon.orderSummary.voucherRemoved />,
   }
 
+  const layoutProps = {
+    lngDict, 
+    i18n, 
+    lng, 
+    brand,
+    withFooter: false,
+    withHeader: false,
+    SEO: { 
+      title: `${i18n.t("payment.title")}` 
+    }
+  }
+
   return (
     <PrivateRouteWrapper>
-      <Layout
-        i18n={i18n}
-        lng={lng}
-        lngDict={lngDict}
-        brand={brand}
-        withHeader={false}
-        withFooter={false}
-      >
-        <SEO title="Payment Method" />
+      <Layout {...layoutProps}>
         <Breadcrumb
           bgBlack
           title={i18n.t("placeOrder.checkOrder")}

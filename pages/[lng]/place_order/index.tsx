@@ -15,7 +15,6 @@ import locale from "locales"
 import { useBrand } from 'lib/useBrand'
 import useWindowSize from 'lib/useWindowSize'
 /* copmonents */
-import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import OrderSummaryBox from 'components/OrderSummaryBox'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
@@ -37,6 +36,8 @@ const placeOrderClasses = {
   loginLabelClassName: styles.loginLabel,
   submitButtonClassName: styles.submitButton,
   billingAddressContainerClassName: styles.billingAddressContainer,
+  billingAddressHeaderClassName: styles.billingAddressHeader,
+  billingAddressFooterClassName: styles.billingAddressFooter,
   signupLabelClassName: styles.signupLabel,
   shippingCheckboxLabelClassName: styles.shippingCheckboxLabel,
   passwordViewButtonClassName: styles.passwordViewButton,
@@ -137,6 +138,12 @@ const PlaceOrderPage: FC<any> = ({
   const size = useWindowSize()
   const router = useRouter()
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("placeOrder.checkOrder")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    withFooter: false,
+    withHeader: false,
+    SEO: { title: `${i18n.t("orderSummary.placeOrder")}` }
+  }
 
   let withButtonProps = {}
   if (size.width > 767) withButtonProps = {
@@ -145,16 +152,7 @@ const PlaceOrderPage: FC<any> = ({
 
   return (
     <PrivateRouteWrapper>
-      <Layout
-        i18n={i18n}
-        lng={lng}
-        lngDict={lngDict}
-        brand={brand}
-        withHeader={false}
-        withFooter={false}
-      >
-        <SEO title="Place Order" />
-
+      <Layout {...layoutProps}>
         <Breadcrumb
           bgBlack
           title={i18n.t("placeOrder.checkOrder")}
@@ -182,6 +180,7 @@ const PlaceOrderPage: FC<any> = ({
             passwordFulfilledCriteriaIcon={<Icon.setNewPassword.passwordCriteriaIcon color="#1DB954" size={16} />}
             passwordUnfulfilledCriteriaIcon={<Icon.setNewPassword.passwordCriteriaIcon color="#E5E7EF" size={16} />}
             datePickerCalendarIcon={<Icon.register.datePickerCalendarIcon />}
+            signupLabelPosition="bottom"
             loadingComponent={
               <>
                 <div className={styles.placeOrder}>

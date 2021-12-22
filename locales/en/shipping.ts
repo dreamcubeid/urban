@@ -18,6 +18,7 @@ const locale = {
     "shippingMethod": "Shipping Method",
     "subtitleContactInfo": "*a bill will be sent to this contact",
     "subtitleShipTo": "*your order will be shipped",
+    "title": "Shipping Method",
     "track": "Track your order",
     "trackDriver": "Track Driver",
     "updatePinpoint": "Change Location Pin",

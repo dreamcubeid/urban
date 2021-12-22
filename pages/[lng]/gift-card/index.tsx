@@ -32,16 +32,15 @@ const GiftCardPage: FC<any> = ({
 
   const i18n: any = useI18n()
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("giftCard.title")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    layoutClassName: styles.login_layout,
+    SEO: { title: i18n.t("giftCard.title") },
+    titleHeader: i18n.t("giftCard.title")
+  }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      titleHeader={i18n.t("giftCard.title")}
-    >
-
+    <Layout {...layoutProps} >
       <Breadcrumb 
         lng={lng}
         title={i18n.t("giftCard.title")} 

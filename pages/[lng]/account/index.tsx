@@ -39,7 +39,6 @@ import { useAuthMethod } from 'lib/client'
 /* Components */
 import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
-import SEO from 'components/SEO'
 
 /* Locales */
 import locale from 'locales'
@@ -76,6 +75,7 @@ const classesAccount = {
   inputContainerClassName: styles.form_inputContainer,
   inputLabelClassName: styles.form_inputLabel,
   inputClassName: styles.form_input,
+  inputDistrictClassName: styles.form_input,
   passwordContainerClassName: styles.form_passwordContainer,
   passwordInputClassName: styles.form_passwordInput,
   passwordViewButtonClassName: styles.form_passwordButton,
@@ -253,6 +253,10 @@ const AccountsPage: FC<any> = ({
 
   const i18n: any = useI18n()
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("account.myAccount")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: i18n.t("account.myAccount") }
+  }
 
   const [name, setName] = useState<string>("")
 
@@ -260,41 +264,29 @@ const AccountsPage: FC<any> = ({
   const onSuccessChPass = (msg: string) => toast.success(msg)
 
   const onSuccess = (msg: string, data: any) => {
-    setName(data?.upsertProfile[0]?.firstName + " " + data?.upsertProfile[0]?.lastName)
+    if (data && data?.upsertProfile) setName(data?.upsertProfile[0]?.firstName)
     toast.success(msg)
   }
 
   const onFetchCompleted = (_: string, data: any) => {
-    const { firstName, lastName } = data?.members[0]
-    setName(`${firstName} ${lastName}`)
+    const { firstName } = data?.members[0]
+    setName(firstName)
   }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-    >
-
+    <Layout {...layoutProps}>
       <Breadcrumb 
         lng={lng}
         title={i18n.t("account.myAccount")} 
         links={linksBreadcrumb} 
       />
-
-      <SEO title={i18n.t("account.myAccount")} />
-
       <div className={styles.wrapper}>
-        
         <div className="container">
           <div className="row">
             <div className="col-12">
-
               <div className={styles.hello}>
                 <h2>{name || '' }</h2>
               </div>
-
               <Account
                 classes={{
                   ...classesAccount,

@@ -1,7 +1,8 @@
 const locale = {
   "forgotPassword": {
     "requestFail": "Pengaturan ulang sandi gagal.",
-    "requestSuccessful": "Pengaturan ulang kata sandi berhasil. Silakan periksa email Anda."
+    "requestSuccessful": "Pengaturan ulang kata sandi berhasil. Silakan periksa email Anda.",
+    "title": "Lupa Password"
   }
 }
 

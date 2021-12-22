@@ -7,6 +7,7 @@ const locale = {
     "productCategory": "Kategori produk",
     "later": "Nanti saja",
     "showMore": "Lihat Selengkapnya",
+    "title": "Beranda"
   }
 }
 

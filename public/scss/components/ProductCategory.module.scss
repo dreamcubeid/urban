@@ -59,6 +59,7 @@
   {
     @include position(absolute, 0, auto, auto, 30%);
     width: 70%;
+    text-align: center;
     
     &:empty
     {
@@ -103,7 +104,7 @@
   &_image
   {
     visibility: hidden;
-    width: 100%;
+    width: auto;
     height: 265px;
   }
 

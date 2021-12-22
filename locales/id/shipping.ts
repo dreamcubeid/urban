@@ -18,6 +18,7 @@ const locale = {
     "shippingMethod": "Metode Pengiriman",
     "subtitleContactInfo": "*tagihan akan dikirim ke kontak ini",
     "subtitleShipTo": "*pesanan Anda akan dikirimkan",
+    "title": "Metode Pengiriman",
     "track": "Lacak Pesanan",
     "trackDriver": "Lacak kurir",
     "updatePinpoint": "Ubah Pin Lokasi",

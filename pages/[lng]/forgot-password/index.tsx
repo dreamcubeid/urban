@@ -8,7 +8,6 @@ import { parseCookies } from 'lib/parseCookies'
 import redirectIfAuthenticated from 'lib/redirectIfAuthenticated'
 import { useBrand } from 'lib/useBrand'
 /* component */
-import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import Loader from 'components/Loader/Loader'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
@@ -32,15 +31,13 @@ const ForgotPassword: FC<any> = ({
   const size = useWindowSize()
   const [page, setPage] = useState<string>("forgotPassword")
   const linksBreadcrumb = [`${i18n.t("header.home")}`, i18n.t("resetPassword.title")]
+  const layoutProps = {
+    lngDict, i18n, lng, brand,
+    SEO: { title: i18n.t("forgotPassword.title") }
+  }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-    >
-      <SEO title={i18n.t("resetPassword.title")} />
+    <Layout {...layoutProps}>
       <Breadcrumb
         title={page === "forgotPassword" ? i18n.t("resetPassword.setNew") : i18n.t("resetPassword.checkYourEmail")}
         links={linksBreadcrumb}
